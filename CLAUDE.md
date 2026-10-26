@@ -8,7 +8,7 @@ Ruang Pikir adalah brand konten **psikologi sehari-hari** (Reels/TikTok/Shorts 9
 |---|---|
 | `website/` | `index.html` satu file (semua CSS/JS/gambar sudah inline), `logo.svg`, `DEPLOY.md` |
 | `brand/` | Logo (foto profil 1080, horizontal, SVG) + `BRAND.md` (warna, font, nada bicara, aturan) |
-| `content/` | Profil IG (nama, bio), caption EP01 & EP02, bank ide konten |
+| `content/` | Profil IG, TikTok & X (nama, bio), caption EP01 & EP02, bank ide konten |
 | `videos/` | Hasil render EP01 & EP02 (MP4 1080×1920) |
 | `video-engine/` | Mesin animasi Python (skia) + suara Gemini TTS + audio/SFX + mux ffmpeg. Lihat `video-engine/README.md` |
 
