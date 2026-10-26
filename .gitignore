@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Rahasia
+.env
+*.key
+
+# Hasil antara render video (dihapus otomatis oleh build.sh, tapi jaga-jaga kalau build gagal di tengah)
+video-engine/*/raw.mp4
+video-engine/*/audio.wav
+video-engine/*/timeline.json
+video-engine/*/preview*.png
+video-engine/*/ruang-pikir-ep*.mp4
+
+# OS / editor
+.DS_Store
+Thumbs.db

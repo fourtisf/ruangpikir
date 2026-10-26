@@ -1,0 +1,79 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Kamu ngerasa semua orang ngeliatin kamu?",
+  "file": "vo/l00.wav",
+  "dur": 2.352
+ },
+ {
+  "i": 1,
+  "anchor": 3.0,
+  "text": "Salah ngomong dikit, langsung kepikiran seharian.",
+  "file": "vo/l01.wav",
+  "dur": 2.922
+ },
+ {
+  "i": 2,
+  "anchor": 7.0,
+  "text": "Tahun 2000, peneliti di Cornell bikin eksperimen unik.",
+  "file": "vo/l02.wav",
+  "dur": 3.342
+ },
+ {
+  "i": 3,
+  "anchor": 10.5,
+  "text": "Mahasiswa disuruh masuk kelas pakai kaos yang malu-maluin.",
+  "file": "vo/l03.wav",
+  "dur": 3.311
+ },
+ {
+  "i": 4,
+  "anchor": 14.5,
+  "text": "Mereka yakin, setengah isi kelas bakal sadar.",
+  "file": "vo/l04.wav",
+  "dur": 3.3
+ },
+ {
+  "i": 5,
+  "anchor": 18.0,
+  "text": "Kenyataannya? Cuma satu dari empat orang yang notice.",
+  "file": "vo/l05.wav",
+  "dur": 3.622
+ },
+ {
+  "i": 6,
+  "anchor": 22.5,
+  "text": "Ini namanya, spotlight effect.",
+  "file": "vo/l06.wav",
+  "dur": 2.433
+ },
+ {
+  "i": 7,
+  "anchor": 25.5,
+  "text": "Di kepalamu, kamu tokoh utama yang selalu disorot.",
+  "file": "vo/l07.wav",
+  "dur": 3.152
+ },
+ {
+  "i": 8,
+  "anchor": 29.5,
+  "text": "Padahal, semua orang juga sibuk sama sorotannya sendiri.",
+  "file": "vo/l08.wav",
+  "dur": 3.71
+ },
+ {
+  "i": 9,
+  "anchor": 34.0,
+  "text": "Jadi santai aja. Nggak ada yang seperhatian itu sama kamu.",
+  "file": "vo/l09.wav",
+  "dur": 4.539
+ },
+ {
+  "i": 10,
+  "anchor": 38.5,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l10.wav",
+  "dur": 2.985
+ }
+]

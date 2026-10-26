@@ -1,0 +1,6 @@
+skia-python>=138
+numpy>=1.26
+scipy>=1.11
+requests>=2.31
+pillow>=10
+# juga butuh ffmpeg di PATH (apt install ffmpeg / brew install ffmpeg)
