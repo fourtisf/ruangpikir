@@ -33,20 +33,20 @@ ruangpikir.id
 - **Website:** `ruangpikir.id`
 - **Lokasi:** `Indonesia`
 
-### Bio (dipakai) — 151/160
+### Bio (dipakai) — 135/160
 ```
-Kenapa kita overthinking jam 2 pagi? Kenapa ngerasa diliatin terus? Dijawab pakai riset, dalam 60 detik 🧠
+Kenapa kita overthinking jam 2 pagi? Kenapa ngerasa diliatin terus? Dijawab pakai riset 🧠
 Satu pertanyaan, satu video 🎬 Tes otakmu ↓
 ```
 "↓" menunjuk ke link ruangpikir.id yang tampil tepat di bawah bio.
 
 ### Alternatif
-Versi 2, pakai tagline — 97/160
+Versi 2, pakai tagline — 87/160
 ```
 Ruang untuk memahami isi kepalamu.
-Psikologi sehari-hari: pakai riset, bahasa santai, 60 detik 🧠
+Psikologi sehari-hari: pakai riset, bahasa santai 🧠
 ```
-Versi 3, mengajak interaksi — 136/160
+Versi 3, mengajak interaksi — 121/160
 ```
-Psikologi sehari-hari dalam 60 detik, pakai riset 🧠 Punya pertanyaan "kok aku gini, ya?" Mention atau DM, bisa jadi episode berikutnya.
+Psikologi sehari-hari, pakai riset 🧠 Punya pertanyaan "kok aku gini, ya?" Mention atau DM, bisa jadi episode berikutnya.
 ```

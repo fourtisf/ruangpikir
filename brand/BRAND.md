@@ -2,7 +2,7 @@
 
 **Nama:** Ruang Pikir · **Tagline:** Ruang untuk memahami isi kepalamu.
 **Instagram & TikTok:** @ruangpikir2026 · **Website:** ruangpikir.id
-**Isi:** psikologi sehari-hari, dijelaskan pakai riset, dalam ±60 detik, dengan bahasa teman sendiri.
+**Isi:** psikologi sehari-hari, dijelaskan pakai riset, dengan bahasa teman sendiri.
 
 ## Logo
 Kepala menghadap kanan dengan **pintu bercahaya** di dalamnya: "ruang" di dalam pikiran yang dibuka setiap episode. Cahaya dari pintu jatuh ke bawah, artinya "jadi paham".

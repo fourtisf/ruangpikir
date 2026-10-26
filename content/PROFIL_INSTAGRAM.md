@@ -9,7 +9,7 @@
 ## Bio (dipakai) — 132 karakter
 ```
 Kenapa kita begini? Dijawab pakai riset 🧠
-Psikologi sehari-hari dalam 60 detik
+Psikologi sehari-hari, bahasa santai
 Satu pertanyaan, satu video 🎬
 👇 Coba tes otak 7 detik
 ```
@@ -22,7 +22,7 @@ Bukan diagnosis, biar kamu lebih kenal dirimu ✨
 ```
 ```
 Ruang untuk memahami isi kepalamu.
-Psikologi · riset · 60 detik
+Psikologi · riset · bahasa santai
 Satu pertanyaan, satu video 🎬
 ↓ Tes otakmu di sini
 ```

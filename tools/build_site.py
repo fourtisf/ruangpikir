@@ -136,7 +136,7 @@ def make_home_og(path):
     im = gradient_bg(W, H)
     add_glow(im, 930, 300, 260)
     d = ImageDraw.Draw(im)
-    tracked(d, (80, 96), 'PSIKOLOGI SEHARI-HARI · 60 DETIK', font('JetBrainsMono-ExtraBold.ttf', 22), VIOLET2, 4)
+    tracked(d, (80, 96), 'PSIKOLOGI SEHARI-HARI · BERBASIS RISET', font('JetBrainsMono-ExtraBold.ttf', 22), VIOLET2, 4)
     d.text((76, 150), 'Ruang untuk', font=font('PlusJakartaSans-ExtraBold.ttf', 78), fill=TEXT)
     d.text((76, 238), 'memahami', font=font('PlusJakartaSans-ExtraBold.ttf', 78), fill=TEXT)
     d.text((80, 322), 'isi kepalamu.', font=font('serif', 96), fill=VIOLET2)
@@ -322,12 +322,12 @@ def list_page(eps):
     <div class="sec-head">
       <div class="eyebrow">Semua episode</div>
       <h1 class="h2">Satu pertanyaan, <em class="serif">satu video.</em></h1>
-      <p>Psikologi sehari-hari dalam ±60 detik, lengkap dengan penjelasan dan sumber risetnya.</p>
+      <p>Psikologi sehari-hari, lengkap dengan penjelasan dan sumber risetnya.</p>
     </div>
     {cards(eps)}
   </div>
 </section>'''
-    return page('/episode/', 'Semua episode · Ruang Pikir', 'Daftar semua video Ruang Pikir: psikologi sehari-hari dalam 60 detik, berbasis riset.',
+    return page('/episode/', 'Semua episode · Ruang Pikir', 'Daftar semua video Ruang Pikir: psikologi sehari-hari berbasis riset, dengan bahasa santai.',
                 body, '/og.png')
 
 
