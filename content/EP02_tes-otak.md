@@ -33,4 +33,4 @@ Aturannya: jawab dalam hati, jangan di-pause 😏 Jujur ya, skormu berapa?
 ```
 
 ## Urutan posting
-Posting EP 02 lebih dulu (format tes paling cepat memancing komentar), EP 01 besok malamnya.
+Posting EP 02 lebih dulu (format tes paling cepat memancing komentar), EP 01 setelahnya.
