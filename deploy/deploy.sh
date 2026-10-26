@@ -10,6 +10,7 @@ set -euo pipefail
 DOMAIN=ruangpikir.id
 CMD=/usr/local/bin/ruangpikir-deploy
 CACHE_CONF=/etc/nginx/conf.d/ruangpikir-cache.conf
+SITE_CONF=/etc/nginx/sites-available/ruangpikir
 SELF=$(readlink -f "${BASH_SOURCE[0]}")
 REPO=$(cd "$(dirname "$SELF")/.." && pwd)
 
@@ -26,6 +27,7 @@ NGINX
 }
 
 ensure_setup() {
+  mkdir -p /var/log/ruangpikir          # dipakai deploy/nginx-site.conf
   if [ "$(readlink -f "$CMD" 2>/dev/null)" != "$SELF" ]; then
     ln -sf "$SELF" "$CMD"; echo "Perintah 'ruangpikir-deploy' terpasang."
   fi
@@ -72,6 +74,19 @@ main() {
   if [ ! -f website/index.html ]; then
     echo "Versi $after tidak punya website/index.html. Dibatalkan, kembali ke $before."
     git checkout --quiet --force --detach "$before"; return 1
+  fi
+
+  # pengaturan nginx yang ikut repo berubah: cek dulu, baru reload
+  if grep -q 'deploy/nginx-site.conf' "$SITE_CONF" 2>/dev/null; then
+    if ! git diff --quiet "$before" "$after" -- deploy/nginx-site.conf; then
+      if nginx -t 2>/dev/null; then systemctl reload nginx; echo "Pengaturan nginx diperbarui."
+      else
+        echo "Pengaturan nginx di versi $after ditolak (nginx -t). Dibatalkan, kembali ke $before."
+        git checkout --quiet --force --detach "$before"; return 1
+      fi
+    fi
+  else
+    echo "Catatan: halaman 404 & statistik butuh pemasangan sekali: bash $REPO/deploy/setup-vps.sh"
   fi
 
   if [ "$before" = "$after" ]; then

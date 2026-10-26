@@ -6,7 +6,9 @@ Ruang Pikir adalah brand konten **psikologi sehari-hari** (Reels/TikTok/Shorts 9
 
 | Folder | Isi |
 |---|---|
-| `website/` | `index.html` satu file (semua CSS/JS/gambar sudah inline), `logo.svg`, `DEPLOY.md` |
+| `website/` | Situs statis: `index.html` (CSS/JS inline), `episodes.json` (data episode), halaman `episode/`, gambar `episodes/`, `DEPLOY.md` |
+| `tools/` | `build_site.py`: membangun kartu & halaman episode, sitemap, gambar preview dari `episodes.json` |
+| `deploy/` | Skrip VPS: `setup-vps.sh`, `deploy.sh` (`ruangpikir-deploy`), `nginx-site.conf`, statistik |
 | `brand/` | Logo (foto profil 1080, horizontal, SVG) + `BRAND.md` (warna, font, nada bicara, aturan) |
 | `content/` | Profil IG, TikTok & X (nama, bio), caption EP01 & EP02, bank ide konten |
 | `videos/` | Hasil render EP01 & EP02 (MP4 1080×1920) |
@@ -15,7 +17,9 @@ Ruang Pikir adalah brand konten **psikologi sehari-hari** (Reels/TikTok/Shorts 9
 ## Tugas 1 — Deploy website ke ruangpikir.id
 
 Ikuti `website/DEPLOY.md`. Ringkas:
-- Website hanya satu file statis `website/index.html`. Tidak butuh build, server, atau database.
+- Website statis (tanpa server aplikasi/database). Header, footer, CSS, dan skrip bersama ada di `index.html`; halaman lain dibangun dari situ oleh `python3 tools/build_site.py` (butuh Pillow + ffmpeg). Setelah mengubah header/footer/CSS di `index.html`, jalankan build lagi supaya halaman episode ikut berubah.
+- **Episode baru di website:** taruh MP4 di `videos/`, tambah entri di `website/episodes.json` (no, slug, judul, topik, tanggal, file video, `poster_time`, ringkasan, isi, sumber), jalankan `python3 tools/build_site.py`, commit, lalu `ruangpikir-deploy` di VPS.
+- Statistik pengunjung di `https://ruangpikir.id/statistik/` (GoAccess, tanpa cookie). Kejadian dikirim lewat `track('nama')` di skrip `common`.
 - Domain `ruangpikir.id` terdaftar di **Hostinger**; DNS A record `@` → VPS Hostinger (Ubuntu 24.04), CNAME `www` → apex.
 - Di VPS: repo di-clone ke `/var/www/ruangpikir`, nginx melayani `website/`. Pasang/ulang: `bash deploy/setup-vps.sh` (lihat "Opsi C" di `website/DEPLOY.md`). Update: `ruangpikir-deploy` di VPS (rollback: `ruangpikir-deploy <commit>`), atau `ssh root@31.97.111.49 ruangpikir-deploy` dari komputer.
 - Setelah live, cek: HTTPS aktif, `https://ruangpikir.id` dan `https://www.ruangpikir.id` sama-sama jalan, game tes otak bisa dimainkan di HP.

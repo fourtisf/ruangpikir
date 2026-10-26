@@ -7,7 +7,9 @@ set -euo pipefail
 
 DOMAIN=ruangpikir.id
 WEBROOT=$(cd "$(dirname "$0")/../website" && pwd)
+REPO=$(dirname "$WEBROOT")
 CONF=/etc/nginx/sites-available/ruangpikir
+LE=/etc/letsencrypt
 
 [ "$(id -u)" = 0 ] || { echo "Jalankan sebagai root."; exit 1; }
 [ -f "$WEBROOT/index.html" ] || { echo "Tidak ada $WEBROOT/index.html"; exit 1; }
@@ -35,17 +37,45 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update -q
 apt-get install -y -q nginx certbot python3-certbot-nginx
 
-# 4. Situs nginx (HTTP dulu; certbot menambahkan HTTPS + redirect di langkah 6)
-cat > "$CONF" <<NGINX
+# 4. Situs nginx. Lokasi, log, halaman 404, dan statistik ada di deploy/nginx-site.conf (ikut repo).
+mkdir -p /var/log/ruangpikir
+SITE_BODY="    root $WEBROOT;
+    index index.html;
+    include $REPO/deploy/nginx-site.conf;"
+if [ -f "$LE/live/$DOMAIN/fullchain.pem" ] && [ -f "$LE/options-ssl-nginx.conf" ] && [ -f "$LE/ssl-dhparams.pem" ]; then
+  # sertifikat sudah ada (setup ulang): tulis konfigurasi HTTPS lengkap, tidak perlu certbot lagi
+  cat > "$CONF" <<NGINX
 server {
     listen 80;
     listen [::]:80;
     server_name $DOMAIN www.$DOMAIN;
-    root $WEBROOT;
-    index index.html;
-    location / { try_files \$uri \$uri/ =404; }
+    location ^~ /.well-known/acme-challenge/ { root $WEBROOT; }   # perpanjangan sertifikat
+    location / { return 301 https://\$host\$request_uri; }
+}
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name $DOMAIN www.$DOMAIN;
+    ssl_certificate $LE/live/$DOMAIN/fullchain.pem;
+    ssl_certificate_key $LE/live/$DOMAIN/privkey.pem;
+    include $LE/options-ssl-nginx.conf;
+    ssl_dhparam $LE/ssl-dhparams.pem;
+$SITE_BODY
 }
 NGINX
+  NEED_CERT=0
+else
+  # pemasangan pertama: HTTP dulu, certbot menambahkan HTTPS + redirect di langkah 6
+  cat > "$CONF" <<NGINX
+server {
+    listen 80;
+    listen [::]:80;
+    server_name $DOMAIN www.$DOMAIN;
+$SITE_BODY
+}
+NGINX
+  NEED_CERT=1
+fi
 ln -sf "$CONF" /etc/nginx/sites-enabled/ruangpikir
 nginx -t
 systemctl enable --now nginx
@@ -57,9 +87,14 @@ if command -v ufw >/dev/null && ufw status | grep -q 'Status: active'; then
 fi
 
 # 6. Sertifikat HTTPS untuk apex + www, redirect http -> https. Perpanjangan otomatis via certbot.timer.
-certbot --nginx -n --agree-tos --register-unsafely-without-email --redirect \
-  -d "$DOMAIN" -d "www.$DOMAIN"
+if [ "$NEED_CERT" = 1 ]; then
+  certbot --nginx -n --agree-tos --register-unsafely-without-email --redirect \
+    -d "$DOMAIN" -d "www.$DOMAIN"
+fi
 
-# 7. Pasang perintah `ruangpikir-deploy` + pengaturan cache, lalu cek situs
+# 7. Statistik pengunjung (password ditampilkan sekali saat pertama dipasang)
+bash "$REPO/deploy/setup-stats.sh"
+
+# 8. Pasang perintah `ruangpikir-deploy` + pengaturan cache, lalu cek situs
 bash "$(dirname "$0")/deploy.sh"
 echo "Selesai. Buka https://$DOMAIN — untuk update berikutnya cukup: ruangpikir-deploy"
