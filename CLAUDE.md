@@ -1,6 +1,6 @@
 # Ruang Pikir — instruksi untuk Claude Code
 
-Ruang Pikir adalah brand konten **psikologi sehari-hari** (Reels/TikTok/Shorts 9:16, 40–55 detik) dengan website **ruangpikir.id** dan Instagram **@ruangpikir2026**. Pemilik: ALFA. Paket ini berisi semua yang dibutuhkan untuk (1) deploy website dan (2) membuat episode video baru dengan gaya yang sama.
+Ruang Pikir adalah brand konten **psikologi sehari-hari** (Reels/TikTok/Shorts 9:16, 40–55 detik) dengan website **ruangpikir.id** dan Instagram/TikTok **@ruangpikir2026**. Pemilik: ALFA. Paket ini berisi semua yang dibutuhkan untuk (1) deploy website dan (2) membuat episode video baru dengan gaya yang sama.
 
 ## Isi paket
 
@@ -19,7 +19,7 @@ Ikuti `website/DEPLOY.md`. Ringkas:
 - Domain `ruangpikir.id` terdaftar di **Hostinger**; DNS A record `@` → VPS Hostinger (Ubuntu 24.04), CNAME `www` → apex.
 - Di VPS: repo di-clone ke `/var/www/ruangpikir`, nginx melayani `website/`. Pasang/ulang: `bash deploy/setup-vps.sh` (lihat "Opsi C" di `website/DEPLOY.md`). Update: `ruangpikir-deploy` di VPS (rollback: `ruangpikir-deploy <commit>`), atau `ssh root@31.97.111.49 ruangpikir-deploy` dari komputer.
 - Setelah live, cek: HTTPS aktif, `https://ruangpikir.id` dan `https://www.ruangpikir.id` sama-sama jalan, game tes otak bisa dimainkan di HP.
-- Link sosial media diatur di objek `SOCIAL` di bagian bawah `index.html` (Instagram sudah `@ruangpikir2026`; TikTok/YouTube kosong = tombol disembunyikan).
+- Link sosial media diatur di objek `SOCIAL` di bagian bawah `index.html` (Instagram & TikTok sudah `@ruangpikir2026`; YouTube kosong = tombol disembunyikan).
 
 ## Tugas 2 — Membuat episode video baru
 

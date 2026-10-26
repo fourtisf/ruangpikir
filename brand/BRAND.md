@@ -1,7 +1,7 @@
 # Brand Ruang Pikir
 
 **Nama:** Ruang Pikir · **Tagline:** Ruang untuk memahami isi kepalamu.
-**Instagram:** @ruangpikir2026 · **Website:** ruangpikir.id
+**Instagram & TikTok:** @ruangpikir2026 · **Website:** ruangpikir.id
 **Isi:** psikologi sehari-hari, dijelaskan pakai riset, dalam ±60 detik, dengan bahasa teman sendiri.
 
 ## Logo
