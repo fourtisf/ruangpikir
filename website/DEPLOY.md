@@ -1,6 +1,6 @@
 # Deploy ruangpikir.id
 
-File yang di-deploy: **`index.html`** saja (semua gambar, logo, CSS, dan JavaScript sudah ada di dalamnya). Font dimuat dari Google Fonts.
+File yang di-deploy: **`index.html`** saja (semua gambar, logo, CSS, dan JavaScript sudah ada di dalamnya). Font dimuat dari Google Fonts, dan logo 3D di hero memakai three.js dari `cdn.jsdelivr.net` (kalau browser tidak mendukung WebGL2 atau CDN gagal, logo SVG biasa yang tampil).
 
 ## Opsi A — Pakai hosting Hostinger (kalau punya paket hosting)
 
