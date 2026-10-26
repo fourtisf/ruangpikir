@@ -7,24 +7,23 @@ Foto profil sama dengan Instagram: `brand/ruangpikir-foto-profil.png`. Jumlah ka
 - **Nama** (maks. 30): `Ruang Pikir · Psikologi` — 23 karakter, sama dengan IG supaya mudah dicari
 - **Username:** `ruangpikir2026`
 - **Link/website:** `ruangpikir.id` (kalau kolom link belum tersedia di akunmu, pakai bio versi 3 yang menulis alamatnya)
-- **Gaya bio:** profesional — bahasa baku, tanpa emoji, jam ditulis 19.00 WIB
+- **Gaya bio:** profesional — bahasa baku, tanpa emoji, tanpa jam tayang
 
-### Bio (dipakai) — 75/80
+### Bio (dipakai) — 74/80
 ```
 Edukasi psikologi sehari-hari berbasis riset.
-Tayang setiap hari, 19.00 WIB
+Satu pertanyaan, satu video.
 ```
 
 ### Alternatif
-Versi 2, lebih ringkas — 68/80
+Versi 2, satu baris — 46/80
 ```
 Psikologi sehari-hari, dijelaskan lewat riset.
-Setiap hari 19.00 WIB
 ```
-Versi 3, dengan penegasan "bukan diagnosis" dan alamat website — 76/80
+Versi 3, dengan penegasan "bukan diagnosis" dan alamat website — 64/80
 ```
 Edukasi psikologi berbasis riset, bukan diagnosis.
-19.00 WIB · ruangpikir.id
+ruangpikir.id
 ```
 
 ## X (Twitter)
