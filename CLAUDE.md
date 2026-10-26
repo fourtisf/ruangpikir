@@ -16,8 +16,8 @@ Ruang Pikir adalah brand konten **psikologi sehari-hari** (Reels/TikTok/Shorts 9
 
 Ikuti `website/DEPLOY.md`. Ringkas:
 - Website hanya satu file statis `website/index.html`. Tidak butuh build, server, atau database.
-- Domain `ruangpikir.id` terdaftar di **Hostinger** (saat ini nameserver parkir `*.dns-parking.com`).
-- Pilihan termudah: upload ke `public_html` hosting Hostinger, atau deploy ke Cloudflare Pages / Netlify / Vercel lalu arahkan DNS.
+- Domain `ruangpikir.id` terdaftar di **Hostinger**; DNS A record `@` → VPS Hostinger (Ubuntu 24.04), CNAME `www` → apex.
+- Di VPS: repo di-clone ke `/var/www/ruangpikir`, nginx melayani `website/`. Pasang/ulang: `bash deploy/setup-vps.sh` (lihat "Opsi C" di `website/DEPLOY.md`). Update: `git -C /var/www/ruangpikir pull`.
 - Setelah live, cek: HTTPS aktif, `https://ruangpikir.id` dan `https://www.ruangpikir.id` sama-sama jalan, game tes otak bisa dimainkan di HP.
 - Link sosial media diatur di objek `SOCIAL` di bagian bawah `index.html` (Instagram sudah `@ruangpikir2026`; TikTok/YouTube kosong = tombol disembunyikan).
 

@@ -11,6 +11,23 @@ File yang di-deploy: **`index.html`** saja (semua gambar, logo, CSS, dan JavaScr
 5. Pastikan domain memakai nameserver Hostinger (hPanel → Domain → DNS/Nameserver → "Use Hostinger nameservers").
 6. Tunggu propagasi DNS (biasanya 15 menit – beberapa jam), lalu buka `https://ruangpikir.id`.
 
+## Opsi C — VPS sendiri (yang dipakai sekarang)
+
+DNS di hPanel: A record `@` → IP VPS, CNAME `www` → `ruangpikir.id`. Lalu SSH ke VPS sebagai root:
+
+```bash
+apt-get update && apt-get install -y git
+[ -d /var/www/ruangpikir ] || git clone https://github.com/fourtisf/ruangpikir.git /var/www/ruangpikir
+bash /var/www/ruangpikir/deploy/setup-vps.sh
+```
+
+Script `deploy/setup-vps.sh` mengecek DNS, memasang nginx yang melayani folder `website/`, lalu memasang HTTPS Let's Encrypt (apex + www, http dialihkan ke https, perpanjangan otomatis). Aman dijalankan ulang.
+
+**Update website** setelah ada perubahan di GitHub (tidak perlu restart nginx):
+```bash
+git -C /var/www/ruangpikir pull
+```
+
 ## Opsi B — Hanya punya domain (tanpa paket hosting): hosting gratis
 
 ### Cloudflare Pages
