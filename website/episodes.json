@@ -1,0 +1,36 @@
+[
+  {
+    "no": 2,
+    "slug": "tes-otak-stroop",
+    "title": "Tes otak 7 detik, berani?",
+    "topic": "Efek Stroop",
+    "date": "2026-10-26",
+    "video": "ruang-pikir-ep02-tes-otak.mp4",
+    "poster_time": 9.5,
+    "summary": "Kenapa otak terasa \"nge-lag\" saat tulisan dan warnanya beda.",
+    "body": [
+      "Coba sebutkan warna huruf pada kata MERAH yang ditulis dengan warna biru. Kebanyakan orang butuh waktu sepersekian detik lebih lama, atau malah keceplosan menyebut \"merah\".",
+      "Fenomena ini disebut efek Stroop, dari psikolog J. Ridley Stroop yang menerbitkannya pada 1935. Orang dewasa sudah sangat terlatih membaca, sehingga makna kata diproses hampir otomatis, lebih cepat daripada kita menamai warna.",
+      "Saat tulisan dan warnanya bertabrakan, otak harus menahan jawaban otomatis itu dulu. Akibatnya respons jadi lebih lambat dan lebih sering salah. Efek ini sangat konsisten, sampai sekarang dipakai peneliti untuk mempelajari perhatian dan kontrol diri."
+    ],
+    "source": "Stroop, J. R. (1935). Studies of interference in serial verbal reactions. Journal of Experimental Psychology, 18(6), 643–662.",
+    "try_test": true
+  },
+  {
+    "no": 1,
+    "slug": "ngerasa-diliatin-terus",
+    "title": "Ngerasa diliatin terus, kok bisa?",
+    "topic": "Spotlight effect",
+    "date": "2026-10-26",
+    "video": "ruang-pikir-ep01-ngerasa-diliatin.mp4",
+    "poster_time": 24.5,
+    "summary": "Riset Cornell tahun 2000: kita menebak setengah ruangan sadar, padahal cuma sekitar 1 dari 4.",
+    "body": [
+      "Pernah salah ngomong, atau datang dengan penampilan yang menurutmu memalukan, lalu merasa semua orang memperhatikan? Perasaan itu sangat umum, dan ada namanya: spotlight effect.",
+      "Pada tahun 2000, psikolog Thomas Gilovich dan rekan-rekannya di Cornell University meminta mahasiswa masuk ke ruangan memakai kaos yang dianggap memalukan. Para mahasiswa itu menebak sekitar setengah orang di ruangan akan sadar. Kenyataannya, hanya sekitar 1 dari 4 orang yang memperhatikan.",
+      "Kita mengalami hidup dari dalam diri sendiri, jadi detail kecil tentang diri kita terasa sangat menonjol. Padahal orang lain sibuk dengan pikiran dan \"sorotan\" di kepalanya masing-masing.",
+      "Jadi kalau besok kamu salah ngomong atau penampilanmu tidak sempurna, ingat: kemungkinan besar orang lain tidak memperhatikan sebanyak yang kamu kira, dan mereka cepat lupa."
+    ],
+    "source": "Gilovich, T., Medvec, V. H., & Savitsky, K. (2000). The spotlight effect in social judgment: An egocentric bias in estimates of the salience of one's own actions and appearance. Journal of Personality and Social Psychology, 78(2), 211–222."
+  }
+]

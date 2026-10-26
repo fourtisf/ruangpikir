@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /statistik/
+Disallow: /e/
+
+Sitemap: https://ruangpikir.id/sitemap.xml

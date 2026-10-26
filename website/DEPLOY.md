@@ -1,12 +1,16 @@
 # Deploy ruangpikir.id
 
-File yang di-deploy: **`index.html`** saja (semua gambar, logo, CSS, dan JavaScript sudah ada di dalamnya). Font dimuat dari Google Fonts, dan logo 3D di hero memakai three.js dari `cdn.jsdelivr.net` (kalau browser tidak mendukung WebGL2 atau CDN gagal, logo SVG biasa yang tampil).
+Yang di-deploy: **seluruh folder `website/`** (beranda, halaman episode, gambar, sitemap, 404) plus video dari `videos/` (lewat symlink `website/videos`). Font dimuat dari Google Fonts, dan logo 3D di hero memakai three.js dari `cdn.jsdelivr.net` (kalau browser tidak mendukung WebGL2 atau CDN gagal, logo SVG biasa yang tampil).
+
+Bagian yang dibuat otomatis dari `website/episodes.json` (kartu episode, halaman episode, sitemap, gambar preview) dibangun dengan `python3 tools/build_site.py`. Jalankan setelah menambah episode, lalu commit hasilnya.
+
+Yang dipakai sekarang: **Opsi C (VPS)**. Opsi A/B di bawah hanya cadangan; kalau dipakai, upload isi folder `website/` (ganti symlink `videos` dengan folder video aslinya). Halaman 404 khusus dan statistik hanya ada di Opsi C.
 
 ## Opsi A — Pakai hosting Hostinger (kalau punya paket hosting)
 
 1. hPanel → **Websites** → **Add website** → pilih "Empty / custom PHP-HTML website" → pilih domain **ruangpikir.id**.
 2. Buka **File Manager** website tersebut → masuk folder `public_html`.
-3. Hapus `default.php` / `index.php` bawaan kalau ada, lalu **upload `index.html`**.
+3. Hapus `default.php` / `index.php` bawaan kalau ada, lalu **upload isi folder `website/`**.
 4. hPanel → **Security → SSL** → pasang SSL gratis (Let's Encrypt) untuk `ruangpikir.id` dan `www.ruangpikir.id`.
 5. Pastikan domain memakai nameserver Hostinger (hPanel → Domain → DNS/Nameserver → "Use Hostinger nameservers").
 6. Tunggu propagasi DNS (biasanya 15 menit – beberapa jam), lalu buka `https://ruangpikir.id`.
@@ -39,6 +43,17 @@ ssh root@31.97.111.49 ruangpikir-deploy
 Perintah ini menolak jalan kalau ada file yang diedit langsung di VPS (supaya tidak hilang tanpa sengaja); pakai `--force` untuk menimpanya. Pengunjung langsung dapat versi baru tanpa perlu Ctrl+Shift+R (HTML diset `Cache-Control: no-cache`).
 
 VPS yang dipasang sebelum perintah ini ada: jalankan sekali `git -C /var/www/ruangpikir pull && bash /var/www/ruangpikir/deploy/deploy.sh`.
+
+Pengaturan nginx situs ada di `deploy/nginx-site.conf` (ikut repo). Kalau file itu berubah, `ruangpikir-deploy` mengecek dengan `nginx -t` lalu reload; kalau ditolak, deploy dibatalkan dan situs tetap di versi lama.
+
+### Statistik pengunjung: https://ruangpikir.id/statistik/
+
+Tanpa cookie dan tanpa layanan pihak ketiga: nginx mencatat kunjungan ke `/var/log/ruangpikir/access.log` (disimpan 90 hari, IP disamarkan di laporan), lalu GoAccess merangkumnya tiap 10 menit. Username `admin`; password ditampilkan sekali saat `setup-vps.sh` pertama memasang statistik. Lupa password: `bash /var/www/ruangpikir/deploy/setup-stats.sh --reset-password`.
+
+Yang terlihat di laporan: jumlah pengunjung & halaman, asal kunjungan (Instagram, TikTok, Google, …), perangkat, dan kejadian dari website di bagian *Requested Files* sebagai `/e/<nama>`:
+`tes-mulai`, `tes-selesai`, `bagikan-hasil`, `putar-<episode>`, `klik-instagram`, `klik-tiktok`, `klik-dm-instagram`.
+
+Tips: aplikasi Instagram/TikTok sering tidak mengirim asal kunjungan. Supaya jelas, pakai link bio `ruangpikir.id/?dari=ig` dan `ruangpikir.id/?dari=tiktok`; angkanya muncul terpisah di laporan.
 
 ## Opsi B — Hanya punya domain (tanpa paket hosting): hosting gratis
 
