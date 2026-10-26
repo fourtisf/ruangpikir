@@ -24,22 +24,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;700&display=swap">
+<script>/* kelas awal: js = animasi muncul aktif, gl = browser sanggup 3D (hero dibuat lebih panjang untuk efek masuk pintu) */
+(function () { var d = document.documentElement; d.classList.add('js'); try { var m = window.matchMedia; if (document.createElement('canvas').getContext('webgl2') && !m('(prefers-reduced-motion: reduce)').matches && !(navigator.connection && navigator.connection.saveData)) d.classList.add('gl'); } catch (e) {} })();</script>
 <!-- /build:head -->
 <!-- build:jsonld --><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "name": "Ruang Pikir", "url": "https://ruangpikir.id/", "logo": "https://ruangpikir.id/apple-touch-icon.png", "sameAs": ["https://www.instagram.com/ruangpikir2026/", "https://www.tiktok.com/@ruangpikir2026"], "@id": "https://ruangpikir.id/#org"}, {"@type": "WebSite", "name": "Ruang Pikir", "url": "https://ruangpikir.id/", "inLanguage": "id", "publisher": {"@id": "https://ruangpikir.id/#org"}}]}</script><!-- /build:jsonld -->
 <style>
-/* Layout: dark editorial landing. Hero (thesis + glowing door-head) -> topic marquee -> playable Stroop test -> series -> episodes -> principles -> follow band -> footer */
+/* Ruang Pikir — dark premium: hero 3D (three.js) + konten yang muncul halus saat discroll. Warna & font dari brand/BRAND.md */
 :root {
-  --ink: #060608;          /* page */
-  --night: #0D0E14;        /* sections */
-  --panel: #14151F;        /* cards */
-  --line: #25273A;         /* hairlines */
-  --violet: #7F8CFF;       /* brand accent */
-  --violet-2: #AEB6FF;     /* light accent */
-  --violet-3: #E3E6FF;     /* glow */
-  --text: #F0EFF6;
-  --muted: #9896A6;
-  --coral: #FF6B57;
-  --mint: #3FD68B;
+  --ink: #060608; --night: #0B0C12; --panel: #11121B; --line: #23253A;
+  --violet: #7F8CFF; --violet-2: #AEB6FF; --violet-3: #E3E6FF;
+  --text: #F0EFF6; --soft: #BDBBCD; --muted: #9896A6; --coral: #FF6B57; --mint: #3FD68B;
+  --glass: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.015));
+  --glass-line: rgba(255,255,255,.09);
+  --ease: cubic-bezier(.2,.75,.2,1);
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -47,278 +44,317 @@
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; background: var(--ink); }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
-body { margin: 0; background: var(--ink); color: var(--text); font-family: var(--font-sans); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+html { scroll-behavior: smooth; background: var(--ink); -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+body { margin: 0; background: var(--ink); color: var(--text); font: 400 17px/1.65 var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+::selection { background: rgba(127,140,255,.35); color: #fff; }
 a { color: inherit; text-decoration: none; }
-img { max-width: 100%; display: block; }
-h1, h2, h3 { margin: 0; line-height: 1.08; text-wrap: balance; letter-spacing: -0.025em; }
+img, video { display: block; max-width: 100%; }
+h1, h2, h3 { margin: 0; line-height: 1.04; letter-spacing: -.03em; text-wrap: balance; font-weight: 800; }
 p { margin: 0; }
-em.serif { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; color: var(--violet-2); }
-.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
-.eyebrow { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--violet-2); font-weight: 700; }
-.section { padding-block: clamp(56px, 9vw, 104px); }
-.sec-head { display: grid; gap: 16px; max-width: 720px; margin-bottom: 48px; }
-.sec-head h2, .h2 { font-size: clamp(30px, 5vw, 56px); font-weight: 800; }
-.sec-row { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 40px; }
-.sec-row .sec-head { margin-bottom: 0; }
-.sec-head p { color: var(--muted); font-size: 18px; }
-.btn { display: inline-flex; align-items: center; gap: 10px; font: 700 16px var(--font-sans); padding: 15px 24px; border-radius: 999px; border: 1px solid transparent; cursor: pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease; }
-.btn:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--violet-2); outline-offset: 3px; }
-.btn-primary { background: linear-gradient(180deg, #A3ADFF, var(--violet)); color: #0B0C1E; box-shadow: 0 10px 40px -10px rgba(127,140,255,.7); }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 50px -10px rgba(127,140,255,.85); }
-.btn-ghost { border-color: var(--line); color: var(--text); background: rgba(255,255,255,.02); }
-.btn-ghost:hover { border-color: var(--violet); background: rgba(127,140,255,.08); }
+em.serif { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -.01em; color: var(--violet-2); }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font: 700 12px/1.4 var(--font-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--violet-2); }
+.label { display: flex; align-items: center; gap: 14px; white-space: nowrap; font: 700 12px/1 var(--font-mono); letter-spacing: .2em; text-transform: uppercase; color: var(--violet-2); }
+.label b { color: var(--text); font-weight: 700; }
+.label::after { content: ""; flex: 1 1 64px; max-width: 64px; min-width: 0; height: 1px; background: linear-gradient(90deg, var(--violet), transparent); }
+.sub { color: var(--muted); font-size: clamp(16.5px, 1.35vw, 19px); max-width: 34em; }
 
-/* nav */
-header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); background: rgba(6,6,8,.72); border-bottom: 1px solid rgba(37,39,58,.6); }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--ink); }
-.nav-in { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 20px; }
-.brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .14em; font-size: 15px; }
-.brand svg { width: 38px; height: 38px; }
-.nav-links { display: flex; gap: 30px; font-size: 15px; color: var(--muted); font-weight: 600; }
-.nav-links a:hover { color: var(--text); }
-.nav .btn { padding: 10px 18px; font-size: 14px; gap: 8px; }
-.nav .btn .short { display: none; }
+/* tekstur film + cahaya kursor */
+.grain { position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .055; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.cursor-glow { position: fixed; left: 0; top: 0; z-index: 1; width: 560px; height: 560px; margin: -280px 0 0 -280px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(127,140,255,.13), rgba(127,140,255,.04) 40%, transparent 65%); transform: translate3d(-999px, -999px, 0); mix-blend-mode: screen; }
+@media (hover: none), (pointer: coarse) { .cursor-glow { display: none; } }
+
+/* muncul halus saat discroll (hanya kalau JS aktif) */
+.js .reveal { opacity: 0; transform: translateY(30px); filter: blur(8px); transition: opacity 1s var(--ease), transform 1.1s var(--ease), filter 1s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
+.js .reveal.in { opacity: 1; transform: none; filter: none; }
+
+/* tombol */
+.btn { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font: 700 15.5px/1 var(--font-sans); padding: 17px 26px; border-radius: 999px; border: 1px solid transparent; cursor: pointer; white-space: nowrap; transition: transform .45s var(--ease), box-shadow .45s var(--ease), background .3s ease, border-color .3s ease; }
+.btn:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--violet-2); outline-offset: 3px; }
+.btn-primary { color: #090A1A; background: linear-gradient(180deg, #CBD0FF, #929CFF 55%, #7783F7); box-shadow: inset 0 1px 0 rgba(255,255,255,.65), 0 14px 44px -14px rgba(127,140,255,.85); }
+.btn-primary::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.6) 50%, transparent 65%); transform: translateX(-130%); transition: transform .9s var(--ease); }
+.btn-primary:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.65), 0 22px 56px -14px rgba(127,140,255,1); }
+.btn-primary:hover::after { transform: translateX(130%); }
+.btn-ghost { color: var(--text); background: rgba(255,255,255,.045); border-color: rgba(255,255,255,.13); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.btn-ghost:hover { border-color: rgba(174,182,255,.65); background: rgba(127,140,255,.12); }
 svg.ig, svg.tt { width: 18px; height: 18px; flex: none; }
-.nav-cta { display: flex; align-items: center; gap: 10px; }
-.nav .btn.btn-icon { padding: 0; width: 44px; height: 44px; justify-content: center; }
-.menu-btn { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 4px; width: 44px; height: 44px; padding: 0; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.03); color: var(--text); cursor: pointer; }
-.menu-btn span { display: block; width: 18px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .2s ease, opacity .2s ease; }
+
+/* navigasi kaca melayang */
+header.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 60; padding: max(12px, env(safe-area-inset-top, 0px)) 14px 0; pointer-events: none; }
+.nav-in { pointer-events: auto; max-width: 1180px; margin: 0 auto; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 10px 0 16px; border-radius: 999px; background: rgba(13,13,20,.42); border: 1px solid rgba(255,255,255,.08); -webkit-backdrop-filter: blur(18px) saturate(150%); backdrop-filter: blur(18px) saturate(150%); box-shadow: 0 20px 50px -30px rgba(0,0,0,.9); transition: background .4s ease, border-color .4s ease; }
+header.nav.scrolled .nav-in { background: rgba(10,10,16,.78); border-color: rgba(255,255,255,.1); }
+.brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: .16em; font-size: 14px; }
+.brand svg { width: 34px; height: 34px; }
+.nav-links { display: flex; gap: 4px; font-size: 14.5px; font-weight: 600; color: var(--soft); }
+.nav-links a { padding: 9px 14px; border-radius: 999px; transition: background .25s ease, color .25s ease; }
+.nav-links a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+.nav-cta { display: flex; align-items: center; gap: 8px; }
+.nav .btn { padding: 12px 18px; font-size: 14px; gap: 8px; }
+.nav .btn.btn-icon { padding: 0; width: 44px; height: 44px; }
+.nav .btn .short { display: none; }
+.menu-btn { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 4px; width: 44px; height: 44px; padding: 0; border-radius: 999px; border: 1px solid rgba(255,255,255,.13); background: rgba(255,255,255,.04); color: var(--text); cursor: pointer; }
+.menu-btn span { display: block; width: 17px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .3s var(--ease), opacity .2s ease; }
 .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-.menu { position: absolute; left: 0; right: 0; top: 100%; background: #08080C; border-bottom: 1px solid var(--line); box-shadow: 0 30px 60px -20px rgba(0,0,0,.8); }
-.menu .wrap { display: grid; padding-block: 8px 22px; }
-.menu .wrap > a { padding: 15px 2px; font-size: 18px; font-weight: 700; border-bottom: 1px solid rgba(37,39,58,.7); }
+.menu { pointer-events: auto; max-width: 1180px; margin: 8px auto 0; border-radius: 26px; background: #0B0B12; border: 1px solid rgba(255,255,255,.09); box-shadow: 0 40px 80px -30px rgba(0,0,0,.9); }
+.menu-in { display: grid; padding: 10px 20px 20px; }
+.menu-in > a { padding: 16px 4px; font-size: 19px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,.07); }
 .menu-social { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
-.menu-social .btn { justify-content: center; padding: 13px 14px; font-size: 15px; }
+.menu-social .btn { padding: 14px; font-size: 15px; }
 
-/* hero: muat dalam satu layar, termasuk laptop pendek (585px) */
-.hero { position: relative; padding-block: clamp(28px, 6vh, 72px); overflow: hidden; min-height: calc(100svh - 72px); display: grid; align-items: center; }
-.hero::before { content: ""; position: absolute; inset: -20% -10% auto; height: 120%; background: radial-gradient(60% 55% at 72% 40%, rgba(96,108,255,.22), transparent 70%), radial-gradient(40% 40% at 10% 10%, rgba(127,140,255,.08), transparent 70%); pointer-events: none; }
-.hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 40px; align-items: center; }
-.hero h1 { font-size: clamp(40px, min(5.8vw, 9.6vh), 80px); font-weight: 800; margin-top: 18px; }
-.hero h1 em.serif { font-size: 1.08em; }
-.hero .lead { margin-top: 20px; font-size: clamp(17px, 1.4vw, 19px); color: var(--muted); max-width: 32em; }
-.hero-cta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
-.hero-proof { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--muted); font-size: 14px; }
+/* hero 3D */
+.hero { position: relative; height: 100svh; min-height: 640px; }
+.gl .hero { height: 210svh; }
+.hero-sticky { position: sticky; top: 0; height: 100svh; min-height: 640px; overflow: hidden; display: grid; align-items: center; background: radial-gradient(60% 70% at 72% 45%, rgba(96,108,255,.2), transparent 70%), radial-gradient(40% 50% at 5% 100%, rgba(127,140,255,.08), transparent 70%), var(--ink); }
+#scene { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.4s var(--ease); }
+.is-3d #scene { opacity: 1; }
+.hero-fallback { position: absolute; right: 7%; top: 50%; width: min(40vw, 500px); transform: translateY(-50%); filter: drop-shadow(0 30px 90px rgba(96,108,255,.5)); transition: opacity .8s ease; }
+.is-3d .hero-fallback { opacity: 0; }
+.hero-shade { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(6,6,8,.8) 0%, rgba(6,6,8,.42) 38%, transparent 62%), linear-gradient(0deg, rgba(6,6,8,.75), transparent 28%); }
+.hero-content { position: relative; z-index: 2; width: 100%; padding-top: 72px; will-change: opacity, transform; }
+.hero-content > * { max-width: 620px; }
+.hero-title { font-size: clamp(46px, min(7.2vw, 11.5vh), 112px); line-height: .96; letter-spacing: -.048em; margin-top: 22px; }
+.hero-title .line { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.hero-title .line > * { display: inline-block; transform: translateY(105%); animation: rise 1.2s var(--ease) forwards; animation-delay: calc(.25s + var(--i) * .13s); }
+.hero-title em.serif { font-size: 1.08em; letter-spacing: -.02em; padding-right: .05em; }
+@keyframes rise { to { transform: none; } }
+.fade-up { opacity: 0; transform: translateY(18px); animation: fadeUp 1.1s var(--ease) forwards; animation-delay: calc(.3s + var(--d) * .12s); }
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+.hero .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px 8px 10px; border-radius: 999px; background: rgba(127,140,255,.1); border: 1px solid rgba(127,140,255,.25); }
+.hero .eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 12px var(--mint); }
+.lead { margin-top: 26px; font-size: clamp(17px, 1.3vw, 19.5px); color: var(--soft); max-width: 31em; }
+.hero-cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-proof { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--muted); font-size: 14px; }
 .hero-proof span { display: inline-flex; align-items: center; gap: 8px; }
-.hero-proof span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--violet); }
-.stage { position: relative; aspect-ratio: 1 / 1; max-width: min(480px, 68vh); width: 100%; justify-self: center; }
-.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.stage .logo-big { position: absolute; inset: 12%; filter: drop-shadow(0 30px 80px rgba(96,108,255,.45)); animation: float 7s ease-in-out infinite; transition: opacity .6s ease; }
-.stage #hero3d { opacity: 0; transition: opacity .9s ease; }
-.stage.is-3d #hero3d { opacity: 1; }
-.stage.is-3d .logo-big { opacity: 0; }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-.chip { position: absolute; font-size: 14px; font-weight: 600; color: var(--violet-3); background: rgba(20,21,31,.85); border: 1px solid rgba(127,140,255,.35); padding: 9px 14px; border-radius: 999px; white-space: nowrap; backdrop-filter: blur(6px); animation: drift 9s ease-in-out infinite; }
-.chip:nth-of-type(1) { top: 8%; left: -4%; }
-.chip:nth-of-type(2) { top: 44%; right: -6%; animation-delay: -3s; }
-.chip:nth-of-type(3) { bottom: 9%; left: 2%; animation-delay: -6s; }
-@keyframes drift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(6px, -10px); } }
+.hero-proof span::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 10px var(--violet); }
+.scroll-hint { position: absolute; z-index: 2; left: 50%; bottom: 22px; transform: translateX(-50%); display: grid; justify-items: center; gap: 10px; font: 700 11px var(--font-mono); letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+.scroll-hint i { width: 1px; height: 42px; background: linear-gradient(var(--violet-2), transparent); transform-origin: top; animation: drip 2.2s var(--ease) infinite; }
+@keyframes drip { 0% { transform: scaleY(0); opacity: 1; } 70% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+.portal { position: absolute; inset: 0; z-index: 3; background: var(--ink); opacity: 0; pointer-events: none; }
+html:not(.gl) .scroll-hint { display: none; }
 
 /* marquee */
-.marquee { border-block: 1px solid var(--line); background: var(--night); overflow: hidden; }
-.marquee-track { display: flex; gap: 46px; padding-block: 20px; width: max-content; animation: slide 40s linear infinite; font-family: var(--font-serif); font-style: italic; font-size: 26px; color: var(--muted); }
-.marquee-track span::after { content: "✦"; font-style: normal; font-size: 14px; color: var(--violet); margin-left: 46px; vertical-align: 4px; }
+.marquee { position: relative; z-index: 2; overflow: hidden; padding-block: 26px; border-block: 1px solid var(--glass-line); background: var(--ink); -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee-track { display: flex; gap: 54px; width: max-content; animation: slide 50s linear infinite; font-family: var(--font-serif); font-style: italic; font-size: clamp(28px, 3.6vw, 46px); color: rgba(240,239,246,.5); white-space: nowrap; }
+.marquee-track span::after { content: "✦"; font-style: normal; font-size: .4em; color: var(--violet); margin-left: 54px; vertical-align: .5em; }
 @keyframes slide { to { transform: translateX(-50%); } }
 
-/* test */
-#tes { background: linear-gradient(180deg, var(--ink), var(--night)); }
-.test-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); grid-template-areas: "head game" "rules game"; gap: 22px 44px; align-items: start; }
+/* bagian umum */
+.section { position: relative; z-index: 2; padding-block: clamp(84px, 12vw, 160px); }
+main > section:first-child:not(.hero), main > article:first-child { padding-top: clamp(120px, 15vw, 180px); }
+.sec-head { display: grid; gap: 20px; max-width: 820px; margin-bottom: clamp(40px, 6vw, 72px); }
+.sec-head h2, .h2 { font-size: clamp(38px, 6vw, 78px); }
+.sec-head p { color: var(--muted); font-size: clamp(16.5px, 1.35vw, 19px); max-width: 34em; }
+.sec-row { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(40px, 6vw, 64px); }
+.sec-row .sec-head { margin-bottom: 0; }
+.glass { background: var(--glass); border: 1px solid var(--glass-line); box-shadow: inset 0 1px 0 rgba(255,255,255,.06); }
+
+/* tes */
+#tes { background: radial-gradient(50% 60% at 80% 30%, rgba(96,108,255,.1), transparent 70%), var(--ink); }
+.test-grid { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); grid-template-areas: "head game" "rules game"; gap: 28px 64px; align-items: start; }
 .test-head { grid-area: head; display: grid; gap: 22px; }
-.test-rules { grid-area: rules; display: grid; gap: 22px; align-content: start; }
-.game { grid-area: game; }
-.rule { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 16px; align-items: start; }
-.rule .n { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--panel); border: 1px solid var(--line); font-family: var(--font-mono); color: var(--violet-2); font-weight: 700; }
-.rule b { display: block; font-size: 18px; }
-.rule span { color: var(--muted); font-size: 15.5px; }
-.example { display: inline-flex; gap: 12px; align-items: center; margin-top: 4px; padding: 14px 18px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); font-size: 15px; color: var(--muted); }
+.test-rules { grid-area: rules; display: grid; gap: 14px; align-content: start; }
+.rule { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 16px; align-items: center; padding: 16px 18px; border-radius: 20px; background: var(--glass); border: 1px solid var(--glass-line); }
+.rule .n { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: rgba(127,140,255,.12); color: var(--violet-2); font: 700 14px var(--font-mono); }
+.rule b { display: block; font-size: 16.5px; }
+.rule span { color: var(--muted); font-size: 14.5px; }
+.example { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; padding: 16px 18px; border-radius: 20px; border: 1px dashed rgba(174,182,255,.25); font-size: 15px; color: var(--muted); }
 .example strong { font-size: 24px; letter-spacing: .02em; }
-.game { position: relative; background: radial-gradient(120% 80% at 50% 0%, rgba(127,140,255,.12), transparent 60%), var(--panel); border: 1px solid var(--line); border-radius: 28px; padding: 28px; min-height: 520px; display: grid; grid-template-rows: auto 1fr auto; gap: 22px; box-shadow: 0 40px 120px -40px rgba(80,90,255,.35); }
-.game-top { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 13px; color: var(--muted); letter-spacing: .08em; }
+@property --spin { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.game { grid-area: game; position: relative; border-radius: 34px; padding: 30px; min-height: 540px; display: grid; grid-template-rows: auto 1fr auto; gap: 22px; background: radial-gradient(120% 80% at 50% 0%, rgba(127,140,255,.14), transparent 60%), linear-gradient(180deg, #141524, #0C0C14); box-shadow: 0 60px 140px -50px rgba(80,90,255,.55), inset 0 1px 0 rgba(255,255,255,.08); }
+.game::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; background: conic-gradient(from var(--spin), rgba(127,140,255,0) 0deg, rgba(174,182,255,.9) 60deg, rgba(127,140,255,0) 140deg, rgba(127,140,255,.0) 360deg); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: spin 7s linear infinite; }
+@keyframes spin { to { --spin: 360deg; } }
+.game-top { display: flex; justify-content: space-between; align-items: center; font: 500 13px var(--font-mono); color: var(--muted); letter-spacing: .1em; }
 .progress { height: 6px; border-radius: 6px; background: rgba(255,255,255,.07); overflow: hidden; margin-top: 10px; }
-.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--violet), var(--violet-2)); transition: width .25s ease; }
-.screen { display: grid; place-items: center; text-align: center; min-height: 260px; border-radius: 22px; transition: box-shadow .15s ease, background .15s ease; }
+.progress i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--violet), var(--violet-3)); box-shadow: 0 0 16px var(--violet); transition: width .25s ease; }
+.screen { display: grid; place-items: center; text-align: center; min-height: 270px; border-radius: 24px; background: rgba(0,0,0,.18); transition: box-shadow .15s ease, background .15s ease; }
 .screen.ok { box-shadow: inset 0 0 0 3px rgba(63,214,139,.7); background: rgba(63,214,139,.06); }
 .screen.no { box-shadow: inset 0 0 0 3px rgba(255,107,87,.7); background: rgba(255,107,87,.06); }
-.word { font-size: clamp(56px, 9vw, 92px); font-weight: 800; letter-spacing: .02em; line-height: 1; text-shadow: 0 0 34px currentColor; }
-.count { font-size: 120px; font-weight: 800; line-height: 1; }
-.idle h3 { font-size: 30px; font-weight: 800; }
+.word { font-size: clamp(56px, 9vw, 96px); font-weight: 800; letter-spacing: .02em; line-height: 1; text-shadow: 0 0 40px currentColor; }
+.count { font-size: 128px; font-weight: 800; line-height: 1; background: linear-gradient(180deg, #fff, var(--violet-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.idle h3 { font-size: 32px; }
 .idle p { color: var(--muted); margin: 12px auto 26px; max-width: 26em; }
 .colors { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
-.colors button { font: 800 14px var(--font-sans); letter-spacing: .04em; padding: 16px 6px; border-radius: 16px; border: 1px solid var(--line); background: #0F1018; color: var(--text); cursor: pointer; display: grid; gap: 8px; justify-items: center; transition: transform .12s ease, border-color .12s ease; }
-.colors button i { width: 26px; height: 26px; border-radius: 50%; display: block; box-shadow: 0 0 18px currentColor; }
-.colors button:hover { border-color: var(--violet); transform: translateY(-2px); }
+.colors button { font: 800 13.5px var(--font-sans); letter-spacing: .04em; padding: 16px 6px; border-radius: 18px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.035); color: var(--text); cursor: pointer; display: grid; gap: 8px; justify-items: center; transition: transform .15s ease, border-color .15s ease, background .15s ease; }
+.colors button i { width: 26px; height: 26px; border-radius: 50%; display: block; box-shadow: 0 0 20px currentColor; }
+.colors button:hover { border-color: var(--violet); background: rgba(127,140,255,.08); transform: translateY(-2px); }
 .colors button:active { transform: translateY(1px); }
 .colors button:disabled { opacity: .35; cursor: default; transform: none; }
 .colors kbd { font: 500 11px var(--font-mono); color: var(--muted); }
-.result { display: grid; gap: 18px; text-align: center; width: 100%; }
-.score { font-size: 84px; font-weight: 800; line-height: 1; letter-spacing: -.04em; }
-.score small { font-size: 30px; color: var(--muted); }
+.result { display: grid; gap: 18px; text-align: center; width: 100%; padding: 6px; }
+.score { font-size: 92px; font-weight: 800; line-height: 1; letter-spacing: -.05em; }
+.score small { font-size: 32px; color: var(--muted); }
 .rt { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; text-align: left; }
-.rt div { background: #0F1018; border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; }
+.rt div { background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 14px 16px; }
 .rt span { font-size: 13px; color: var(--muted); display: block; }
 .rt b { font-size: 26px; font-variant-numeric: tabular-nums; }
 .verdict { color: var(--violet-3); }
 .result .row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
-/* series */
-.series { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.serie { background: var(--panel); border: 1px solid var(--line); border-radius: 24px; padding: 28px; display: grid; gap: 14px; align-content: start; transition: border-color .2s ease, transform .2s ease; }
-.serie:hover { border-color: rgba(127,140,255,.55); transform: translateY(-3px); }
-.serie .tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; color: var(--violet-2); }
-.serie h3 { font-size: 25px; font-weight: 800; }
-.serie ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-.serie li { color: var(--muted); font-size: 15.5px; padding-left: 18px; position: relative; }
-.serie li::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--violet); }
-.serie.wide { grid-column: span 2; background: linear-gradient(135deg, rgba(127,140,255,.16), rgba(127,140,255,.02) 60%), var(--panel); }
-
-/* episodes */
-.eps { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-.ep { background: var(--panel); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
-.ep:hover { border-color: rgba(127,140,255,.55); }
+/* episode */
+#episode { background: linear-gradient(180deg, var(--ink), var(--night) 30%, var(--night) 70%, var(--ink)); }
+.eps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 24px; }
+.ep { position: relative; border-radius: 26px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; background: var(--panel); border: 1px solid var(--glass-line); transition: transform .5s var(--ease), border-color .3s ease, box-shadow .5s var(--ease); }
+.ep:hover { border-color: rgba(174,182,255,.45); box-shadow: 0 40px 90px -40px rgba(80,90,255,.65); }
 .ep-poster { position: relative; display: block; aspect-ratio: 4 / 5; background: #000; overflow: hidden; }
-.ep-poster img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
-.ep-poster:hover img { transform: scale(1.03); }
-.ep-poster .play { position: absolute; left: 50%; top: 50%; width: 62px; height: 62px; margin: -31px 0 0 -31px; border-radius: 50%; display: grid; place-items: center; background: rgba(127,140,255,.92); color: #0B0C1E; box-shadow: 0 10px 40px -6px rgba(127,140,255,.8); transition: transform .2s ease; }
+.ep-poster img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.ep-poster::after { content: ""; position: absolute; inset: auto 0 0; height: 40%; background: linear-gradient(transparent, rgba(17,18,27,.95)); pointer-events: none; }
+.ep:hover .ep-poster img { transform: scale(1.05); }
+.ep-poster .play { position: absolute; z-index: 1; left: 50%; top: 46%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: rgba(127,140,255,.35); border: 1px solid rgba(227,230,255,.5); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 0 0 10px rgba(127,140,255,.12); transition: transform .4s var(--ease), background .3s ease; }
 .ep-poster .play svg { width: 22px; height: 22px; margin-left: 3px; }
-.ep-poster:hover .play { transform: scale(1.08); }
-.ep-poster .dur { position: absolute; right: 10px; bottom: 10px; font: 700 12px var(--font-mono); background: rgba(6,6,8,.78); padding: 4px 8px; border-radius: 8px; }
-.ep .meta { padding: 16px 18px 20px; display: grid; gap: 8px; align-content: start; }
+.ep:hover .ep-poster .play { transform: scale(1.1); background: rgba(127,140,255,.75); }
+.ep-poster .dur { position: absolute; z-index: 1; right: 12px; top: 12px; font: 700 12px var(--font-mono); background: rgba(6,6,8,.7); padding: 5px 9px; border-radius: 999px; }
+.ep .meta { padding: 4px 20px 22px; display: grid; gap: 8px; align-content: start; }
 .ep .meta .eyebrow { font-size: 11px; letter-spacing: .14em; }
-.ep h3 { font-size: 19px; font-weight: 800; line-height: 1.22; }
+.ep h3 { font-size: 20px; line-height: 1.2; letter-spacing: -.02em; }
 .ep p { color: var(--muted); font-size: 14.5px; line-height: 1.5; }
-.ep .go { font-weight: 700; color: var(--violet-2); font-size: 14px; margin-top: 2px; }
+.ep .go { font-weight: 700; color: var(--violet-2); font-size: 14px; margin-top: 4px; }
 
-/* pemutar video */
-dialog.player { width: 100vw; height: 100dvh; max-width: 100vw; max-height: 100dvh; margin: 0; padding: 0; border: 0; background: transparent; color: var(--text); }
-dialog.player::backdrop { background: rgba(3,3,6,.88); backdrop-filter: blur(6px); }
-body:has(dialog[open]) { overflow: hidden; }
-.player-in { position: relative; height: 100%; display: grid; place-items: center; align-content: center; gap: 14px; padding: 60px 16px 20px; }
-.player video { display: block; height: min(74dvh, 760px); aspect-ratio: 9 / 16; max-width: 100%; border-radius: 18px; background: #000; box-shadow: 0 30px 100px -30px rgba(80,90,255,.6); }
-.player-meta { display: grid; gap: 12px; justify-items: center; text-align: center; }
-.player-meta b { font-size: 18px; }
-.player-meta .row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-.player-meta .btn { padding: 11px 18px; font-size: 14px; }
-.player-close { position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: rgba(20,21,31,.9); color: var(--text); font-size: 26px; line-height: 1; cursor: pointer; }
+/* seri */
+.series { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
+.serie { grid-column: span 2; position: relative; overflow: hidden; border-radius: 28px; padding: 30px; display: grid; gap: 14px; align-content: start; background: var(--glass); border: 1px solid var(--glass-line); transition: border-color .3s ease; }
+.serie:nth-child(-n+2) { grid-column: span 3; }
+.serie:hover { border-color: rgba(174,182,255,.4); }
+.serie .num { position: absolute; right: 20px; top: 8px; font: 800 104px/1 var(--font-sans); letter-spacing: -.06em; color: transparent; background: linear-gradient(180deg, rgba(174,182,255,.2), rgba(174,182,255,0) 85%); -webkit-background-clip: text; background-clip: text; pointer-events: none; }
+.serie .tag { font: 700 11.5px var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--violet-2); }
+.serie h3 { font-size: 26px; letter-spacing: -.02em; }
+.serie ul { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.serie li { color: var(--soft); font-size: 15.5px; padding-left: 20px; position: relative; }
+.serie li::before { content: ""; position: absolute; left: 0; top: .66em; width: 8px; height: 1px; background: var(--violet); }
 
-/* halaman episode */
-.ep-page { padding-block: clamp(32px, 6vw, 72px); }
-.ep-grid { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
-.ep-video { position: sticky; top: 96px; }
-.ep-video video { width: 100%; aspect-ratio: 9 / 16; border-radius: 22px; background: #000; display: block; box-shadow: 0 40px 120px -40px rgba(80,90,255,.55); }
-.ep-body { display: grid; gap: 18px; max-width: 640px; }
-.ep-body .back { color: var(--muted); font-weight: 600; font-size: 15px; }
-.ep-body h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; }
-.ep-body .lead { font-size: 19px; color: var(--violet-3); }
-.ep-body p { color: #CFCDE0; }
-.ep-source { border: 1px solid var(--line); background: var(--panel); border-radius: 18px; padding: 16px 18px; font-size: 14.5px; color: var(--muted); }
-.ep-source b { display: block; color: var(--text); font-size: 13px; font-family: var(--font-mono); letter-spacing: .12em; margin-bottom: 6px; }
-.ep-body .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
-.notfound { min-height: 60vh; display: grid; align-content: center; gap: 18px; text-align: center; justify-items: center; }
-
-/* principles */
-.princ { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
-.princ div { border-top: 1px solid var(--line); padding-top: 22px; display: grid; gap: 10px; align-content: start; }
-.princ b { font-size: 22px; }
+/* tentang */
+.statement { display: grid; gap: 22px; max-width: 980px; margin-bottom: clamp(48px, 7vw, 88px); }
+.statement h2 { font-size: clamp(38px, 6.2vw, 84px); }
+.princ { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.princ > div { display: grid; gap: 12px; align-content: start; padding: 28px; border-radius: 26px; background: var(--glass); border: 1px solid var(--glass-line); }
+.princ .pn { font: 700 13px var(--font-mono); color: var(--violet-2); letter-spacing: .14em; }
+.princ b { font-size: 22px; letter-spacing: -.02em; }
 .princ p { color: var(--muted); }
 .help { display: inline-block; margin-top: 4px; color: var(--violet-2); font-weight: 700; font-size: 15px; }
 
-/* kerja sama */
-.collab { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 28px; align-items: center; padding: 36px 40px; border-radius: 28px; border: 1px solid var(--line); background: linear-gradient(135deg, rgba(127,140,255,.10), rgba(127,140,255,0) 55%), var(--panel); }
-.collab h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin-top: 10px; }
-.collab p { color: var(--muted); margin-top: 12px; }
-.collab p b { color: var(--text); }
-.collab-actions { display: grid; gap: 10px; }
-.collab-actions .btn { justify-content: center; }
-
-/* follow band */
-.band { position: relative; overflow: hidden; border-radius: 36px; padding: 56px 48px; background: radial-gradient(70% 120% at 85% 20%, rgba(96,108,255,.35), transparent 60%), linear-gradient(180deg, #121426, #0B0C16); border: 1px solid rgba(127,140,255,.3); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 40px; align-items: center; }
-.band h2 { font-size: clamp(32px, 4.6vw, 54px); font-weight: 800; }
-.band p { color: var(--muted); margin-top: 14px; font-size: 18px; }
+/* ikuti + kerja sama */
+.band { position: relative; overflow: hidden; border-radius: 40px; padding: clamp(36px, 6vw, 72px); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 48px; align-items: center; background: radial-gradient(70% 110% at 85% 10%, rgba(96,108,255,.42), transparent 60%), radial-gradient(50% 80% at 0% 100%, rgba(127,140,255,.12), transparent 60%), linear-gradient(180deg, #11132A, #090A14); border: 1px solid rgba(127,140,255,.28); }
+.band h2 { font-size: clamp(36px, 5vw, 64px); margin-top: 18px; }
+.band p { color: var(--soft); margin-top: 16px; font-size: 18px; }
 .band p b { color: var(--text); }
 .band .row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
 .band .row:not(:has(> a:not([hidden]))) { display: none; }
-
-/* kartu profil Instagram */
-.igcard { background: rgba(8,9,16,.78); border: 1px solid rgba(127,140,255,.28); border-radius: 26px; padding: 24px; display: grid; gap: 16px; box-shadow: 0 30px 80px -30px rgba(80,90,255,.5); }
+.igcard { border-radius: 28px; padding: 24px; display: grid; gap: 16px; background: rgba(8,9,16,.72); border: 1px solid rgba(255,255,255,.1); box-shadow: 0 40px 90px -30px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.06); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
 .ig-head { display: flex; align-items: center; gap: 16px; min-width: 0; }
 .ig-avatar { flex: none; width: 78px; height: 78px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, var(--violet-3), var(--violet) 55%, #4B55C8); }
-.ig-avatar span { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: var(--ink); border: 3px solid var(--ink); }
+.ig-avatar > span { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: var(--ink); border: 3px solid var(--ink); }
 .ig-avatar svg { width: 76%; height: 76%; }
-.ig-user { display: block; font-weight: 800; font-size: 19px; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.ig-user { display: block; font-weight: 800; font-size: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ig-head > div { min-width: 0; }
 .ig-name { display: block; color: var(--muted); font-size: 14px; line-height: 1.45; }
 .ig-bio { font-size: 15px; line-height: 1.6; }
 .ig-bio .link { color: var(--violet-2); font-weight: 700; }
 .ig-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
-.ig-actions .btn { justify-content: center; padding: 12px 16px; font-size: 15px; }
+.ig-actions .btn { padding: 13px 16px; font-size: 15px; }
+.collab { margin-top: 22px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 28px; align-items: center; padding: clamp(28px, 4vw, 44px); border-radius: 32px; background: var(--glass); border: 1px solid var(--glass-line); scroll-margin-top: 110px; }
+.collab h2 { font-size: clamp(28px, 3.6vw, 44px); margin-top: 14px; }
+.collab p { color: var(--muted); margin-top: 12px; }
+.collab p b { color: var(--text); }
+.collab-actions { display: grid; gap: 10px; }
 
-/* kartu miring 3D saat disorot mouse (diatur JS, hanya di perangkat ber-mouse) */
-.tilt { position: relative; transition: transform .25s ease, border-color .2s ease; }
-.tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s ease; background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(174,182,255,.13), transparent 45%); }
+/* kartu miring 3D (diatur JS, hanya perangkat ber-mouse) */
+.tilt { transform-style: preserve-3d; }
+.tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s ease; background: radial-gradient(460px circle at var(--gx, 50%) var(--gy, 50%), rgba(174,182,255,.14), transparent 45%); }
 .tilt:hover::after { opacity: 1; }
 
-footer { padding-block: 56px 70px; color: var(--muted); font-size: 14.5px; }
-.foot { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-top: 30px; }
-footer { border-top: 1px solid var(--line); }
+/* pemutar video */
+dialog.player { width: 100vw; height: 100dvh; max-width: 100vw; max-height: 100dvh; margin: 0; padding: 0; border: 0; background: transparent; color: var(--text); }
+dialog.player::backdrop { background: rgba(3,3,6,.9); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+body:has(dialog[open]) { overflow: hidden; }
+.player-in { position: relative; height: 100%; display: grid; place-items: center; align-content: center; gap: 14px; padding: 64px 16px 20px; }
+.player video { display: block; height: min(74dvh, 760px); aspect-ratio: 9 / 16; max-width: 100%; border-radius: 22px; background: #000; box-shadow: 0 40px 120px -30px rgba(80,90,255,.65); }
+.player-meta { display: grid; gap: 12px; justify-items: center; text-align: center; }
+.player-meta b { font-size: 18px; }
+.player-meta .row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.player-meta .btn { padding: 12px 18px; font-size: 14px; }
+.player-close { position: absolute; top: 14px; right: 14px; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.14); background: rgba(20,21,31,.9); color: var(--text); font-size: 26px; line-height: 1; cursor: pointer; }
+
+/* halaman episode & 404 (dibuat tools/build_site.py) */
+.ep-page { position: relative; z-index: 2; padding-bottom: clamp(48px, 8vw, 96px); }
+.ep-grid { display: grid; grid-template-columns: minmax(0, 390px) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.ep-video { position: sticky; top: 104px; }
+.ep-video video { width: 100%; aspect-ratio: 9 / 16; border-radius: 26px; background: #000; display: block; box-shadow: 0 50px 130px -40px rgba(80,90,255,.6); border: 1px solid var(--glass-line); }
+.ep-body { display: grid; gap: 18px; max-width: 660px; }
+.ep-body .back { color: var(--muted); font-weight: 600; font-size: 15px; }
+.ep-body h1 { font-size: clamp(36px, 5.4vw, 64px); }
+.ep-body .lead { margin-top: 0; font-size: 20px; color: var(--violet-3); }
+.ep-body p { color: var(--soft); }
+.ep-source { border: 1px solid var(--glass-line); background: var(--glass); border-radius: 20px; padding: 18px 20px; font-size: 14.5px; color: var(--muted); }
+.ep-source b { display: block; color: var(--text); font: 700 12px var(--font-mono); letter-spacing: .16em; margin-bottom: 8px; }
+.ep-body .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+.notfound { min-height: 64vh; display: grid; align-content: center; gap: 20px; text-align: center; justify-items: center; }
+
+/* footer */
+footer { position: relative; z-index: 2; overflow: hidden; border-top: 1px solid var(--glass-line); padding-top: 56px; color: var(--muted); font-size: 14.5px; background: var(--ink); }
+.foot { display: flex; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
 .foot .note { max-width: 620px; }
 .foot .note a { color: var(--violet-2); font-weight: 700; }
 .foot .help-line { display: block; margin-top: 10px; }
 .foot-side { display: grid; gap: 8px; justify-items: end; align-content: start; }
 .foot-side a { color: var(--text); font-weight: 600; }
+.wordmark { margin-top: clamp(40px, 6vw, 72px); text-align: center; white-space: nowrap; user-select: none; font: 800 clamp(56px, 15.5vw, 236px)/.8 var(--font-sans); letter-spacing: -.06em; color: transparent; background: linear-gradient(180deg, rgba(174,182,255,.26), rgba(127,140,255,.03) 82%); -webkit-background-clip: text; background-clip: text; transform: translateY(14%); }
 
-@media (max-width: 920px) {
-  .hero-grid, .band, .collab { grid-template-columns: minmax(0, 1fr); }
+/* responsif */
+@media (max-width: 1000px) {
   .test-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "game" "rules"; }
-  .ep-grid { grid-template-columns: minmax(0, 1fr); }
-  .ep-video { position: static; max-width: 360px; width: 100%; margin-inline: auto; }
-  .hero { min-height: 0; }
-  .stage { max-width: 380px; }
+  .band, .collab { grid-template-columns: minmax(0, 1fr); }
+  .igcard { max-width: 480px; }
   .series { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .igcard { max-width: 460px; }
+  .serie, .serie:nth-child(-n+2) { grid-column: auto; }
+  .ep-grid { grid-template-columns: minmax(0, 1fr); }
+  .ep-video { position: static; max-width: 380px; width: 100%; margin-inline: auto; }
 }
 @media (max-width: 900px) {
   .nav-links, .nav-tt { display: none; }
   .menu-btn { display: flex; }
   .nav .btn .long { display: none; }
   .nav .btn .short { display: inline; }
+  .princ { grid-template-columns: minmax(0, 1fr); }
 }
-@media (min-width: 901px) {
-  .menu { display: none !important; }
+@media (min-width: 901px) { .menu { display: none !important; } }
+/* layar tegak (HP / tablet): kepala 3D di atas, teks di bawah */
+@media (max-aspect-ratio: 4/5) {
+  .hero-sticky { align-items: end; }
+  .hero-content { padding-top: 0; padding-bottom: max(30px, env(safe-area-inset-bottom, 0px)); }
+  .hero-shade { background: linear-gradient(0deg, rgba(6,6,8,.96) 0%, rgba(6,6,8,.78) 34%, rgba(6,6,8,.1) 62%, transparent 75%); }
+  .hero-fallback { right: auto; left: 50%; top: 28%; width: min(64vw, 360px); transform: translate(-50%, -50%); }
+  .hero-title { font-size: clamp(42px, 11.5vw, 72px); }
+  .hero-proof, .scroll-hint { display: none; }
+  .hero .eyebrow { font-size: 10.5px; letter-spacing: .14em; padding: 7px 12px 7px 9px; }
 }
 @media (max-width: 640px) {
   body { font-size: 16px; }
-  .hero { padding-block: 28px 40px; }
-  .hero .lead { font-size: 17px; }
-  .hero-cta .btn { flex: 1 1 100%; justify-content: center; }
-  .stage { max-width: 300px; }
-  .princ { grid-template-columns: minmax(0, 1fr); gap: 22px; }
-  .sec-head { margin-bottom: 28px; }
-  .sec-head p, .test-head p { font-size: 16px !important; }
-  /* seri & episode jadi carousel geser di HP */
-  .series, .eps { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: -20px; padding: 2px 20px 8px; scroll-padding-inline: 20px; scrollbar-width: none; }
+  .nav-in { height: 58px; padding-left: 12px; }
+  .brand { font-size: 13px; letter-spacing: .14em; }
+  .lead { font-size: 16.5px; margin-top: 18px; }
+  .hero-cta { margin-top: 24px; }
+  .hero-cta .btn { flex: 1 1 auto; padding: 16px 18px; }
+  .hero-cta .btn .hide-sm { display: none; }
+  .series, .eps { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: -20px; padding: 4px 20px 10px; scroll-padding-inline: 20px; scrollbar-width: none; }
   .series::-webkit-scrollbar, .eps::-webkit-scrollbar { display: none; }
-  .serie { flex: 0 0 84%; scroll-snap-align: start; padding: 22px; }
-  .serie.wide { grid-column: auto; }
-  .ep { flex: 0 0 72%; scroll-snap-align: start; }
-  .sec-row { margin-bottom: 28px; }
-  .game { padding: 18px; min-height: 0; }
+  .serie { flex: 0 0 84%; scroll-snap-align: start; padding: 24px; }
+  .ep { flex: 0 0 74%; scroll-snap-align: start; }
+  .game { padding: 18px; min-height: 0; border-radius: 28px; }
   .screen { min-height: 230px; }
-  .colors { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
-  .colors button { padding: 12px 2px; font-size: 12px; letter-spacing: 0; }
-  .collab { padding: 26px 20px; }
+  .colors { gap: 6px; }
+  .colors button { padding: 12px 2px; font-size: 11.5px; letter-spacing: 0; border-radius: 14px; }
+  .colors kbd { display: none; }
+  .band { border-radius: 30px; }
+  .igcard { padding: 20px; }
+  .ig-avatar { width: 62px; height: 62px; }
+  .ig-user { font-size: 17px; }
   .ig-bio { font-size: 14px; }
   .foot-side { justify-items: start; }
-  .colors kbd { display: none; }
-  .band { padding: 36px 20px; border-radius: 28px; }
-  .igcard { padding: 20px; }
-  .chip { font-size: 12px; }
-  .chip:nth-of-type(1) { left: 0; } .chip:nth-of-type(2) { right: 0; }
 }
 @media (max-width: 480px) {
-  .nav .nav-ig { padding: 0; width: 44px; height: 44px; justify-content: center; }
+  .nav .nav-ig { padding: 0; width: 44px; height: 44px; }
   .nav .nav-ig .short { display: none; }
 }
 </style>
@@ -326,8 +362,9 @@ footer { border-top: 1px solid var(--line); }
 <body>
 
 <!-- build:header -->
+<div class="grain" aria-hidden="true"></div>
 <header class="nav">
-  <div class="wrap nav-in">
+  <div class="nav-in">
     <a class="brand" href="#top" aria-label="Ruang Pikir, ke atas"><svg viewBox="225 205 710 730" role="img" aria-label="Logo Ruang Pikir" xmlns="http://www.w3.org/2000/svg"><defs>
 <linearGradient id="hfn0" x1="300" y1="240" x2="840" y2="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#34343B"/><stop offset=".55" stop-color="#1C1C21"/><stop offset="1" stop-color="#121215"/></linearGradient>
 <linearGradient id="drn0" x1="0" y1="340" x2="0" y2="640" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#E3E6FF"/><stop offset="1" stop-color="#9AA5FF"/></linearGradient>
@@ -340,9 +377,7 @@ footer { border-top: 1px solid var(--line); }
 <rect x="480" y="340" width="160" height="300" rx="80" fill="url(#drn0)"/>
 <path d="M480 410C480 360 500 340 540 348L562 380L562 670L480 640Z" fill="url(#lfn0)"/>
 <circle cx="542" cy="510" r="9" fill="#9AA5FF"/></svg><span>RUANG PIKIR</span></a>
-    <nav class="nav-links" aria-label="Navigasi utama">
-      <a href="#tes">Tes Otak</a><a href="#episode">Episode</a><a href="#seri">Seri</a><a href="#tentang">Tentang</a><a href="#kerjasama">Kerja sama</a>
-    </nav>
+    <nav class="nav-links" aria-label="Navigasi utama"><a href="#tes">Tes Otak</a><a href="#episode">Episode</a><a href="#seri">Seri</a><a href="#tentang">Tentang</a><a href="#kerjasama">Kerja sama</a></nav>
     <div class="nav-cta">
       <a class="btn btn-ghost btn-icon nav-tt js-tt" href="#" target="_blank" rel="noopener" aria-label="TikTok Ruang Pikir" title="TikTok @ruangpikir2026"><svg class="tt" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16.6 5.8a4.3 4.3 0 0 1-1-2.8h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.3 7.3 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.3-1.6z"/></svg></a>
       <a class="btn btn-primary nav-ig js-ig" href="#" target="_blank" rel="noopener" aria-label="Follow Ruang Pikir di Instagram"><svg class="ig" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg><span class="long js-ig-handle">@ruangpikir2026</span><span class="short">Follow</span></a>
@@ -350,7 +385,7 @@ footer { border-top: 1px solid var(--line); }
     </div>
   </div>
   <div class="menu" id="menu" hidden>
-    <div class="wrap">
+    <div class="menu-in">
       <a href="#tes">Tes Otak</a><a href="#episode">Episode</a><a href="#seri">Seri</a><a href="#tentang">Tentang</a><a href="#kerjasama">Kerja sama</a>
       <div class="menu-social">
         <a class="btn btn-primary js-ig" href="#" target="_blank" rel="noopener"><svg class="ig" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg>Instagram</a>
@@ -360,27 +395,13 @@ footer { border-top: 1px solid var(--line); }
   </div>
 </header>
 <!-- /build:header -->
+<div class="cursor-glow" aria-hidden="true"></div>
 
 <main id="top">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="eyebrow">Psikologi sehari-hari · 60 detik</div>
-        <h1>Ruang untuk memahami <em class="serif">isi kepalamu.</em></h1>
-        <p class="lead">Kenapa kita overthinking jam dua pagi? Kenapa merasa diliatin terus? Ruang Pikir menjawab satu pertanyaan tiap video, pakai riset dan bahasa yang santai.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#tes">Coba tes otak 7 detik</a>
-          <a class="btn btn-ghost js-ig" href="#" target="_blank" rel="noopener"><svg class="ig" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg><span>Follow <span class="js-ig-handle">@ruangpikir2026</span></span></a>
-        </div>
-        <div class="hero-proof">
-          <span>Satu pertanyaan per video</span>
-          <span>Sumber riset disebut</span>
-          <span>Instagram &amp; TikTok</span>
-        </div>
-      </div>
-      <div class="stage" aria-hidden="true">
-        <canvas id="dust"></canvas>
-        <div class="logo-big"><svg viewBox="225 205 710 730" role="img" aria-label="Logo Ruang Pikir" xmlns="http://www.w3.org/2000/svg"><defs>
+  <section class="hero" id="hero">
+    <div class="hero-sticky">
+      <canvas id="scene" aria-hidden="true"></canvas>
+      <div class="hero-fallback" aria-hidden="true"><svg viewBox="225 205 710 730" role="img" aria-label="Logo Ruang Pikir" xmlns="http://www.w3.org/2000/svg"><defs>
 <linearGradient id="hfn1" x1="300" y1="240" x2="840" y2="900" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#34343B"/><stop offset=".55" stop-color="#1C1C21"/><stop offset="1" stop-color="#121215"/></linearGradient>
 <linearGradient id="drn1" x1="0" y1="340" x2="0" y2="640" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#E3E6FF"/><stop offset="1" stop-color="#9AA5FF"/></linearGradient>
 <linearGradient id="bmn1" x1="0" y1="640" x2="0" y2="880" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#AEB6FF" stop-opacity=".55"/><stop offset="1" stop-color="#AEB6FF" stop-opacity="0"/></linearGradient>
@@ -392,11 +413,23 @@ footer { border-top: 1px solid var(--line); }
 <rect x="480" y="340" width="160" height="300" rx="80" fill="#C9CEFF" fill-opacity=".5" filter="url(#bln1)"/><rect x="480" y="340" width="160" height="300" rx="80" fill="url(#drn1)"/>
 <path d="M480 410C480 360 500 340 540 348L562 380L562 670L480 640Z" fill="url(#lfn1)"/>
 <circle cx="542" cy="510" r="9" fill="#9AA5FF"/></svg></div>
-        <canvas id="hero3d"></canvas>
-        <span class="chip">kok dia belum bales?</span>
-        <span class="chip">ngerasa diliatin terus</span>
-        <span class="chip">overthinking jam 2 pagi</span>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="wrap hero-content" id="hero-content">
+        <div class="eyebrow fade-up" style="--d:0"><i></i>Psikologi sehari-hari · 60 detik</div>
+        <h1 class="hero-title"><span class="line" style="--i:0"><span>Ruang untuk</span></span><span class="line" style="--i:1"><span>memahami</span></span><span class="line" style="--i:2"><em class="serif">isi kepalamu.</em></span></h1>
+        <p class="lead fade-up" style="--d:4">Kenapa kita overthinking jam dua pagi? Kenapa merasa diliatin terus? Ruang Pikir menjawab satu pertanyaan tiap video, pakai riset dan bahasa yang santai.</p>
+        <div class="hero-cta fade-up" style="--d:5">
+          <a class="btn btn-primary magnetic" href="#tes">Coba tes otak<span class="hide-sm">&nbsp;7 detik</span></a>
+          <a class="btn btn-ghost magnetic js-ig" href="#" target="_blank" rel="noopener"><svg class="ig" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg><span>Follow<span class="hide-sm"> <span class="js-ig-handle">@ruangpikir2026</span></span></span></a>
+        </div>
+        <div class="hero-proof fade-up" style="--d:6">
+          <span>Satu pertanyaan per video</span>
+          <span>Sumber riset disebut</span>
+          <span>Instagram &amp; TikTok</span>
+        </div>
       </div>
+      <div class="scroll-hint" id="scroll-hint" aria-hidden="true"><span>Gulir untuk masuk</span><i></i></div>
+      <div class="portal" id="portal" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -409,19 +442,12 @@ footer { border-top: 1px solid var(--line); }
 
   <section class="section" id="tes">
     <div class="wrap test-grid">
-      <div class="test-head">
-        <div class="eyebrow">Tes otak · efek Stroop</div>
-        <h2 style="font-size:clamp(34px,5vw,56px);font-weight:800">Sebutin <em class="serif">warnanya</em>, bukan tulisannya.</h2>
-        <p style="color:var(--muted);font-size:18px">Tes klasik dari J. Ridley Stroop (1935). Otak kita membaca secara otomatis, jadi tulisan sampai lebih dulu daripada warna. Coba rasakan sendiri.</p>
+      <div class="test-head reveal">
+        <div class="label"><b>01</b> Tes otak · efek Stroop</div>
+        <h2 class="h2">Sebutin <em class="serif">warnanya</em>, bukan tulisannya.</h2>
+        <p class="sub">Tes klasik dari J. Ridley Stroop (1935). Otak kita membaca secara otomatis, jadi tulisan sampai lebih dulu daripada warna. Coba rasakan sendiri.</p>
       </div>
-      <div class="test-rules">
-        <div class="rule"><div class="n">01</div><div><b>Lihat warna hurufnya</b><span>Abaikan kata yang tertulis.</span></div></div>
-        <div class="rule"><div class="n">02</div><div><b>Pilih warna secepatnya</b><span>Klik tombolnya, atau tekan angka 1–5 di keyboard.</span></div></div>
-        <div class="rule"><div class="n">03</div><div><b>Bandingkan waktu reaksimu</b><span>Saat warna cocok dengan tulisan, dan saat beda.</span></div></div>
-        <div class="example">Contoh: <strong style="color:#4D8DFF">MERAH</strong> jawabannya <b style="color:#4D8DFF">BIRU</b></div>
-      </div>
-
-      <div class="game" id="game" aria-live="polite">
+      <div class="game reveal" id="game" aria-live="polite" style="--d:2">
         <div>
           <div class="game-top"><span id="g-label">16 SOAL</span><span id="g-score">SKOR 0</span></div>
           <div class="progress"><i id="g-bar"></i></div>
@@ -435,21 +461,27 @@ footer { border-top: 1px solid var(--line); }
         </div>
         <div class="colors" id="g-colors" role="group" aria-label="Pilihan warna"></div>
       </div>
+      <div class="test-rules">
+        <div class="rule reveal" style="--d:1"><div class="n">01</div><div><b>Lihat warna hurufnya</b><span>Abaikan kata yang tertulis.</span></div></div>
+        <div class="rule reveal" style="--d:2"><div class="n">02</div><div><b>Pilih warna secepatnya</b><span>Klik tombolnya, atau tekan angka 1–5 di keyboard.</span></div></div>
+        <div class="rule reveal" style="--d:3"><div class="n">03</div><div><b>Bandingkan waktu reaksimu</b><span>Saat warna cocok dengan tulisan, dan saat beda.</span></div></div>
+        <div class="example reveal" style="--d:4">Contoh: <strong style="color:#4D8DFF">MERAH</strong> jawabannya <b style="color:#4D8DFF">BIRU</b></div>
+      </div>
     </div>
   </section>
 
-  <section class="section" id="episode" style="background:var(--night)">
+  <section class="section" id="episode">
     <div class="wrap">
       <div class="sec-row">
-        <div class="sec-head">
-          <div class="eyebrow">Episode terbaru</div>
+        <div class="sec-head reveal">
+          <div class="label"><b>02</b> Episode terbaru</div>
           <h2>Tonton, lalu <em class="serif">ngaca sebentar.</em></h2>
         </div>
-        <a class="btn btn-ghost" href="/episode/">Semua episode</a>
+        <a class="btn btn-ghost reveal" href="/episode/">Semua episode →</a>
       </div>
       <!-- build:episodes -->
 <div class="eps">
-<article class="ep tilt">
+<article class="ep reveal tilt" style="--d:0">
   <a class="ep-poster" href="/episode/tes-otak-stroop/" data-video="/videos/ruang-pikir-ep02-tes-otak.mp4" data-poster="/episodes/tes-otak-stroop-poster.jpg" data-title="Tes otak 7 detik, berani?" data-slug="tes-otak-stroop" aria-label="Putar video: Tes otak 7 detik, berani?">
     <img src="/episodes/tes-otak-stroop-card.jpg" alt="Cuplikan video: Tes otak 7 detik, berani?" width="640" height="800" loading="lazy">
     <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>
@@ -462,7 +494,7 @@ footer { border-top: 1px solid var(--line); }
     <a class="go" href="/episode/tes-otak-stroop/">Penjelasan &amp; sumber →</a>
   </div>
 </article>
-<article class="ep tilt">
+<article class="ep reveal tilt" style="--d:1">
   <a class="ep-poster" href="/episode/ngerasa-diliatin-terus/" data-video="/videos/ruang-pikir-ep01-ngerasa-diliatin.mp4" data-poster="/episodes/ngerasa-diliatin-terus-poster.jpg" data-title="Ngerasa diliatin terus, kok bisa?" data-slug="ngerasa-diliatin-terus" aria-label="Putar video: Ngerasa diliatin terus, kok bisa?">
     <img src="/episodes/ngerasa-diliatin-terus-card.jpg" alt="Cuplikan video: Ngerasa diliatin terus, kok bisa?" width="640" height="800" loading="lazy">
     <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>
@@ -482,21 +514,21 @@ footer { border-top: 1px solid var(--line); }
 
   <section class="section" id="seri">
     <div class="wrap">
-      <div class="sec-head">
-        <div class="eyebrow">Seri konten</div>
+      <div class="sec-head reveal">
+        <div class="label"><b>03</b> Seri konten</div>
         <h2>Lima ruang, <em class="serif">satu pertanyaan</em> tiap episode.</h2>
         <p>Setiap video masuk salah satu dari lima seri ini.</p>
       </div>
       <div class="series">
-        <article class="tilt serie wide"><span class="tag">SERI 01</span><h3>Coba Tes Ini</h3>
+        <article class="serie tilt reveal" style="--d:0"><span class="num" aria-hidden="true">01</span><span class="tag">Interaktif</span><h3>Coba Tes Ini</h3>
           <ul><li>Sebutin warnanya, bukan tulisannya</li><li>Hitung berapa kali bolanya dioper</li><li>Baca kalimat ini pelan-pelan</li></ul></article>
-        <article class="tilt serie"><span class="tag">SERI 02</span><h3>Kenapa Kamu Gitu?</h3>
+        <article class="serie tilt reveal" style="--d:1"><span class="num" aria-hidden="true">02</span><span class="tag">Kebiasaan</span><h3>Kenapa Kamu Gitu?</h3>
           <ul><li>Ngerasa diliatin terus</li><li>Ngetik "wkwk" padahal nggak ketawa</li><li>Ide bagus muncul pas mandi</li></ul></article>
-        <article class="tilt serie"><span class="tag">SERI 03</span><h3>Psikologi Cinta</h3>
+        <article class="serie tilt reveal" style="--d:2"><span class="num" aria-hidden="true">03</span><span class="tag">Hubungan</span><h3>Psikologi Cinta</h3>
           <ul><li>Cinlok ada penjelasan ilmiahnya</li><li>Foto rame-rame bikin lebih cakep</li><li>Makin dicuekin, makin kepikiran</li></ul></article>
-        <article class="tilt serie"><span class="tag">SERI 04</span><h3>Otakmu Lagi Dijebak</h3>
+        <article class="serie tilt reveal" style="--d:3"><span class="num" aria-hidden="true">04</span><span class="tag">Bias &amp; trik</span><h3>Otakmu Lagi Dijebak</h3>
           <ul><li>Flash sale bikin panik</li><li>Satu menu super mahal di restoran</li><li>Harga Rp99.000 terasa murah</li></ul></article>
-        <article class="tilt serie"><span class="tag">SERI 05</span><h3>Mitos Psikologi</h3>
+        <article class="serie tilt reveal" style="--d:4"><span class="num" aria-hidden="true">05</span><span class="tag">Cek fakta</span><h3>Mitos Psikologi</h3>
           <ul><li>Otak cuma dipakai 10%?</li><li>Introvert pasti pemalu?</li><li>Kebiasaan baru cukup 21 hari?</li></ul></article>
       </div>
     </div>
@@ -504,39 +536,23 @@ footer { border-top: 1px solid var(--line); }
 
   <section class="section" id="tentang">
     <div class="wrap">
-      <div class="sec-head">
-        <div class="eyebrow">Tentang Ruang Pikir</div>
+      <div class="statement reveal">
+        <div class="label"><b>04</b> Tentang Ruang Pikir</div>
         <h2>Bikin orang <em class="serif">paham</em>, bukan bikin orang salah diagnosis.</h2>
       </div>
       <div class="princ">
-        <div><b>Berbasis riset</b><p>Setiap fakta punya sumber: nama peneliti, tahun, dan apa yang benar-benar mereka temukan.</p></div>
-        <div><b>Bahasa teman sendiri</b><p>Mulai dari kejadian sehari-hari, baru masuk teori. Pendek, jelas, tanpa menggurui.</p></div>
-        <div><b>Bukan pengganti psikolog</b><p>Konten kami untuk mengenal diri. Kalau sesuatu terasa berat, cerita ke psikolog atau orang terdekat.</p><a class="help" href="https://healing119.id" target="_blank" rel="noopener">Butuh teman bicara sekarang? Healing119 Kemenkes, telepon 119 ext. 8 →</a></div>
+        <div class="reveal" style="--d:0"><span class="pn">01</span><b>Berbasis riset</b><p>Setiap fakta punya sumber: nama peneliti, tahun, dan apa yang benar-benar mereka temukan.</p></div>
+        <div class="reveal" style="--d:1"><span class="pn">02</span><b>Bahasa teman sendiri</b><p>Mulai dari kejadian sehari-hari, baru masuk teori. Pendek, jelas, tanpa menggurui.</p></div>
+        <div class="reveal" style="--d:2"><span class="pn">03</span><b>Bukan pengganti psikolog</b><p>Konten kami untuk mengenal diri. Kalau sesuatu terasa berat, cerita ke psikolog atau orang terdekat.</p><a class="help" href="https://healing119.id" target="_blank" rel="noopener">Butuh teman bicara sekarang? Healing119 Kemenkes, telepon 119 ext. 8 →</a></div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="kerjasama" style="padding-top:0">
+  <section class="section" id="ikuti" style="padding-top:0">
     <div class="wrap">
-      <div class="collab">
+      <div class="band reveal">
         <div>
-          <div class="eyebrow">Kerja sama</div>
-          <h2>Mau <em class="serif">kolaborasi?</em></h2>
-          <p>Untuk kerja sama brand, kampus, komunitas, atau media, kirim DM ke Instagram atau TikTok <b class="js-ig-handle">@ruangpikir2026</b>. Ceritakan singkat idenya, kami balas lewat DM.</p>
-        </div>
-        <div class="collab-actions">
-          <a class="btn btn-primary js-ig-dm" href="#" target="_blank" rel="noopener"><svg class="ig" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg>DM Instagram</a>
-          <a class="btn btn-ghost js-tt" href="#" target="_blank" rel="noopener"><svg class="tt" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16.6 5.8a4.3 4.3 0 0 1-1-2.8h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.3 7.3 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.3-1.6z"/></svg>DM TikTok</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:0">
-    <div class="wrap">
-      <div class="band">
-        <div>
-          <div class="eyebrow">Jangan ketinggalan episode</div>
+          <div class="label"><b>05</b> Jangan ketinggalan</div>
           <h2>Episode baru, <em class="serif">langsung di berandamu.</em></h2>
           <p>Follow <b class="js-ig-handle">@ruangpikir2026</b> di Instagram dan TikTok supaya video berikutnya muncul di berandamu. Punya pertanyaan "kok aku gini, ya?" Kirim lewat DM, bisa jadi episode berikutnya.</p>
           <div class="row">
@@ -567,6 +583,18 @@ footer { border-top: 1px solid var(--line); }
           </div>
         </div>
       </div>
+
+      <div class="collab reveal" id="kerjasama">
+        <div>
+          <div class="label">Kerja sama</div>
+          <h2>Mau <em class="serif">kolaborasi?</em></h2>
+          <p>Untuk kerja sama brand, kampus, komunitas, atau media, kirim DM ke Instagram atau TikTok <b class="js-ig-handle">@ruangpikir2026</b>. Ceritakan singkat idenya, kami balas lewat DM.</p>
+        </div>
+        <div class="collab-actions">
+          <a class="btn btn-primary js-ig-dm" href="#" target="_blank" rel="noopener"><svg class="ig" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg>DM Instagram</a>
+          <a class="btn btn-ghost js-tt" href="#" target="_blank" rel="noopener"><svg class="tt" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M16.6 5.8a4.3 4.3 0 0 1-1-2.8h-3.1v12.4a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.3 7.3 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.3-1.6z"/></svg>DM TikTok</a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -578,6 +606,7 @@ footer { border-top: 1px solid var(--line); }
       <span class="help-line">Butuh bantuan segera? Layanan <a href="https://healing119.id" target="_blank" rel="noopener">Healing119</a> dari Kemenkes: telepon 119 ext. 8.</span></div>
     <div class="foot-side"><a href="/episode/">Semua episode</a><a href="/#kerjasama">Kerja sama</a><span>© 2026 Ruang Pikir</span></div>
   </div>
+  <div class="wordmark" aria-hidden="true">RUANG PIKIR</div>
 </footer>
 <!-- /build:footer -->
 
@@ -591,7 +620,6 @@ footer { border-top: 1px solid var(--line); }
     </div>
   </div>
 </dialog>
-
 
 <script id="common">
 /* ===== Ganti link sosial media di sini ===== */
@@ -630,31 +658,23 @@ document.addEventListener('click', e => {
   menu.addEventListener('click', e => { if (e.target.closest('a')) open(false); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') open(false); });
 })();
+/* ===== animasi muncul saat discroll ===== */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: .1 });
+  els.forEach(e => io.observe(e));
+})();
+
+/* ===== navigasi makin pekat setelah discroll ===== */
+(function () {
+  const n = document.querySelector('header.nav'); if (!n) return;
+  const f = () => n.classList.toggle('scrolled', scrollY > 30);
+  f(); addEventListener('scroll', f, { passive: true });
+})();
 </script>
 
 <script>
-/* ===== partikel latar hero ===== */
-(function () {
-  const c = document.getElementById('dust'); if (!c) return;
-  const ctx = c.getContext('2d'); let w, h, pts = [], dpr = Math.min(2, window.devicePixelRatio || 1);
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function size() { const r = c.getBoundingClientRect(); w = r.width; h = r.height; c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
-  function seed() { pts = Array.from({ length: 46 }, () => ({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.8 + .4, s: Math.random() * .25 + .05, p: Math.random() * 6.3 })); }
-  function draw(t) {
-    ctx.clearRect(0, 0, w, h);
-    const g = ctx.createRadialGradient(w * .5, h * .48, 10, w * .5, h * .48, w * .55);
-    g.addColorStop(0, 'rgba(110,122,255,.30)'); g.addColorStop(1, 'rgba(110,122,255,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
-    for (const p of pts) {
-      const y = reduce ? p.y : (p.y - t * .02 * p.s * 60 / 16) % h; const yy = y < 0 ? y + h : y;
-      ctx.globalAlpha = .25 + .35 * (0.5 + 0.5 * Math.sin(t / 900 + p.p)); ctx.fillStyle = '#C9CEFF';
-      ctx.beginPath(); ctx.arc(p.x, yy, p.r, 0, 6.283); ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    if (!reduce) requestAnimationFrame(draw);
-  }
-  size(); seed(); requestAnimationFrame(draw); window.addEventListener('resize', () => { size(); seed(); if (reduce) draw(0); });
-})();
-
 /* ===== tes Stroop ===== */
 (function () {
   const COLORS = [
@@ -799,6 +819,7 @@ document.addEventListener('click', e => {
   document.addEventListener('keydown', e => { const k = parseInt(e.key, 10); if (k >= 1 && k <= 5 && !busy) answer(k - 1); });
 })();
 
+
 /* ===== pemutar video episode (tanpa JS: link membuka halaman episode) ===== */
 (function () {
   const dlg = document.getElementById('player'); if (!dlg || !dlg.showModal) return;
@@ -816,6 +837,7 @@ document.addEventListener('click', e => {
   dlg.addEventListener('close', () => { vid.pause(); vid.removeAttribute('src'); vid.load(); });
 })();
 
+
 /* ===== kartu miring 3D mengikuti mouse ===== */
 (function () {
   if (!matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -828,28 +850,50 @@ document.addEventListener('click', e => {
     el.addEventListener('pointerleave', () => { el.style.transform = ''; });
   });
 })();
+
+/* ===== cahaya mengikuti kursor + tombol magnetik (perangkat ber-mouse) ===== */
+(function () {
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const glow = document.querySelector('.cursor-glow');
+  let x = null, y = 0, tx = 0, ty = 0, raf = 0;
+  const step = () => { x += (tx - x) * .16; y += (ty - y) * .16; glow.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`; raf = Math.abs(tx - x) + Math.abs(ty - y) > .5 ? requestAnimationFrame(step) : 0; };
+  addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; if (x === null) { x = tx; y = ty; } if (!raf) raf = requestAnimationFrame(step); }, { passive: true });
+  document.querySelectorAll('.magnetic').forEach(el => {
+    el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(); el.style.transform = `translate(${((e.clientX - r.left - r.width / 2) * .22).toFixed(1)}px, ${((e.clientY - r.top - r.height / 2) * .35).toFixed(1)}px)`; });
+    el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+  });
+})();
 </script>
 
 <script type="module">
-/* ===== Logo 3D di hero (three.js dari CDN). Kalau WebGL2 / CDN gagal, logo SVG tetap tampil. ===== */
+/* ===== Hero 3D (three.js dari CDN): kepala logo glossy dengan pintu bercahaya, sinar & debu,
+   pikiran yang mengorbit, dan kamera yang "masuk lewat pintu" saat discroll.
+   Tanpa WebGL2, mode hemat data, atau kalau CDN gagal: logo SVG biasa yang tampil. ===== */
 const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js';
-const stage = document.querySelector('.stage'), cv = document.getElementById('hero3d');
+const root = document.documentElement, hero = document.getElementById('hero'), cv = document.getElementById('scene');
 const hasGL2 = (() => { try { return !!document.createElement('canvas').getContext('webgl2'); } catch (_) { return false; } })();
-if (stage && cv && hasGL2 && !(navigator.connection && navigator.connection.saveData)) {
-  import(THREE_URL).then(initHero3D).catch(err => console.warn('Logo 3D dimatikan:', err));
-}
+if (hero && cv && hasGL2 && !(navigator.connection && navigator.connection.saveData)) {
+  import(THREE_URL).then(initScene).catch(err => { console.warn('Hero 3D dimatikan:', err); root.classList.remove('gl'); });
+} else root.classList.remove('gl');
 
-function initHero3D(THREE) {
+async function initScene(THREE) {
   const HEAD = 'M372 905C372 840 330 800 300 735C240 600 262 420 372 330C470 250 640 238 742 318C812 372 838 452 830 530C828 552 832 566 842 582L888 652C898 668 890 680 872 684L852 688C860 704 858 716 846 724C856 736 854 752 840 760C846 790 834 812 800 818C752 826 712 826 690 846C672 862 668 884 670 905Z';
   const DOOR = { x0: 480, x1: 640, top: 340, bot: 640 };   // pintu melengkung, koordinat SVG logo
-  const BOX = { x: 240, y: 220, w: 680, h: 700 };          // kotak tekstur muka kepala (koordinat SVG)
-  const K = 0.01, CX = 580, CY = 572;                       // 100 unit SVG = 1 unit 3D, pusat kepala
-  const V = (x, y) => [(x - CX) * K, (CY - y) * K];
-  const DEPTH = 0.6, BEV = 0.06, FRONT = DEPTH / 2 + BEV;
+  const BOX = { x: 240, y: 220, w: 680, h: 700 };          // kotak tekstur muka kepala
+  const K = .01, CX = 580, CY = 572, V = (x, y) => [(x - CX) * K, (CY - y) * K];
+  const DEPTH = .72, BEV = .07, FRONT = DEPTH / 2 + BEV;
+  const THOUGHTS = ['kok dia belum bales?', 'ngerasa diliatin terus', 'overthinking jam 2 pagi', 'kenapa aku gini, ya?', 'susah move on', 'déjà vu', 'people pleaser', 'nanti aja deh…'];
+  const sticky = hero.querySelector('.hero-sticky'), content = document.getElementById('hero-content');
+  const hint = document.getElementById('scroll-hint'), portal = document.getElementById('portal'), shade = hero.querySelector('.hero-shade');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const mouse = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const journey = root.classList.contains('gl') && !reduce;
+  const small = Math.min(innerWidth, innerHeight) < 700;
+  const clamp01 = x => Math.max(0, Math.min(1, x)), ease3 = x => 1 - Math.pow(1 - clamp01(x), 3);
+  const smooth = (a, b, x) => { const t = clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+  try { await document.fonts.load('600 40px "Plus Jakarta Sans"'); } catch (_) {}
 
-  // path SVG absolut (M/L/C/Z) -> THREE.Shape
+  // ---------- bantuan bentuk & tekstur
   function shapeFromPath(d) {
     const s = new THREE.Shape(), t = d.match(/[MLCZ]|-?\d*\.?\d+/g);
     let i = 0, cmd;
@@ -869,118 +913,227 @@ function initHero3D(THREE) {
     p.moveTo(ax, ay); p.lineTo(ax, cy); p.absarc(cx, cy, r * K, Math.PI, 0, true); p.lineTo(bx, ay); p.closePath();
     return p;
   }
-  // UV dari posisi x/y supaya tekstur kanvas (digambar dalam koordinat SVG) pas dengan bentuknya
   function uvFromBox(geo, b) {
     const [x0, y1] = V(b.x, b.y), [x1, y0] = V(b.x + b.w, b.y + b.h), p = geo.attributes.position, uv = geo.attributes.uv;
     for (let i = 0; i < uv.count; i++) uv.setXY(i, (p.getX(i) - x0) / (x1 - x0), (p.getY(i) - y0) / (y1 - y0));
   }
-  function canvasTex(size, b, draw) {
-    const c = document.createElement('canvas'); c.width = c.height = size;
-    const g = c.getContext('2d'); g.scale(size / b.w, size / b.h); g.translate(-b.x, -b.y); draw(g);
+  function canvasTex(w, h, b, draw) {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const g = c.getContext('2d'); if (b) { g.scale(w / b.w, h / b.h); g.translate(-b.x, -b.y); } draw(g, c);
     const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; return tex;
   }
+  function rrect(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+  const dotTex = canvasTex(64, 64, null, g => { const rg = g.createRadialGradient(32, 32, 0, 32, 32, 32); rg.addColorStop(0, 'rgba(255,255,255,1)'); rg.addColorStop(.3, 'rgba(210,214,255,.55)'); rg.addColorStop(1, 'rgba(201,206,255,0)'); g.fillStyle = rg; g.fillRect(0, 0, 64, 64); });
 
-  // --- kepala: bentuk logo diberi ketebalan, pintu dilubangi
+  // ---------- renderer, scene, kamera
+  const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, small ? 1.5 : 1.75));
+  renderer.setClearColor(0x000000, 0);
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x060608, .028);
+  const camera = new THREE.PerspectiveCamera(35, 1, .05, 120);
+
+  // lingkungan pantulan: langit ungu gradasi + dua "softbox" (untuk kilau kaca hitam)
+  {
+    const env = new THREE.Scene();
+    env.add(new THREE.Mesh(new THREE.SphereGeometry(20, 32, 16), new THREE.ShaderMaterial({
+      side: THREE.BackSide, depthWrite: false,
+      vertexShader: 'varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.); }',
+      fragmentShader: 'varying vec3 vP; void main(){ float h = normalize(vP).y; vec3 c = mix(vec3(.015,.015,.03), vec3(.32,.35,.95), smoothstep(-.1, 1., h)); gl_FragColor = vec4(c, 1.); }',
+    })));
+    const box = (w, h, pos, color, k) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(k), side: THREE.DoubleSide })); m.position.set(...pos); m.lookAt(0, 0, 0); env.add(m); };
+    box(9, 4, [-6, 6, 8], '#ffffff', 3); box(4, 9, [9, 1, -2], '#8E99FF', 4); box(8, 2, [0, -6, 6], '#3B44A8', 1.5);
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(env, .035).texture; pmrem.dispose();
+  }
+
+  const rig = new THREE.Group();      // kepala + pintu + sinar, ikut miring/berputar
+  scene.add(rig);
+
+  // ---------- kepala: bentuk logo diberi ketebalan, pintu dilubangi
   const head = shapeFromPath(HEAD);
   const hole = arch(DOOR, 0, THREE.Path).getPoints(32);
   if (THREE.ShapeUtils.isClockWise(hole) === THREE.ShapeUtils.isClockWise(head.getPoints(48))) hole.reverse();
   head.holes.push(new THREE.Path(hole));
-  const headGeo = new THREE.ExtrudeGeometry(head, { depth: DEPTH, bevelEnabled: true, bevelThickness: BEV, bevelSize: 0.05, bevelSegments: 4, curveSegments: 40 });
+  const headGeo = new THREE.ExtrudeGeometry(head, { depth: DEPTH, bevelEnabled: true, bevelThickness: BEV, bevelSize: .055, bevelSegments: 5, curveSegments: 48 });
   headGeo.translate(0, 0, -DEPTH / 2); uvFromBox(headGeo, BOX);
-
-  const faceTex = canvasTex(512, BOX, g => {
-    const lg = g.createLinearGradient(300, 240, 840, 900);
-    lg.addColorStop(0, '#4A4A56'); lg.addColorStop(.55, '#26262E'); lg.addColorStop(1, '#17171C');
-    g.fillStyle = lg; g.fillRect(BOX.x, BOX.y, BOX.w, BOX.h);
+  const faceTex = canvasTex(512, 512, BOX, g => { const lg = g.createLinearGradient(300, 240, 840, 900); lg.addColorStop(0, '#3C3C48'); lg.addColorStop(.55, '#1C1C24'); lg.addColorStop(1, '#101014'); g.fillStyle = lg; g.fillRect(BOX.x, BOX.y, BOX.w, BOX.h); });
+  const beamTex = canvasTex(512, 512, BOX, g => {          // cahaya pintu jatuh ke "lantai" di muka kepala
+    g.fillStyle = '#000'; g.fillRect(BOX.x, BOX.y, BOX.w, BOX.h); g.clip(new Path2D(HEAD));
+    const lg = g.createLinearGradient(0, 640, 0, 900); lg.addColorStop(0, 'rgba(190,197,255,.75)'); lg.addColorStop(1, 'rgba(174,182,255,0)');
+    g.fillStyle = lg; g.beginPath(); g.moveTo(480, 640); g.lineTo(640, 640); g.lineTo(850, 905); g.lineTo(310, 905); g.closePath(); g.fill();
   });
-  const beamTex = canvasTex(512, BOX, g => {   // cahaya pintu yang jatuh ke "lantai" di muka kepala
-    g.fillStyle = '#000'; g.fillRect(BOX.x, BOX.y, BOX.w, BOX.h);
-    g.clip(new Path2D(HEAD));
-    const lg = g.createLinearGradient(0, 640, 0, 890);
-    lg.addColorStop(0, 'rgba(174,182,255,.6)'); lg.addColorStop(1, 'rgba(174,182,255,0)');
-    g.fillStyle = lg; g.beginPath(); g.moveTo(480, 640); g.lineTo(640, 640); g.lineTo(840, 905); g.lineTo(320, 905); g.closePath(); g.fill();
-  });
-  const faceMat = new THREE.MeshStandardMaterial({ map: faceTex, roughness: .42, metalness: .2, emissive: 0xffffff, emissiveMap: beamTex, emissiveIntensity: 0 });
-  const rimMat = new THREE.MeshStandardMaterial({ color: 0x7F8CFF, emissive: 0x7F8CFF, emissiveIntensity: .9, roughness: .3, metalness: .1 });
-  const rig = new THREE.Group();
+  const faceMat = new THREE.MeshPhysicalMaterial({ map: faceTex, roughness: .3, metalness: .5, clearcoat: 1, clearcoatRoughness: .12, envMapIntensity: 1.15, emissive: 0xffffff, emissiveMap: beamTex, emissiveIntensity: 0 });
+  const rimMat = new THREE.MeshStandardMaterial({ color: 0x7F8CFF, emissive: 0x7F8CFF, emissiveIntensity: 1.5, roughness: .25, metalness: .2 });
   rig.add(new THREE.Mesh(headGeo, [faceMat, rimMat]));
 
-  // --- ruang bercahaya di balik pintu
+  // ruang bercahaya di balik pintu
   const doorBox = { x: DOOR.x0 - 8, y: DOOR.top - 8, w: DOOR.x1 - DOOR.x0 + 16, h: DOOR.bot - DOOR.top + 16 };
   const wallGeo = new THREE.ShapeGeometry(arch(DOOR, -8), 24); uvFromBox(wallGeo, doorBox);
-  const wallMat = new THREE.MeshBasicMaterial({ toneMapped: false, color: 0x222222, map: canvasTex(128, doorBox, g => {
-    const lg = g.createLinearGradient(0, DOOR.top, 0, DOOR.bot);
-    lg.addColorStop(0, '#F2F3FF'); lg.addColorStop(1, '#9AA5FF');
-    g.fillStyle = lg; g.fillRect(doorBox.x, doorBox.y, doorBox.w, doorBox.h);
-  }) });
+  const wallMat = new THREE.MeshBasicMaterial({ toneMapped: false, color: 0x222222, map: canvasTex(128, 128, doorBox, g => { const lg = g.createLinearGradient(0, DOOR.top, 0, DOOR.bot); lg.addColorStop(0, '#F4F5FF'); lg.addColorStop(1, '#9AA5FF'); g.fillStyle = lg; g.fillRect(doorBox.x, doorBox.y, doorBox.w, doorBox.h); }) });
   const wall = new THREE.Mesh(wallGeo, wallMat); wall.position.z = -DEPTH / 2; rig.add(wall);
 
-  // --- daun pintu, berengsel di kiri, membuka ke arah penonton
-  const leafGeo = new THREE.ExtrudeGeometry(arch(DOOR, 6), { depth: .06, bevelEnabled: false, curveSegments: 24 });
+  // daun pintu, berengsel di kiri, membuka ke arah penonton
+  const leafGeo = new THREE.ExtrudeGeometry(arch(DOOR, 6), { depth: .07, bevelEnabled: false, curveSegments: 24 });
   const hingeX = V(DOOR.x0 + 6, 0)[0];
-  leafGeo.translate(-hingeX, 0, -.06);
+  leafGeo.translate(-hingeX, 0, -.07);
   const leaf = new THREE.Group(); leaf.position.set(hingeX, 0, FRONT - .02);
-  leaf.add(new THREE.Mesh(leafGeo, new THREE.MeshStandardMaterial({ color: 0x3B3F78, roughness: .5, metalness: .15 })));
-  const knob = new THREE.Mesh(new THREE.SphereGeometry(.055, 16, 12), new THREE.MeshBasicMaterial({ color: 0x9AA5FF }));
-  knob.position.set((DOOR.x1 - DOOR.x0 - 12) * K * .8, V(0, 510)[1], .02); leaf.add(knob);
+  leaf.add(new THREE.Mesh(leafGeo, new THREE.MeshPhysicalMaterial({ color: 0x3A3F80, roughness: .35, metalness: .35, clearcoat: .7, clearcoatRoughness: .2 })));
+  const knob = new THREE.Mesh(new THREE.SphereGeometry(.055, 16, 12), new THREE.MeshBasicMaterial({ color: 0xB9C0FF, toneMapped: false }));
+  knob.position.set((DOOR.x1 - DOOR.x0 - 12) * K * .8, V(0, 510)[1], .03); leaf.add(knob);
   rig.add(leaf);
-
   const [dcx, dcy] = V((DOOR.x0 + DOOR.x1) / 2, (DOOR.top + DOOR.bot) / 2);
-  const doorLight = new THREE.PointLight(0xC9CEFF, 0, 7, 1.6); doorLight.position.set(dcx + .3, dcy - .4, FRONT - .2); rig.add(doorLight);
+  const doorLight = new THREE.PointLight(0xC9CEFF, 0, 9, 1.6); doorLight.position.set(dcx + .25, dcy - .35, FRONT - .25); rig.add(doorLight);
 
-  // --- pendar ungu di belakang siluet (seperti glow logo)
-  const haloBox = { x: 120, y: 100, w: 920, h: 940 };
-  const halo = new THREE.Mesh(new THREE.PlaneGeometry(haloBox.w * K, haloBox.h * K), new THREE.MeshBasicMaterial({
-    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false,
-    map: canvasTex(512, haloBox, g => { g.shadowColor = '#7F8CFF'; g.shadowBlur = 40; g.strokeStyle = 'rgba(127,140,255,.55)'; g.lineWidth = 22; g.stroke(new Path2D(HEAD)); g.stroke(new Path2D(HEAD)); }),
-  }));
-  halo.position.set(...V(haloBox.x + haloBox.w / 2, haloBox.y + haloBox.h / 2), -FRONT - .05); rig.add(halo);
-
-  // --- partikel "pikiran" melayang di depan & belakang kepala
-  const N = 90, pos = new Float32Array(N * 3), spd = new Float32Array(N);
-  for (let k = 0; k < N; k++) { pos[k * 3] = (Math.random() - .5) * 11; pos[k * 3 + 1] = (Math.random() - .5) * 10; pos[k * 3 + 2] = (Math.random() - .5) * 7; spd[k] = .08 + Math.random() * .25; }
-  const ptsGeo = new THREE.BufferGeometry(); ptsGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  const dot = document.createElement('canvas'); dot.width = dot.height = 64;
-  { const g = dot.getContext('2d'), rg = g.createRadialGradient(32, 32, 0, 32, 32, 32); rg.addColorStop(0, 'rgba(255,255,255,1)'); rg.addColorStop(.35, 'rgba(201,206,255,.6)'); rg.addColorStop(1, 'rgba(201,206,255,0)'); g.fillStyle = rg; g.fillRect(0, 0, 64, 64); }
-  const pts = new THREE.Points(ptsGeo, new THREE.PointsMaterial({ size: .13, map: new THREE.CanvasTexture(dot), color: 0xC9CEFF, transparent: true, opacity: .75, depthWrite: false, blending: THREE.AdditiveBlending }));
-
-  const scene = new THREE.Scene();
-  scene.add(rig, pts);
-  scene.add(new THREE.HemisphereLight(0xAEB6FF, 0x08080C, .9));
-  const key = new THREE.DirectionalLight(0xFFFFFF, 1.6); key.position.set(-5, 6, 9); scene.add(key);
-  const rim = new THREE.DirectionalLight(0x7F8CFF, 3); rim.position.set(6, 3, -5); scene.add(rim);
-
-  const camera = new THREE.PerspectiveCamera(30, 1, .1, 100); camera.position.z = 16.6;
-  const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true, powerPreference: 'low-power' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2)); renderer.setClearColor(0x000000, 0);
-
-  // --- interaksi & animasi
-  let px = 0, py = 0, time = 0, running = false, visible = true;
-  if (mouse) addEventListener('pointermove', e => {
-    const r = stage.getBoundingClientRect();
-    px = Math.max(-1, Math.min(1, (e.clientX - r.left - r.width / 2) / (r.width / 2)));
-    py = Math.max(-1, Math.min(1, (e.clientY - r.top - r.height / 2) / (r.height / 2)));
-  }, { passive: true });
-  const ease = x => 1 - Math.pow(1 - Math.max(0, Math.min(1, x)), 3);
-  function setOpen(o) {                                   // o: 0 = pintu tertutup, 1 = terbuka
-    leaf.rotation.y = -1.25 * o;
-    doorLight.intensity = 9 * o;
-    faceMat.emissiveIntensity = o;
-    wallMat.color.setScalar(.13 + .87 * o);
+  // sinar keluar dari pintu (volume transparan) + debu yang berkilau di dalamnya
+  const shaftMat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide,
+    uniforms: { uOpen: { value: 0 }, uTime: { value: 0 } },
+    vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.); }',
+    fragmentShader: 'varying vec2 vUv; uniform float uOpen; uniform float uTime; void main(){ float edge = sin(3.14159 * vUv.x); float a = pow(1. - vUv.y, 1.7) * edge * .2 * uOpen; a *= .86 + .14 * sin(uTime * 1.2 + vUv.y * 7.); gl_FragColor = vec4(vec3(.8, .83, 1.) * a, a); }',
+  });
+  const [sx0, syT] = V(DOOR.x0 + 4, DOOR.top + 50), [sx1, syB] = V(DOOR.x1 - 4, DOOR.bot), scx = (sx0 + sx1) / 2;
+  const L = 6.5, near = [[sx0, syB], [sx1, syB], [sx1, syT], [sx0, syT]];
+  const far = near.map(([x, y]) => [scx + (x - scx) * 2.3, syB - 2.4 + (y - syB) * 1.7]);
+  {
+    const pos = [], uv = [];
+    for (let k = 0; k < 4; k++) {
+      const a = near[k], b = near[(k + 1) % 4], c = far[(k + 1) % 4], d = far[k], zN = FRONT, zF = FRONT + L;
+      pos.push(a[0], a[1], zN, b[0], b[1], zN, c[0], c[1], zF, a[0], a[1], zN, c[0], c[1], zF, d[0], d[1], zF);
+      uv.push(0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1);
+    }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+    rig.add(new THREE.Mesh(g, shaftMat));
   }
+  const DUST = small ? 90 : 170, dust = new Float32Array(DUST * 3), dustSeed = [];
+  for (let k = 0; k < DUST; k++) { dustSeed.push([Math.random(), Math.random(), Math.random(), .2 + Math.random() * .8]); }
+  const dustGeo = new THREE.BufferGeometry(); dustGeo.setAttribute('position', new THREE.BufferAttribute(dust, 3));
+  const dustMat = new THREE.PointsMaterial({ size: .05, map: dotTex, color: 0xE3E6FF, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending, fog: false });
+  rig.add(new THREE.Points(dustGeo, dustMat));
+
+  // pendar di belakang siluet + "bloom" di depan pintu
+  const haloBox = { x: 120, y: 100, w: 920, h: 940 };
+  const halo = new THREE.Mesh(new THREE.PlaneGeometry(haloBox.w * K, haloBox.h * K), new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false, fog: false,
+    map: canvasTex(512, 512, haloBox, g => { g.shadowColor = '#7F8CFF'; g.shadowBlur = 46; g.strokeStyle = 'rgba(127,140,255,.6)'; g.lineWidth = 24; g.stroke(new Path2D(HEAD)); g.stroke(new Path2D(HEAD)); }) }));
+  halo.position.set(...V(haloBox.x + haloBox.w / 2, haloBox.y + haloBox.h / 2), -FRONT - .06); rig.add(halo);
+  const bloom = new THREE.Sprite(new THREE.SpriteMaterial({ map: dotTex, color: 0xB9C0FF, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending, fog: false }));
+  bloom.position.set(dcx, dcy, FRONT + .15); bloom.scale.set(3.4, 4.4, 1); rig.add(bloom);
+
+  // ---------- bintang/debu latar
+  const STARS = small ? 360 : 750, stars = new Float32Array(STARS * 3);
+  for (let k = 0; k < STARS; k++) { stars[k * 3] = (Math.random() - .5) * 30; stars[k * 3 + 1] = (Math.random() - .5) * 20; stars[k * 3 + 2] = -14 + Math.random() * 18; }
+  const starGeo = new THREE.BufferGeometry(); starGeo.setAttribute('position', new THREE.BufferAttribute(stars, 3));
+  const starField = new THREE.Points(starGeo, new THREE.PointsMaterial({ size: .07, map: dotTex, color: 0xC9CEFF, transparent: true, opacity: .85, depthWrite: false, blending: THREE.AdditiveBlending }));
+  scene.add(starField);
+
+  // ---------- pikiran yang mengorbit (sprite teks 3D, bisa lewat di belakang kepala)
+  const orbit = new THREE.Group(); scene.add(orbit);
+  const chips = THOUGHTS.slice(0, small ? 6 : 8).map((text, i, arr) => {
+    const fs = 40, padX = 34, H = 92;
+    const tex = canvasTex(1, 1, null, (g, c) => {
+      g.font = `600 ${fs}px "Plus Jakarta Sans", sans-serif`;
+      const w = Math.ceil(g.measureText(text).width) + padX * 2; c.width = w + 8; c.height = H + 8;
+      rrect(g, 4, 4, w, H, H / 2); g.fillStyle = 'rgba(15,16,27,.84)'; g.fill(); g.lineWidth = 2.5; g.strokeStyle = 'rgba(140,152,255,.6)'; g.stroke();
+      g.font = `600 ${fs}px "Plus Jakarta Sans", sans-serif`; g.fillStyle = '#E3E6FF'; g.textBaseline = 'middle'; g.fillText(text, 4 + padX, 4 + H / 2 + 2);
+    });
+    const img = tex.image, sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false, fog: false, opacity: 0 }));
+    orbit.add(sp);
+    return { sp, aspect: img.width / img.height, r: 3.4 + (i % 3) * .45, tilt: new THREE.Euler(.32 + .22 * Math.sin(i * 1.7), 0, (i % 2 ? -1 : 1) * .22), speed: (.085 + .025 * (i % 3)) * (i % 2 ? -1 : 1), phase: i / arr.length * Math.PI * 2, y: (i % 2 ? .45 : -.35), born: 1.5 + i * .14 };
+  });
+
+  // ---------- cahaya
+  scene.add(new THREE.HemisphereLight(0xAEB6FF, 0x060608, .35));
+  const key = new THREE.DirectionalLight(0xffffff, 1.3); key.position.set(-6, 7, 10); scene.add(key);
+  const rimR = new THREE.DirectionalLight(0x7F8CFF, 4); rimR.position.set(7, 3, -6); scene.add(rimR);
+  const rimL = new THREE.DirectionalLight(0xC9CEFF, 1.6); rimL.position.set(-7, -2, -5); scene.add(rimL);
+
+  // ---------- tata letak: kepala di kanan (layar lebar) atau di atas teks (layar tegak)
+  const base = new THREE.Vector3(), CAMZ = 15.5;
+  let headScale = 1, portrait = false;
+  function layout() {
+    const w = sticky.clientWidth, h = sticky.clientHeight; if (!w || !h) return;
+    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+    const visH = 2 * CAMZ * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)), visW = visH * camera.aspect;
+    portrait = camera.aspect < .8;
+    if (portrait) {                        // muat kepala di ruang antara navigasi dan teks
+      const ppu = h / visH, top = 84, room = Math.max(120, content.offsetTop - top - 12);
+      headScale = Math.max(.3, Math.min(.62, room * .86 / (6.7 * ppu)));
+      base.set(0, (h / 2 - (top + room / 2)) / ppu, 0);
+    }
+    else { headScale = Math.max(.82, Math.min(1.02, camera.aspect * .6)); base.set(Math.min(visW * .21, 3.9), -.1, 0); }
+  }
+
+  // ---------- interaksi & animasi
+  let px = 0, py = 0, spx = 0, spy = 0, time = 0, running = false, visible = true;
+  if (mouse) addEventListener('pointermove', e => { px = e.clientX / innerWidth * 2 - 1; py = e.clientY / innerHeight * 2 - 1; }, { passive: true });
+  const progress = () => { const r = hero.getBoundingClientRect(), total = r.height - innerHeight; return total > 0 ? clamp01(-r.top / total) : 0; };
+  const doorW = new THREE.Vector3(), camA = new THREE.Vector3(), camB = new THREE.Vector3(), look = new THREE.Vector3(), lookA = new THREE.Vector3(), tmp = new THREE.Vector3();
+
   function step(dt) {
     time += dt;
-    setOpen(reduce ? 1 : ease((time - .5) / 1.8));
-    if (!reduce) {
-      const ty = mouse ? px * .34 : Math.sin(time * .6) * .22, tx = mouse ? py * .16 : Math.sin(time * .45) * .05;
-      rig.rotation.y += (ty - rig.rotation.y) * .06; rig.rotation.x += (tx - rig.rotation.x) * .06;
-      rig.position.y = Math.sin(time * .9) * .12;
-      pts.rotation.y = rig.rotation.y * .35;
-      for (let k = 0; k < N; k++) { const j = k * 3 + 1; pos[j] += spd[k] * dt; if (pos[j] > 5) pos[j] = -5; }
-      ptsGeo.attributes.position.needsUpdate = true;
+    const T = reduce ? 99 : time;
+    const intro = ease3(T / 2.6);
+    const p = journey ? progress() : 0, s = smooth(.03, 1, p), live = 1 - s;
+    spx += (px - spx) * .05; spy += (py - spy) * .05;
+    const sway = mouse || reduce ? 0 : Math.sin(time * .5) * .2;
+
+    // kepala: berputar masuk saat dibuka, lalu mengikuti kursor; saat discroll menghadap kamera
+    rig.position.set(base.x, base.y + (reduce ? 0 : Math.sin(time * .8) * .09) * live, 0);
+    rig.scale.setScalar(headScale);
+    rig.rotation.set(spy * .14 * live, ((1 - intro) * -.75 + spx * .32 + sway) * live, 0);
+    const open = Math.max(ease3((T - .8) / 1.7), s);
+    const deep = smooth(.74, .9, p), dark = smooth(.86, 1, p);   // akhir scroll: putih -> ungu -> gelap
+    leaf.rotation.y = -1.28 * open;
+    doorLight.intensity = 10 * open * (1 - smooth(.55, .82, p));   // redup saat kamera sudah di ambang pintu
+    faceMat.emissiveIntensity = open;
+    rimMat.emissiveIntensity = 1.5 * (1 - .65 * deep);
+    const lit = (.12 + .88 * open) * (1 - dark);
+    wallMat.color.setRGB(lit * (1 - .72 * deep), lit * (1 - .7 * deep), lit * (1 - .08 * deep));
+    shaftMat.uniforms.uOpen.value = open * live; shaftMat.uniforms.uTime.value = time;
+    dustMat.opacity = .9 * open * live;
+    bloom.material.opacity = (.5 * open + .5 * s) * (1 - dark);
+    for (let k = 0; k < DUST; k++) {
+      const [u, v, w0, sp] = dustSeed[k], t = (w0 + time * .025 * sp) % 1;
+      const nx = sx0 + (sx1 - sx0) * u, ny = syB + (syT - syB) * v, fx = scx + (nx - scx) * 2.3, fy = syB - 2.4 + (ny - syB) * 1.7;
+      dust[k * 3] = nx + (fx - nx) * t; dust[k * 3 + 1] = ny + (fy - ny) * t + Math.sin(time * sp + k) * .04; dust[k * 3 + 2] = FRONT + L * t;
+    }
+    dustGeo.attributes.position.needsUpdate = true;
+
+    // kamera: maju pelan saat dibuka; saat discroll terbang masuk ke pintu
+    rig.updateMatrixWorld(true);
+    doorW.set(dcx, dcy, FRONT).applyMatrix4(rig.matrixWorld);
+    camA.set(spx * .3 * live, -spy * .18 * live, CAMZ + (1 - intro) * 6);
+    camB.copy(doorW); camB.z += .28 * headScale;
+    camera.position.lerpVectors(camA, camB, s * s);
+    lookA.set(0, portrait ? base.y * .25 : 0, 0);
+    look.lerpVectors(lookA, doorW, Math.min(1, s * 1.7));
+    camera.lookAt(look);
+
+    // pikiran mengorbit; saat discroll menjauh dan memudar
+    orbit.position.copy(base);
+    chips.forEach(c => {
+      const a = c.phase + (reduce ? 0 : time * c.speed), r = c.r * headScale * (1 + s * 1.6);
+      tmp.set(Math.cos(a) * r, c.y * headScale, Math.sin(a) * r).applyEuler(c.tilt);
+      c.sp.position.copy(tmp);
+      const born = reduce ? 1 : ease3((T - c.born) / .9), depth = .55 + .45 * clamp01((tmp.z / r + 1) / 2);
+      const hgt = .4 * headScale * (portrait ? 1.25 : 1);
+      c.sp.scale.set(hgt * c.aspect * born, hgt * born, 1);
+      c.sp.material.opacity = born * depth * clamp01(1 - s * 1.5);
+    });
+
+    if (!reduce) { for (let k = 0; k < STARS; k++) { const j = k * 3 + 1; stars[j] += dt * .05 * (1 + (k % 5) * .2); if (stars[j] > 10) stars[j] = -10; } starGeo.attributes.position.needsUpdate = true; }
+    starField.rotation.y = spx * .04 - s * .3;
+
+    if (journey) {
+      content.style.opacity = (1 - smooth(.01, .2, p)).toFixed(3);
+      content.style.transform = p > 0 ? `translateY(${(-p * 160).toFixed(1)}px)` : '';
+      hint.style.opacity = (1 - smooth(0, .05, p)).toFixed(3);
+      shade.style.opacity = (1 - smooth(.05, .4, p)).toFixed(3);
+      portal.style.opacity = smooth(.9, 1, p).toFixed(3);
     }
     renderer.render(scene, camera);
   }
+
   const clock = new THREE.Clock();
   function loop() { if (!running) return; step(Math.min(clock.getDelta(), .05)); requestAnimationFrame(loop); }
   function toggle() {
@@ -988,16 +1141,11 @@ function initHero3D(THREE) {
     if (go && !running) { running = true; clock.getDelta(); requestAnimationFrame(loop); }
     else if (!go) running = false;
   }
-  function resize() {
-    const w = stage.clientWidth, h = stage.clientHeight; if (!w || !h) return;
-    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
-    if (!running) step(0);
-  }
-  new ResizeObserver(resize).observe(stage);
-  new IntersectionObserver(es => { visible = es[0].isIntersecting; toggle(); }).observe(stage);
+  new ResizeObserver(() => { layout(); if (!running) step(0); }).observe(sticky);
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; toggle(); }).observe(hero);
   document.addEventListener('visibilitychange', toggle);
-  resize(); step(0);
-  stage.classList.add('is-3d');
+  layout(); step(0);
+  hero.classList.add('is-3d');
   toggle();
 }
 </script>

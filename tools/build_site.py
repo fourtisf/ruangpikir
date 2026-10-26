@@ -208,11 +208,11 @@ def mmss(sec):
     return f'{sec // 60}:{sec % 60:02d}'
 
 
-def card(ep, player):
+def card(ep, player, i=0):
     url = f'/episode/{ep["slug"]}/'
     data = (f' data-video="/videos/{esc(ep["video"])}" data-poster="/episodes/{ep["slug"]}-poster.jpg"'
             f' data-title="{esc(ep["title"])}" data-slug="{ep["slug"]}"') if player else ''
-    return f'''<article class="ep{' tilt' if player else ''}">
+    return f'''<article class="ep reveal{' tilt' if player else ''}" style="--d:{i}">
   <a class="ep-poster" href="{url}"{data} aria-label="Putar video: {esc(ep["title"])}">
     <img src="/episodes/{ep["slug"]}-card.jpg" alt="Cuplikan video: {esc(ep["title"])}" width="640" height="800" loading="lazy">
     <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>
@@ -228,7 +228,7 @@ def card(ep, player):
 
 
 def cards(eps, player=False):
-    return '<div class="eps">\n' + '\n'.join(card(e, player) for e in eps) + '\n</div>'
+    return '<div class="eps">\n' + '\n'.join(card(e, player, i) for i, e in enumerate(eps)) + '\n</div>'
 
 
 def page(path, title, desc, body, og_image, og_type='website', ld=None, script='', noindex=False):
