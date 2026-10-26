@@ -21,12 +21,24 @@ apt-get update && apt-get install -y git
 bash /var/www/ruangpikir/deploy/setup-vps.sh
 ```
 
-Script `deploy/setup-vps.sh` mengecek DNS, memasang nginx yang melayani folder `website/`, lalu memasang HTTPS Let's Encrypt (apex + www, http dialihkan ke https, perpanjangan otomatis). Aman dijalankan ulang.
+Script `deploy/setup-vps.sh` mengecek DNS, memasang nginx yang melayani folder `website/`, memasang HTTPS Let's Encrypt (apex + www, http dialihkan ke https, perpanjangan otomatis), lalu memasang perintah `ruangpikir-deploy`. Aman dijalankan ulang.
 
-**Update website** setelah ada perubahan di GitHub (tidak perlu restart nginx):
+### Update website: `ruangpikir-deploy`
+
+Setelah ada perubahan di GitHub, cukup satu perintah di VPS:
 ```bash
-git -C /var/www/ruangpikir pull
+ruangpikir-deploy                 # versi terbaru dari GitHub
+ruangpikir-deploy a2b52f4         # kembali ke versi lama (rollback); kode versinya ditampilkan tiap deploy
+ruangpikir-deploy nama-branch     # coba versi dari branch lain
+ruangpikir-deploy --help
 ```
+Atau langsung dari komputer sendiri (PowerShell / Terminal), tanpa masuk SSH dulu:
+```bash
+ssh root@31.97.111.49 ruangpikir-deploy
+```
+Perintah ini menolak jalan kalau ada file yang diedit langsung di VPS (supaya tidak hilang tanpa sengaja); pakai `--force` untuk menimpanya. Pengunjung langsung dapat versi baru tanpa perlu Ctrl+Shift+R (HTML diset `Cache-Control: no-cache`).
+
+VPS yang dipasang sebelum perintah ini ada: jalankan sekali `git -C /var/www/ruangpikir pull && bash /var/www/ruangpikir/deploy/deploy.sh`.
 
 ## Opsi B — Hanya punya domain (tanpa paket hosting): hosting gratis
 

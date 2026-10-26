@@ -60,8 +60,6 @@ fi
 certbot --nginx -n --agree-tos --register-unsafely-without-email --redirect \
   -d "$DOMAIN" -d "www.$DOMAIN"
 
-# 7. Cek hasil: https harus 200, http harus 301 (dialihkan ke https). 000 = tidak bisa tersambung.
-for u in "https://$DOMAIN" "https://www.$DOMAIN" "http://$DOMAIN"; do
-  echo "$u -> $(curl -s -o /dev/null -m 15 -w '%{http_code}' "$u" || true)"
-done
-echo "Selesai. Buka https://$DOMAIN"
+# 7. Pasang perintah `ruangpikir-deploy` + pengaturan cache, lalu cek situs
+bash "$(dirname "$0")/deploy.sh"
+echo "Selesai. Buka https://$DOMAIN — untuk update berikutnya cukup: ruangpikir-deploy"
