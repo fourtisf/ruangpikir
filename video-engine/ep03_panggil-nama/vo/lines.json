@@ -3,77 +3,77 @@
   "i": 0,
   "anchor": 0.15,
   "text": "Mau presentasi, terus deg-degan parah?",
-  "file": "vo/l00_s.wav",
-  "dur": 2.558
+  "file": "vo/l00.wav",
+  "dur": 2.949
  },
  {
   "i": 1,
   "anchor": 2.62,
   "text": "Coba trik ini: semangati diri pakai namamu.",
-  "file": "vo/l01_s.wav",
-  "dur": 3.36
+  "file": "vo/l01.wav",
+  "dur": 3.496
  },
  {
   "i": 2,
   "anchor": 5.38,
   "text": "Bukan \"aku pasti bisa\". Tapi, \"Dina, kamu pasti bisa\".",
-  "file": "vo/l02_s.wav",
-  "dur": 6.725
+  "file": "vo/l02.wav",
+  "dur": 5.473
  },
  {
   "i": 3,
   "anchor": 8.82,
   "text": "Tahun dua ribu empat belas, psikolog Ethan Kross menguji trik ini.",
-  "file": "vo/l03_s.wav",
-  "dur": 4.23
+  "file": "vo/l03.wav",
+  "dur": 3.605
  },
  {
   "i": 4,
   "anchor": 11.98,
   "text": "Peserta siapin pidato dadakan. Ada yang ngomong ke diri pakai \"aku\", ada yang pakai nama.",
-  "file": "vo/l04_s.wav",
-  "dur": 6.946
+  "file": "vo/l04.wav",
+  "dur": 5.448
  },
  {
   "i": 5,
   "anchor": 17.39,
   "text": "Yang pakai nama tampil lebih baik, dan nggak kepikiran terus sesudahnya.",
-  "file": "vo/l05_s.wav",
-  "dur": 4.929
+  "file": "vo/l05.wav",
+  "dur": 4.285
  },
  {
   "i": 6,
   "anchor": 21.81,
   "text": "Soalnya, namamu bikin kamu ngelihat diri sendiri dari luar.",
-  "file": "vo/l06_s.wav",
-  "dur": 4.893
+  "file": "vo/l06.wav",
+  "dur": 3.668
  },
  {
   "i": 7,
   "anchor": 25.49,
   "text": "Kayak lagi nyemangatin teman. Ini namanya, self-distancing.",
-  "file": "vo/l07_s.wav",
-  "dur": 4.711
+  "file": "vo/l07.wav",
+  "dur": 3.857
  },
  {
   "i": 8,
   "anchor": 29.17,
   "text": "Cemasnya nggak langsung hilang, tapi kamu lebih pegang kendali.",
-  "file": "vo/l08_s.wav",
-  "dur": 5.372
+  "file": "vo/l08.wav",
+  "dur": 3.587
  },
  {
   "i": 9,
   "anchor": 33.08,
   "text": "Tulis di komentar: kalimat semangat pakai namamu sendiri!",
-  "file": "vo/l09_s.wav",
-  "dur": 3.743
+  "file": "vo/l09.wav",
+  "dur": 3.049
  },
  {
   "i": 10,
   "anchor": 36.64,
   "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
-  "file": "vo/l10_s.wav",
-  "dur": 3.642
+  "file": "vo/l10.wav",
+  "dur": 2.954
  }
 ]

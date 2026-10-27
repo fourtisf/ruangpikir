@@ -36,9 +36,9 @@ LANGKAH
      pill label, sparkle; coral #FF6B57 untuk "salah/kaget", mint #3FD68B untuk "benar/tips"
    - minimal satu momen visual "wow" per video (transformasi, tabrakan, zoom, reveal angka)
    - semua ilustrasi di y 560–1200; jangan menutupi caption
-7. Suara: Gemini TTS voice Achird, model gemini-3.8-flash-tts (GEMINI_API_KEY di .env). Gunakan voice.sh (2 kalimat per
-   request lewat vo_rest.py, tanpa prefix gaya, lalu slow_voice.py supaya temponya seperti EP02); cek durasi tiap baris
-   dan cek isinya dengan transkripsi; ulangi baris yang aneh. Tanpa garis progress bar dan tanpa titik debu.
+7. Suara: Gemini TTS voice Achird dengan resep EP01 (GEMINI_API_KEY di .env): voice.sh -> vo_full.py
+   (gemini-3.1-flash-tts-preview + instruksi gaya EP01, 1 request, dipotong di jeda terpanjang); cek durasi tiap baris
+   dan cek isinya dengan transkripsi (instruksi tidak boleh ikut terbaca); ulangi kalau aneh. Tanpa garis progress bar dan tanpa titik debu.
    Tulis tahun dengan huruf di vo.py (caption tetap angka).
 8. SFX: susun build_sfx() yang menempel ke setiap kejadian visual (pop saat muncul, whoosh saat ganti scene,
    ding saat reveal, tick tiap caption).

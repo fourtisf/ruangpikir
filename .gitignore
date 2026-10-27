@@ -14,6 +14,7 @@ video-engine/*/timeline.json
 video-engine/*/preview*.png
 video-engine/*/preview/
 video-engine/*/vo/chunk_*.wav
+video-engine/*/vo/full.wav
 video-engine/*/ruang-pikir-ep*.mp4
 
 # OS / editor

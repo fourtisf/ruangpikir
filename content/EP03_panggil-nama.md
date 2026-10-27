@@ -1,6 +1,6 @@
 # EP 03 — Panggil namamu, kok jadi tenang?
 
-Status: **sudah diproduksi** — `videos/ruang-pikir-ep03-panggil-nama.mp4` (±56 detik, 1080×1920), halaman web `ruangpikir.id/episode/panggil-namamu/`.
+Status: **sudah diproduksi** — `videos/ruang-pikir-ep03-panggil-nama.mp4` (±49 detik, 1080×1920), halaman web `ruangpikir.id/episode/panggil-namamu/`.
 Seri: Kenapa Kamu Gitu? · Topik: distanced self-talk / self-distancing.
 
 ## Riset
@@ -98,4 +98,4 @@ Tonton video barunya 👇
 ```
 
 ## Produksi
-Folder `video-engine/ep03_panggil-nama/`: render ulang dengan `./build.sh` (suara sudah ada di `vo/`), buat ulang suara dengan `./build.sh --voice`. Di `vo.py` tahun ditulis dengan huruf ("dua ribu empat belas") supaya dibaca benar oleh TTS; caption tetap memakai angka. Suara dibuat tanpa prefix gaya (model membacakannya) lalu diperlambat ke tempo 0.85 dengan `slow_voice.py` supaya mirip EP02. Tanpa garis progress bar dan titik debu.
+Folder `video-engine/ep03_panggil-nama/`: render ulang dengan `./build.sh` (suara sudah ada di `vo/`), buat ulang suara dengan `./build.sh --voice`. Di `vo.py` tahun ditulis dengan huruf ("dua ribu empat belas") supaya dibaca benar oleh TTS; caption tetap memakai angka. Suara memakai resep EP01 (`vo_full.py`: `gemini-3.1-flash-tts-preview` + instruksi gaya EP01), sesuai suara acuan pilihan ALFA. Tanpa garis progress bar dan titik debu.

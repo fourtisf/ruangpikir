@@ -32,7 +32,7 @@ Suara sudah tersimpan di `vo/`. Tambah `--voice` untuk membuat ulang suaranya.
 | `audio.py` | Musik lo-fi sintetis, kamus `SFX`, mixing + ducking musik di bawah suara |
 | `gemini_tts.py` | Panggil Gemini TTS, simpan wav 44.1 kHz, mode `script` memotong per kalimat |
 | `vo_rest.py`, `countdown.py`, `tighten_countdown.py` | Alat suara EP02 (lihat "Jebakan suara") |
-| `voice.sh`, `slow_voice.py` (EP03) | Suara dalam beberapa request kecil (2 kalimat per request, tanpa prefix gaya) lewat `vo_rest.py`, lalu tempo diperlambat (`vo/lNN_s.wav`) |
+| `voice.sh`, `vo_full.py` (EP03) | Suara resep EP01: `gemini-3.1-flash-tts-preview` + instruksi gaya EP01, 1 request, dipotong di jeda terpanjang |
 | `logo*.py`, `premium.py`, `v3.py` | Gambar logo kepala + pintu untuk outro (`logo_rp.c4`) |
 | `fonts/` | Plus Jakarta Sans + JetBrains Mono (OFL) |
 
@@ -70,11 +70,13 @@ Aturan gerak: elemen muncul dengan `bo()` (back-out pop) 0.3–0.5 dtk; antar sc
 whoosh, swish, zoom, plop, pop, tick, chop, crack, fizz, fizz_soft, rise, sting, blink, plip, zap, zap2, ding, ding_soft, card, boing, shine, clunk, heart, stamp, beep, go, buzzer, clock.
 
 ## Jebakan suara (penting)
-- **`gemini-3.8-flash-tts` membacakan prefix gaya, bahkan yang pendek** (dicek 27 Okt 2026 lewat transkripsi: prefix EP02 "Ucapkan dengan santai…", versi Inggris, dan format "DIRECTOR'S NOTES / TRANSCRIPT" semuanya ikut terbaca). Kirim kalimatnya saja tanpa prefix (`style=''`). Tanpa prefix temponya ±27% lebih cepat dari EP02 (±15 vs ±12 karakter/detik), jadi perlambat dengan `slow_voice.py` (rubberband, nada tidak berubah; tempo 0.85 ≈ 12,8 kar/dtk). Cek dengan transkripsi (mis. `gemini-3.5-flash-lite`) sebelum render.
-- `gemini-3.1-flash-tts-preview` tidak membacakan prefix, tapi nada Achird-nya jauh lebih tinggi (median ±216 Hz vs ±150 Hz di EP02), jadi terdengar seperti suara lain. `gemini-2.5-flash-preview-tts` memotong kalimat terakhir.
+- **Suara resmi = resep EP01** (dipilih ALFA, 27 Okt 2026, acuan video "Jam 2 pagi, kok overthinking?"): `gemini-3.1-flash-tts-preview` + `STYLE` EP01 + "Beri jeda sekitar satu detik di antara setiap baris.", semua kalimat 1 request, `split_by_pauses`. Ciri terukur: nada median ±185 Hz, ±16 karakter/detik, ekspresif. Diukur dengan MFCC, audio final EP03 berjarak 0,32 dari video acuan (EP01 0,29; EP02 0,51).
+- EP02 memakai `gemini-3.8-flash-tts` (nada ±150 Hz, lebih kalem); suaranya terdengar seperti orang lain. Model ini sekarang **membacakan prefix gaya** (prefix EP02, versi Inggris, format "DIRECTOR'S NOTES / TRANSCRIPT" semuanya ikut terbaca, dicek 27 Okt 2026). Jangan dipakai lagi.
+- `gemini-3.1-flash-tts-preview` dengan prefix pendek EP02 nadanya jadi terlalu tinggi (±216 Hz); pakai `STYLE` panjang EP01. `gemini-2.5-flash-preview-tts` memotong kalimat terakhir.
+- Mempercepat/memperlambat suara (time-stretch) membuat suara terdengar seperti orang lain; jangan dipakai.
 - Prompt gaya yang panjang kadang **ikut dibacakan** oleh model. Pakai prefix gaya pendek (mis. "Ucapkan dengan santai, ramah, dan antusias seperti kreator TikTok:") atau tanpa prefix, dan **cek durasi**: tolak hasil yang > 2× perkiraan (±14 karakter/detik).
 - Kalimat dengan jeda internal (hitung mundur) jangan digabung dalam satu request: buat terpisah (`countdown.py`), lalu rapatkan jedanya (`tighten_countdown.py`).
-- Banyak kalimat dalam satu request lalu dipotong (`vo_rest.py`) lebih hemat kuota dan suaranya lebih konsisten. Tanpa prefix gaya, model tidak selalu memberi jeda panjang antarparagraf, jadi kirim maksimal 2 kalimat per request (`voice.sh` EP03) supaya potongannya tepat.
+- Banyak kalimat dalam satu request lalu dipotong (`vo_rest.py`) lebih hemat kuota dan suaranya lebih konsisten. Dengan instruksi "beri jeda sekitar satu detik" (resep EP01), potongan di jeda terpanjang tepat; tetap cek dengan transkripsi.
 - Kuota gratis: ±3 request/menit per model + batas harian. Kena 429 → tunggu, atau ganti `GEMINI_TTS_MODEL`.
 
 ## QA sebelum diserahkan

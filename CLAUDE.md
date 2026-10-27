@@ -30,7 +30,7 @@ Ikuti `website/DEPLOY.md`. Ringkas:
 
 Baca `video-engine/README.md` lalu pakai template prompt di `video-engine/PROMPT_VIDEO_BARU.md` (episode terbaru sebagai contoh gaya premium: `video-engine/ep03_panggil-nama/`). Prinsip yang tidak boleh dilanggar:
 - **Gaya visual tetap**: background hitam-ungu malam, aksen biru-ungu `#7F8CFF`, tag mono di atas judul, judul "X, kok Y?" di atas, caption 2 baris dengan kata kunci di-highlight, watermark "RUANG PIKIR", outro logo + ruangpikir.id. Sejak EP03 **tanpa garis progress bar dan tanpa titik-titik debu** (permintaan ALFA).
-- **Suara**: Gemini TTS, voice `Achird`, model `gemini-3.8-flash-tts` (sama dengan EP02). Model ini membacakan prefix gaya, jadi kirim tanpa prefix lalu perlambat dengan `slow_voice.py` (tempo ±0.85) supaya temponya mendekati EP02 (±12–13 karakter/detik). Selalu cek durasi & transkripsi tiap baris.
+- **Suara**: Gemini TTS, voice `Achird`, **resep EP01** (suara yang dipilih ALFA, acuannya video "Jam 2 pagi, kok overthinking?"): model `gemini-3.1-flash-tts-preview` + instruksi gaya panjang EP01, semua kalimat dalam 1 request, dipotong di jeda terpanjang. Lihat `video-engine/ep03_panggil-nama/vo_full.py`. Jangan pakai resep EP02 (`gemini-3.8-flash-tts`): suaranya beda dan model itu ikut membacakan instruksi gaya. Selalu cek transkripsi (instruksi tidak boleh terbaca) dan durasi tiap baris.
 - **Isi**: satu pertanyaan per video, berbasis riset nyata (sebut peneliti + tahun), bukan diagnosis, tidak melabeli orang nyata dengan gangguan mental, tidak membahas cara menyakiti diri.
 - **QA wajib** sebelum menyerahkan: render contact sheet ±12 frame, pastikan tidak ada teks bertabrakan (zona caption y 1200–1390 harus bersih dari ilustrasi), loudness akhir sekitar −14 LUFS.
 
