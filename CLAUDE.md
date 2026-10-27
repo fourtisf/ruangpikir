@@ -36,5 +36,8 @@ Baca `video-engine/README.md` lalu pakai template prompt di `video-engine/PROMPT
 
 ## Rahasia / API key
 
-- **Jangan** menulis API key ke file atau commit. Gunakan environment variable: `export GEMINI_API_KEY=...`
+- **Jangan** menulis API key ke file di dalam repo atau commit (repo ini publik). Gunakan environment variable `GEMINI_API_KEY`:
+  - di cloud Claude Code: pengaturan environment (Network secrets / environment variable `GEMINI_API_KEY`);
+  - di VPS/laptop: file pribadi `~/.config/ruangpikir/gemini.env` (`export GEMINI_API_KEY=...`, chmod 600), dibaca otomatis oleh `gemini_tts.py`.
+- `gemini-3.8-flash-tts` ikut membacakan prefix gaya: kirim kalimat tanpa prefix dan cek hasil suara dengan transkripsi.
 - Kuota gratis Gemini TTS terbatas (±3 request/menit per model dan ada batas harian). Kalau kena 429, tunggu atau ganti model TTS (`GEMINI_TTS_MODEL`, misalnya `gemini-3.8-flash-tts` atau `gemini-2.5-flash-preview-tts`).

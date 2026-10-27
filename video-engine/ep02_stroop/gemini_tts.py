@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gemini TTS helper. Env: GEMINI_API_KEY. Needs generativelanguage.googleapis.com allowed.
+"""Gemini TTS helper. Key: env GEMINI_API_KEY atau ~/.config/ruangpikir/gemini.env. Needs generativelanguage.googleapis.com allowed.
 python3 gemini_tts.py sample <voice> <out.wav> "<text>"     -> one clip
 python3 gemini_tts.py script <voice>                          -> full script into vo/lXX.wav + vo/lines.json (split by pauses)
 """
@@ -11,12 +11,24 @@ STYLE = ("Bacakan dalam bahasa Indonesia gaul yang santai, ramah, hangat dan eks
          "yang lagi cerita fakta seru ke temannya. Senyum saat bicara, intonasi naik di pertanyaan, antusias di bagian kejutan. "
          "Tempo agak cepat dan energik, jangan lambat. Kalimat pertama menantang dan seru seperti mengajak main game, hitungan mundur terdengar antusias, bagian penjelasan santai, ajakan komentar terdengar bersemangat.")
 
+def api_key():
+    """GEMINI_API_KEY dari environment, atau dari ~/.config/ruangpikir/gemini.env (file pribadi di luar repo, jangan di-commit)."""
+    k = os.environ.get('GEMINI_API_KEY')
+    p = os.path.expanduser('~/.config/ruangpikir/gemini.env')
+    if not k and os.path.exists(p):
+        for line in open(p):
+            line = line.strip()
+            if line.startswith('export '): line = line[7:].strip()
+            if line.startswith('GEMINI_API_KEY='): k = line.split('=', 1)[1].strip().strip('"\'')
+    if not k: raise SystemExit('GEMINI_API_KEY belum diset (environment, atau ~/.config/ruangpikir/gemini.env)')
+    return k
+
 def tts(text, voice, style=STYLE):
     url = f'https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent'
     body = {'contents': [{'parts': [{'text': f'{style}\n\n{text}'}]}],
             'generationConfig': {'responseModalities': ['AUDIO'],
                                  'speechConfig': {'voiceConfig': {'prebuiltVoiceConfig': {'voiceName': voice}}}}}
-    r = requests.post(url, headers={'x-goog-api-key': os.environ['GEMINI_API_KEY']}, json=body, timeout=300,
+    r = requests.post(url, headers={'x-goog-api-key': api_key()}, json=body, timeout=300,
                       verify=os.environ.get('REQUESTS_CA_BUNDLE') or True)
     if r.status_code != 200: raise SystemExit(f'HTTP {r.status_code}: {r.text[:500]}')
     js = r.json()

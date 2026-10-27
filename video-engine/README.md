@@ -9,6 +9,9 @@ Output: MP4 1080×1920, 30 fps, H.264 + AAC 192k, loudness −14 LUFS. Render 45
 pip install -r requirements.txt      # skia-python, numpy, scipy, requests, pillow
 # + ffmpeg di PATH
 export GEMINI_API_KEY=...            # hanya kalau mau generate suara baru
+# atau simpan sekali di file pribadi (di luar repo), dibaca otomatis oleh gemini_tts.py:
+#   ~/.config/ruangpikir/gemini.env  berisi  export GEMINI_API_KEY=...   (chmod 600)
+# + skia butuh libEGL di Linux: apt install libegl1 libgl1
 ```
 
 ## Render ulang episode yang ada (tanpa API key)
@@ -64,6 +67,7 @@ Aturan gerak: elemen muncul dengan `bo()` (back-out pop) 0.3–0.5 dtk; antar sc
 whoosh, swish, zoom, plop, pop, tick, chop, crack, fizz, fizz_soft, rise, sting, blink, plip, zap, zap2, ding, ding_soft, card, boing, shine, clunk, heart, stamp, beep, go, buzzer, clock.
 
 ## Jebakan suara (penting)
+- **`gemini-3.8-flash-tts` membacakan prefix gaya, bahkan yang pendek** (dicek 27 Okt 2026 lewat transkripsi: "Ucapkan dengan santai…" ikut terbaca). Kirim kalimatnya saja tanpa prefix (`style=''`); hasilnya tetap santai. Cek dengan transkripsi (mis. `gemini-3.5-flash-lite`) sebelum render.
 - Prompt gaya yang panjang kadang **ikut dibacakan** oleh model. Pakai prefix gaya pendek (mis. "Ucapkan dengan santai, ramah, dan antusias seperti kreator TikTok:") atau tanpa prefix, dan **cek durasi**: tolak hasil yang > 2× perkiraan (±14 karakter/detik).
 - Kalimat dengan jeda internal (hitung mundur) jangan digabung dalam satu request: buat terpisah (`countdown.py`), lalu rapatkan jedanya (`tighten_countdown.py`).
 - Banyak kalimat dalam satu request lalu dipotong (`vo_rest.py`) lebih hemat kuota dan suaranya lebih konsisten.
