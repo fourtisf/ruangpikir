@@ -85,6 +85,17 @@ Sumber: Kross, E., dkk. (2014), Journal of Personality and Social Psychology.
 #psikologi #faktapsikologi #selftalk #kesehatanmental #presentasi #selfgrowth #ruangpikir
 ```
 
+## Caption TikTok
+```
+Besok presentasi? Coba semangati diri pakai NAMAMU, bukan "aku" 🧠
+
+Riset Ethan Kross dkk. (2014), 7 studi dengan 585 peserta: yang menyemangati diri pakai nama sendiri tampil lebih baik saat pidato dadakan, dan lebih jarang kepikiran terus sesudahnya.
+
+Tulis kalimat semangat pakai namamu di komentar 👇
+
+#psikologi #selftalk #presentasi #faktapsikologi #ruangpikir
+```
+
 ## Komentar pertama (pin)
 ```
 Contoh: "Dina, tarik napas. Kamu udah latihan, kamu siap." Sekarang giliranmu, pakai namamu sendiri 👇
