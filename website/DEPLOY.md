@@ -46,6 +46,14 @@ VPS yang dipasang sebelum perintah ini ada: jalankan sekali `git -C /var/www/rua
 
 Pengaturan nginx situs ada di `deploy/nginx-site.conf` (ikut repo). Kalau file itu berubah, `ruangpikir-deploy` mengecek dengan `nginx -t` lalu reload; kalau ditolak, deploy dibatalkan dan situs tetap di versi lama.
 
+### API key Gemini di VPS (hanya untuk membuat suara video, website tidak butuh)
+
+Jalankan **satu baris** ini, lalu tempel key saat diminta (tidak terlihat dan tidak masuk riwayat terminal):
+```bash
+read -rsp "Tempel GEMINI_API_KEY lalu Enter: " k && echo && printf 'GEMINI_API_KEY=%s\nGEMINI_TTS_MODEL=gemini-3.8-flash-tts\n' "$k" > /var/www/ruangpikir/.env && chmod 600 /var/www/ruangpikir/.env && unset k && echo "Tersimpan di /var/www/ruangpikir/.env"
+```
+File `.env` tidak ikut git, tidak bisa dibuka lewat website (nginx hanya melayani folder `website/`), dan tetap ada setiap `ruangpikir-deploy`.
+
 ### Statistik pengunjung: https://ruangpikir.id/statistik/
 
 Tanpa cookie dan tanpa layanan pihak ketiga: nginx mencatat kunjungan ke `/var/log/ruangpikir/access.log` (disimpan 90 hari, IP disamarkan di laporan), lalu GoAccess merangkumnya tiap 10 menit. Username `admin`; password ditampilkan sekali saat `setup-vps.sh` pertama memasang statistik. Lupa password: `bash /var/www/ruangpikir/deploy/setup-stats.sh --reset-password`.

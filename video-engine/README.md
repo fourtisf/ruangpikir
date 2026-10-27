@@ -9,8 +9,8 @@ Output: MP4 1080×1920, 30 fps, H.264 + AAC 192k, loudness −14 LUFS. Render 45
 pip install -r requirements.txt      # skia-python, numpy, scipy, requests, pillow
 # + ffmpeg di PATH
 export GEMINI_API_KEY=...            # hanya kalau mau generate suara baru
-# atau simpan sekali di file pribadi (di luar repo), dibaca otomatis oleh gemini_tts.py:
-#   ~/.config/ruangpikir/gemini.env  berisi  export GEMINI_API_KEY=...   (chmod 600)
+# atau simpan sekali di file .env di folder repo (salin dari .env.example; .env tidak ikut git),
+# dibaca otomatis oleh gemini_tts.py: GEMINI_API_KEY=...  GEMINI_TTS_MODEL=gemini-3.8-flash-tts
 # + skia butuh libEGL di Linux: apt install libegl1 libgl1
 ```
 

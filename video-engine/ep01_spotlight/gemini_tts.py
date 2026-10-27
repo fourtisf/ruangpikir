@@ -1,26 +1,32 @@
 #!/usr/bin/env python3
-"""Gemini TTS helper. Key: env GEMINI_API_KEY atau ~/.config/ruangpikir/gemini.env. Needs generativelanguage.googleapis.com allowed.
+"""Gemini TTS helper. Key: GEMINI_API_KEY dari environment atau file .env di folder repo. Needs generativelanguage.googleapis.com allowed.
 python3 gemini_tts.py sample <voice> <out.wav> "<text>"     -> one clip
 python3 gemini_tts.py script <voice>                          -> full script into vo/lXX.wav + vo/lines.json (split by pauses)
 """
 import os, sys, json, base64, requests, numpy as np
 from scipy.io import wavfile
 from scipy.signal import resample_poly
+# Kunci & pengaturan dibaca dari environment, atau dari .env di folder repo (tidak ikut git),
+# atau ~/.config/ruangpikir/gemini.env. Yang sudah ada di environment tidak ditimpa.
+def _load_env():
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    for p in (os.path.join(root, '.env'), os.path.expanduser('~/.config/ruangpikir/gemini.env')):
+        if not os.path.exists(p): continue
+        for line in open(p):
+            line = line.strip()
+            if line.startswith('export '): line = line[7:].strip()
+            if '=' in line and not line.startswith('#'):
+                k, v = line.split('=', 1)
+                if v.strip(): os.environ.setdefault(k.strip(), v.strip().strip('"\''))
+_load_env()
 MODEL = os.environ.get('GEMINI_TTS_MODEL', 'gemini-3.1-flash-tts-preview')
 STYLE = ("Bacakan dalam bahasa Indonesia gaul yang santai, ramah, hangat dan ekspresif, seperti kreator konten TikTok "
          "yang lagi cerita fakta seru ke temannya. Senyum saat bicara, intonasi naik di pertanyaan, antusias di bagian kejutan. "
          "Tempo agak cepat dan energik, jangan lambat. Di kalimat pertama terdengar penasaran, di bagian angka riset terdengar kaget, di bagian akhir hangat menenangkan.")
 
 def api_key():
-    """GEMINI_API_KEY dari environment, atau dari ~/.config/ruangpikir/gemini.env (file pribadi di luar repo, jangan di-commit)."""
     k = os.environ.get('GEMINI_API_KEY')
-    p = os.path.expanduser('~/.config/ruangpikir/gemini.env')
-    if not k and os.path.exists(p):
-        for line in open(p):
-            line = line.strip()
-            if line.startswith('export '): line = line[7:].strip()
-            if line.startswith('GEMINI_API_KEY='): k = line.split('=', 1)[1].strip().strip('"\'')
-    if not k: raise SystemExit('GEMINI_API_KEY belum diset (environment, atau ~/.config/ruangpikir/gemini.env)')
+    if not k: raise SystemExit('GEMINI_API_KEY belum diset: isi di file .env di folder repo (lihat .env.example)')
     return k
 
 def tts(text, voice, style=STYLE):
