@@ -50,9 +50,8 @@ def draw_bg(cv, t):
         yy = 560 + (y - 560 - t * 9 * dep) % 640
         a = (0.035 + 0.05 * (0.5 + 0.5 * math.sin(t * 0.9 + ph))) * min(1, (yy - 560) / 80, (1200 - yy) / 80)
         if a > 0: cv.drawCircle(x + 24 * math.sin(t * 0.35 + ph), yy, r, P(col(c, a), blur=r * 0.45))
-    for x, y, r, sp, ph in b.DUST:
-        cv.drawCircle(x, (y - t * sp) % H, r, P(col(ACC_L, 0.08 + 0.14 * (0.5 + 0.5 * math.sin(t * 1.3 + ph)))))
-b.draw_bg = draw_bg
+b.draw_bg = draw_bg          # tanpa titik-titik debu (permintaan ALFA sejak EP03)
+b.draw_progress = lambda cv, t: None   # tanpa garis progress; tag scene tetap tampil
 
 # ilustrasi selalu memudar lembut sebelum zona caption (y 1200-1390) dan di bawah judul
 _draw_groups = b.draw_groups

@@ -32,7 +32,7 @@ Suara sudah tersimpan di `vo/`. Tambah `--voice` untuk membuat ulang suaranya.
 | `audio.py` | Musik lo-fi sintetis, kamus `SFX`, mixing + ducking musik di bawah suara |
 | `gemini_tts.py` | Panggil Gemini TTS, simpan wav 44.1 kHz, mode `script` memotong per kalimat |
 | `vo_rest.py`, `countdown.py`, `tighten_countdown.py` | Alat suara EP02 (lihat "Jebakan suara") |
-| `voice.sh` (EP03) | Suara dalam beberapa request kecil (2 kalimat per request, tanpa prefix gaya) lewat `vo_rest.py` |
+| `voice.sh`, `slow_voice.py` (EP03) | Suara dalam beberapa request kecil (2 kalimat per request, tanpa prefix gaya) lewat `vo_rest.py`, lalu tempo diperlambat (`vo/lNN_s.wav`) |
 | `logo*.py`, `premium.py`, `v3.py` | Gambar logo kepala + pintu untuk outro (`logo_rp.c4`) |
 | `fonts/` | Plus Jakarta Sans + JetBrains Mono (OFL) |
 
@@ -52,7 +52,7 @@ ffmpeg mux + loudnorm -14 LUFS -> final.mp4
 ## Layout (wajib dipatuhi)
 | Zona | y (px) | Isi |
 |---|---|---|
-| Tag + progress bar | 404 | `GROUPS[i][2]`, contoh `RISET · 2000` |
+| Tag (+ progress bar di EP01–02; sejak EP03 tanpa progress bar) | 404 | `GROUPS[i][2]`, contoh `RISET · 2000` |
 | Judul | 482 | `draw_title`, format "X, [kok bisa]?" (bagian dalam `[...]` berwarna aksen) |
 | Ilustrasi | 560 – 1200 | semua gambar scene |
 | Caption baris 1 / 2 | 1252 / 1340 | `CAPS`, kata dalam `[...]` diberi highlight |
@@ -70,7 +70,8 @@ Aturan gerak: elemen muncul dengan `bo()` (back-out pop) 0.3–0.5 dtk; antar sc
 whoosh, swish, zoom, plop, pop, tick, chop, crack, fizz, fizz_soft, rise, sting, blink, plip, zap, zap2, ding, ding_soft, card, boing, shine, clunk, heart, stamp, beep, go, buzzer, clock.
 
 ## Jebakan suara (penting)
-- **`gemini-3.8-flash-tts` membacakan prefix gaya, bahkan yang pendek** (dicek 27 Okt 2026 lewat transkripsi: "Ucapkan dengan santai…" ikut terbaca). Kirim kalimatnya saja tanpa prefix (`style=''`); hasilnya tetap santai. Cek dengan transkripsi (mis. `gemini-3.5-flash-lite`) sebelum render.
+- **`gemini-3.8-flash-tts` membacakan prefix gaya, bahkan yang pendek** (dicek 27 Okt 2026 lewat transkripsi: prefix EP02 "Ucapkan dengan santai…", versi Inggris, dan format "DIRECTOR'S NOTES / TRANSCRIPT" semuanya ikut terbaca). Kirim kalimatnya saja tanpa prefix (`style=''`). Tanpa prefix temponya ±27% lebih cepat dari EP02 (±15 vs ±12 karakter/detik), jadi perlambat dengan `slow_voice.py` (rubberband, nada tidak berubah; tempo 0.85 ≈ 12,8 kar/dtk). Cek dengan transkripsi (mis. `gemini-3.5-flash-lite`) sebelum render.
+- `gemini-3.1-flash-tts-preview` tidak membacakan prefix, tapi nada Achird-nya jauh lebih tinggi (median ±216 Hz vs ±150 Hz di EP02), jadi terdengar seperti suara lain. `gemini-2.5-flash-preview-tts` memotong kalimat terakhir.
 - Prompt gaya yang panjang kadang **ikut dibacakan** oleh model. Pakai prefix gaya pendek (mis. "Ucapkan dengan santai, ramah, dan antusias seperti kreator TikTok:") atau tanpa prefix, dan **cek durasi**: tolak hasil yang > 2× perkiraan (±14 karakter/detik).
 - Kalimat dengan jeda internal (hitung mundur) jangan digabung dalam satu request: buat terpisah (`countdown.py`), lalu rapatkan jedanya (`tighten_countdown.py`).
 - Banyak kalimat dalam satu request lalu dipotong (`vo_rest.py`) lebih hemat kuota dan suaranya lebih konsisten. Tanpa prefix gaya, model tidak selalu memberi jeda panjang antarparagraf, jadi kirim maksimal 2 kalimat per request (`voice.sh` EP03) supaya potongannya tepat.

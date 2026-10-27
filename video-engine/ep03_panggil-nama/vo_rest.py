@@ -6,7 +6,7 @@ from vo import LINES, OUT
 IDX = [int(v) for v in sys.argv[1].split(',')]
 rest = [LINES[k] for k in IDX]
 text = '\n\n'.join(t for _, t in rest)
-# gemini-3.8-flash-tts ikut membacakan prefix gaya, jadi default tanpa prefix (VO_STYLE untuk model lain)
+# prefix gaya dari VO_STYLE; kosong = tanpa prefix (gemini-3.8-flash-tts ikut membacakan prefix)
 style = os.environ.get('VO_STYLE', '')
 x = None
 for attempt in range(5):
@@ -39,6 +39,8 @@ meta = [m for m in meta if m['i'] not in IDX]
 for n, (a, b) in enumerate(zip(bounds[:-1], bounds[1:])):
     seg = x[a:b]; idx = np.where(np.abs(seg) > 0.01)[0]
     if len(idx): seg = seg[max(0, idx[0] - 441): idx[-1] + 3500]
+    seg = seg.copy(); fi, fo = min(220, len(seg) // 4), min(1300, len(seg) // 4)   # fade 5 ms / 30 ms: potongan tanpa bunyi klik
+    seg[:fi] *= np.linspace(0, 1, fi); seg[len(seg) - fo:] *= np.linspace(1, 0, fo)
     k = IDX[n]; p = os.path.join(OUT, f'l{k:02d}.wav'); g.save(p, seg)
     meta.append({'i': k, 'anchor': LINES[k][0], 'text': LINES[k][1], 'file': os.path.relpath(p, os.path.dirname(OUT)), 'dur': round(len(seg) / 44100, 3)})
     print(f'{k:2d} {len(seg)/44100:5.2f}s (exp {len(LINES[k][1])/14:4.2f}) {LINES[k][1]}', flush=True)

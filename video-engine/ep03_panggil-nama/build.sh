@@ -2,7 +2,7 @@
 # Render EP03. Pakai suara yang sudah ada di vo/. Tambah --voice untuk generate ulang suara (butuh GEMINI_API_KEY di .env).
 set -e
 cd "$(dirname "$0")"
-[ "$1" = "--voice" ] && ./voice.sh
+[ "$1" = "--voice" ] && ./voice.sh       # TTS + perlambat tempo (slow_voice.py)
 python3 episode.py timeline timeline.json
 python3 audio.py timeline.json audio.wav
 python3 episode.py video raw.mp4
