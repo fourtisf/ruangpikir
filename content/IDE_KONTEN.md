@@ -11,6 +11,12 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 ## Seri 02 · Kenapa Kamu Gitu?
 - [x] Ngerasa diliatin terus, kok bisa? (spotlight effect) — EP01
 - [x] Panggil namamu, kok jadi tenang? (distanced self-talk, Kross dkk. 2014) — EP03, lihat `EP03_panggil-nama.md`
+- [x] Pura-pura gapapa, kok capek? (menahan emosi vs memaknai ulang, Gross & Levenson 1997; Gross 1998) — EP04, lihat `EP04_pura-pura-gapapa.md`
+- [ ] Dipuji, kok malah ngerasa palsu? (impostor phenomenon, Clance & Imes 1978; tinjauan Bravata dkk. 2020, 62 studi — bukan gangguan mental)
+- [ ] Kok selalu jatuh ke orang yang cuek? (gaya keterikatan, Hazan & Shaver 1987 — penjelasan, bukan label)
+- [ ] Gagal terus, kok jadi males nyoba? (learned helplessness, Hiroto & Seligman 1975; harapan: Maier & Seligman 2016)
+- [ ] Kok kita paling galak ke orang terdekat? (displaced aggression, meta-analisis Marcus-Newhall dkk. 2000, 49 studi)
+- [ ] Putus cinta, kok sakitnya kayak kecanduan? (Fisher dkk. 2010, fMRI, 15 peserta — sebut sampel kecil)
 - [ ] Kamu nunda kerjaan bukan karena malas (regulasi emosi, Sirois & Pychyl 2013; memaafkan diri sendiri, Wohl dkk. 2010 — studi korelasi)
 - [ ] Sebut perasaanmu, marahnya berkurang (affect labeling, Lieberman dkk. 2007)
 - [ ] Begadang semalam, besoknya gampang marah? (Yoo, Walker dkk. 2007: amigdala >60% lebih reaktif; sampel kecil, 26 orang)

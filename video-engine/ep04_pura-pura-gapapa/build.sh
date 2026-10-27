@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Render EP04. Pakai suara yang sudah ada di vo/. Tambah --voice untuk generate ulang suara (butuh GEMINI_API_KEY di .env).
+set -e
+cd "$(dirname "$0")"
+[ "$1" = "--voice" ] && ./voice.sh       # suara baru (resep EP01, lihat vo_full.py)
+python3 episode.py timeline timeline.json
+python3 audio.py timeline.json audio.wav
+python3 episode.py video raw.mp4
+ffmpeg -y -loglevel error -i raw.mp4 -i audio.wav -c:v copy -af "loudnorm=I=-14:TP=-1.5:LRA=11" \
+  -c:a aac -b:a 192k -ar 44100 -shortest -movflags +faststart ruang-pikir-ep04.mp4
+rm -f raw.mp4 audio.wav timeline.json
+echo "Selesai: ruang-pikir-ep04.mp4"

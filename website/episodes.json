@@ -1,5 +1,22 @@
 [
   {
+    "no": 4,
+    "slug": "pura-pura-gapapa",
+    "title": "Pura-pura gapapa, kok capek?",
+    "topic": "Menahan emosi",
+    "date": "2026-10-27",
+    "video": "ruang-pikir-ep04-pura-pura-gapapa.mp4",
+    "poster_time": 9.4,
+    "summary": "Riset Gross & Levenson (1997): menahan ekspresi tidak menghilangkan rasa sedih, malah bikin tubuh lebih tegang.",
+    "body": [
+      "Pernah bilang \"aku gapapa\" padahal sedang tidak baik-baik saja? Menahan emosi supaya tidak terlihat memang sering kita lakukan, entah supaya tidak merepotkan orang lain atau supaya terlihat kuat.",
+      "Pada 1997, psikolog James Gross dan Robert Levenson meminta 180 peserta menonton film sedih, netral, dan lucu. Separuh peserta diminta menahan ekspresi wajahnya. Ekspresi mereka memang berkurang, tetapi rasa sedihnya tidak ikut berkurang, dan sistem jantung serta pembuluh darah mereka justru bekerja lebih keras.",
+      "Setahun kemudian, Gross membandingkan dua cara mengatur emosi saat 120 peserta menonton film yang menjijikkan: menahan ekspresi, atau memaknai ulang situasinya (reappraisal). Memaknai ulang menurunkan perasaan tidak enaknya, sedangkan menahan ekspresi malah menaikkan respons stres tubuh.",
+      "Memaknai ulang bukan berarti pura-pura positif. Saat teman membalas singkat, coba pikirkan kemungkinan lain, misalnya \"dia mungkin lagi capek\", bukan langsung \"dia benci aku\". Dan kamu tidak harus selalu kuat: bercerita ke orang yang kamu percaya, atau ke psikolog kalau rasanya berat terus, juga cara yang sehat."
+    ],
+    "source": "Gross, J. J., & Levenson, R. W. (1997). Hiding feelings: The acute effects of inhibiting negative and positive emotion. Journal of Abnormal Psychology, 106(1), 95–103. · Gross, J. J. (1998). Antecedent- and response-focused emotion regulation: Divergent consequences for experience, expression, and physiology. Journal of Personality and Social Psychology, 74(1), 224–237."
+  },
+  {
     "no": 3,
     "slug": "panggil-namamu",
     "title": "Panggil namamu, kok jadi tenang?",
