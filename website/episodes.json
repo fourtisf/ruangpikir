@@ -1,5 +1,22 @@
 [
   {
+    "no": 3,
+    "slug": "panggil-namamu",
+    "title": "Panggil namamu, kok jadi tenang?",
+    "topic": "Self-distancing",
+    "date": "2026-10-27",
+    "video": "ruang-pikir-ep03-panggil-nama.mp4",
+    "poster_time": 11.9,
+    "summary": "Riset Ethan Kross (2014): menyemangati diri pakai nama sendiri bikin tampil lebih baik saat pidato dadakan.",
+    "body": [
+      "Mau presentasi atau wawancara, lalu jantung berdebar kencang? Banyak orang menenangkan diri dengan bicara dalam hati: \"aku pasti bisa\". Ternyata, cara kita menyebut diri sendiri saat self-talk ikut berpengaruh.",
+      "Pada 2014, psikolog Ethan Kross dan rekan-rekannya menguji hal ini lewat 7 studi dengan 585 peserta. Dalam salah satu studi, peserta harus menyiapkan pidato dadakan. Sebagian menyemangati diri pakai \"aku\", sebagian lagi pakai nama sendiri atau \"kamu\".",
+      "Peserta yang memakai nama sendiri dinilai tampil lebih baik, terlihat lebih tenang, dan lebih jarang memikirkan ulang pidatonya sesudahnya. Menyebut nama sendiri membuat kita mengambil sedikit jarak, seolah sedang menyemangati teman. Para peneliti menyebutnya self-distancing.",
+      "Cemasnya memang tidak langsung hilang. Yang berubah adalah seberapa besar cemas itu mengganggu penampilan dan pikiran sesudahnya. Jadi sebelum presentasi berikutnya, coba bilang ke diri sendiri: \"(namamu), kamu sudah latihan. Kamu siap.\""
+    ],
+    "source": "Kross, E., Bruehlman-Senecal, E., Park, J., Burson, A., Dougherty, A., Shablack, H., Bremner, R., Moser, J., & Ayduk, O. (2014). Self-talk as a regulatory mechanism: How you do it matters. Journal of Personality and Social Psychology, 106(2), 304–324."
+  },
+  {
     "no": 2,
     "slug": "tes-otak-stroop",
     "title": "Tes otak 7 detik, berani?",

@@ -23,20 +23,22 @@ LANGKAH
    - 38–46    PUNCHLINE / TIPS: satu kalimat yang nempel atau 1–3 tips
    - akhir    CTA: "Follow Ruang Pikir, ..." atau ajakan komentar
    Judul layar format "X, [kok bisa]?" (maks ±940 px lebar pada 62 px).
-3. Buat folder video-engine/ep<<NN>>_<<slug>>/ dengan menyalin ep02_stroop/, ganti nama stroop.py menjadi
-   episode.py, perbarui build.sh.
+3. Buat folder video-engine/ep<<NN>>_<<slug>>/ dengan menyalin ep03_panggil-nama/ (tanpa vo/ dan preview/),
+   tulis ulang scene di episode.py, perbarui build.sh.
 4. Isi vo.py (anchor tiap kalimat dalam waktu animasi, DUR 42) dan b.CAPS (anchor sama, 2 baris,
    kata kunci dalam [..]). Caption = ringkasan pendek dari kalimat yang dibacakan.
 5. Rancang 6 GROUPS (scene) dengan tag mono: PSIKOLOGI / RISET · TAHUN / ILUSTRASI / TIPS / KOMENTAR / RUANG PIKIR.
    Scene terakhir selalu outro logo (logo_rp.c4) + "RUANG PIKIR" + ruangpikir.id.
-6. Gambar setiap scene dengan gaya yang sama dengan EP01/EP02:
-   - background hitam-ungu malam, debu cahaya, aksen #7F8CFF, glow lembut
+6. Gambar setiap scene dengan gaya premium yang sama dengan EP03:
+   - background hitam-ungu malam, debu cahaya, aksen #7F8CFF, glow lembut, aurora + bokeh
+   - kartu kaca (glass + sheen), sinar (rays), gelembung bicara, centang/silang digambar sebagai bentuk
    - karakter kapsul (person()), ikon neon, kartu riset (card + stamp), grafik batang untuk angka,
      pill label, sparkle; coral #FF6B57 untuk "salah/kaget", mint #3FD68B untuk "benar/tips"
    - minimal satu momen visual "wow" per video (transformasi, tabrakan, zoom, reveal angka)
    - semua ilustrasi di y 560–1200; jangan menutupi caption
-7. Suara: Gemini TTS voice Achird (export GEMINI_API_KEY). Gunakan vo_rest.py (satu request, dipotong otomatis);
-   cek durasi tiap baris; ulangi baris yang aneh. Jangan pakai prompt gaya panjang.
+7. Suara: Gemini TTS voice Achird (GEMINI_API_KEY di .env). Gunakan voice.sh (2 kalimat per request lewat vo_rest.py,
+   tanpa prefix gaya); cek durasi tiap baris dan cek isinya dengan transkripsi; ulangi baris yang aneh.
+   Tulis tahun dengan huruf di vo.py (caption tetap angka).
 8. SFX: susun build_sfx() yang menempel ke setiap kejadian visual (pop saat muncul, whoosh saat ganti scene,
    ding saat reveal, tick tiap caption).
 9. QA: contact sheet ±12 frame, perbaiki tabrakan/overflow, render, cek loudness −14 LUFS.

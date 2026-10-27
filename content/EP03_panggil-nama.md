@@ -1,7 +1,7 @@
 # EP 03 — Panggil namamu, kok jadi tenang?
 
-Status: **naskah siap**, belum diproduksi (suara menunggu `GEMINI_API_KEY`).
-Seri: Kenapa Kamu Gitu? · Topik: distanced self-talk / self-distancing · Perkiraan durasi ±52 detik.
+Status: **sudah diproduksi** — `videos/ruang-pikir-ep03-panggil-nama.mp4` (±51 detik, 1080×1920), halaman web `ruangpikir.id/episode/panggil-namamu/`.
+Seri: Kenapa Kamu Gitu? · Topik: distanced self-talk / self-distancing.
 
 ## Riset
 - **Sumber utama:** Kross, E., Bruehlman-Senecal, E., Park, J., Burson, A., Dougherty, A., Shablack, H., Bremner, R., Moser, J., & Ayduk, O. (2014). Self-talk as a regulatory mechanism: How you do it matters. *Journal of Personality and Social Psychology, 106*(2), 304–324.
@@ -98,4 +98,4 @@ Tonton video barunya 👇
 ```
 
 ## Produksi
-Ikuti `video-engine/PROMPT_VIDEO_BARU.md` mulai langkah 3: folder `video-engine/ep03_panggil-nama/` (salin dari `ep02_stroop/`), isi `vo.py` dan `CAPS` di atas, gambar 6 adegan, suara `Achird` lewat `vo_rest.py` (butuh `GEMINI_API_KEY` di pengaturan environment), QA contact sheet, render, −14 LUFS. Setelah jadi: salin MP4 ke `videos/`, tambah entri di `website/episodes.json`, jalankan `python3 tools/build_site.py`.
+Folder `video-engine/ep03_panggil-nama/`: render ulang dengan `./build.sh` (suara sudah ada di `vo/`), buat ulang suara dengan `./build.sh --voice`. Di `vo.py` tahun ditulis dengan huruf ("dua ribu empat belas") supaya dibaca benar oleh TTS; caption tetap memakai angka.

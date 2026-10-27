@@ -10,7 +10,7 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 
 ## Seri 02 · Kenapa Kamu Gitu?
 - [x] Ngerasa diliatin terus, kok bisa? (spotlight effect) — EP01
-- [ ] Panggil namamu, kok jadi tenang? (distanced self-talk, Kross dkk. 2014) — EP03, naskah siap di `EP03_panggil-nama.md`
+- [x] Panggil namamu, kok jadi tenang? (distanced self-talk, Kross dkk. 2014) — EP03, lihat `EP03_panggil-nama.md`
 - [ ] Kamu nunda kerjaan bukan karena malas (regulasi emosi, Sirois & Pychyl 2013; memaafkan diri sendiri, Wohl dkk. 2010 — studi korelasi)
 - [ ] Sebut perasaanmu, marahnya berkurang (affect labeling, Lieberman dkk. 2007)
 - [ ] Begadang semalam, besoknya gampang marah? (Yoo, Walker dkk. 2007: amigdala >60% lebih reaktif; sampel kecil, 26 orang)

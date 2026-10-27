@@ -10,8 +10,8 @@ Ruang Pikir adalah brand konten **psikologi sehari-hari** (Reels/TikTok/Shorts 9
 | `tools/` | `build_site.py`: membangun kartu & halaman episode, sitemap, gambar preview dari `episodes.json` |
 | `deploy/` | Skrip VPS: `setup-vps.sh`, `deploy.sh` (`ruangpikir-deploy`), `nginx-site.conf`, statistik |
 | `brand/` | Logo (foto profil 1080, horizontal, SVG) + `BRAND.md` (warna, font, nada bicara, aturan) |
-| `content/` | Profil IG, TikTok & X (nama, bio), caption EP01 & EP02, bank ide konten |
-| `videos/` | Hasil render EP01 & EP02 (MP4 1080×1920) |
+| `content/` | Profil IG, TikTok & X (nama, bio), naskah + caption EP01–EP03, bank ide konten |
+| `videos/` | Hasil render EP01–EP03 (MP4 1080×1920) |
 | `video-engine/` | Mesin animasi Python (skia) + suara Gemini TTS + audio/SFX + mux ffmpeg. Lihat `video-engine/README.md` |
 
 ## Tugas 1 — Deploy website ke ruangpikir.id
@@ -28,7 +28,7 @@ Ikuti `website/DEPLOY.md`. Ringkas:
 
 ## Tugas 2 — Membuat episode video baru
 
-Baca `video-engine/README.md` lalu pakai template prompt di `video-engine/PROMPT_VIDEO_BARU.md`. Prinsip yang tidak boleh dilanggar:
+Baca `video-engine/README.md` lalu pakai template prompt di `video-engine/PROMPT_VIDEO_BARU.md` (episode terbaru sebagai contoh gaya premium: `video-engine/ep03_panggil-nama/`). Prinsip yang tidak boleh dilanggar:
 - **Gaya visual tetap**: background hitam-ungu malam, aksen biru-ungu `#7F8CFF`, tag mono di atas judul, progress bar per bagian, judul "X, kok Y?" di atas, caption 2 baris dengan kata kunci di-highlight, watermark "RUANG PIKIR", outro logo + ruangpikir.id.
 - **Suara**: Gemini TTS, voice `Achird`. Jangan pakai prompt gaya yang panjang (model kadang ikut membacakan instruksinya). Selalu cek durasi tiap baris.
 - **Isi**: satu pertanyaan per video, berbasis riset nyata (sebut peneliti + tahun), bukan diagnosis, tidak melabeli orang nyata dengan gangguan mental, tidak membahas cara menyakiti diri.
