@@ -10,6 +10,10 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 
 ## Seri 02 · Kenapa Kamu Gitu?
 - [x] Ngerasa diliatin terus, kok bisa? (spotlight effect) — EP01
+- [ ] Panggil namamu, kok jadi tenang? (distanced self-talk, Kross dkk. 2014) — EP03, naskah siap di `EP03_panggil-nama.md`
+- [ ] Kamu nunda kerjaan bukan karena malas (regulasi emosi, Sirois & Pychyl 2013; memaafkan diri sendiri, Wohl dkk. 2010 — studi korelasi)
+- [ ] Sebut perasaanmu, marahnya berkurang (affect labeling, Lieberman dkk. 2007)
+- [ ] Begadang semalam, besoknya gampang marah? (Yoo, Walker dkk. 2007: amigdala >60% lebih reaktif; sampel kecil, 26 orang)
 - [ ] Ngetik "wkwk" padahal nggak ketawa? (tawa sebagai sinyal sosial)
 - [ ] Lebih berani ngomong di chat daripada langsung? (online disinhibition effect)
 - [ ] Buka HP padahal nggak ada notif? (kebiasaan / habit loop)
@@ -17,12 +21,14 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 - [ ] Makin dewasa, kok waktu kerasa makin cepat?
 - [ ] Minggu sore, kok bikin cemas? (Sunday scaries)
 - [ ] Momen memalukan 5 tahun lalu masih kepikiran?
-- [ ] Overthinking jam 2 pagi, kok bisa?
+- [ ] Overthinking jam 2 pagi? Coba tulis (expressive writing, Pennebaker & Beall 1986)
 
 ## Seri 03 · Psikologi Cinta
 - [ ] Cinlok itu ada penjelasan ilmiahnya (mere exposure effect)
 - [ ] Foto rame-rame bikin kamu kelihatan lebih cakep (cheerleader effect, Walker & Vul 2014)
-- [ ] Makin dicuekin, kok makin kepikiran?
+- [ ] Makin dicuekin, kok makin kepikiran? / Jangan bayangin beruang putih (menekan pikiran malah memperkuatnya, Wegner dkk. 1987)
+- [ ] Ditolak atau dicuekin, kok sakit banget? (Eisenberger, Lieberman & Williams 2003) — topik berat: tutup dengan ajakan bercerita
+- [ ] Nolak ajakan nongkrong itu nggak apa-apa (Givi & Kirk 2023/2024: kita melebih-lebihkan kesalnya orang yang ditolak)
 - [ ] Jatuh cinta, kok jadi nggak nafsu makan?
 - [ ] Cinta pertama, kok susah dilupain?
 
@@ -32,6 +38,8 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 - [ ] Harga Rp99.000, kok kerasa jauh lebih murah? (left-digit effect)
 - [ ] Barang rakitan sendiri, kok lebih disayang? (IKEA effect)
 - [ ] Udah bayar mahal, kok susah berhenti? (sunk cost)
+- [ ] 1 komentar jahat kalahin 100 pujian (negativity bias, Baumeister dkk. 2001)
+- [ ] Scroll IG 10 menit, kok jadi minder? (perbandingan sosial, Festinger 1954; Vogel dkk. 2014)
 
 ## Seri 05 · Mitos Psikologi
 - [ ] Otak cuma dipakai 10%, beneran?
