@@ -51,15 +51,20 @@ CAPS = [
 ]
 ```
 
-## Adegan (GROUPS)
-| Waktu | Tag | Visual |
-|---|---|---|
-| 0–6.2 | PSIKOLOGI | Karakter memegang topeng senyum, gelembung "Aku gapapa kok.", air mata menetes dari balik topeng. Lalu dada "tembus pandang": badai coral + kilat, meter TEKANAN naik ke merah, topeng retak (*momen wow*). |
-| 6.2–8.9 | TERNYATA | Siluet kaca: jantung berdetak makin cepat, pembuluh darah menyala coral, pill "makin tegang". |
-| 8.9–23.3 | RISET · 1997 | Kartu riset "James Gross & Robert Levenson · 1997 · 180 peserta" + stamp MENAHAN EMOSI; layar FILM SEDIH dengan dua penonton (NONTON BIASA vs TAHAN EKSPRESI + ikon gembok); panel hasil tanpa angka: ekspresi wajah turun ("datar"), rasa sedih sama ("tetap ada"), jantung & pembuluh darah naik ("lebih keras"). |
-| 23.3–32.9 | RISET · 1998 | Kartu "James Gross · 1998", pilihan Menahan vs Memaknai ulang (menyala mint). Contoh: chat "ok." → kartu pikiran "Dia benci aku..." dibalik jadi "Dia lagi capek." + meter PERASAAN reda & TUBUH tetap tenang. |
-| 32.9–36.6 | UNTUKMU | Topeng diturunkan, teman datang, gelembung "...", hati kecil melayang. |
-| 36.6–42 | RUANG PIKIR | Outro logo + ruangpikir.id |
+## Adegan (gaya sinematik, seperti video acuan "Jam 2 pagi")
+Judul hanya di adegan pertama, tanpa tag, caption besar per frasa (`PHRASES` di `episode.py`).
+
+| Waktu | Visual |
+|---|---|
+| 0–6.2 | Kartu kaca mengetik "Aku gapapa kok." lalu berubah jadi wajah senyum ("di luar"); bola "emosi" di lantai membesar, memerah, lantai melengkung, lalu retak bercahaya ("di dalam", *momen wow*). |
+| 6.2–8.9 | Siluet kepala + bahu garis tipis, jantung berdetak makin cepat, pembuluh darah menyala. |
+| 8.9–13.1 | Kartu besar RISET · 1997 · James Gross & Robert Levenson · 180 peserta. |
+| 13.1–16.9 | Layar "film sedih" dengan wajah sedih, mata menonton, lalu dua wajah: nonton biasa (menangis) vs tahan ekspresi (datar + gembok). |
+| 16.9–23.3 | Batang perbandingan Nonton biasa vs Tahan ekspresi untuk Ekspresi wajah → "datar", Rasa sedih → "tetap ada", Kerja jantung → "lebih keras" (tanpa angka). |
+| 23.3–27.9 | Kartu RISET 1998 · James Gross; bola "menahan" (merah) vs "maknai ulang" yang menyala hijau + centang. |
+| 27.9–32.9 | Chat "ok." → pikiran "dia benci aku..." dicoret → "dia lagi capek."; bola emosi mengempis dan jadi hijau, "tenang". |
+| 32.9–36.6 | Teman datang, bola emosi kecil dibagi di tengah, gelembung "...", hati. |
+| 36.6–42 | Outro logo + RUANG PIKIR + ruangpikir.id + tombol Follow. |
 
 ## Teks cover Reels
 ```

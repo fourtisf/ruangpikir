@@ -29,7 +29,8 @@ LANGKAH
    kata kunci dalam [..]). Caption = ringkasan pendek dari kalimat yang dibacakan.
 5. Rancang 6 GROUPS (scene) dengan tag mono: PSIKOLOGI / RISET · TAHUN / ILUSTRASI / TIPS / KOMENTAR / RUANG PIKIR.
    Scene terakhir selalu outro logo (logo_rp.c4) + "RUANG PIKIR" + ruangpikir.id.
-6. Gambar setiap scene dengan gaya premium yang sama dengan EP03/EP04:
+6. Gambar setiap scene dengan gaya sinematik EP04 (judul hanya di awal, tanpa tag, caption per frasa tanpa kotak,
+   ilustrasi besar-minimalis, satu ide visual per adegan, kamera bergerak halus), dengan bahan:
    - background hitam-ungu malam, debu cahaya, aksen #7F8CFF, glow lembut, aurora + bokeh
    - kartu kaca (glass + sheen), sinar (rays), gelembung bicara, centang/silang digambar sebagai bentuk
    - karakter kapsul (person()), ikon neon, kartu riset (card + stamp), grafik batang untuk angka,
