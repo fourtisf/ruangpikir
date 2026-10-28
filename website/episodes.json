@@ -1,5 +1,22 @@
 [
   {
+    "no": 5,
+    "slug": "cermin-vs-foto",
+    "title": "Cakep di cermin, kok jelek di foto?",
+    "topic": "Efek paparan",
+    "date": "2026-10-28",
+    "video": "ruang-pikir-ep05-cermin-foto.mp4",
+    "poster_time": 8.2,
+    "summary": "Riset Mita dkk. (1977): kita lebih suka wajah versi cermin, teman kita lebih suka versi asli. Bukan jelek, cuma belum terbiasa.",
+    "body": [
+      "Di cermin terlihat oke, tapi begitu lihat hasil kamera belakang rasanya beda dan kurang enak dilihat? Itu sangat umum, dan sebagian besar bukan soal wajahmu, melainkan soal kebiasaan.",
+      "Wajah manusia tidak simetris sempurna. Cermin membalik kiri dan kanan, sehingga versi wajah yang paling sering kamu lihat setiap hari adalah versi terbalik. Sementara itu, orang lain (dan kamera belakang) melihat versi aslinya.",
+      "Pada 1977, psikolog Theodore Mita, Marshall Dermer, dan Jeffrey Knight memperlihatkan dua foto wajah peserta: versi asli dan versi cermin. Peserta lebih memilih versi cermin wajahnya sendiri, sedangkan teman atau pasangan mereka lebih memilih versi asli.",
+      "Para peneliti menjelaskannya dengan efek paparan (mere exposure): makin sering kita melihat sesuatu, makin kita menyukainya. Jadi kalau ada foto dirimu yang terasa aneh, ingat bahwa itu mungkin justru versi wajah yang paling akrab bagi orang lain."
+    ],
+    "source": "Mita, T. H., Dermer, M., & Knight, J. (1977). Reversed facial images and the mere-exposure hypothesis. Journal of Personality and Social Psychology, 35(8), 597–601."
+  },
+  {
     "no": 4,
     "slug": "pura-pura-gapapa",
     "title": "Pura-pura gapapa, kok capek?",

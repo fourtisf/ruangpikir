@@ -12,6 +12,10 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 - [x] Ngerasa diliatin terus, kok bisa? (spotlight effect) — EP01
 - [x] Panggil namamu, kok jadi tenang? (distanced self-talk, Kross dkk. 2014) — EP03, lihat `EP03_panggil-nama.md`
 - [x] Pura-pura gapapa, kok capek? (menahan emosi vs memaknai ulang, Gross & Levenson 1997; Gross 1998) — EP04, lihat `EP04_pura-pura-gapapa.md`
+- [x] Cakep di cermin, kok jelek di foto? (efek paparan, Mita, Dermer & Knight 1977) — EP05, lihat `EP05_cermin-foto.md`
+- [ ] Sendirian 15 menit, kok milih disetrum? (Wilson dkk. 2014, Science: 67% pria & 25% wanita menyetrum diri; satu pria 190 kali — sampel kecil)
+- [ ] Ingat jelas, kok ternyata palsu? (ingatan palsu, Loftus & Pickrell 1995: 6 dari 24 "ingat" tersesat di mal; Loftus & Palmer 1974)
+- [ ] Dengar suara sendiri di rekaman, kok geli? (hantaran tulang + Hughes & Harrison 2013: suara sendiri dinilai paling menarik saat tidak sadar)
 - [ ] Dipuji, kok malah ngerasa palsu? (impostor phenomenon, Clance & Imes 1978; tinjauan Bravata dkk. 2020, 62 studi — bukan gangguan mental)
 - [ ] Kok selalu jatuh ke orang yang cuek? (gaya keterikatan, Hazan & Shaver 1987 — penjelasan, bukan label)
 - [ ] Gagal terus, kok jadi males nyoba? (learned helplessness, Hiroto & Seligman 1975; harapan: Maier & Seligman 2016)
