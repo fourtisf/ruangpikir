@@ -1,5 +1,22 @@
 [
   {
+    "no": 6,
+    "slug": "liking-gap",
+    "title": "Habis ngobrol, kok takut ilfeel?",
+    "topic": "Liking gap",
+    "date": "2026-10-28",
+    "video": "ruang-pikir-ep06-liking-gap.mp4",
+    "poster_time": 7.5,
+    "summary": "Riset Boothby dkk. (2018): setelah mengobrol, kita hampir selalu meremehkan seberapa suka lawan bicara pada kita.",
+    "body": [
+      "Habis ngobrol dengan orang baru, sering muncul pikiran: \"tadi aku garing nggak, ya? Dia ilfeel nggak?\" Ternyata, tebakan semacam ini biasanya meleset ke arah yang terlalu pesimis.",
+      "Pada 2018, psikolog Erica Boothby, Gus Cooney, Gillian Sandstrom, dan Margaret Clark memasangkan orang-orang yang belum saling kenal untuk mengobrol selama lima menit. Setelahnya, setiap orang menilai seberapa suka ia pada lawan bicaranya, dan menebak seberapa suka lawan bicaranya pada dirinya.",
+      "Hasilnya, orang cenderung meremehkan seberapa disukai mereka. Lawan bicara ternyata lebih menyukai mereka daripada yang mereka kira. Para peneliti menyebutnya liking gap. Pengamat bisa melihat tanda-tanda suka dari rekaman obrolan, tetapi peserta sendiri sering melewatkannya karena sibuk menilai penampilan dirinya.",
+      "Di antara mahasiswa baru dan teman sekamarnya, celah ini bahkan bertahan berbulan-bulan. Jadi setelah mengobrol, tidak perlu memutar ulang setiap kalimat di kepala: kemungkinan besar kamu lebih disukai daripada yang kamu kira."
+    ],
+    "source": "Boothby, E. J., Cooney, G., Sandstrom, G. M., & Clark, M. S. (2018). The liking gap in conversations: Do people like us more than we think? Psychological Science, 29(11), 1742–1756."
+  },
+  {
     "no": 5,
     "slug": "cermin-vs-foto",
     "title": "Cakep di cermin, kok jelek di foto?",

@@ -13,6 +13,12 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 - [x] Panggil namamu, kok jadi tenang? (distanced self-talk, Kross dkk. 2014) — EP03, lihat `EP03_panggil-nama.md`
 - [x] Pura-pura gapapa, kok capek? (menahan emosi vs memaknai ulang, Gross & Levenson 1997; Gross 1998) — EP04, lihat `EP04_pura-pura-gapapa.md`
 - [x] Cakep di cermin, kok jelek di foto? (efek paparan, Mita, Dermer & Knight 1977) — EP05, lihat `EP05_cermin-foto.md`
+- [x] Habis ngobrol, kok takut ilfeel? (liking gap, Boothby dkk. 2018) — EP06, lihat `EP06_liking-gap.md`
+- [ ] Coba gelitik dirimu sendiri, kok nggak bisa? (Blakemore, Frith & Wolpert 1999: otak menebak & meredam sentuhan sendiri; lewat robot dengan jeda, geli lagi)
+- [ ] Masuk kamar, kok langsung lupa mau ngapain? (efek pintu, Radvansky dkk. 2011)
+- [ ] Lagu nyangkut di kepala? Kunyah permen karet (Beaman dkk. 2015, 98 peserta)
+- [ ] Lihat yang lucu, kok pengen nyubit? (cute aggression, Aragón dkk. 2015; Stavropoulos & Alba 2018)
+- [ ] HP kerasa geter, padahal nggak ada notif? (phantom vibration, Rothberg dkk. 2010 BMJ; Drouin)
 - [ ] Sendirian 15 menit, kok milih disetrum? (Wilson dkk. 2014, Science: 67% pria & 25% wanita menyetrum diri; satu pria 190 kali — sampel kecil)
 - [ ] Ingat jelas, kok ternyata palsu? (ingatan palsu, Loftus & Pickrell 1995: 6 dari 24 "ingat" tersesat di mal; Loftus & Palmer 1974)
 - [ ] Dengar suara sendiri di rekaman, kok geli? (hantaran tulang + Hughes & Harrison 2013: suara sendiri dinilai paling menarik saat tidak sadar)
