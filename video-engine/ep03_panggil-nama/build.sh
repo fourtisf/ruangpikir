@@ -6,7 +6,8 @@ cd "$(dirname "$0")"
 python3 episode.py timeline timeline.json
 python3 audio.py timeline.json audio.wav
 python3 episode.py video raw.mp4
-ffmpeg -y -loglevel error -i raw.mp4 -i audio.wav -c:v copy -af "loudnorm=I=-14:TP=-1.5:LRA=11" \
-  -c:a aac -b:a 192k -ar 44100 -shortest -movflags +faststart ruang-pikir-ep03.mp4
+ffmpeg -y -loglevel error -i raw.mp4 -i audio.wav -af "loudnorm=I=-14:TP=-1.5:LRA=11" \
+  -c:v libx264 -preset slow -crf 24 -tune animation -x264-params aq-mode=3 -pix_fmt yuv420p -profile:v high \
+  -c:a aac -b:a 128k -ar 44100 -shortest -movflags +faststart ruang-pikir-ep03.mp4
 rm -f raw.mp4 audio.wav timeline.json
 echo "Selesai: ruang-pikir-ep03.mp4"

@@ -2,7 +2,7 @@
 
 Video dibuat 100% dengan kode: ilustrasi digambar dengan **skia-python**, suara dari **Gemini TTS** (voice `Achird`), musik + SFX disintesis dengan **numpy/scipy**, lalu digabung dengan **ffmpeg**. Tidak ada biaya per video selain kuota TTS.
 
-Output: MP4 1080×1920, 30 fps, H.264 + AAC 192k, loudness −14 LUFS. Render 45–50 detik ±4–6 menit di 2 vCPU.
+Output: MP4 1080×1920 (HD), 30 fps, H.264 (preset slow, CRF 24, `-tune animation`, `aq-mode=3` supaya gradasi gelap tidak belang) + AAC 128k, loudness −14 LUFS. Ukuran ±4–5 MB per 50 detik (sebelumnya ±9 MB; hasil uji SSIM 0,998 terhadap versi CRF 17, tanpa beda kasat mata). Jangan pakai HEVC/H.265: lebih kecil, tapi tidak diputar di sebagian browser. Render 45–55 detik ±5–7 menit di 2 vCPU.
 
 ## Instalasi
 ```bash
