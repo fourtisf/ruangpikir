@@ -31,12 +31,14 @@ LANGKAH
    Scene terakhir selalu outro logo (logo_rp.c4) + "RUANG PIKIR" + ruangpikir.id.
 6. Gambar setiap scene dengan gaya sinematik EP04 (judul hanya di awal, tanpa tag, caption per frasa tanpa kotak,
    ilustrasi besar-minimalis, satu ide visual per adegan, kamera bergerak halus), dengan bahan:
-   - background hitam-ungu malam, debu cahaya, aksen #7F8CFF, glow lembut, aurora + bokeh
+   - background hitam-ungu malam, aksen #7F8CFF, glow lembut, aurora (TANPA debu cahaya/bokeh)
    - kartu kaca (glass + sheen), sinar (rays), gelembung bicara, centang/silang digambar sebagai bentuk
    - karakter kapsul (person()), ikon neon, kartu riset (card + stamp), grafik batang untuk angka,
      pill label, sparkle; coral #FF6B57 untuk "salah/kaget", mint #3FD68B untuk "benar/tips"
    - minimal satu momen visual "wow" per video (transformasi, tabrakan, zoom, reveal angka)
-   - semua ilustrasi di y 560–1200; jangan menutupi caption
+   - semua ilustrasi di y 260–1220; zona caption y 1200–1390 harus bersih
+   - variasi gaya per episode boleh (contoh: EP05 potret premium, EP06 garis neon + tipografi kinetik,
+     EP07 HUD / alat ukur) asal aturan dasar di atas tetap
 7. Suara: Gemini TTS voice Achird dengan resep EP01 (GEMINI_API_KEY di .env): voice.sh -> vo_full.py
    (gemini-3.1-flash-tts-preview + instruksi gaya EP01, 1 request, dipotong dengan split_lines, lalu tighten.py); cek durasi tiap baris
    dan cek isinya dengan transkripsi (instruksi tidak boleh ikut terbaca); ulangi kalau aneh. Tanpa garis progress bar dan tanpa titik debu.

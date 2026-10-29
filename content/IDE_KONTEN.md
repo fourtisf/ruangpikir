@@ -14,6 +14,7 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 - [x] Pura-pura gapapa, kok capek? (menahan emosi vs memaknai ulang, Gross & Levenson 1997; Gross 1998) — EP04, lihat `EP04_pura-pura-gapapa.md`
 - [x] Cakep di cermin, kok jelek di foto? (efek paparan, Mita, Dermer & Knight 1977) — EP05, lihat `EP05_cermin-foto.md`
 - [x] Habis ngobrol, kok takut ilfeel? (liking gap, Boothby dkk. 2018) — EP06, lihat `EP06_liking-gap.md`
+- [x] Omongan orang, kok kepikiran terus? (sociometer, Leary dkk. 1995; Savitsky, Epley & Gilovich 2001) — EP07, lihat `EP07_omongan-orang.md`
 - [ ] Coba gelitik dirimu sendiri, kok nggak bisa? (Blakemore, Frith & Wolpert 1999: otak menebak & meredam sentuhan sendiri; lewat robot dengan jeda, geli lagi)
 - [ ] Masuk kamar, kok langsung lupa mau ngapain? (efek pintu, Radvansky dkk. 2011)
 - [ ] Lagu nyangkut di kepala? Kunyah permen karet (Beaman dkk. 2015, 98 peserta)
