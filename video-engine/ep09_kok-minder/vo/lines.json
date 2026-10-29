@@ -1,0 +1,72 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Kalau kamu ngerasa cuma kamu yang hidupnya berantakan, otakmu lagi salah hitung.",
+  "file": "vo/l00.wav",
+  "dur": 5.349
+ },
+ {
+  "i": 1,
+  "anchor": 4.5,
+  "text": "Teman liburan, teman wisuda, teman jadian. Kamu? Rebahan sambil overthinking.",
+  "file": "vo/l01.wav",
+  "dur": 6.782
+ },
+ {
+  "i": 2,
+  "anchor": 8.68,
+  "text": "Tahun dua ribu sebelas, psikolog Alex Jordan di Stanford meneliti ini.",
+  "file": "vo/l02.wav",
+  "dur": 4.406
+ },
+ {
+  "i": 3,
+  "anchor": 12.48,
+  "text": "Mahasiswa diminta menebak: berapa banyak temannya yang lagi sedih, atau habis bertengkar?",
+  "file": "vo/l03.wav",
+  "dur": 4.66
+ },
+ {
+  "i": 4,
+  "anchor": 17.32,
+  "text": "Hasilnya? Soal yang sedih, tebakan mereka terlalu rendah. Soal yang seneng-seneng, terlalu tinggi.",
+  "file": "vo/l04.wav",
+  "dur": 6.675
+ },
+ {
+  "i": 5,
+  "anchor": 22.64,
+  "text": "Bahkan ke sahabat dan teman sekamar sendiri.",
+  "file": "vo/l05.wav",
+  "dur": 2.417
+ },
+ {
+  "i": 6,
+  "anchor": 25.03,
+  "text": "Soalnya, rasa sedih biasanya disembunyikan. Yang dipamerkan cuma bagian bahagianya.",
+  "file": "vo/l06.wav",
+  "dur": 5.678
+ },
+ {
+  "i": 7,
+  "anchor": 29.54,
+  "text": "Dan yang paling salah tebak, cenderung paling kesepian.",
+  "file": "vo/l07.wav",
+  "dur": 3.631
+ },
+ {
+  "i": 8,
+  "anchor": 32.53,
+  "text": "Jadi kamu nggak sendirian. Coba tanya kabar temanmu hari ini, yang beneran.",
+  "file": "vo/l08.wav",
+  "dur": 5.094
+ },
+ {
+  "i": 9,
+  "anchor": 36.6,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l09.wav",
+  "dur": 3.257
+ }
+]
