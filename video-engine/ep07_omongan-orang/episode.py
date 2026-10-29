@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Ruang Pikir reel #7: 'Omongan orang, kok kepikiran terus?' (sociometer, Leary dkk. 1995; Savitsky, Epley & Gilovich 2001)
-Gaya "HUD / alat ukur": dasbor instrumen futuristik (alat ukur jarum "sociometer", jam 24 jam, kartu arsip, slider sensitivitas),
-teks mono, sudut bingkai HUD, sapuan radar samar di latar.
+Gaya "dunia 3D + UI medsos": ponsel & kartu kaca miring dalam perspektif (plane_m/plane), komentar yang berputar
+mengelilingi kepala (orbit), teks 3D (extrude), alat ukur fisik, alarm asap yang kelewat sensitif, kartu riset yang berputar.
 Gaya sinematik (seperti video acuan "Jam 2 pagi, kok overthinking?"): judul hanya di awal, tanpa tag, caption besar per frasa
 tanpa kotak, ilustrasi besar-minimalis (bola 3D lembut, kartu kaca, kata besar, siluet garis), kamera bergerak halus.
 python3 episode.py preview t1 t2 ... | timeline out.json | video out.mp4"""
@@ -14,31 +14,31 @@ from base import (clamp, lerp, prog, eo, ei, eio, bo, bump, col, P, lg, rg, laye
 VIOLET, YELLOW, INK, HL = '#B57BFF', '#FFD23F', '#0B0C1E', '#AEB6FF'
 
 # adegan (waktu animasi, DUR 42); tag tidak ditampilkan
-b.GROUPS = [(0.0, 4.43, 'A'), (4.43, 7.3, 'B'), (7.3, 11.9, 'C'), (11.9, 15.15, 'D'), (15.15, 17.31, 'E1'), (17.31, 20.24, 'E2'),
-            (20.24, 22.95, 'F'), (22.95, 25.98, 'G1'), (25.98, 29.94, 'G2'), (29.94, 32.38, 'H'), (32.38, 36.6, 'I'), (36.6, 42.0, 'J')]
-PHRASES = [(0.15, 'Di kepalamu ada [alat ukur]'), (1.62, 'yang terus [menilai]:'), (2.73, 'orang lain [suka kamu],'), (3.7, 'atau [nggak].'),
-           (4.43, 'Makanya satu [komentar kecil],'), (5.75, 'bisa [kepikiran seharian].'),
-           (7.3, 'Tahun [1995],'), (9.03, 'psikolog [Mark Leary]'), (10.53, 'menyebutnya [sociometer].'),
-           (11.9, '[Harga dirimu] naik turun,'), (13.31, 'ikut seberapa kamu [merasa diterima].'),
-           (15.15, 'Dulu,'), (15.91, '[dikucilkan] kelompok itu [bahaya].'), (17.31, 'Makanya [ditolak sedikit],'), (18.61, 'otak bereaksi mirip [rasa sakit].'),
-           (20.24, 'Masalahnya,'), (21.28, 'alat ukur ini sering [kelewat sensitif].'),
-           (22.95, 'Tahun [2001],'), (24.47, '[Savitsky] dan timnya menemukan:'), (25.98, 'kalau kita [salah] di depan orang,'),
-           (27.77, 'mereka nggak menilai [seburuk yang kita kira].'),
-           (29.94, 'Kita yang terlalu fokus ke [kesalahan sendiri].'),
-           (32.38, 'Jadi kalau [omongan orang] kepikiran lagi,'), (34.48, 'ingat: alat ukurmu memang [suka lebay].'),
-           (36.6, 'Follow [Ruang Pikir],'), (38.0, 'biar makin kenal [isi kepalamu].')]
+b.GROUPS = [(0.0, 4.19, 'A'), (4.19, 8.11, 'B'), (8.11, 12.82, 'C'), (12.82, 16.13, 'D'), (16.13, 17.86, 'E1'), (17.86, 20.67, 'E2'),
+            (20.67, 23.05, 'F'), (23.05, 26.12, 'G1'), (26.12, 30.18, 'G2'), (30.18, 32.67, 'H'), (32.67, 36.6, 'I'), (36.6, 42.0, 'J')]
+PHRASES = [(0.15, 'Satu [komentar kecil]'), (1.05, 'bisa [kepikiran seharian].'), (2.62, 'Itu [bukan karena kamu lemah].'),
+           (4.19, 'Di kepalamu ada [alat ukur]'), (5.51, 'yang terus [menilai]:'), (6.49, 'kamu [disukai],'), (7.27, 'atau [nggak].'),
+           (8.11, 'Tahun [1995],'), (9.71, 'psikolog [Mark Leary] menyebutnya [sociometer].'),
+           (12.82, '[Harga dirimu] naik turun,'), (14.27, 'ikut seberapa kamu [merasa diterima].'),
+           (16.13, 'Dulu,'), (16.62, '[dikucilkan] itu [bahaya].'), (17.86, 'Jadi [ditolak sedikit],'), (18.96, 'otak bereaksi mirip [rasa sakit].'),
+           (20.67, 'Masalahnya,'), (21.45, 'alat ukur ini [kelewat sensitif].'),
+           (23.05, 'Tahun [2001],'), (24.32, '[Savitsky] dan timnya menemukan:'), (26.12, 'kalau kita [salah] di depan orang,'),
+           (27.87, 'mereka nggak menilai [seburuk yang kita kira].'),
+           (30.18, 'Kita yang terlalu fokus ke [kesalahan sendiri].'),
+           (32.67, 'Jadi kalau [omongan orang] kepikiran lagi,'), (34.59, 'ingat: alat ukurmu [suka lebay].'),
+           (36.6, 'Follow [Ruang Pikir],'), (37.94, 'biar makin kenal [isi kepalamu].')]
 b.CAPS = [(t, s, '') for t, s in PHRASES]          # dipakai base hanya untuk jadwal
 
 # ------------------------------------------------------------ chrome gaya sinematik
 b.draw_tag = lambda cv, t: None
 b.draw_progress = lambda cv, t: None
 def draw_title(cv, t):
-    a = eo(prog(t, 0.05, 0.35)) * (1 - eio(prog(t, 6.55, 7.0)))
+    a = eo(prog(t, 0.05, 0.35)) * (1 - eio(prog(t, 3.75, 4.15)))
     if a <= 0: return
     segs = parse("Omongan orang, [kok kepikiran terus]?"); size = 60; f = font(XB, size)
     tot = sum(f.measureText(s) for s, _ in segs)
     if tot > 940: size *= 940 / tot; f = font(XB, size); tot = sum(f.measureText(s) for s, _ in segs)
-    x = 540 - tot / 2; y = bl(f, 232) + (1 - eo(prog(t, 0.05, 0.35))) * 16 - 10 * eio(prog(t, 6.55, 7.0))
+    x = 540 - tot / 2; y = bl(f, 232) + (1 - eo(prog(t, 0.05, 0.35))) * 16 - 10 * eio(prog(t, 3.75, 4.15))
     layer(cv, a); xx = x
     for s, h in segs: cv.drawString(s, xx, y + 5, f, P(col('#000000', 0.55), blur=8)); xx += f.measureText(s)
     for s, h in segs: cv.drawString(s, x, y, f, P(col(HL if h else TXT))); x += f.measureText(s)
@@ -677,260 +677,595 @@ def file_card(cv, t, t0, year, names, journal, a=1.0, y0=420):
 def shake(t, t0, amp, dur=0.5):
     return amp * math.sin(t * 61) * (1 - prog(t, t0, t0 + dur)) if t >= t0 else 0.0
 
-# ------------------------------------------------------------ A: HOOK — alat ukur di kepala (0 - 4.43)
-def v_hook(t):
-    wild = 0.8 * math.sin(t * 9.5) * math.cos(t * 3.1) + 0.18 * math.sin(t * 27)
-    weigh = 0.45 * math.sin((t - 1.62) * 5.5)
-    if t < 2.73: return lerp(wild, weigh, eio(prog(t, 1.45, 1.85)))
-    if t < 3.7: return lerp(0.45 * math.sin(1.11 * 5.5), 0.86, bo(prog(t, 2.73, 3.05)))
-    return lerp(0.86, -0.88, bo(prog(t, 3.7, 3.98))) + 0.03 * math.sin(t * 40) * (1 - prog(t, 3.98, 4.6))
+# ------------------------------------------------------------ helper EP07 v2: dunia 3D + UI medsos
+F3 = 1500.0
+def P3(sx, sy, z):
+    """titik (sx, sy) di bidang layar z=0, didorong sejauh z -> posisi layar + skala (perspektif ke pusat 540, 760)"""
+    s = F3 / max(60.0, F3 + z); return 540 + (sx - 540) * s, 760 + (sy - 760) * s, s
 
-def gA(cv, t):
-    gx, gy = 540, 650
-    z = 1 + 0.42 * eio(prog(t, 1.3, 2.2)); sx = shake(t, 3.7, 12)
-    cv.save(); cv.translate(gx + sx, gy); cv.scale(z, z); cv.translate(-gx, -gy)
-    ha = 1 - eio(prog(t, 1.5, 2.1))
-    if ha > 0:
-        head = head_line(530, 735, 1.12)
-        cv.drawPath(head, P(shader=rg(540, 640, 420, [col('#2A2F66', 0.35 * ha), col('#2A2F66', 0)])))
-        neon(cv, head, eo(prog(t, -0.2, 0.45)), ACC_XL, 4, ha)
-    gauge(cv, gx, gy, 185, v_hook(t), 1.0, t, eo(prog(t, -0.25, 0.5)), bump(prog(t, 3.7, 4.5)))
-    cv.restore()
-    sa = prog(t, 2.73, 3.3)
-    if 0 < sa < 1: rays(cv, gx, gy, 520, bump(sa), t, n=16, c=MINT)
-    sp = prog(t, 0.0, 0.7)
-    if 0 < sp < 1: scanline(cv, 110, 970, lerp(290, 1190, eio(sp)), 1 - 0.5 * sp)
-    for tx, ty, txt, c, t0 in ((815, 360, '+1 suka', MINT, 0.2), (250, 430, 'dilihat', ACC_L, 0.5), (850, 980, 'komentar baru', CORAL, 0.8)):
-        pa = prog(t, t0, t0 + 0.3); out = 1 - eio(prog(t, 1.3, 1.6))
-        if pa > 0 and out > 0:
-            s = lerp(0.6, 1.0, bo(pa)); cv.save(); cv.translate(tx, ty); cv.scale(s, s)
-            chip(cv, txt, 0, 0, clamp(pa * 2) * out, size=28, fg=c, edge=c); cv.restore()
+def plane_m(sx, sy, z, w, h, ry=0.0, rx=0.0, rz=0.0):
+    """matrix yang memetakan kotak lokal (-w/2,-h/2)-(w/2,h/2) ke bidang 3D berpusat di (sx, sy, z), rotasi derajat"""
+    cyy, syy = math.cos(math.radians(ry)), math.sin(math.radians(ry))
+    cxx, sxx = math.cos(math.radians(rx)), math.sin(math.radians(rx))
+    czz, szz = math.cos(math.radians(rz)), math.sin(math.radians(rz))
+    src, dst = [], []
+    for u, v in ((-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2), (-w / 2, h / 2)):
+        u2, v2 = u * czz - v * szz, u * szz + v * czz
+        yy, zz = v2 * cxx, v2 * sxx
+        xx, zz2 = u2 * cyy + zz * syy, -u2 * syy + zz * cyy
+        if F3 + z + zz2 < 80: return None
+        X, Y, _ = P3(sx + xx, sy + yy, z + zz2); src.append(skia.Point(u, v)); dst.append(skia.Point(X, Y))
+    m = skia.Matrix()
+    return m if m.setPolyToPoly(src, dst) else None
 
-# ------------------------------------------------------------ B: satu komentar kecil, kepikiran seharian (4.43 - 7.3)
-ECHO = [(10.2, 200, 690), (14.6, 880, 740), (19.1, 200, 1000), (23.8, 880, 1050)]
-def gB(cv, t):
-    hour = 8 + 24 * eio(prog(t, 5.75, 7.6))
-    ka = eo(prog(t, 5.55, 6.0))
-    clock24(cv, 540, 880, 215 * lerp(0.85, 1, ka), hour, ka)
-    for h, x, y in ECHO:
-        ea = eo(prog(hour, h, h + 1.2))
-        if ea > 0:
-            mono(cv, f'{int(h) % 24:02d}.{int((h % 1) * 60):02d}', x, y - 50, 20, CORAL, 0.8 * ea)
-            comment(cv, 'kamu kok gitu sih?', x, y, 0.75 * ea, lerp(0.7, 1.0, bo(ea)), size=21)
-    ma = eo(prog(t, 4.45, 4.8)) * (1 - eio(prog(t, 5.35, 5.7)))
-    if ma > 0:
-        mv = lerp(0.55, -0.78, bo(prog(t, 4.62, 4.95))) + (0.04 * math.sin(t * 30) if t > 4.62 else 0)
-        gauge(cv, 540, 905, 150, mv, ma, t, ma, 0.8 * clamp(prog(t, 4.7, 4.8)), label=None)
-    rp = prog(t, 4.6, 5.4)
-    if 0 < rp < 1:
-        for k in range(2):
-            u = clamp(rp * 1.3 - k * 0.3)
-            if 0 < u < 1: cv.drawRoundRect(skia.Rect(540 - 330 - 140 * u, 560 - 70 - 80 * u, 540 + 330 + 140 * u, 560 + 70 + 80 * u), 80, 80, P(col(CORAL, 0.6 * (1 - u)), stroke=3))
-    ca = prog(t, 4.43, 4.85); my = lerp(560, 470, eio(prog(t, 5.5, 6.0))); ms = lerp(1.0, 0.86, eio(prog(t, 5.5, 6.0)))
-    pulse = max([bump(prog(hour, h, h + 1.2)) for h, _, _ in ECHO] + [0])
-    comment(cv, 'kamu kok gitu sih?', 540 + shake(t, 4.62, 8, 0.4), my, clamp(ca * 2), lerp(0.6, 1.0, bo(ca)) * ms, size=40, glow=0.3 + 0.7 * pulse)
-    mono(cv, 'KOMENTAR KECIL', 540, my - 92 * ms, 22, ACC_L, 0.7 * eo(prog(t, 4.8, 5.1)) * (1 - eio(prog(t, 5.5, 5.8))), sp=4)
+class plane:
+    """with plane(cv, sx, sy, z, w, h, ry, rx) as ok: gambar di koordinat lokal (pusat 0,0)"""
+    def __init__(self, cv, *a, **k): self.cv, self.m = cv, plane_m(*a, **k)
+    def __enter__(self):
+        if self.m is None: return False
+        self.cv.save(); self.cv.concat(self.m); return True
+    def __exit__(self, *e):
+        if self.m is not None: self.cv.restore()
+        return False
 
-# ------------------------------------------------------------ C: riset 1995, sociometer (7.3 - 11.9)
-def gC(cv, t):
-    ca = 1 - eio(prog(t, 10.25, 10.6))
-    if ca > 0:
-        cv.save(); s = lerp(1, 0.85, eio(prog(t, 10.25, 10.6))); cv.translate(540, 680); cv.scale(s, s); cv.translate(-540, -680)
-        file_card(cv, t, 7.3, '1995', 'Mark Leary dkk.', 'Journal of Personality and Social Psychology', ca); cv.restore()
-    if t >= 10.5:
-        ga = eo(prog(t, 10.5, 10.9))
-        gauge(cv, 540, 470, 120, 0.5 * math.sin((t - 10.5) * 2.4), ga, t, eo(prog(t, 10.5, 11.0)), label=None, read=None, ends=False)
-        slam(cv, 'SOCIOMETER', 540, 790, 118, t, 10.53, '#FFFFFF', HL, ACC, shake=6)
-        f = font(XB, 118); wS = f.measureText('SOCIO'); wT = f.measureText('SOCIOMETER'); x0 = 540 - wT / 2
-        for k, (x_a, x_b, lab, c, t0) in enumerate(((x0, x0 + wS, 'sosial', ACC_L, 11.0), (x0 + wS, x0 + wT, 'alat ukur', MINT, 11.25))):
-            u = eo(prog(t, t0, t0 + 0.35))
-            if u > 0:
-                y = 880; xm = (x_a + x_b) / 2; hw = (x_b - x_a) / 2 - 10
-                p = skia.Path(); p.moveTo(xm - hw * u, y - 12); p.lineTo(xm - hw * u, y); p.lineTo(xm + hw * u, y); p.lineTo(xm + hw * u, y - 12)
-                cv.drawPath(p, P(col(c, 0.9 * u), stroke=3))
-                mono(cv, lab, xm, y + 44, 34, c, u, glow=0.5)
+def facing(ry, rx=0.0): return math.cos(math.radians(ry)) * math.cos(math.radians(rx))
 
-# ------------------------------------------------------------ D: harga diri ikut seberapa diterima (11.9 - 15.15)
-PEOPLE = [(235, 520), (205, 780), (235, 1040), (845, 520), (875, 780), (845, 1040)]
-def accept(k, t):
-    on = eo(prog(t, 12.0 + k * 0.17, 12.3 + k * 0.17))
-    if k == 1: on *= 1 - eio(prog(t, 13.4, 13.75))
-    if k == 4: on *= 1 - eio(prog(t, 13.6, 13.95)) * (1 - eio(prog(t, 14.4, 14.75)))
-    if k == 2: on *= 1 - eio(prog(t, 13.8, 14.15))
-    return on
-def gD(cv, t):
-    a0 = eo(prog(t, 11.9, 12.3)); acc = [accept(k, t) for k in range(6)]
-    lvl = 0.12 + 0.8 * sum(acc) / 6
-    r = skia.Rect(490, 470, 590, 1010)
-    for k, (x, y) in enumerate(PEOPLE):
-        u = acc[k]; gone = (1 - u) * (1 if eo(prog(t, 12.0 + k * 0.17, 12.3 + k * 0.17)) >= 1 else 0)
-        dx = (-1 if x < 540 else 1) * 40 * gone; c = mixc(MINT, CORAL, gone) if gone else mixc(ACC_L, MINT, u)
-        ty = lerp(r.bottom(), r.top(), lvl); xx = r.left() if x < 540 else r.right()
-        lp_ = skia.Path(); lp_.moveTo(x + dx + (45 if x < 540 else -45), y); lp_.cubicTo((x + xx) / 2, y, (x + xx) / 2, ty, xx, ty)
-        cv.drawPath(lp_, P(col(c, (0.15 + 0.55 * u) * a0), stroke=2.5 if u > 0.5 else 1.5))
-        mini_person(cv, x + dx, y, 70, c, a0 * (1 - 0.45 * gone), u)
-        if u > 0.6: check_mark(cv, x + dx + 42, y - 52, 14, prog(u, 0.6, 1.0), a0)
-        if gone > 0.1: cross(cv, x + dx + 42, y - 52, 12, a0 * gone, CORAL, 5)
-    glass(cv, r, rad=50, a=a0)
-    fh = (r.height() - 20) * lvl; fr = skia.Rect(r.left() + 10, r.bottom() - 10 - fh, r.right() - 10, r.bottom() - 10)
-    fc = vcol(lvl * 2 - 1)
-    cv.drawRoundRect(fr, 40, 40, P(col(fc, 0.55 * a0), blur=18))
-    cv.drawRoundRect(fr, 40, 40, P(shader=lg(0, fr.top(), 0, fr.bottom(), [col(mixc(fc, '#FFFFFF', 0.4), a0), col(fc, a0)])))
-    for k in range(1, 10):
-        y = lerp(r.bottom(), r.top(), k / 10); cv.drawLine(r.right() - 26, y, r.right() - 10, y, P(col('#FFFFFF', 0.35 * a0), stroke=2))
-    mono(cv, 'HARGA DIRI', 540, 420, 26, ACC_L, 0.85 * a0, sp=4)
-    mono(cv, f'{int(round(lvl * 100))}%', 540, 1075, 46, fc, a0, glow=0.6)
+def RR(r, rad): return skia.RRect.MakeRectXY(r, rad, rad)
 
-# ------------------------------------------------------------ E1: dulu, dikucilkan kelompok itu bahaya (15.15 - 17.31)
-GROUP = [(330, 900), (420, 790), (660, 790), (750, 900)]
-def gE1(cv, t):
-    a0 = eo(prog(t, 15.15, 15.5))
-    mono(cv, 'ZAMAN DULU', 540, 360, 28, AMBER, 0.85 * a0, sp=8)
-    flame(cv, 540, 930, 62, t, a0)
-    for x, y in GROUP: mini_person(cv, x, y, 82, AMBER, a0, 0.6)
-    u = eio(prog(t, 15.9, 16.6))
-    yx, yy = lerp(540, 885, u), lerp(1040, 600, u); dark = u
-    if dark > 0: cv.drawCircle(yx, yy, 200, P(shader=rg(yx, yy, 200, [col(CORAL, 0.16 * dark), col(CORAL, 0)])))
-    mini_person(cv, yx, yy, 82, mixc(AMBER, CORAL, dark), a0 * (1 - 0.35 * dark), 0.6 * (1 - dark) + 0.3 * dark)
-    ra = eo(prog(t, 16.0, 16.4))
-    if ra > 0:
-        p = skia.Path(); p.addOval(skia.Rect(225, 690, 855, 1050))
-        cv.drawPath(partial(p, ra), P(col(AMBER, 0.5 * a0), stroke=2.5))
-        mono(cv, 'KELOMPOK', 540, 1085, 22, AMBER, 0.75 * ra * a0, sp=4)
-    wa = prog(t, 16.65, 16.95)
-    if wa > 0:
-        s = bo(wa); fl = 0.75 + 0.25 * math.sin(t * 20)
-        cv.save(); cv.translate(yx, yy - 150); cv.scale(s, s); warn_tri(cv, 0, 0, 44, a0 * fl); cv.restore()
-        mono(cv, 'BAHAYA', yx, yy + 120, 30, CORAL, a0 * clamp(wa * 2), sp=5, glow=0.6)
+def extrude(cv, text, cx, cy, size, a=1.0, depth=12, front=('#FFFFFF', HL), side='#2E3270', glow=ACC, dx=0.5, dy=0.9):
+    """teks 3D: lapisan samping bertumpuk + muka bergradasi + pendar"""
+    if a <= 0: return 0
+    f = font(XB, size); w = f.measureText(text); x = cx - w / 2; y = bl(f, cy); st = size / 120
+    cv.drawString(text, x + dx * depth * st, y + (dy * depth + 14) * st, f, P(col('#000000', 0.55 * a), blur=size * 0.1))
+    for k in range(depth, 0, -1):
+        cv.drawString(text, x + dx * k * st, y + dy * k * st, f, P(col(mixc(side, '#05060F', 0.55 * k / depth), a)))
+    cv.drawString(text, x, y, f, P(col(glow, 0.55 * a), blur=size * 0.14))
+    cv.drawString(text, x, y, f, P(shader=lg(0, y - size * 0.75, 0, y + size * 0.05, [col(front[0], a), col(front[1], a)])))
+    return w
 
-# ------------------------------------------------------------ E2: ditolak sedikit -> otak bereaksi mirip rasa sakit (17.31 - 20.24)
-def gE2(cv, t):
-    a0 = eo(prog(t, 17.31, 17.7)); hx, hy, hs = 540, 790, 0.86
-    head = head_line(hx, hy, hs)
-    cv.save(); cv.translate(shake(t, 17.75, 10, 0.45), 0)
-    cv.drawPath(head, P(shader=rg(540, 700, 380, [col('#2A2F66', 0.35 * a0), col('#2A2F66', 0)])))
-    neon(cv, head, eo(prog(t, 17.31, 17.8)), ACC_XL, 4, a0)
-    sx, sy = 520, 690; pa = prog(t, 17.8, 18.3)
-    if pa > 0:
-        pu = 0.75 + 0.25 * math.sin(t * 9)
-        cv.drawCircle(sx, sy, 150, P(shader=rg(sx, sy, 150, [col(CORAL, 0.75 * eo(pa) * pu), col(CORAL, 0.25 * eo(pa)), col(CORAL, 0)], [0, 0.4, 1])))
-        cv.drawCircle(sx, sy, 34, P(col('#FFD1C8', 0.9 * eo(pa))))
-        for k in range(3):
-            u = ((t - 17.8) * 0.9 + k / 3) % 1.0
-            cv.drawCircle(sx, sy, 40 + 230 * u, P(col(CORAL, 0.55 * (1 - u) * eo(pa)), stroke=3))
-    cv.restore()
-    ca = prog(t, 17.31, 17.75); co = 1 - eio(prog(t, 18.3, 18.6))
-    if ca > 0 and co > 0:
-        cx_ = lerp(1150, 650, eio(ca)); comment(cv, 'kamu nggak usah ikut ya', cx_, 470, co, lerp(0.8, 1.0, eo(ca)) * lerp(1, 0.9, 1 - co), size=32, av=CORAL, glow=0.3)
-    la = eo(prog(t, 18.6, 19.0))
-    if la > 0:
-        cv.drawLine(sx, sy - 40, sx, 520 - 10 + 30 * (1 - la), P(col(CORAL, 0.7 * la), stroke=2.5))
-        mono(cv, 'SINYAL MIRIP RASA SAKIT', 540, 470, 32, CORAL, la, sp=2, glow=0.6)
-        mono(cv, 'Eisenberger dkk. (2003), Science', 540, 412, 21, ACC_L, 0.7 * la)
-
-# ------------------------------------------------------------ F: alat ukurnya kelewat sensitif (20.24 - 22.95)
-def v_sens(t):
-    if t < 20.75: return 0.35 + 0.04 * math.sin(t * 5)
-    return lerp(0.35, -1.0, bo(prog(t, 20.75, 21.05))) + 0.05 * math.sin(t * 38)
-def slider(cv, y, val, a=1.0, t=0.0, maxflash=0.0):
+def notif(cv, x, y, w, text, a=1.0, title='Komentar baru', glow=0.0):
+    """banner notifikasi gaya ponsel (koordinat lokal, pusat x,y)"""
     if a <= 0: return
-    x0, x1 = 400, 930
-    mono(cv, 'SENSITIVITAS', 150, y, 26, ACC_L, 0.85 * a, sp=2, align=0)
-    cv.drawRoundRect(skia.Rect(x0, y - 9, x1, y + 9), 9, 9, P(col('#1A1B30', 0.95 * a))); cv.drawRoundRect(skia.Rect(x0, y - 9, x1, y + 9), 9, 9, P(col(ACC_L, 0.25 * a), stroke=2))
-    xk = lerp(x0, x1, val); c = vcol(1 - 2 * val) if val > 0.5 else ACC
-    cv.drawRoundRect(skia.Rect(x0, y - 9, xk, y + 9), 9, 9, P(shader=lg(x0, 0, x1, 0, [col(ACC, a), col(CORAL, a)])))
-    cv.drawCircle(xk, y, 26, P(col(c, 0.6 * a), blur=14)); cv.drawCircle(xk, y, 22, P(col('#FFFFFF', a))); cv.drawCircle(xk, y, 22, P(col(c, a), stroke=4))
-    if maxflash > 0: mono(cv, 'MAKS', x1, y - 52, 30, CORAL, maxflash * (0.7 + 0.3 * math.sin(t * 24)), sp=3, align=1, glow=0.8)
-def gF(cv, t):
-    a0 = eo(prog(t, 20.24, 20.6)); al = clamp(prog(t, 20.85, 21.0)) * (0.6 + 0.4 * eio(prog(t, 21.3, 22.4)))
-    cv.save(); cv.translate(shake(t, 20.8, 12), 0)
-    gauge(cv, 540, 690, 230, v_sens(t), a0, t, eo(prog(t, 20.24, 20.7)), al)
+    h = w * 0.3; r = skia.Rect(x - w / 2, y - h / 2, x + w / 2, y + h / 2)
+    glass(cv, r, rad=h * 0.28, a=a, glow=glow, gc=CORAL, fill=('#2B2D47', '#191A2C'))
+    ic = h * 0.52; ix, iy = r.left() + h * 0.18, y - ic / 2
+    icr = skia.Rect(ix, iy, ix + ic, iy + ic)
+    cv.drawRoundRect(icr, ic * 0.26, ic * 0.26, P(shader=lg(ix, iy, ix + ic, iy + ic, [col('#FF8A7A', a), col('#B57BFF', a)])))
+    bp, _ = bubble_path(ix + ic / 2, iy + ic * 0.46, ic * 0.56, ic * 0.4, (ix + ic * 0.32, iy + ic * 0.8), maxlen=ic * 0.2)
+    cv.drawPath(bp, P(col('#FFFFFF', 0.95 * a)))
+    tx = ix + ic + h * 0.16; f1 = font(B, h * 0.2); f2 = font(XB, h * 0.25); f3 = font(M, h * 0.17)
+    cv.drawString(title, tx, bl(f1, y - h * 0.17), f1, P(col(ACC_L, 0.9 * a)))
+    tw = f3.measureText('baru saja'); cv.drawString('baru saja', r.right() - h * 0.2 - tw, bl(f3, y - h * 0.17), f3, P(col(MUTED, a)))
+    cv.drawString(text, tx, bl(f2, y + h * 0.16), f2, P(col(TXT, a)))
+
+def phone(cv, w, h, a, t, banner=0.0, btext='kamu kok gitu sih?', screen=1.0):
+    """ponsel kaca (koordinat lokal, pusat 0,0): bingkai logam, layar kunci, banner notifikasi turun (banner 0..1)"""
+    if a <= 0: return
+    r = skia.Rect(-w / 2, -h / 2, w / 2, h / 2); rad = w * 0.15
+    cv.drawRRect(RR(r.makeOffset(0, 34), rad), P(col('#000000', 0.6 * a), blur=44))
+    cv.drawRRect(RR(r, rad), P(shader=lg(r.left(), r.top(), r.right(), r.bottom(), [col('#6A6E8E', a), col('#1A1B2A', a), col('#4A4D68', a), col('#15161F', a)], [0, 0.35, 0.7, 1])))
+    sr = r.makeInset(w * 0.035, w * 0.035); srad = rad * 0.8
+    cv.drawRRect(RR(sr, srad), P(col('#04050A', a)))
+    cv.save(); cv.clipRRect(RR(sr, srad), skia.ClipOp.kIntersect, True)
+    if screen > 0:
+        sa = a * screen
+        cv.drawRect(sr, P(shader=lg(0, sr.top(), 0, sr.bottom(), [col('#2A2470', sa), col('#14123A', sa), col('#0A0A1A', sa)], [0, 0.5, 1])))
+        cv.drawCircle(sr.left() + w * 0.2, sr.top() + h * 0.18, w * 0.75, P(shader=rg(sr.left() + w * 0.2, sr.top() + h * 0.18, w * 0.75, [col('#7F5CFF', 0.45 * sa), col('#7F5CFF', 0)])))
+        cv.drawCircle(sr.right() - w * 0.1, sr.bottom() - h * 0.2, w * 0.8, P(shader=rg(sr.right() - w * 0.1, sr.bottom() - h * 0.2, w * 0.8, [col('#3F6BFF', 0.35 * sa), col('#3F6BFF', 0)])))
+        f = font(M, w * 0.055); s_ = 'Selasa, 29 Oktober'; cv.drawString(s_, -f.measureText(s_) / 2, bl(f, -h * 0.33), f, P(col(ACC_XL, 0.85 * sa)))
+        f = font(XB, w * 0.25); s_ = '23.47'; cv.drawString(s_, -f.measureText(s_) / 2, bl(f, -h * 0.24), f, P(col('#FFFFFF', 0.95 * sa)))
+        if banner > 0:
+            by = lerp(-h * 0.62, -h * 0.06, bo(banner)); notif(cv, 0, by, w * 0.88, btext, sa * clamp(banner * 3))
+        cv.drawRect(sr, P(shader=lg(sr.left(), sr.top(), sr.right(), sr.bottom(), [col('#FFFFFF', 0.1 * a), col('#FFFFFF', 0), col('#FFFFFF', 0)], [0, 0.4, 1])))
     cv.restore()
-    ca = prog(t, 20.45, 20.75)
+    cv.drawRoundRect(skia.Rect(-w * 0.13, -h / 2 + w * 0.07, w * 0.13, -h / 2 + w * 0.15), w * 0.04, w * 0.04, P(col('#000000', a)))
+    cv.drawRRect(RR(r, rad), P(col('#FFFFFF', 0.28 * a), stroke=2.5))
+
+def head_solid(cv, cx, cy, s, a=1.0, face=1, rim=ACC_L, glow=0.0, gc=ACC):
+    """kepala profil padat (dari logo) dengan cahaya tepi"""
+    if a <= 0: return None
+    hp = head_line(cx, cy, s, face)
+    if glow > 0: cv.drawPath(hp, P(col(gc, 0.5 * glow * a), stroke=40 * s, blur=40 * s))
+    sh = skia.Path(hp); sh.offset(0, 30 * s); cv.drawPath(sh, P(col('#000000', 0.55 * a), blur=36 * s))
+    cv.drawPath(hp, P(shader=lg(cx + 260 * s * face, cy - 300 * s, cx - 260 * s * face, cy + 300 * s, [col('#2C3170', a), col('#121329', a), col('#090A14', a)], [0, 0.5, 1])))
+    cv.save(); cv.clipPath(hp, skia.ClipOp.kIntersect, True)
+    rp = skia.Path(hp); rp.offset(-16 * s * face, 16 * s); cv.drawPath(rp, P(col(rim, 0.75 * a), stroke=26 * s, blur=14 * s))
+    cv.restore()
+    cv.drawPath(hp, P(col(rim, 0.45 * a), stroke=2.5))
+    return hp
+
+def ring_pos(k, n, spin, R, tilt=0.3):
+    ang = spin + k * math.tau / n
+    return R * math.sin(ang), -R * tilt * math.cos(ang), R * math.cos(ang)
+
+def orbit(cv, cx, cy, R, spin, n, text, a=1.0, size=24, center=None, born=None, drop=0.0, tilt=0.3, hot=0.0):
+    """kartu komentar berputar mengelilingi pusat (perspektif, urut kedalaman); center() digambar di tengah antrian"""
+    items = []
+    for k in range(n):
+        x, y, z = ring_pos(k, n, spin, R, tilt)
+        b_ = 1.0 if born is None else born(k)
+        if b_ <= 0: continue
+        yy = y + drop * (380 + 90 * k) ** 1.0 * drop
+        items.append((z, k, x, yy, b_))
+    items.sort(key=lambda it: -it[0]); drawn = False
+    for z, k, x, y, b_ in items:
+        if z < 0 and not drawn and center: center(); drawn = True
+        X, Y, s = P3(cx + x, cy + y, z)
+        dep = clamp((R - z) / (2 * R)); af = a * b_ * lerp(0.3, 1.0, dep) * (1 - clamp(drop * 1.6))
+        rot = (k % 3 - 1) * 4 + drop * (k % 2 * 2 - 1) * 40
+        comment(cv, text, X, Y, af, s * lerp(0.6, 1.0, bo(b_)), size=size, rot=rot, glow=hot * dep)
+    if center and not drawn: center()
+
+def heart_shape(cv, cx, cy, s, a=1.0, c=MINT):
+    if a <= 0: return
+    hp = heart_path(cx, cy, s); cv.drawPath(hp, P(col(c, 0.5 * a), blur=s * 0.5)); cv.drawPath(hp, P(shader=lg(0, cy - s, 0, cy + s, [col(mixc(c, '#FFFFFF', 0.4), a), col(c, a)])))
+
+def gauge_phys(cv, cx, cy, r, v, a=1.0, t=0.0, boot=1.0, alarm=0.0, **k):
+    """alat ukur fisik premium: bingkai logam + kubah kaca di atas gauge()"""
+    if a <= 0: return
+    cv.drawCircle(cx, cy + r * 0.1, r * 1.22, P(col('#000000', 0.55 * a), blur=r * 0.18))
+    sw = skia.GradientShader.MakeSweep(cx, cy, [col(c_, a) for c_ in ('#8A90B8', '#262838', '#E6E8FF', '#3A3D55', '#A8AED6', '#262838', '#8A90B8')], [0, 0.18, 0.32, 0.5, 0.68, 0.85, 1])
+    cv.drawCircle(cx, cy, r * 1.17, P(shader=sw)); cv.drawCircle(cx, cy, r * 1.17, P(col('#FFFFFF', 0.35 * a), stroke=2))
+    gauge(cv, cx, cy, r, v, a, t, boot, alarm, **k)
+    gl = skia.Path(); gl.addArc(skia.Rect(cx - r * 0.98, cy - r * 0.98, cx + r * 0.98, cy + r * 0.98), 200, 70)
+    cv.drawPath(gl, P(col('#FFFFFF', 0.22 * a), stroke=r * 0.06, blur=r * 0.02))
+    cv.drawCircle(cx - r * 0.35, cy - r * 0.55, r * 0.5, P(shader=rg(cx - r * 0.35, cy - r * 0.55, r * 0.5, [col('#FFFFFF', 0.08 * a), col('#FFFFFF', 0)])))
+
+def crack(cv, cx, cy, r, u, a=1.0, seed=3):
+    """retakan kaca yang menjalar (u 0..1)"""
+    if u <= 0 or a <= 0: return
+    rnd = random.Random(seed); p = skia.Path()
+    for k in range(7):
+        ang = k * math.tau / 7 + rnd.uniform(-0.3, 0.3); x, y = cx, cy; p.moveTo(x, y); L = r * rnd.uniform(0.6, 1.0) * eo(u)
+        for j in range(4):
+            ang += rnd.uniform(-0.5, 0.5); x += math.cos(ang) * L / 4; y += math.sin(ang) * L / 4; p.lineTo(x, y)
+    cv.drawPath(p, P(col(CORAL, 0.5 * a), stroke=6, blur=5)); cv.drawPath(p, P(col('#FFFFFF', 0.9 * a), stroke=2.2))
+
+def research_card(cv, t, t0, year, names, journal, back=None, t_flip=None, y=700, t_out=None):
+    """kartu riset kaca yang berputar masuk dalam 3D; bisa dibalik (t_flip) untuk menampilkan sisi belakang"""
+    p = prog(t, t0, t0 + 0.7)
+    if p <= 0: return
+    ry = lerp(80, 0, bo(p)) + 5 * math.sin((t - t0) * 0.9); rx = 5 * math.sin((t - t0) * 0.7 + 0.5); z = lerp(600, 0, eo(p))
+    if t_flip: ry += 180 * eio(prog(t, t_flip, t_flip + 0.6))
+    if t_out: z += 900 * ei(prog(t, t_out, t_out + 0.5))
+    w, h = 780, 540; a = clamp(p * 2.5)
+    with plane(cv, 540, y, z, w, h, ry, rx) as ok:
+        if not ok: return
+        r = skia.Rect(-w / 2, -h / 2, w / 2, h / 2)
+        if facing(ry, rx) >= 0:
+            pth = glass(cv, r, rad=34, a=a, glow=0.35)
+            mono(cv, 'ARSIP RISET', r.left() + 54, r.top() + 60, 25, ACC_L, 0.85 * a, sp=4, align=0)
+            mono(cv, 'JPSP', r.right() - 54, r.top() + 60, 25, MINT, 0.8 * a, sp=3, align=1)
+            cv.drawLine(r.left() + 54, r.top() + 102, r.right() - 54, r.top() + 102, P(col(ACC_L, 0.25 * a), stroke=2))
+            extrude(cv, year, 0, r.top() + 228, 170, a * eo(prog(t, t0 + 0.25, t0 + 0.6)), depth=14)
+            na = eo(prog(t, t0 + 0.5, t0 + 0.9))
+            f = font(XB, 44); ww = f.measureText(names); cv.drawString(names, -ww / 2, bl(f, r.top() + 385) + (1 - na) * 12, f, P(col(TXT, na * a)))
+            f = font(M, 27); ww = f.measureText(journal); cv.drawString(journal, -ww / 2, bl(f, r.top() + 445), f, P(col(ACC_L, 0.85 * na * a)))
+            sheen(cv, pth, r, prog(t, t0 + 0.6, t0 + 1.5), a)
+        elif back:
+            cv.scale(-1, 1); back(cv, r, a)
+
+# ------------------------------------------------------------ A: HOOK — satu komentar, diputar ulang seharian (0 - 4.19)
+HOOK_TXT = 'kamu kok gitu sih?'
+def ph_banner(t): return prog(t, 0.02, 0.24)
+def phone_m(t):
+    sink = eio(prog(t, 0.55, 1.25)); vib = 8 * math.sin(t * 95) * (1 - prog(t, 0.05, 0.6))
+    return (540 + vib, 760 + 160 * sink, 700 * sink, 420, 840, -18 + 5 * math.sin(t * 1.4), 10 + 25 * sink)
+def spin_A(t):
+    # sudut putaran: makin cepat 1.3 -> 2.62, berhenti mendadak di 2.62
+    tt = min(t, 2.62) - 1.25
+    return 0.0 if tt <= 0 else 1.2 * tt + 2.6 * tt * tt
+def counter_A(t):
+    tt = clamp((min(t, 2.62) - 1.3) / 1.32); return int(round(1 + 98 * tt ** 1.7))
+def gA(cv, t):
+    push = 1 + 0.05 * eio(prog(t, 0, 3.0)) + 1.6 * ei(prog(t, 3.55, 4.6))
+    cv.save(); cv.translate(540, 790); cv.scale(push, push); cv.translate(-540, -790)
+    pa = 1 - eio(prog(t, 0.95, 1.35))
+    if pa > 0:
+        m = phone_m(t)
+        with plane(cv, *m) as ok:
+            if ok: phone(cv, 420, 840, pa, t, ph_banner(t) if t < 0.55 else 0.0)
+        vb = 1 - prog(t, 0.05, 0.6)
+        if vb > 0:
+            for sd in (-1, 1):
+                for k in range(2):
+                    u = ((t * 3.2 + k * 0.5) % 1.0); x = 540 + sd * (230 + 60 * u)
+                    arc = skia.Path(); arc.addArc(skia.Rect(x - 40, 640, x + 40, 840), -40 if sd > 0 else 140, 80)
+                    cv.drawPath(arc, P(col(ACC_L, 0.8 * vb * (1 - u)), stroke=4))
+    # banner lepas dari ponsel, terbang ke depan kamera
+    fp = prog(t, 0.55, 1.0); fo = 1 - eio(prog(t, 1.15, 1.45))
+    if fp > 0 and fo > 0:
+        x0, y0 = 540, 760 - 840 * 0.06; x1, y1 = 540, 520
+        x = lerp(x0, x1, eio(fp)); y = lerp(y0, y1, eio(fp)) - 40 * bump(fp); sc = lerp(1.0, 1.5, eo(fp))
+        cv.save(); cv.translate(x, y); cv.rotate(-6 * (1 - eo(fp))); cv.scale(sc, sc)
+        notif(cv, 0, 0, 340, HOOK_TXT, fo, glow=0.6 * bump(fp)); cv.restore()
+    # kepala + putaran komentar
+    ha = eo(prog(t, 0.95, 1.4)); hy = 860 + 60 * (1 - ha)
+    if ha > 0:
+        drop = eio(prog(t, 2.7, 3.4)); spin = spin_A(t) + 0.4
+        hot = 0.6 * clamp(prog(t, 1.6, 2.6)) * (1 - drop)
+        def center():
+            head_solid(cv, 540, hy, 0.68, ha, 1, ACC_L, 0.3 + 0.7 * hot, CORAL)
+            ga = eo(prog(t, 2.8, 3.3))
+            if ga > 0:
+                halo(cv, 532, hy - 70, 230, ACC, ga)
+                gauge(cv, 532, hy - 70, 88, 0.6 * math.sin(t * 6), ga, t, ga, label=None, read=None, ends=False)
+                mono(cv, '?', 655, hy - 185, 70, HL, ga * (0.6 + 0.4 * math.sin(t * 7)), glow=0.8)
+        born = lambda k: prog(t, 1.15 + k * 0.1, 1.4 + k * 0.1)
+        orbit(cv, 540, hy - 40, 330, spin, 6, HOOK_TXT, ha, 25, center, born, drop, 0.42, hot)
+        fz = prog(t, 2.62, 2.95)
+        if 0 < fz < 1: cv.drawCircle(540, hy - 40, 200 + 380 * eo(fz), P(col('#FFFFFF', 0.55 * (1 - fz)), stroke=6, blur=4))
+    cv.restore()
+    ca = clamp(prog(t, 1.3, 1.5)) * (1 - eio(prog(t, 2.9, 3.2)))
     if ca > 0:
-        s = lerp(0.6, 1, bo(ca)); cv.save(); cv.translate(540, 335); cv.scale(s, s)
-        chip(cv, 'cuma dibaca', -20, 0, clamp(ca * 2) * a0, size=30, fg=ACC_XL)
-        f = font(B, 30); w = f.measureText('cuma dibaca'); ck = P(col('#7FB8FF', clamp(ca * 2) * a0), stroke=4)
+        n = counter_A(t); mono(cv, f'diputar ulang di kepala: {n}x', 540, 1150, 30, CORAL, ca, sp=1, glow=0.6)
+
+# ------------------------------------------------------------ B: alat ukur di kepalamu (4.19 - 8.11)
+def v_B(t):
+    if t < 5.51: return 0.7 * math.sin((t - 4.19) * 7.0) * math.cos((t - 4.19) * 2.3)
+    if t < 6.49: return lerp(0.7 * math.sin(1.32 * 7.0) * math.cos(1.32 * 2.3), 0.0, eio(prog(t, 5.51, 5.8))) + 0.5 * math.sin((t - 5.51) * 6.4) * prog(t, 5.6, 5.9)
+    if t < 7.27: return lerp(0.5 * math.sin(0.98 * 6.4), 0.9, bo(prog(t, 6.49, 6.8)))
+    return lerp(0.9, -0.92, bo(prog(t, 7.27, 7.55))) + 0.03 * math.sin(t * 40) * (1 - prog(t, 7.55, 8.2))
+HEARTS = [(-0.9, 0.0), (-0.55, 0.15), (-0.2, 0.05), (0.15, 0.2), (0.5, 0.1), (0.85, 0.25)]
+def gB(cv, t):
+    p = prog(t, 4.19, 4.9); z = lerp(-700, 0, eo(p)); ry = lerp(-35, 10, eo(p)) + 5 * math.sin(t * 0.9); rx = 9 + 3 * math.sin(t * 0.6)
+    sx = shake(t, 7.27, 12)
+    al = bump(prog(t, 7.27, 8.3)); v = v_B(t)
+    with plane(cv, 540 + sx, 690, z, 640, 640, ry, rx) as ok:
+        if ok:
+            gauge_phys(cv, 0, 0, 225, v, clamp(p * 3), t, eo(prog(t, 4.19, 4.8)), al)
+            crack(cv, -150, 40, 150, prog(t, 7.3, 7.6), 1 - eio(prog(t, 8.0, 8.4)))
+    hp_ = prog(t, 6.55, 7.3)
+    if 0 < hp_ < 1:
+        for k, (dx, ph) in enumerate(HEARTS):
+            u = clamp(hp_ * 1.25 - ph)
+            if 0 < u < 1: heart_shape(cv, 760 + dx * 120, 760 - 380 * eo(u), 26 + 10 * (k % 2), bump(u) * 1.2, MINT)
+        rays(cv, 540, 690, 560, bump(hp_), t, n=16, c=MINT)
+    fl = prog(t, 7.27, 7.7)
+    if 0 < fl < 1: cv.drawRect(skia.Rect(0, 260, W, 1220), P(shader=rg(540, 690, 700, [col(CORAL, 0.35 * (1 - fl)), col(CORAL, 0)])))
+
+# ------------------------------------------------------------ C: riset 1995 -> sociometer (8.11 - 12.82)
+def back_socio(cv, r, a):
+    glass(cv, r, rad=34, a=a, glow=0.5)
+    mono(cv, 'NAMANYA', 0, r.top() + 70, 25, ACC_L, 0.8 * a, sp=6)
+    extrude(cv, 'SOCIOMETER', 0, -10, 104, a, depth=10)
+    f = font(XB, 104); wS = f.measureText('SOCIO'); wT = f.measureText('SOCIOMETER'); x0 = -wT / 2
+    for x_a, x_b, lab, c in ((x0, x0 + wS, 'sosial', ACC_L), (x0 + wS, x0 + wT, 'alat ukur', MINT)):
+        xm = (x_a + x_b) / 2; hw = (x_b - x_a) / 2 - 10; yy = 80
+        p = skia.Path(); p.moveTo(xm - hw, yy - 12); p.lineTo(xm - hw, yy); p.lineTo(xm + hw, yy); p.lineTo(xm + hw, yy - 12)
+        cv.drawPath(p, P(col(c, 0.9 * a), stroke=3)); mono(cv, lab, xm, yy + 46, 34, c, a, glow=0.5)
+def gC(cv, t):
+    research_card(cv, t, 8.11, '1995', 'Mark Leary dkk.', 'Journal of Personality and Social Psychology', back_socio, 11.3)
+
+# ------------------------------------------------------------ D: harga diri naik turun, ikut seberapa diterima (12.82 - 16.13)
+AV_COL = ['#FF8A7A', '#7FB8FF', '#B57BFF', '#FFC56B', '#3FD6A4', '#FF7FC8', '#8C93FF', '#5AD1E6']
+def acc_D(k, t):
+    on = eo(prog(t, 12.9 + k * 0.12, 13.15 + k * 0.12))
+    off = {1: 14.35, 4: 14.55, 6: 14.75}.get(k)
+    if off: on *= 1 - eio(prog(t, off, off + 0.3)) * (1 - (eio(prog(t, 15.35, 15.65)) if k == 4 else 0))
+    return on
+def avatar(cv, x, y, r, c, a=1.0, ok=1.0, gone=0.0):
+    if a <= 0: return
+    cc = mixc(c, '#3A3B4A', gone)
+    cv.drawCircle(x, y + r * 0.2, r * 1.05, P(col('#000000', 0.5 * a), blur=r * 0.3))
+    cv.drawCircle(x, y, r, P(shader=lg(x, y - r, x, y + r, [col(mixc(cc, '#FFFFFF', 0.35), a), col(cc, a)])))
+    pc = skia.Path(); pc.addCircle(x, y, r); cv.save(); cv.clipPath(pc, skia.ClipOp.kIntersect, True)
+    cv.drawCircle(x, y - r * 0.18, r * 0.36, P(col('#FFFFFF', 0.9 * a))); cv.drawOval(skia.Rect(x - r * 0.68, y + r * 0.28, x + r * 0.68, y + r * 1.5), P(col('#FFFFFF', 0.9 * a)))
+    cv.restore()
+    rc = mixc(MINT, CORAL, gone) if (ok > 0.05 or gone > 0.05) else ACC_L
+    cv.drawCircle(x, y, r * 1.12, P(col(rc, (0.25 + 0.75 * max(ok, gone)) * a), stroke=r * 0.1))
+    if ok > 0.5: heart_shape(cv, x + r * 0.75, y - r * 0.75, r * 0.3, a * prog(ok, 0.5, 1.0), MINT)
+    if gone > 0.1: cross(cv, x + r * 0.75, y - r * 0.75, r * 0.22, a * gone, CORAL, r * 0.09)
+def tube(cv, cx, top, bot, w, lvl, a, t, c):
+    if a <= 0: return
+    rx, ry = w / 2, w * 0.16; body = skia.Rect(cx - rx, top, cx + rx, bot)
+    cv.drawOval(skia.Rect(cx - rx * 1.6, bot - ry * 0.8, cx + rx * 1.6, bot + ry * 1.6), P(col('#000000', 0.5 * a), blur=20))
+    shp = skia.Op(skia.Op(skia.Path.Rect(skia.Rect(cx - rx, top, cx + rx, bot)), skia.Path.Oval(skia.Rect(cx - rx, bot - ry, cx + rx, bot + ry)), skia.PathOp.kUnion_PathOp), skia.Path.Oval(skia.Rect(cx - rx, top - ry, cx + rx, top + ry)), skia.PathOp.kUnion_PathOp)
+    cv.drawPath(shp, P(col('#15162A', 0.75 * a)))
+    ly = lerp(bot, top + ry, lvl)
+    liq = skia.Op(skia.Path.Rect(skia.Rect(cx - rx + 8, ly, cx + rx - 8, bot)), skia.Path.Oval(skia.Rect(cx - rx + 8, bot - ry + 6, cx + rx - 8, bot + ry - 6)), skia.PathOp.kUnion_PathOp)
+    cv.drawPath(liq, P(col(c, 0.55 * a), blur=20))
+    cv.drawPath(liq, P(shader=lg(0, ly, 0, bot, [col(mixc(c, '#FFFFFF', 0.3), a), col(c, a), col(mixc(c, '#000000', 0.3), a)], [0, 0.5, 1])))
+    wv = 4 * math.sin(t * 5)
+    cv.drawOval(skia.Rect(cx - rx + 8, ly - ry * 0.8 + wv * 0.3, cx + rx - 8, ly + ry * 0.8 - wv * 0.3), P(col(mixc(c, '#FFFFFF', 0.55), a)))
+    cv.drawRect(skia.Rect(cx - rx * 0.62, top + 10, cx - rx * 0.38, bot - 10), P(shader=lg(0, top, 0, bot, [col('#FFFFFF', 0.28 * a), col('#FFFFFF', 0.06 * a)])))
+    cv.drawPath(shp, P(col(ACC_XL, 0.45 * a), stroke=2.5))
+    cv.drawOval(skia.Rect(cx - rx, top - ry, cx + rx, top + ry), P(col(ACC_XL, 0.6 * a), stroke=2.5))
+    for k in range(1, 10):
+        y = lerp(bot, top + ry, k / 10); cv.drawLine(cx + rx - 24, y, cx + rx - 8, y, P(col('#FFFFFF', 0.4 * a), stroke=2))
+def gD(cv, t):
+    a0 = eo(prog(t, 12.82, 13.2)); acc = [acc_D(k, t) for k in range(8)]
+    lvl = 0.1 + 0.85 * sum(acc) / 8; c = vcol(lvl * 2 - 1); spin = 0.35 * (t - 12.82) - 0.4
+    started = [prog(t, 12.9 + k * 0.12, 13.15 + k * 0.12) >= 1 for k in range(8)]
+    items = sorted(range(8), key=lambda k: -ring_pos(k, 8, spin, 350, 0.28)[2]); drawn = False
+    def center():
+        tube(cv, 540, 470, 980, 150, lvl, a0, t, c)
+        mono(cv, 'HARGA DIRI', 540, 405, 27, ACC_L, 0.9 * a0, sp=4)
+        mono(cv, f'{int(round(lvl * 100))}%', 540, 1060, 50, c, a0, glow=0.6)
+    for k in items:
+        x, y, z = ring_pos(k, 8, spin, 350, 0.28)
+        if z < 0 and not drawn: center(); drawn = True
+        gone = (1 - acc[k]) if started[k] else 0.0
+        out = 60 * gone; X, Y, s = P3(540 + x * (1 + out / 350), 720 + y, z + out)
+        dep = clamp((350 - z) / 700)
+        avatar(cv, X, Y, 54 * s, AV_COL[k], a0 * lerp(0.45, 1, dep) * (1 - 0.4 * gone), acc[k], gone)
+    if not drawn: center()
+
+# ------------------------------------------------------------ E1: dulu, dikucilkan itu bahaya (16.13 - 17.86)
+def sitter(cv, x, y, s, a=1.0, rim=FIRE, side=1, cool=0.0):
+    """siluet orang duduk memeluk lutut (padat); cahaya tepi di sisi yang menghadap api (side=1: api di kanan)"""
+    if a <= 0: return
+    p = skia.Path.Circle(x + side * s * 0.04, y - s * 0.86, s * 0.23)
+    b_ = skia.Path(); b_.moveTo(x - s * 0.08, y - s * 0.66)
+    b_.cubicTo(x - s * 0.34, y - s * 0.64, x - s * 0.4, y - s * 0.5, x - s * 0.38, y - s * 0.2)
+    b_.lineTo(x - s * 0.36, y + s * 0.12); b_.cubicTo(x - s * 0.4, y + s * 0.3, x - s * 0.2, y + s * 0.36, x, y + s * 0.36)
+    b_.lineTo(x + s * 0.5, y + s * 0.36); b_.cubicTo(x + s * 0.62, y + s * 0.36, x + s * 0.62, y + s * 0.1, x + s * 0.42, y - s * 0.05)
+    b_.cubicTo(x + s * 0.38, y - s * 0.4, x + s * 0.3, y - s * 0.64, x + s * 0.08, y - s * 0.66); b_.close()
+    if side < 0: m = skia.Matrix(); m.setScale(-1, 1, x, y); b_.transform(m)
+    p = skia.Op(p, b_, skia.PathOp.kUnion_PathOp)
+    cv.drawPath(p, P(shader=lg(x, y - s, x, y + s * 0.4, [col(mixc('#1C1622', '#151A38', cool), a), col('#060509', a)])))
+    cv.save(); cv.clipPath(p, skia.ClipOp.kIntersect, True); rp = skia.Path(p); rp.offset(-side * s * 0.13, s * 0.02)
+    cv.drawPath(rp, P(col(mixc(rim, ACC, cool), 0.8 * a), stroke=s * 0.12, blur=s * 0.06)); cv.restore()
+GROUP_E = [0.3, 1.2, 2.4, 3.5, 4.6]          # sudut duduk di sekitar api; indeks 1 = "kamu"
+def gE1(cv, t):
+    a0 = eo(prog(t, 16.13, 16.5)); fx, fy = 540, 900
+    cv.drawOval(skia.Rect(fx - 420, fy - 90, fx + 420, fy + 130), P(shader=rg(fx, fy + 20, 420, [col(FIRE, 0.28 * a0), col(FIRE, 0.08 * a0), col(FIRE, 0)], [0, 0.6, 1])))
+    mono(cv, 'ZAMAN DULU', 540, 360, 28, AMBER, 0.85 * a0, sp=8)
+    out = eio(prog(t, 16.65, 17.35)); ppl = []
+    for k, ang in enumerate(GROUP_E):
+        x = fx + 300 * math.sin(ang); y = fy - 40 + 95 * math.cos(ang)
+        if k == 1: x, y = lerp(x, 925, out), lerp(y, 600, out)
+        ppl.append((y, k, x))
+    ppl.sort()
+    def person(p_):
+        y, k, x = p_; cool = out if k == 1 else 0.0
+        sitter(cv, x, y, 135 * lerp(0.85, 1.05, clamp((y - 600) / 400)), a0, FIRE, 1 if x < fx else -1, cool)
+    for p_ in ppl:
+        if p_[0] <= fy - 20: person(p_)
+    flame(cv, fx, fy, 64, t, a0)
+    for p_ in ppl:
+        if p_[0] > fy - 20: person(p_)
+    if out > 0:
+        yx, yy = next((x, y) for y, k, x in ppl if k == 1)
+        cv.drawRect(skia.Rect(0, 260, W, 1220), P(shader=rg(fx, fy - 60, 900, [col('#000000', 0), col('#000000', 0.35 * out)], [0.45, 1])))
+        cv.drawCircle(yx, yy - 40, 190, P(shader=rg(yx, yy - 40, 190, [col(CORAL, 0.18 * out), col(CORAL, 0)])))
+        wa = prog(t, 17.25, 17.5)
+        if wa > 0:
+            cv.save(); cv.translate(yx, yy - 230); cv.scale(bo(wa), bo(wa)); warn_tri(cv, 0, 0, 44, a0 * (0.75 + 0.25 * math.sin(t * 20))); cv.restore()
+            mono(cv, 'BAHAYA', yx - 20, yy + 90, 30, CORAL, a0 * clamp(wa * 2), sp=5, glow=0.6)
+
+# ------------------------------------------------------------ E2: ditolak -> otak bereaksi mirip rasa sakit (17.86 - 20.67)
+_BRAIN = None
+def brain_paths():
+    global _BRAIN
+    if _BRAIN is None:
+        lobes = [(-0.62, 0.05, 0.4), (-0.42, -0.3, 0.42), (-0.05, -0.45, 0.46), (0.36, -0.36, 0.44), (0.64, -0.02, 0.38),
+                 (0.42, 0.22, 0.36), (0.0, 0.18, 0.44), (-0.38, 0.26, 0.36)]
+        p = skia.Path()
+        for x, y, r in lobes: p = skia.Op(p, skia.Path.Circle(x * 100, y * 100, r * 100), skia.PathOp.kUnion_PathOp)
+        cb = skia.Path.Circle(48, 52, 22); st = skia.Path.RRect(skia.RRect.MakeRectXY(skia.Rect(8, 30, 30, 92), 11, 11))
+        g = skia.Path()
+        for k, (x, y, r) in enumerate(lobes):
+            for fr, a0, sw in ((0.62, 200 + k * 47, 150), (0.32, 30 + k * 61, 170)):
+                g.addArc(skia.Rect(x * 100 - r * 100 * fr, y * 100 - r * 100 * fr, x * 100 + r * 100 * fr, y * 100 + r * 100 * fr), a0 % 360, sw)
+        g.moveTo(-70, -10); g.cubicTo(-20, -30, 20, 10, 75, -5)
+        _BRAIN = (p, cb, st, g)
+    return _BRAIN
+def brain(cv, cx, cy, s, a=1.0, pain=0.0, t=0.0, label=None):
+    if a <= 0: return
+    p, cb, st, g = brain_paths()
+    cv.save(); cv.translate(cx, cy); cv.scale(s, s)
+    cv.drawPath(p, P(col(ACC, 0.45 * a), blur=18)); cv.drawPath(st, P(col('#2A2D55', a))); cv.drawPath(cb, P(col('#3A3E78', a)))
+    cv.drawPath(p, P(shader=rg(-30, -60, 160, [col('#4E54B8', a), col('#252860', a), col('#14163A', a)], [0, 0.6, 1])))
+    cv.save(); cv.clipPath(p, skia.ClipOp.kIntersect, True)
+    cv.drawPath(g, P(col(ACC_XL, 0.28 * a), stroke=3))
+    if pain > 0:
+        pu = 0.75 + 0.25 * math.sin(t * 9)
+        cv.drawCircle(0, -30, 70, P(shader=rg(0, -30, 70, [col('#FFD1C8', 0.95 * pain * pu * a), col(CORAL, 0.7 * pain * a), col(CORAL, 0)], [0, 0.35, 1])))
+    cv.restore()
+    cv.drawPath(p, P(col(ACC_XL, 0.6 * a), stroke=2.5))
+    if pain > 0:
         for k in range(2):
-            x = w / 2 + 2 + k * 14; cv.drawLine(x - 10, 2, x - 3, 9, ck); cv.drawLine(x - 3, 9, x + 9, -6, ck)
+            u = ((t - 17.0) * 0.9 + k / 2) % 1.0; cv.drawCircle(0, -30, 30 + 120 * u, P(col(CORAL, 0.5 * (1 - u) * pain * a), stroke=3))
+    cv.restore()
+    if label: mono(cv, label, cx, cy + 135 * s, 28, ACC_L, 0.9 * a, sp=3)
+def gE2(cv, t):
+    a0 = eo(prog(t, 17.86, 18.2)); sp = eio(prog(t, 18.9, 19.4))
+    bx = lerp(540, 300, sp); bs = lerp(2.6, 1.55, sp)
+    hit = prog(t, 18.25, 18.5)
+    cv.save(); cv.translate(shake(t, 18.3, 10, 0.4), 0)
+    brain(cv, bx, 720, bs, a0, clamp(hit * 2) * (0.6 + 0.4 * sp), t, 'DITOLAK' if sp > 0.5 else None)
+    cv.restore()
+    ca = prog(t, 17.9, 18.3); co = 1 - eio(prog(t, 18.45, 18.7))
+    if ca > 0 and co > 0:
+        comment(cv, 'kamu nggak diajak ya', lerp(1180, 720, eio(ca)), lerp(380, 450, eio(ca)), co, lerp(0.8, 1, eo(ca)), size=32, rot=-5, glow=0.4)
+    if sp > 0:
+        brain(cv, lerp(900, 780, sp), 720, 1.55, a0 * sp, sp, t, 'SAKIT FISIK')
+        mono(cv, '≈', 540, 700, 80, HL, a0 * sp, glow=0.6)
+        la = eo(prog(t, 19.4, 19.8))
+        mono(cv, 'area otak yang sama ikut aktif', 540, 455, 30, CORAL, a0 * la, glow=0.5)
+        mono(cv, 'Eisenberger dkk. (2003), Science', 540, 1020, 22, ACC_L, 0.75 * a0 * la)
+
+# ------------------------------------------------------------ F: alat ukurnya kelewat sensitif = alarm asap (20.67 - 23.05)
+def smoke_alarm(cv, cx, cy, s, on, t, a=1.0):
+    if a <= 0: return
+    cv.drawRect(skia.Rect(0, 255, W, cy - s * 0.28), P(shader=lg(0, 255, 0, cy - s * 0.28, [col('#0B0C16', 0), col('#1A1C30', 0.9 * a)])))
+    cv.drawLine(0, cy - s * 0.28, W, cy - s * 0.28, P(col(ACC_L, 0.35 * a), stroke=2))
+    if on > 0:
+        fl = on * (0.5 + 0.5 * (1 if (t * 4) % 1 < 0.5 else 0))
+        cv.drawRect(skia.Rect(0, 255, W, 1220), P(shader=rg(cx, cy, 900, [col(CORAL, 0.38 * fl), col(CORAL, 0.1 * fl), col(CORAL, 0)], [0, 0.4, 1])))
+        cv.save(); cv.translate(cx, cy + s * 0.2); cv.rotate(t * 260)
+        bm = skia.Path(); bm.moveTo(0, 0); bm.lineTo(900, -120); bm.lineTo(900, 120); bm.close()
+        cv.drawPath(bm, P(shader=lg(0, 0, 900, 0, [col(CORAL, 0.25 * on), col(CORAL, 0)]))); cv.rotate(180); cv.drawPath(bm, P(shader=lg(0, 0, 900, 0, [col(CORAL, 0.25 * on), col(CORAL, 0)])))
         cv.restore()
-    wa = prog(t, 20.9, 21.15)
-    if wa > 0:
-        cv.save(); cv.translate(858, 440); cv.scale(bo(wa), bo(wa)); warn_tri(cv, 0, 0, 34, a0 * (0.7 + 0.3 * math.sin(t * 20))); cv.restore()
-    sa = eo(prog(t, 21.2, 21.5))
-    slider(cv, 1085, lerp(0.5, 1.0, eio(prog(t, 21.4, 22.2))), sa * a0, t, eo(prog(t, 22.3, 22.5)))
+        for sd in (-1, 1):
+            for k in range(3):
+                u = ((t * 1.6 + k / 3) % 1.0); rr = s * (1.2 + 1.3 * u)
+                arc = skia.Path(); arc.addArc(skia.Rect(cx - rr, cy - rr * 0.7, cx + rr, cy + rr * 0.7), (-35 if sd > 0 else 145), 70)
+                cv.drawPath(arc, P(col(CORAL, 0.8 * (1 - u) * on), stroke=5))
+    rx_, ry_ = s, s * 0.36; th = s * 0.16
+    cv.drawOval(skia.Rect(cx - rx_ * 1.05, cy - ry_ + th + 10, cx + rx_ * 1.05, cy + ry_ + th + 30), P(col('#000000', 0.5 * a), blur=24))
+    side = skia.Path(); side.addRect(skia.Rect(cx - rx_, cy - th, cx + rx_, cy + th)); side.addOval(skia.Rect(cx - rx_, cy - ry_ + th, cx + rx_, cy + ry_ + th))
+    cv.drawPath(side, P(shader=lg(cx - rx_, 0, cx + rx_, 0, [col('#8D90A8', a), col('#E8E9F4', a), col('#9A9DB4', a)], [0, 0.4, 1])))
+    face = skia.Rect(cx - rx_, cy - ry_ - th, cx + rx_, cy + ry_ - th)
+    cv.drawOval(face, P(shader=rg(cx - rx_ * 0.3, cy - th - ry_ * 0.4, rx_ * 1.3, [col('#FFFFFF', a), col('#D4D6E6', a), col('#A9ACC4', a)], [0, 0.6, 1])))
+    for k in (0.78, 0.55):
+        cv.drawOval(skia.Rect(cx - rx_ * k, cy - th - ry_ * k, cx + rx_ * k, cy - th + ry_ * k), P(col('#7E8199', 0.6 * a), stroke=2))
+    for k in range(16):
+        ang = k * math.tau / 16; x0, y0 = cx + math.cos(ang) * rx_ * 0.62, cy - th + math.sin(ang) * ry_ * 0.62
+        x1, y1 = cx + math.cos(ang) * rx_ * 0.72, cy - th + math.sin(ang) * ry_ * 0.72
+        cv.drawLine(x0, y0, x1, y1, P(col('#6A6D85', 0.8 * a), stroke=4))
+    lx, ly = cx + rx_ * 0.32, cy - th + ry_ * 0.05; blink = on * (1 if (t * 4) % 1 < 0.5 else 0.25)
+    lc = CORAL if on > 0 else MINT
+    cv.drawCircle(lx, ly, 26, P(col(lc, (0.7 * blink if on > 0 else 0.4) * a), blur=16))
+    cv.drawCircle(lx, ly, 9, P(col(mixc(lc, '#FFFFFF', 0.4), a)))
+    mono(cv, 'SOCIOMETER', cx - rx_ * 0.1, cy - th - ry_ * 0.05, 22, '#4A4D66', a, sp=3)
+def gF(cv, t):
+    a0 = eo(prog(t, 20.67, 21.0)); on = clamp(prog(t, 21.5, 21.6))
+    cv.save(); cv.translate(shake(t, 21.5, 9, 0.6) + (3 * math.sin(t * 70) * on), 0)
+    smoke_alarm(cv, 540, 470, 170, on, t, a0)
+    cv.restore()
+    ca = eo(prog(t, 20.95, 21.25))
+    if ca > 0:
+        cv.save(); cv.translate(540, 1000); s = lerp(0.6, 1, bo(ca)); cv.scale(s, s)
+        chip(cv, 'dibaca', -12, 0, ca * a0, size=26, fg=ACC_XL)
+        f = font(B, 26); w = f.measureText('dibaca'); ck = P(col('#7FB8FF', ca * a0), stroke=3.5)
+        for k in range(2):
+            x = w / 2 - 2 + k * 12; cv.drawLine(x - 9, 2, x - 3, 8, ck); cv.drawLine(x - 3, 8, x + 8, -5, ck)
+        cv.restore()
+        for k in range(2):
+            wp = skia.Path(); ph = t * 2.2 + k * 1.7; wp.moveTo(540 + k * 20 - 10, 960)
+            for i in range(1, 7): wp.lineTo(540 + k * 20 - 10 + 12 * math.sin(ph + i * 0.9), 960 - i * 22)
+            cv.drawPath(wp, P(col('#C9CBE0', 0.35 * ca * a0), stroke=4, blur=3))
+        brackets(cv, skia.Rect(430, 955, 650, 1045), ca * a0 * (0.6 + 0.4 * on), ACC_L, 22, 2.5)
+        mono(cv, 'pemicunya cuma ini', 540, 1100, 24, ACC_L, ca * a0 * eo(prog(t, 21.9, 22.2)), sp=2)
+    if on > 0:
+        for k, (x, y, rot, t0) in enumerate(((250, 720, -10, 21.55), (830, 700, 9, 21.75), (540, 820, -4, 22.0))):
+            pa = prog(t, t0, t0 + 0.15)
+            if pa > 0:
+                cv.save(); cv.translate(x, y); cv.rotate(rot); s = lerp(1.6, 1, eo(pa)); cv.scale(s, s)
+                extrude(cv, 'BIP!', 0, 0, 74, clamp(pa * 3) * a0, depth=8, front=('#FFFFFF', '#FFB3A6'), side='#5A1530', glow=CORAL); cv.restore()
 
-# ------------------------------------------------------------ G1: riset 2001 (22.95 - 25.98)
+# ------------------------------------------------------------ G1: riset 2001 (23.05 - 26.12)
 def gG1(cv, t):
-    file_card(cv, t, 22.95, '2001', 'Savitsky, Epley & Gilovich', 'Journal of Personality and Social Psychology')
+    research_card(cv, t, 23.05, '2001', 'Savitsky, Epley & Gilovich', 'Journal of Personality and Social Psychology')
 
-# ------------------------------------------------------------ G2: salah di depan orang; mereka nggak menilai seburuk itu (25.98 - 29.94)
+# ------------------------------------------------------------ G2: salah di depan orang; mereka nggak menilai seburuk itu (26.12 - 30.18)
+def stander(cv, x, foot, h, a=1.0, rim=ACC_L):
+    """siluet orang berdiri (padat) dengan cahaya tepi dari atas"""
+    if a <= 0: return
+    p = skia.Path.Circle(x, foot - h * 0.9, h * 0.075)
+    b_ = skia.Path(); b_.moveTo(x - h * 0.04, foot - h * 0.83)
+    b_.cubicTo(x - h * 0.17, foot - h * 0.82, x - h * 0.19, foot - h * 0.76, x - h * 0.19, foot - h * 0.64)
+    b_.lineTo(x - h * 0.17, foot - h * 0.4); b_.lineTo(x - h * 0.125, foot - h * 0.4); b_.lineTo(x - h * 0.105, foot)
+    b_.lineTo(x - h * 0.02, foot); b_.lineTo(x, foot - h * 0.36); b_.lineTo(x + h * 0.02, foot); b_.lineTo(x + h * 0.105, foot)
+    b_.lineTo(x + h * 0.125, foot - h * 0.4); b_.lineTo(x + h * 0.17, foot - h * 0.4); b_.lineTo(x + h * 0.19, foot - h * 0.64)
+    b_.cubicTo(x + h * 0.19, foot - h * 0.76, x + h * 0.17, foot - h * 0.82, x + h * 0.04, foot - h * 0.83); b_.close()
+    p = skia.Op(p, b_, skia.PathOp.kUnion_PathOp)
+    cv.drawPath(p, P(shader=lg(x, foot - h, x, foot, [col('#262A5E', a), col('#0A0B16', a)])))
+    cv.save(); cv.clipPath(p, skia.ClipOp.kIntersect, True); rp = skia.Path(p); rp.offset(0, h * 0.035)
+    cv.drawPath(rp, P(col(rim, 0.85 * a), stroke=h * 0.035, blur=h * 0.018)); cv.restore()
+def bust(cv, x, y, s, a=1.0, rim=ACC_L):
+    """kepala + bahu (padat), dilihat dari belakang/samping"""
+    if a <= 0: return
+    p = skia.Path.Circle(x, y - s * 0.62, s * 0.3)
+    b_ = skia.Path(); b_.moveTo(x - s * 0.75, y + s * 0.9); b_.cubicTo(x - s * 0.75, y - s * 0.05, x - s * 0.45, y - s * 0.28, x, y - s * 0.28)
+    b_.cubicTo(x + s * 0.45, y - s * 0.28, x + s * 0.75, y - s * 0.05, x + s * 0.75, y + s * 0.9); b_.close()
+    p = skia.Op(p, b_, skia.PathOp.kUnion_PathOp)
+    cv.drawPath(p, P(shader=lg(x, y - s, x, y + s, [col('#20234F', a), col('#0A0B16', a)])))
+    cv.save(); cv.clipPath(p, skia.ClipOp.kIntersect, True); rp = skia.Path(p); rp.offset(0, s * 0.07)
+    cv.drawPath(rp, P(col(rim, 0.7 * a), stroke=s * 0.08, blur=s * 0.04)); cv.restore()
+def thought(cv, text, cx, cy, size, a=1.0, c=ACC, tail=None, sc=1.0, fill=('#2A2C48', '#171828'), fg=TXT, shake_=0.0):
+    """gelembung pikiran kaca dengan ekor ke arah tail"""
+    if a <= 0: return
+    f = font(XB, size); w = f.measureText(text) + size * 1.8; h = size * 2.0
+    cv.save(); cv.translate(cx + shake_, cy); cv.scale(sc, sc)
+    tip = ((tail[0] - cx) / sc, (tail[1] - cy) / sc) if tail else (0, h)
+    pth, r = bubble_path(0, 0, w, h, tip, maxlen=size * 1.6)
+    draw_bubble(cv, pth, r, a, 0.6, fill, c, c)
+    cv.drawString(text, -f.measureText(text) / 2, bl(f, 0), f, P(col(fg, a)))
+    cv.restore()
+AUD = [(680, 1085, 'susah sih soalnya', 720), (840, 1110, 'biasa aja', 820), (985, 1080, 'wajar kok', 910)]
 def gG2(cv, t):
-    sa = eo(prog(t, 25.98, 26.35)) * (1 - eio(prog(t, 27.55, 27.9)))
-    if sa > 0:
-        bad = eo(prog(t, 26.75, 26.95))
+    a0 = eo(prog(t, 26.12, 26.5)); px = 330
+    cone = skia.Path(); cone.moveTo(px - 30, 255); cone.lineTo(px + 30, 255); cone.lineTo(px + 190, 1080); cone.lineTo(px - 190, 1080); cone.close()
+    cv.drawPath(cone, P(shader=lg(0, 255, 0, 1080, [col('#DDE0FF', 0.22 * a0), col('#AEB6FF', 0.07 * a0)])))
+    cv.drawOval(skia.Rect(px - 200, 1050, px + 200, 1110), P(col('#DDE0FF', 0.18 * a0), blur=10))
+    stander(cv, px, 1080, 330, a0, '#DDE0FF')
+    ta = 1 - eio(prog(t, 27.7, 28.0)); bad = eo(prog(t, 26.85, 27.05))
+    if ta > 0:
         for k, ch in enumerate('HALSA'):
-            tp = eo(prog(t, 26.0 + k * 0.06, 26.3 + k * 0.06))
-            tile(cv, ch, 300 + k * 120 + shake(t, 26.8, 9, 0.4), 520 + (1 - tp) * 30, 100, sa * tp, bad)
-        cross(cv, 540, 700, 50, sa, CORAL, 14, prog(t, 26.8, 27.15))
-        mono(cv, 'GAGAL', 540, 790, 34, CORAL, sa * eo(prog(t, 27.0, 27.2)), sp=6, glow=0.6)
-        neon(cv, head_line(250, 1010, 0.3, 1), eo(prog(t, 26.0, 26.5)), ACC_XL, 3, sa, 0.7)
-        for k, x in enumerate((640, 790, 940)):
-            neon(cv, head_line(x, 1010 - (k % 2) * 20, 0.26, -1), eo(prog(t, 26.1 + k * 0.08, 26.6 + k * 0.08)), ACC_L, 3, sa * 0.85, 0.6)
-        mono(cv, 'PENONTON', 790, 1130, 22, ACC_L, 0.7 * sa, sp=4)
-    ga = eo(prog(t, 27.6, 28.0))
-    if ga > 0:
-        vl = lerp(0.0, -0.88, bo(prog(t, 27.8, 28.3))); vr = lerp(0.0, -0.12, eo(prog(t, 28.1, 28.6))) + 0.03 * math.sin(t * 4)
-        gauge(cv, 290, 720, 165, vl, ga, t, eo(prog(t, 27.6, 28.0)), 0.6 * prog(t, 28.3, 28.5), label='KITA KIRA', read='PENILAIAN', pct='PARAH', pc=CORAL)
-        gauge(cv, 790, 720, 165, vr, ga, t, eo(prog(t, 27.75, 28.15)), label='KENYATAAN', read='PENILAIAN', pct='BIASA', pc=ACC_XL)
-        mono(cv, 'vs', 540, 720, 40, ACC_L, ga * 0.8)
+            tp = eo(prog(t, 26.15 + k * 0.06, 26.45 + k * 0.06))
+            tile(cv, ch, 330 - 2 * 108 + k * 108 + shake(t, 26.9, 9, 0.4), 470 + (1 - tp) * 30, 92, a0 * tp * ta, bad)
+        cross(cv, 330, 610, 44, a0 * ta, CORAL, 13, prog(t, 26.9, 27.2))
+        mono(cv, 'GAGAL', 330, 690, 32, CORAL, a0 * ta * eo(prog(t, 27.05, 27.25)), sp=6, glow=0.6)
+    for k, (x, y, txt, ty) in enumerate(AUD): bust(cv, x, y, 88, a0 * eo(prog(t, 26.2 + k * 0.08, 26.6 + k * 0.08)), '#AEB6FF')
+    ya = prog(t, 27.87, 28.15)
+    if ya > 0:
+        shr = eio(prog(t, 29.2, 29.6)); sc = lerp(lerp(0.6, 1.0, bo(ya)), 0.62, shr)
+        thought(cv, 'mereka pasti ilfeel banget', 400, 560, 36, a0 * clamp(ya * 2), CORAL, (350, 700), sc, ('#3A1C2A', '#1E0E18'), '#FFD9D2', shake(t, 27.95, 6, 0.6) + 2 * math.sin(t * 30) * (1 - shr))
+        mono(cv, 'KITA KIRA', 400, 455, 24, CORAL, a0 * clamp(ya * 2) * (1 - shr), sp=4)
+    for k, (x, y, txt, ty) in enumerate(AUD):
+        pa = prog(t, 28.35 + k * 0.2, 28.65 + k * 0.2)
+        if pa > 0: thought(cv, txt, min(x - 40, 920), ty - 30 * k, 26, a0 * clamp(pa * 2), MINT, (x, y - 110), lerp(0.6, 1, bo(pa)), ('#173A30', '#0D2019'), '#D8FFF0')
+    ka = eo(prog(t, 28.5, 28.8))
+    mono(cv, 'KENYATAAN', 850, 640, 24, MINT, a0 * ka, sp=4)
 
-# ------------------------------------------------------------ H: kita yang terlalu fokus ke kesalahan sendiri (29.94 - 32.38)
+# ------------------------------------------------------------ H: kita yang terlalu fokus ke kesalahan sendiri (30.18 - 32.67)
 def gH(cv, t):
-    a0 = eo(prog(t, 29.94, 30.3)); r = skia.Rect(250, 560, 830, 840)
+    a0 = eo(prog(t, 30.18, 30.5)); r = skia.Rect(250, 540, 830, 820)
     glass(cv, r, rad=26, a=a0)
     for k, wl in enumerate((0.85, 0.7, 0.9, 0.55)):
         y = r.top() + 62 + k * 56; cv.drawRoundRect(skia.Rect(r.left() + 50, y - 9, r.left() + 50 + (r.width() - 100) * wl, y + 9), 9, 9, P(col(ACC_L, 0.22 * a0)))
     ex, ey = 640, r.top() + 118; cross(cv, ex, ey, 9, a0, CORAL, 4)
-    lk = eio(prog(t, 30.2, 30.8))
+    lk = eio(prog(t, 30.4, 30.9))
     bx = skia.Rect(lerp(r.left() - 20, ex - 40, lk), lerp(r.top() - 20, ey - 40, lk), lerp(r.right() + 20, ex + 40, lk), lerp(r.bottom() + 20, ey + 40, lk))
-    brackets(cv, bx, a0 * (1 - eio(prog(t, 30.9, 31.1))), CORAL if lk >= 1 else ACC_L, 30, 3)
-    la = eo(prog(t, 30.85, 31.25))
+    brackets(cv, bx, a0 * (1 - eio(prog(t, 31.0, 31.2))), CORAL if lk >= 1 else ACC_L, 30, 3)
+    la = eo(prog(t, 30.95, 31.35))
     if la > 0:
-        lx, ly, lr = ex, ey + 60 * (1 - la), 150 * bo(la) if la < 1 else 150
-        lr = max(1, lr); pth = skia.Path(); pth.addCircle(lx, ly, lr)
+        lr = max(1.0, 150 * (bo(la) if la < 1 else 1)); lx, ly = ex, ey + 60 * (1 - la); pth = skia.Path(); pth.addCircle(lx, ly, lr)
         cv.drawCircle(lx, ly, lr, P(col(CORAL, 0.4 * la), blur=30))
         cv.drawCircle(lx, ly, lr, P(shader=rg(lx, ly - lr * 0.3, lr * 1.3, [col('#2A1C2E', 0.96 * la), col('#140E1A', 0.96 * la)])))
         cv.save(); cv.clipPath(pth, skia.ClipOp.kIntersect, True); cross(cv, lx, ly, 70, la, CORAL, 20); cv.restore()
-        cv.drawCircle(lx, ly, lr, P(col(ACC_XL, 0.9 * la), stroke=5))
-        hx, hy = lx + lr * 0.72, ly + lr * 0.72; cv.drawLine(hx, hy, hx + 90, hy + 90, P(col(ACC_XL, 0.9 * la), stroke=18))
-        mono(cv, 'FOKUS: KESALAHAN', 540, 400, 30, CORAL, la, sp=3, glow=0.6)
-        mono(cv, 'x10', lx - lr - 20, ly - lr + 10, 26, ACC_L, 0.8 * la, align=1)
+        cv.drawCircle(lx, ly, lr, P(shader=skia.GradientShader.MakeSweep(lx, ly, [col(c_, la) for c_ in ('#8A90B8', '#E6E8FF', '#3A3D55', '#A8AED6', '#8A90B8')], [0, 0.25, 0.5, 0.75, 1]), stroke=12))
+        hx, hy = lx + lr * 0.74, ly + lr * 0.74
+        cv.drawLine(hx, hy, hx + 100, hy + 100, P(col('#000000', 0.5 * la), stroke=30, blur=10)); cv.drawLine(hx, hy, hx + 100, hy + 100, P(shader=lg(hx, hy, hx + 100, hy + 100, [col('#6A6E8E', la), col('#1A1B2A', la)]), stroke=24))
+        mono(cv, 'FOKUS: KESALAHAN SENDIRI', 540, 410, 28, CORAL, la, sp=2, glow=0.6)
     for k, (x, txt) in enumerate(((240, 'laper'), (540, 'tugas numpuk'), (840, 'chat doi'))):
-        pa = eo(prog(t, 31.0 + k * 0.17, 31.35 + k * 0.17))
+        pa = eo(prog(t, 31.1 + k * 0.17, 31.45 + k * 0.17))
         if pa > 0:
-            neon(cv, head_line(x, 1085, 0.2, 1 if k != 2 else -1), pa, ACC_L, 3, 0.85 * pa, 0.6)
-            chip(cv, txt, x, 975 + (1 - pa) * 14, pa, size=24, fg=ACC_XL)
+            bust(cv, x, 1095, 62, pa, ACC_L); chip(cv, txt, x, 975 + (1 - pa) * 14, pa, size=24, fg=ACC_XL)
 
-# ------------------------------------------------------------ I: omongan orang kepikiran lagi -> alat ukurmu suka lebay (32.38 - 36.6)
-COMS = [('kok gitu sih?', 250, 380, -6, 32.5), ('hmm.', 860, 470, 5, 32.85), ('kamu beda ya', 220, 1000, 4, 33.2), ('serius?', 870, 960, -5, 33.55)]
-def v_calm(t):
-    hits = sum(0.5 * bump(prog(t, t0 + 0.1, t0 + 0.45)) for _, _, _, _, t0 in COMS)
-    v = lerp(-0.2, -0.75, eio(prog(t, 32.5, 33.8))) - hits * 0.4 + 0.06 * math.sin(t * 31) * (1 - prog(t, 34.6, 35.0))
-    return lerp(v, 0.15 + 0.03 * math.sin(t * 2.5), eio(prog(t, 34.6, 35.4)))
+# ------------------------------------------------------------ I: omongan orang kepikiran lagi -> alat ukurmu suka lebay (32.67 - 36.6)
+def knob(cv, cx, cy, r, val, a=1.0, label='SENSITIVITAS'):
+    if a <= 0: return
+    tk = skia.Path()
+    for k in range(21):
+        ang = math.radians(135 + k * 13.5); r0, r1 = r * 1.22, r * (1.42 if k % 5 == 0 else 1.34)
+        tk.moveTo(cx + math.cos(ang) * r0, cy + math.sin(ang) * r0); tk.lineTo(cx + math.cos(ang) * r1, cy + math.sin(ang) * r1)
+    cv.drawPath(tk, P(col(ACC_L, 0.5 * a), stroke=3))
+    arc = skia.Path(); arc.addArc(skia.Rect(cx - r * 1.28, cy - r * 1.28, cx + r * 1.28, cy + r * 1.28), 135, max(0.5, 270 * val))
+    c = mixc(MINT, CORAL, val); cv.drawPath(arc, P(col(c, 0.5 * a), stroke=12, blur=8)); cv.drawPath(arc, P(col(c, a), stroke=5))
+    cv.drawCircle(cx, cy + r * 0.15, r * 1.05, P(col('#000000', 0.55 * a), blur=r * 0.25))
+    sw = skia.GradientShader.MakeSweep(cx, cy, [col(c_, a) for c_ in ('#9AA0C8', '#2A2C40', '#E8EAFF', '#3A3D55', '#9AA0C8')], [0, 0.25, 0.5, 0.75, 1])
+    cv.drawCircle(cx, cy, r, P(shader=sw)); cv.drawCircle(cx, cy, r * 0.8, P(shader=rg(cx - r * 0.2, cy - r * 0.3, r, [col('#3C3F5C', a), col('#16172A', a)])))
+    ang = math.radians(135 + 270 * val)
+    cv.drawLine(cx + math.cos(ang) * r * 0.25, cy + math.sin(ang) * r * 0.25, cx + math.cos(ang) * r * 0.72, cy + math.sin(ang) * r * 0.72, P(col(c, a), stroke=7))
+    mono(cv, label, cx - r * 1.75, cy, 22, ACC_L, 0.85 * a, sp=3, align=1)
+    mono(cv, 'MIN', cx - r * 1.45, cy + r * 1.25, 18, MINT, 0.8 * a); mono(cv, 'MAKS', cx + r * 1.45, cy + r * 1.25, 18, CORAL, 0.8 * a)
 def gI(cv, t):
-    a0 = eo(prog(t, 32.38, 32.75)); calm = eio(prog(t, 34.6, 35.4))
-    al = clamp(prog(t, 32.6, 32.8)) * (1 - calm)
-    gauge(cv, 540, 690, 225, v_calm(t), a0, t, eo(prog(t, 32.38, 32.8)), al * 0.8)
-    for txt, x, y, rot, t0 in COMS:
-        pa = prog(t, t0, t0 + 0.3); out = 1 - eio(prog(t, 34.55, 35.0))
-        if pa > 0 and out > 0:
-            sx_ = lerp(x + (-200 if x < 540 else 200), x, eo(pa))
-            comment(cv, txt, sx_, y, clamp(pa * 2) * out * a0, lerp(0.7, 1, bo(pa)) * lerp(0.8, 1, out), size=28, rot=rot)
-    sa = eo(prog(t, 34.4, 34.7))
-    slider(cv, 1085, lerp(1.0, 0.4, eio(prog(t, 34.6, 35.3))), sa * a0, t)
-    stamp(cv, 'LEBAY', 540, 600, 104, t, 35.55, CORAL, -9, a0)
-
+    a0 = eo(prog(t, 32.67, 33.0)); calm = eio(prog(t, 34.75, 35.45)); hy = 800
+    spin = 1.1 * (t - 32.67) + 0.9 * (t - 32.67) ** 2 * (1 - calm) if t < 34.75 else 1.1 * 2.08 + 0.9 * 2.08 ** 2 + 1.0 * (t - 34.75) - 0.6 * (t - 34.75) ** 2 * calm
+    def center():
+        hot = (1 - calm) * clamp(prog(t, 33.0, 33.6))
+        head_solid(cv, 540, hy, 0.68, a0, 1, mixc(ACC_L, MINT, calm), 0.3 + 0.7 * hot, mixc(CORAL, MINT, calm))
+        gv = lerp(-0.6 + 0.3 * math.sin(t * 13), 0.2 + 0.03 * math.sin(t * 2), calm)
+        gauge(cv, 532, hy - 70, 88, gv, a0, t, 1.0, 0.8 * hot, label=None, read=None, ends=False)
+    born = lambda k: prog(t, 32.75 + k * 0.12, 33.0 + k * 0.12) * (1 - calm)
+    orbit(cv, 540, hy - 40, 330, spin, 6, HOOK_TXT, a0, 25, center, born, 0.0, 0.42, 0.6 * (1 - calm))
+    ka = eo(prog(t, 34.45, 34.75))
+    knob(cv, 600, 1105, 48, lerp(1.0, 0.2, eio(prog(t, 34.65, 35.4))), ka * a0)
+    stamp(cv, 'LEBAY', 540, 700, 110, t, 35.85, CORAL, -9, a0)
 
 # ------------------------------------------------------------ J: outro (36.6 - 42)
 def gJ(cv, t):
@@ -953,22 +1288,24 @@ def gJ(cv, t):
 b.DRAWERS = [gA, gB, gC, gD, gE1, gE2, gF, gG1, gG2, gH, gI, gJ]
 
 def build_sfx():
-    ev = [(0.02, 'whoosh'), (0.05, 'zap'), (0.2, 'pop'), (0.5, 'plip'), (0.8, 'pop'), (1.3, 'zoom'), (1.62, 'tick'), (2.0, 'tick'), (2.4, 'tick'),
-          (2.73, 'rise'), (3.0, 'ding_soft'), (3.7, 'chop'), (3.72, 'buzzer'),
-          (4.43, 'whoosh'), (4.6, 'plop'), (4.62, 'crack'), (5.6, 'swish'), (5.8, 'clock'), (6.1, 'pop'), (6.45, 'pop'), (6.8, 'pop'), (7.15, 'pop'),
-          (7.3, 'whoosh'), (7.35, 'card'), (7.5, 'zap2'), (8.5, 'ding_soft'), (10.53, 'chop'), (10.56, 'stamp'), (11.0, 'plip'), (11.25, 'plip'),
-          (11.9, 'whoosh'), (12.0, 'pop'), (12.17, 'pop'), (12.34, 'pop'), (12.51, 'pop'), (12.68, 'pop'), (12.85, 'ding_soft'),
-          (13.4, 'zap2'), (13.6, 'zap2'), (13.8, 'zap2'), (14.4, 'plip'),
-          (15.15, 'whoosh'), (15.2, 'fizz_soft'), (15.9, 'swish'), (16.65, 'beep'), (16.95, 'beep'),
-          (17.31, 'whoosh'), (17.45, 'swish'), (17.75, 'crack'), (17.8, 'heart'), (18.3, 'heart'), (18.8, 'heart'), (18.6, 'ding_soft'),
-          (20.24, 'whoosh'), (20.45, 'pop'), (20.8, 'chop'), (20.85, 'buzzer'), (21.4, 'rise'), (22.3, 'beep'),
-          (22.95, 'whoosh'), (23.0, 'card'), (23.1, 'zap2'), (24.2, 'ding_soft'),
-          (25.98, 'whoosh'), (26.0, 'plip'), (26.12, 'plip'), (26.24, 'plip'), (26.8, 'buzzer'), (27.0, 'stamp'),
-          (27.6, 'whoosh'), (28.0, 'boing'), (28.4, 'ding_soft'),
-          (29.94, 'whoosh'), (30.2, 'zoom'), (30.8, 'tick'), (30.9, 'pop'), (31.0, 'plip'), (31.17, 'plip'), (31.34, 'plip'),
-          (32.38, 'whoosh'), (32.5, 'plop'), (32.85, 'plop'), (33.2, 'plop'), (33.55, 'plop'), (32.7, 'buzzer'),
-          (34.6, 'swish'), (35.0, 'shine'), (35.55, 'chop'), (35.58, 'stamp'),
+    ev = [(0.02, 'ding'), (0.05, 'clunk'), (0.2, 'clunk'), (0.35, 'clunk'), (0.55, 'whoosh'), (1.0, 'pop'), (1.4, 'rise'),
+          (2.62, 'chop'), (2.64, 'stamp'), (2.75, 'swish'), (2.85, 'shine'), (3.55, 'zoom'),
+          (4.19, 'whoosh'), (4.45, 'clunk'), (5.51, 'tick'), (5.8, 'tick'), (6.1, 'tick'), (6.49, 'rise'), (6.6, 'ding'),
+          (7.27, 'chop'), (7.3, 'crack'), (7.32, 'buzzer'),
+          (8.11, 'whoosh'), (8.2, 'card'), (8.45, 'stamp'), (8.75, 'ding_soft'), (11.3, 'swish'), (11.65, 'chop'), (11.75, 'plip'), (11.95, 'plip'),
+          (12.82, 'whoosh'), (13.95, 'ding_soft'), (14.35, 'zap2'), (14.55, 'zap2'), (14.75, 'zap2'), (15.35, 'plip'),
+          (16.13, 'whoosh'), (16.2, 'fizz_soft'), (16.65, 'swish'), (17.25, 'beep'), (17.5, 'beep'),
+          (17.86, 'whoosh'), (17.95, 'swish'), (18.3, 'crack'), (18.32, 'heart'), (18.9, 'whoosh'), (19.0, 'heart'), (19.4, 'ding_soft'), (19.6, 'heart'),
+          (20.67, 'whoosh'), (20.95, 'pop'), (21.5, 'buzzer'), (21.55, 'beep'), (21.75, 'beep'), (22.0, 'beep'), (22.25, 'beep'), (22.5, 'beep'), (22.75, 'beep'),
+          (23.05, 'whoosh'), (23.15, 'card'), (23.4, 'stamp'), (23.7, 'ding_soft'),
+          (26.12, 'whoosh'), (26.9, 'buzzer'), (27.05, 'stamp'), (27.87, 'boing'), (28.35, 'pop'), (28.55, 'pop'), (28.75, 'pop'), (29.2, 'fizz_soft'),
+          (30.18, 'whoosh'), (30.4, 'zoom'), (30.95, 'pop'), (31.1, 'plip'), (31.27, 'plip'), (31.44, 'plip'),
+          (32.67, 'whoosh'), (33.0, 'rise'), (34.45, 'clock'), (34.7, 'swish'), (35.4, 'shine'), (35.85, 'chop'), (35.88, 'stamp'),
           (36.6, 'whoosh'), (36.75, 'boing'), (37.1, 'shine'), (37.35, 'pop')]
+    for k in range(8): ev += [(1.15 + k * 0.08, 'plip'), (12.9 + k * 0.12, 'pop'), (32.75 + k * 0.1, 'plip')]
+    for k in range(5): ev.append((26.15 + k * 0.06, 'plip'))
+    tt, k = 1.4, 0
+    while tt < 2.6: ev.append((round(tt, 3), 'tick')); tt += max(0.05, 0.2 - 0.03 * k); k += 1
     return sorted(ev)
 
 if __name__ == '__main__':
@@ -991,4 +1328,5 @@ if __name__ == '__main__':
             cv.clear(skia.ColorBLACK); b.draw_frame(cv, b.anim_t(fi / FPS)); pr.stdin.write(s.makeImageSnapshot().tobytes())
             if fi % 200 == 0: print('frame', fi, '/', n, flush=True)
         pr.stdin.close(); pr.wait()
+
 

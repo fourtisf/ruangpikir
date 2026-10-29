@@ -1,6 +1,6 @@
 # EP 07 — Omongan orang, kok kepikiran terus?
 
-Status: **sudah diproduksi** — `videos/ruang-pikir-ep07-omongan-orang.mp4` (±55 detik, 1080×1920, ±5,4 MB), halaman web `ruangpikir.id/episode/omongan-orang/`.
+Status: **sudah diproduksi (v2: visual baru + hook lebih kuat)** — `videos/ruang-pikir-ep07-omongan-orang.mp4` (±50 detik, 1080×1920, ±5,6 MB), halaman web `ruangpikir.id/episode/omongan-orang/`.
 Seri: Kenapa Kamu Gitu? · Topik: sociometer (harga diri sebagai alat ukur penerimaan sosial) + kita melebih-lebihkan penilaian orang setelah salah.
 
 ## Riset
@@ -19,54 +19,54 @@ Omongan orang, [kok kepikiran terus]?
 ```
 
 ## Hook (detik 0–3)
-- Suara membuka dengan klaim: "Di kepalamu ada alat ukur yang terus menilai: orang lain suka kamu, atau nggak."
-- Visual: siluet kepala tergambar, di dalamnya alat ukur "SOCIOMETER" menyala dengan jarum yang langsung berayun liar sejak frame pertama, garis pindai lewat, notifikasi "+1 suka", "dilihat", "komentar baru" bermunculan, lalu kamera masuk ke alat ukur; jarum ke SUKA (sinar mint) lalu jatuh ke NGGAK (alarm merah + goyang).
+- Suara membuka dengan kalimat yang langsung relatable + janji jawaban (open loop): "Satu komentar kecil bisa kepikiran seharian. Itu bukan karena kamu lemah."
+- Visual yang langsung dikenali: frame pertama ponsel miring 3D bergetar di gelap, notifikasi "kamu kok gitu sih?" jatuh dari atas; notifikasinya lepas dan terbang ke kamera, lalu jadi 6 kartu komentar yang berputar makin cepat mengelilingi kepala, dengan penghitung "diputar ulang di kepala: 1x → 99x".
+- Di "Itu bukan karena kamu lemah": putaran berhenti mendadak (kilat cincin), kartu-kartu jatuh, dan di dalam kepala menyala alat ukur misterius + tanda "?", lalu kamera masuk ke kepala (penonton penasaran "alat apa itu?").
 
 ## Gaya visual (beda dari EP04–EP06)
-"HUD / alat ukur": dasbor instrumen futuristik. Alat ukur jarum (`gauge()`: busur 240° coral → ungu → mint, cincin HUD berputar, angka mono), jam 24 jam, kartu "ARSIP RISET", slider SENSITIVITAS, sudut bingkai HUD, teks mono (JetBrains Mono), sapuan radar samar di latar. Tetap tanpa titik/bokeh dan tanpa progress bar.
+"Dunia 3D + UI medsos": ponsel dan kartu kaca miring dalam perspektif 3D, notifikasi & kartu komentar, komentar yang berputar mengelilingi kepala (urut kedalaman), teks 3D bertumpuk ("1995", "SOCIOMETER", "BIP!"), alat ukur fisik berbingkai logam, alarm asap sebagai metafora "kelewat sensitif", kartu riset yang berputar masuk dan dibalik, siluet orang padat dengan cahaya tepi. Tetap tanpa titik/bokeh dan tanpa progress bar.
 
 ## Naskah suara (vo.py, anchor = waktu animasi, DUR 42)
 ```python
 LINES = [
-    (0.15, "Di kepalamu ada alat ukur yang terus menilai: orang lain suka kamu, atau nggak."),
-    (4.43, "Makanya satu komentar kecil, bisa kepikiran seharian."),
-    (7.3, "Tahun sembilan belas sembilan puluh lima, psikolog Mark Leary menyebutnya sociometer."),
-    (11.9, "Harga dirimu naik turun, ikut seberapa kamu merasa diterima."),
-    (15.15, "Dulu, dikucilkan kelompok itu bahaya. Makanya ditolak sedikit, otak bereaksi mirip rasa sakit."),
-    (20.24, "Masalahnya, alat ukur ini sering kelewat sensitif."),
-    (22.95, "Tahun dua ribu satu, Savitsky dan timnya menemukan: kalau kita salah di depan orang, mereka nggak menilai seburuk yang kita kira."),
-    (29.94, "Kita yang terlalu fokus ke kesalahan sendiri."),
-    (32.38, "Jadi kalau omongan orang kepikiran lagi, ingat: alat ukurmu memang suka lebay."),
+    (0.15, "Satu komentar kecil bisa kepikiran seharian. Itu bukan karena kamu lemah."),
+    (4.19, "Di kepalamu ada alat ukur yang terus menilai: kamu disukai, atau nggak."),
+    (8.11, "Tahun sembilan belas sembilan puluh lima, psikolog Mark Leary menyebutnya sociometer."),
+    (12.82, "Harga dirimu naik turun, ikut seberapa kamu merasa diterima."),
+    (16.13, "Dulu, dikucilkan itu bahaya. Jadi ditolak sedikit, otak bereaksi mirip rasa sakit."),
+    (20.67, "Masalahnya, alat ukur ini kelewat sensitif."),
+    (23.05, "Tahun dua ribu satu, Savitsky dan timnya menemukan: kalau kita salah di depan orang, mereka nggak menilai seburuk yang kita kira."),
+    (30.18, "Kita yang terlalu fokus ke kesalahan sendiri."),
+    (32.67, "Jadi kalau omongan orang kepikiran lagi, ingat: alat ukurmu suka lebay."),
     (36.6, "Follow Ruang Pikir, biar makin kenal isi kepalamu."),
 ]
 ```
 Caption per frasa ada di `PHRASES` di `video-engine/ep07_omongan-orang/episode.py`.
 
 ## Adegan
-| Waktu | Visual |
+| Waktu animasi | Visual |
 |---|---|
-| 0–4.4 | **Hook:** kepala garis + alat ukur SOCIOMETER, jarum liar, notifikasi, kamera masuk; jarum ke SUKA lalu jatuh ke NGGAK (alarm). |
-| 4.4–7.3 | Kartu komentar "kamu kok gitu sih?" menghantam, jarum alat ukur kecil jatuh; jam 24 jam berputar sehari penuh, komentar yang sama terulang di jam 10.12, 14.36, 19.06, 23.48. |
-| 7.3–11.9 | Kartu ARSIP RISET 1995 · Mark Leary dkk. · JPSP; kata "SOCIOMETER" menghantam layar, dipecah jadi "sosial" + "alat ukur". |
-| 11.9–15.2 | Tabung HARGA DIRI di tengah, 6 orang tersambung garis; saat mereka menerima (mint, centang) tabung naik ke 92%, saat ada yang menjauh (coral, silang) tabung turun. |
-| 15.2–17.3 | ZAMAN DULU: kelompok di sekitar api unggun, satu orang terlempar keluar lingkaran KELOMPOK, tanda BAHAYA. |
-| 17.3–20.2 | Komentar "kamu nggak usah ikut ya" menghantam kepala; titik sakit coral berdenyut + gelombang; label "SINYAL MIRIP RASA SAKIT" · Eisenberger dkk. (2003). |
-| 20.2–23 | Alat ukur tenang, notifikasi "cuma dibaca" → jarum langsung jatuh ke 0%, alarm; slider SENSITIVITAS meluncur ke MAKS. |
-| 23–26 | Kartu ARSIP RISET 2001 · Savitsky, Epley & Gilovich · JPSP. |
-| 26–27.8 | Huruf anagram "HALSA" gagal (merah, goyang, silang, GAGAL) di depan penonton. |
-| 27.8–29.9 | Dua alat ukur: KITA KIRA (jarum ke PARAH) vs KENYATAAN (jarum hampir di tengah, BIASA). |
-| 29.9–32.4 | Kertas dengan satu kesalahan kecil; bingkai fokus mengunci, kaca pembesar memperbesar silangnya ×10, "FOKUS: KESALAHAN"; orang lain sibuk dengan pikirannya sendiri ("laper", "tugas numpuk", "chat doi"). |
-| 32.4–36.6 | Komentar-komentar beterbangan, jarum gelisah + alarm; slider sensitivitas diturunkan, jarum tenang, stempel **LEBAY** menghantam alat ukur. |
+| 0–4.2 | **Hook:** ponsel 3D bergetar + notifikasi "kamu kok gitu sih?" → notifikasi terbang ke kamera → 6 kartu komentar berputar makin cepat mengelilingi kepala, penghitung "diputar ulang di kepala: 99x" → putaran berhenti, kartu jatuh, alat ukur + "?" menyala di dalam kepala, kamera masuk. |
+| 4.2–8.1 | Alat ukur fisik (bingkai logam, kubah kaca) miring 3D: jarum liar, menimbang, ke SUKA (hati mint beterbangan + sinar), lalu jatuh ke NGGAK (kaca retak, kilat merah, goyang). |
+| 8.1–12.8 | Kartu ARSIP RISET berputar masuk: "1995" teks 3D · Mark Leary dkk. · JPSP; kartu dibalik → "SOCIOMETER" = sosial + alat ukur. |
+| 12.8–16.1 | Tabung kaca HARGA DIRI berisi cairan bercahaya, 8 avatar berputar mengelilingi: menerima (cincin mint + hati) → tabung naik; tiga menjauh (abu, silang) → tabung turun; satu kembali. |
+| 16.1–17.9 | ZAMAN DULU: siluet orang duduk di sekitar api unggun; satu orang terlempar ke kegelapan, tanda BAHAYA. |
+| 17.9–20.7 | Komentar "kamu nggak diajak ya" menghantam otak (berdenyut coral) → dua otak: DITOLAK ≈ SAKIT FISIK, "area otak yang sama ikut aktif" · Eisenberger dkk. (2003). |
+| 20.7–23.1 | Alarm asap bertuliskan SOCIOMETER di plafon; pemicunya cuma notifikasi kecil "dibaca" → alarm meraung: lampu merah berputar, gelombang suara, "BIP!" teks 3D. |
+| 23.1–26.1 | Kartu ARSIP RISET 2001 · Savitsky, Epley & Gilovich · JPSP. |
+| 26.1–30.2 | Panggung + lampu sorot: huruf anagram "HALSA" gagal (GAGAL); KITA KIRA "mereka pasti ilfeel banget" (gemetar) vs KENYATAAN penonton: "susah sih soalnya", "biasa aja", "wajar kok"; gelembung kita mengecil. |
+| 30.2–32.7 | Kertas dengan satu kesalahan kecil; bingkai fokus mengunci, kaca pembesar logam memperbesar silangnya, "FOKUS: KESALAHAN SENDIRI"; orang lain sibuk dengan pikirannya ("laper", "tugas numpuk", "chat doi"). |
+| 32.7–36.6 | Callback hook: kartu komentar kembali berputar mengelilingi kepala yang memerah; kenop SENSITIVITAS diputar ke MIN → putaran hilang, alat ukur jadi tenang (mint), stempel **LEBAY**. |
 | 36.6–42 | Outro logo + RUANG PIKIR + ruangpikir.id + tombol Follow. |
 
 ## Teks cover Reels
 ```
-Kenapa omongan orang kepikiran terus?
+Itu bukan karena kamu lemah
 ```
 
 ## Caption Instagram
 ```
-Satu komentar kecil, kok bisa kepikiran seharian? 🫠
+Satu komentar kecil bisa kepikiran seharian. Dan itu bukan karena kamu lemah 🫠
 
 Tahun 1995, psikolog Mark Leary dan timnya menjelaskan: di kepala kita ada semacam "alat ukur" yang terus memantau seberapa kita diterima orang lain. Namanya sociometer. Harga diri kita ikut naik turun mengikuti alat ukur itu.
 
@@ -87,7 +87,7 @@ Sumber: Leary dkk. (1995) & Savitsky, Epley & Gilovich (2001), Journal of Person
 
 ## Caption TikTok
 ```
-Kenapa omongan orang kepikiran terus? 🫠
+Satu komentar kecil bisa kepikiran seharian, dan itu bukan karena kamu lemah 🫠
 
 Di kepalamu ada "alat ukur" penerimaan sosial, namanya sociometer (Leary dkk., 1995). Masalahnya, alat ukur ini suka lebay: setelah kita salah, orang lain menilai kita jauh lebih santai dari yang kita kira (Savitsky dkk., 2001).
 
@@ -109,4 +109,4 @@ Tonton video barunya 👇
 ```
 
 ## Produksi
-Folder `video-engine/ep07_omongan-orang/`: render ulang dengan `./build.sh` (suara sudah ada di `vo/`), buat ulang suara dengan `./build.sh --voice` (resep EP01 + `tighten.py`; take ini memakai `tighten.py 0.25` supaya durasi ≤ 55 dtk). Encode CRF 26 (bukan 24) karena animasi HUD padat: CRF 24 menghasilkan 6,7 MB, CRF 26 ±5,4 MB dengan SSIM 0,996. Helper gaya HUD: `gauge()` (alat ukur jarum + angka), `mono()` (teks mono HUD), `brackets()` (sudut bingkai), `scanline()`, `warn_tri()`, `comment()` (kartu komentar dengan avatar), `mini_person()`, `cross()`, `clock24()`, `flame()` (api unggun), `stamp()` (stempel yang dihantamkan), `tile()` (huruf anagram), `file_card()` (kartu arsip riset), `slider()` (slider sensitivitas).
+Folder `video-engine/ep07_omongan-orang/`: render ulang dengan `./build.sh` (suara sudah ada di `vo/`), buat ulang suara dengan `./build.sh --voice` (resep EP01 + `tighten.py 0.25`). Encode CRF 26 (bukan 24) karena animasinya padat (SSIM 0,996, ±5,6 MB). Versi pertama (gaya HUD / alat ukur, hook "Di kepalamu ada alat ukur...") ada di riwayat git (commit d549af3). Helper gaya 3D: `plane_m()`/`plane` (bidang 3D miring lewat `Matrix.setPolyToPoly`), `P3()`, `extrude()`, `phone()`, `notif()`, `head_solid()`, `orbit()`, `gauge_phys()`, `crack()`, `research_card()` (bisa dibalik), `avatar()`, `tube()`, `sitter()`/`stander()`/`bust()`, `brain()`, `smoke_alarm()`, `knob()`, `thought()`, `stamp()`.
