@@ -1,5 +1,22 @@
 [
   {
+    "no": 10,
+    "slug": "sebut-perasaan",
+    "title": "Lagi emosi, kok bisa reda?",
+    "topic": "Affect labeling",
+    "date": "2026-10-30",
+    "video": "ruang-pikir-ep10-sebut-perasaan.mp4",
+    "poster_time": 3.5,
+    "summary": "Emosi meledak? Meredamnya cuma butuh satu kalimat: sebut perasaanmu (Lieberman dkk., 2007).",
+    "body": [
+      "Lagi kesal sampai rasanya mau meledak? Ada satu cara sederhana yang didukung riset otak: memberi nama pada emosinya.",
+      "Tahun 2007, Matthew Lieberman dan rekan-rekannya di UCLA memindai otak peserta dengan fMRI saat mereka melihat foto wajah yang marah atau takut. Saat peserta memberi label pada emosi di wajah itu (misalnya memilih kata \"marah\"), respons amigdala, bagian otak yang bekerja seperti alarm emosi, lebih rendah dibanding saat mereka memproses wajah yang sama dengan cara lain. Sebaliknya, bagian prefrontal kanan yang membantu mengendalikan emosi justru lebih aktif.",
+      "Efek ini juga terlihat saat orang menyebut perasaannya sendiri. Tahun 2012, Katharina Kircanski, Lieberman, dan Michelle Craske meminta orang yang takut laba-laba mengucapkan perasaannya (misalnya \"aku takut\") saat berhadapan dengan laba-laba. Seminggu kemudian, reaksi tubuh mereka lebih tenang dibanding kelompok yang mencoba memaknai ulang atau mengalihkan perhatian, walaupun rasa takut yang mereka laporkan tidak berbeda.",
+      "Jadi lain kali kamu kesal, coba ucapkan atau tulis: \"aku lagi kesal\". Bukan dipendam, bukan diledakkan, tapi diberi nama. Ini bukan pengganti bantuan profesional; kalau emosi terasa berat terus-menerus, cerita ke orang yang kamu percaya atau ke psikolog."
+    ],
+    "source": "Lieberman, M. D., Eisenberger, N. I., Crockett, M. J., Tom, S. M., Pfeifer, J. H., & Way, B. M. (2007). Putting feelings into words: Affect labeling disrupts amygdala activity in response to affective stimuli. Psychological Science, 18(5), 421–428. · Kircanski, K., Lieberman, M. D., & Craske, M. G. (2012). Feelings into words: Contributions of language to exposure therapy. Psychological Science, 23(10), 1086–1091."
+  },
+  {
     "no": 9,
     "slug": "scroll-kok-minder",
     "title": "Scroll story, kok jadi minder?",

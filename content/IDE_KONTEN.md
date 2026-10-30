@@ -17,6 +17,7 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 - [x] Omongan orang, kok kepikiran terus? (sociometer, Leary dkk. 1995; Savitsky, Epley & Gilovich 2001) — EP07, lihat `EP07_omongan-orang.md`
 - [x] Deadline besok, kok masih nunda? (menunda = memperbaiki mood sesaat, Sirois & Pychyl 2013; Tice dkk. 2001; memaafkan diri, Wohl dkk. 2010) — EP08, lihat `EP08_nunda-kerjaan.md`
 - [x] Scroll story, kok jadi minder? (meremehkan emosi negatif orang lain, Jordan dkk. 2011) — EP09, lihat `EP09_kok-minder.md`
+- [x] Lagi emosi, kok bisa reda? (affect labeling, Lieberman dkk. 2007; Kircanski dkk. 2012) — EP10 (30 detik), lihat `EP10_sebut-perasaan.md`
 - [ ] Ngobrol sama orang asing di KRL, kok malah bahagia? (Epley & Schroeder 2014, penumpang kereta)
 - [ ] Coba gelitik dirimu sendiri, kok nggak bisa? (Blakemore, Frith & Wolpert 1999: otak menebak & meredam sentuhan sendiri; lewat robot dengan jeda, geli lagi)
 - [ ] Masuk kamar, kok langsung lupa mau ngapain? (efek pintu, Radvansky dkk. 2011)
@@ -31,7 +32,6 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 - [ ] Gagal terus, kok jadi males nyoba? (learned helplessness, Hiroto & Seligman 1975; harapan: Maier & Seligman 2016)
 - [ ] Kok kita paling galak ke orang terdekat? (displaced aggression, meta-analisis Marcus-Newhall dkk. 2000, 49 studi)
 - [ ] Putus cinta, kok sakitnya kayak kecanduan? (Fisher dkk. 2010, fMRI, 15 peserta — sebut sampel kecil)
-- [ ] Sebut perasaanmu, marahnya berkurang (affect labeling, Lieberman dkk. 2007)
 - [ ] Begadang semalam, besoknya gampang marah? (Yoo, Walker dkk. 2007: amigdala >60% lebih reaktif; sampel kecil, 26 orang)
 - [ ] Ngetik "wkwk" padahal nggak ketawa? (tawa sebagai sinyal sosial)
 - [ ] Lebih berani ngomong di chat daripada langsung? (online disinhibition effect)
