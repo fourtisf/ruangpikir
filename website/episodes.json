@@ -1,5 +1,23 @@
 [
   {
+    "no": 11,
+    "slug": "momen-memalukan",
+    "title": "Momen memalukan, kok keinget terus?",
+    "topic": "Ingatan emosional",
+    "date": "2026-10-30",
+    "video": "ruang-pikir-ep11-momen-memalukan.mp4",
+    "poster_time": 2.0,
+    "summary": "Kamu masih ingat momen paling memalukanmu karena otakmu memang sengaja menyimpannya (McGaugh, 2004).",
+    "body": [
+      "Mau tidur, tiba-tiba teringat momen memalukan bertahun-tahun lalu, lalu pengen teriak ke bantal? Kamu nggak sendirian, dan ada penjelasannya.",
+      "Psikolog dan ahli saraf James McGaugh (2004) merangkum banyak penelitian yang menunjukkan bahwa saat emosi kita memuncak, amigdala bersama hormon stres membantu memperkuat penyimpanan ingatan. Akibatnya, kejadian yang sangat emosional, termasuk yang memalukan, diingat jauh lebih kuat daripada kejadian biasa.",
+      "Kenapa munculnya justru saat mau tidur? Penelitian Dorthe Berntsen tentang ingatan yang muncul tanpa diundang menemukan bahwa ingatan seperti ini paling sering datang saat kita sedang santai atau mengerjakan hal ringan, ketika perhatian tidak sedang fokus pada apa pun.",
+      "Padahal, orang lain jauh lebih jarang memperhatikan kita daripada yang kita kira. Dalam studi spotlight effect Thomas Gilovich dan rekan-rekannya (2000), orang menebak sekitar setengah ruangan memperhatikan penampilan memalukan mereka, padahal kenyataannya hanya sekitar seperempat.",
+      "Jadi kalau momen itu muncul lagi, coba bersikap baik ke diri sendiri: semua orang pernah malu, dan itu manusiawi. Riset Mark Leary dan timnya (2007) menemukan bahwa sikap welas asih pada diri sendiri membuat orang bisa mengakui perannya dalam kejadian yang tidak enak tanpa tenggelam dalam emosi negatif."
+    ],
+    "source": "McGaugh, J. L. (2004). The amygdala modulates the consolidation of memories of emotionally arousing experiences. Annual Review of Neuroscience, 27, 1–28. · Berntsen, D. (1996). Involuntary autobiographical memories. Applied Cognitive Psychology, 10(5), 435–454. · Gilovich, T., Medvec, V. H., & Savitsky, K. (2000). The spotlight effect in social judgment. Journal of Personality and Social Psychology, 78(2), 211–222. · Leary, M. R., Tate, E. B., Adams, C. E., Allen, A. B., & Hancock, J. (2007). Self-compassion and reactions to unpleasant self-relevant events: The implications of treating oneself kindly. Journal of Personality and Social Psychology, 92(5), 887–904."
+  },
+  {
     "no": 10,
     "slug": "sebut-perasaan",
     "title": "Lagi emosi, kok bisa reda?",

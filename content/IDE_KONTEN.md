@@ -18,6 +18,11 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 - [x] Deadline besok, kok masih nunda? (menunda = memperbaiki mood sesaat, Sirois & Pychyl 2013; Tice dkk. 2001; memaafkan diri, Wohl dkk. 2010) — EP08, lihat `EP08_nunda-kerjaan.md`
 - [x] Scroll story, kok jadi minder? (meremehkan emosi negatif orang lain, Jordan dkk. 2011) — EP09, lihat `EP09_kok-minder.md`
 - [x] Lagi emosi, kok bisa reda? (affect labeling, Lieberman dkk. 2007; Kircanski dkk. 2012) — EP10 (30 detik), lihat `EP10_sebut-perasaan.md`
+- [x] Momen memalukan, kok keinget terus? (McGaugh 2004; Berntsen; Gilovich dkk. 2000; Leary dkk. 2007) — EP11, lihat `EP11_momen-memalukan.md`
+- [ ] Iri sama sahabat sendiri, kok bisa? (self-evaluation maintenance, Tesser 1988)
+- [ ] Dipuji, kok malah ngerasa nggak pantas? (impostor phenomenon, Clance & Imes 1978; Bravata dkk. 2020)
+- [ ] Satu kritik, kok ngalahin lima pujian? (Baumeister dkk. 2001, bad is stronger than good)
+- [ ] Ke teman bisa maklum, ke diri sendiri kok galak? (Breines & Chen 2012, self-compassion & motivasi)
 - [ ] Ngobrol sama orang asing di KRL, kok malah bahagia? (Epley & Schroeder 2014, penumpang kereta)
 - [ ] Coba gelitik dirimu sendiri, kok nggak bisa? (Blakemore, Frith & Wolpert 1999: otak menebak & meredam sentuhan sendiri; lewat robot dengan jeda, geli lagi)
 - [ ] Masuk kamar, kok langsung lupa mau ngapain? (efek pintu, Radvansky dkk. 2011)
@@ -39,7 +44,6 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 - [ ] Ide bagus, kok munculnya pas mandi? (inkubasi ide saat rileks)
 - [ ] Makin dewasa, kok waktu kerasa makin cepat?
 - [ ] Minggu sore, kok bikin cemas? (Sunday scaries)
-- [ ] Momen memalukan 5 tahun lalu masih kepikiran?
 - [ ] Overthinking jam 2 pagi? Coba tulis (expressive writing, Pennebaker & Beall 1986)
 
 ## Seri 03 · Psikologi Cinta
