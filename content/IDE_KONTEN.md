@@ -79,6 +79,12 @@ Pilih pertanyaan terbaik di komentar minggu itu, jadikan video (sebut username p
 Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tokoh kapsul + ajakan komentar. Setiap angka wajib dicek ke paper asli.
 - [x] Panggil namamu, kok jadi tenang? (Kross dkk. 2014) — EP03
 - [x] Mau tampil, kok deg-degan? (Brooks 2014) — EP12
+- [x] Susah tidur? Paksa dirimu tetap melek (paradoxical intention; Ansfield dkk. 1996; Broomfield & Espie 2003) — EP13, lihat `EP13_paksa-melek.md`
+- [ ] Mau nolak godaan? Bilang "aku nggak", bukan "aku nggak bisa" (Patrick & Hagtvedt 2012)
+- [ ] Overthinking terus? Kasih jadwal khawatir 15 menit (worry postponement, McGowan & Behar 2013)
+- [ ] Mau rajin? Pakai kalimat "kalau..., maka..." (implementation intentions, Gollwitzer & Sheeran 2006)
+- [ ] Lagi takut? Genggam tangan orang terdekat (Coan dkk. 2006)
+- [ ] Mau lebih bahagia? Tulis 3 hal baik sebelum tidur (Seligman dkk. 2005)
 - [ ] Mau ujian, kok blank? Tulis kekhawatiranmu 10 menit sebelum ujian (Ramirez & Beilock 2011, Science)
 - [ ] Overthinking pas mau tidur? Tulis to-do list besok (Scullin dkk. 2018, cepat terlelap)
 - [ ] Susah fokus belajar? Taruh HP di ruangan lain (Ward dkk. 2017, "brain drain")
