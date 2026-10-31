@@ -1,0 +1,65 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Mau presentasi, tapi deg-degan? Jangan bilang tenang. Bilang ini.",
+  "file": "vo/l00.wav",
+  "dur": 5.831
+ },
+ {
+  "i": 1,
+  "anchor": 3.81,
+  "text": "Soalnya di badan, cemas sama excited itu mirip banget: jantung berdebar, napas cepat.",
+  "file": "vo/l01.wav",
+  "dur": 7.537
+ },
+ {
+  "i": 2,
+  "anchor": 9.09,
+  "text": "Tahun dua ribu empat belas, psikolog Alison Wood Brooks menguji trik sederhana.",
+  "file": "vo/l02.wav",
+  "dur": 4.859
+ },
+ {
+  "i": 3,
+  "anchor": 14.0,
+  "text": "Sebelum karaoke, pidato, atau tes matematika, peserta disuruh bilang satu kalimat.",
+  "file": "vo/l03.wav",
+  "dur": 5.876
+ },
+ {
+  "i": 4,
+  "anchor": 19.09,
+  "text": "Ada yang bilang: aku tenang. Ada yang bilang: aku excited.",
+  "file": "vo/l04.wav",
+  "dur": 4.172
+ },
+ {
+  "i": 5,
+  "anchor": 22.69,
+  "text": "Hasilnya? Yang bilang aku excited tampil lebih baik, dan lebih percaya diri.",
+  "file": "vo/l05.wav",
+  "dur": 5.369
+ },
+ {
+  "i": 6,
+  "anchor": 27.41,
+  "text": "Rasa cemasnya nggak hilang. Tapi energinya dibelokkan jadi semangat.",
+  "file": "vo/l06.wav",
+  "dur": 4.646
+ },
+ {
+  "i": 7,
+  "anchor": 31.32,
+  "text": "Jadi sebelum tampil, bilang: aku excited! Tulis di komentar, kamu mau tampil di mana?",
+  "file": "vo/l07.wav",
+  "dur": 6.024
+ },
+ {
+  "i": 8,
+  "anchor": 36.6,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l08.wav",
+  "dur": 2.971
+ }
+]

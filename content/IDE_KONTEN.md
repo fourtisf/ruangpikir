@@ -19,6 +19,7 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 - [x] Scroll story, kok jadi minder? (meremehkan emosi negatif orang lain, Jordan dkk. 2011) — EP09, lihat `EP09_kok-minder.md`
 - [x] Lagi emosi, kok bisa reda? (affect labeling, Lieberman dkk. 2007; Kircanski dkk. 2012) — EP10 (30 detik), lihat `EP10_sebut-perasaan.md`
 - [x] Momen memalukan, kok keinget terus? (McGaugh 2004; Berntsen; Gilovich dkk. 2000; Leary dkk. 2007) — EP11, lihat `EP11_momen-memalukan.md`
+- [x] Mau tampil, kok deg-degan? (bilang "aku excited", Brooks 2014) — EP12, lihat `EP12_aku-excited.md`
 - [ ] Iri sama sahabat sendiri, kok bisa? (self-evaluation maintenance, Tesser 1988)
 - [ ] Dipuji, kok malah ngerasa nggak pantas? (impostor phenomenon, Clance & Imes 1978; Bravata dkk. 2020)
 - [ ] Satu kritik, kok ngalahin lima pujian? (Baumeister dkk. 2001, bad is stronger than good)
@@ -73,3 +74,13 @@ Format judul: **"X, kok Y?"** atau pertanyaan yang memakai "kamu". Satu pertanya
 
 ## Sabtu · Jawab komentar
 Pilih pertanyaan terbaik di komentar minggu itu, jadikan video (sebut username penanya bila mereka setuju).
+
+## Seri 03 · Trik Psikologi (format paling viral, seperti EP03 & EP12)
+Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tokoh kapsul + ajakan komentar. Setiap angka wajib dicek ke paper asli.
+- [x] Panggil namamu, kok jadi tenang? (Kross dkk. 2014) — EP03
+- [x] Mau tampil, kok deg-degan? (Brooks 2014) — EP12
+- [ ] Mau ujian, kok blank? Tulis kekhawatiranmu 10 menit sebelum ujian (Ramirez & Beilock 2011, Science)
+- [ ] Overthinking pas mau tidur? Tulis to-do list besok (Scullin dkk. 2018, cepat terlelap)
+- [ ] Susah fokus belajar? Taruh HP di ruangan lain (Ward dkk. 2017, "brain drain")
+- [ ] Panik/cemas? Tarik napas dua kali, buang panjang (cyclic sighing, Balban dkk. 2023)
+- [ ] Belajar semalam suntuk tapi lupa? Tes dirimu, jangan cuma baca ulang (Roediger & Karpicke 2006)
