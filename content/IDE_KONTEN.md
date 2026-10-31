@@ -92,7 +92,7 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Susah fokus belajar? Taruh HP di ruangan lain (Ward dkk. 2017, "brain drain")
 - [ ] Panik/cemas? Tarik napas dua kali, buang panjang (cyclic sighing, Balban dkk. 2023)
 - [ ] Belajar semalam suntuk tapi lupa? Tes dirimu, jangan cuma baca ulang (Roediger & Karpicke 2006)
-- [ ] Keinget teman lama, kok gengsi chat duluan? Kirim "hai, tiba-tiba keinget kamu" (Liu, Rim, Min & Min 2023, JPSP: kita meremehkan seberapa senang orang dihubungi; >5.900 peserta)
+- [x] Keinget teman lama, kok gengsi chat duluan? Kirim "hai, tiba-tiba keinget kamu" — EP15, lihat `EP15_chat-duluan.md` (Liu, Rim, Min & Min 2023, JPSP: kita meremehkan seberapa senang orang dihubungi; >5.900 peserta)
 - [ ] Bingung milih? Lempar koin, tapi jangan ikutin hasilnya: rasakan kamu berharap keluar apa (Jaffé, Reutner & Greifeneder 2019, PLOS ONE; jujur: Jaffé & Greifeneder 2021 tidak menemukan keputusan jadi lebih tepat)
 - [ ] Takut nanya, takut dikira bodoh? Minta saran malah bikin kelihatan pintar (Brooks, Gino & Schweitzer 2015, Management Science; tugas sulit, ke orang yang paham)
 - [ ] Mau minta tolong? Ngomong langsung, jangan lewat chat (Roghanizad & Bohns 2017: tatap muka ±34× lebih berhasil daripada email ke orang asing; Flynn & Lake 2008)

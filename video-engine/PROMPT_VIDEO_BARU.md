@@ -38,7 +38,7 @@ LANGKAH
    - minimal satu momen visual "wow" per video (transformasi, tabrakan, zoom, reveal angka)
    - semua ilustrasi di y 260–1220; zona caption y 1200–1390 harus bersih
    - variasi gaya per episode boleh (contoh: EP05 potret premium, EP06 garis neon + tipografi kinetik,
-     EP07 dunia 3D + UI medsos, EP08 meja belajar malam, EP09 di balik postingan, EP10 energi emosi, EP11 kamar jam 2 pagi + arsip ingatan, EP12 panggung sinematik + tokoh kapsul, EP13 kamar malam + tokoh kapsul berbaring, EP14 kafe malam + dua tokoh ngobrol) asal aturan dasar di atas tetap
+     EP07 dunia 3D + UI medsos, EP08 meja belajar malam, EP09 di balik postingan, EP10 energi emosi, EP11 kamar jam 2 pagi + arsip ingatan, EP12 panggung sinematik + tokoh kapsul, EP13 kamar malam + tokoh kapsul berbaring, EP14 kafe malam + dua tokoh ngobrol, EP15 ponsel chat + dua tokoh berjauhan) asal aturan dasar di atas tetap
 7. Suara: Gemini TTS voice Achird dengan resep EP01 (GEMINI_API_KEY di .env): voice.sh -> vo_full.py
    (gemini-3.1-flash-tts-preview + instruksi gaya EP01, 1 request, dipotong dengan split_lines, lalu tighten.py); cek durasi tiap baris
    dan cek isinya dengan transkripsi (instruksi tidak boleh ikut terbaca); ulangi kalau aneh. Tanpa garis progress bar dan tanpa titik debu.
