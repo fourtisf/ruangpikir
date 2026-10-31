@@ -80,6 +80,8 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [x] Panggil namamu, kok jadi tenang? (Kross dkk. 2014) — EP03
 - [x] Mau tampil, kok deg-degan? (Brooks 2014) — EP12
 - [x] Susah tidur? Paksa dirimu tetap melek (paradoxical intention; Ansfield dkk. 1996; Broomfield & Espie 2003) — EP13, lihat `EP13_paksa-melek.md`
+- [x] Banyak nanya, kok malah disukai? (pertanyaan lanjutan, Huang dkk. 2017) — EP14, lihat `EP14_terus-gimana.md`
+- [ ] Grogi ngobrol sama gebetan? Tiru gayanya pelan-pelan (chameleon effect, Chartrand & Bargh 1999)
 - [ ] Mau nolak godaan? Bilang "aku nggak", bukan "aku nggak bisa" (Patrick & Hagtvedt 2012)
 - [ ] Overthinking terus? Kasih jadwal khawatir 15 menit (worry postponement, McGowan & Behar 2013)
 - [ ] Mau rajin? Pakai kalimat "kalau..., maka..." (implementation intentions, Gollwitzer & Sheeran 2006)
