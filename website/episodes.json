@@ -1,5 +1,22 @@
 [
   {
+    "no": 16,
+    "slug": "takut-blank",
+    "title": "Mau ujian, kok blank?",
+    "topic": "Menulis kekhawatiran",
+    "date": "2026-11-02",
+    "video": "ruang-pikir-ep16-takut-blank.mp4",
+    "poster_time": 4.9,
+    "summary": "Besok ujian tapi takut blank? Tulis semua kekhawatiranmu 10 menit sebelum mulai (Ramirez & Beilock, 2011).",
+    "body": [
+      "Sudah belajar semalaman, tapi begitu lembar soal dibagikan, kepala mendadak kosong. Saat cemas, pikiran seperti \"nanti salah\" atau \"nanti nilainya jelek\" ikut memakai memori kerja, yaitu ruang di otak yang kita pakai untuk mengingat rumus dan berpikir saat mengerjakan soal.",
+      "Tahun 2011, psikolog Gerardo Ramirez dan Sian Beilock dari University of Chicago menguji cara sederhana untuk mengatasinya, dan hasilnya terbit di jurnal Science. Sebelum ujian yang menegangkan, sebagian mahasiswa hanya duduk diam, sementara sebagian lain menulis semua kekhawatirannya tentang ujian itu selama sekitar 10 menit.",
+      "Hasilnya, kelompok yang hanya duduk diam nilainya turun saat ditekan, sedangkan kelompok yang menulis kekhawatirannya justru tampil lebih baik. Para peneliti lalu mencobanya di kelas sungguhan menjelang ujian akhir biologi siswa SMA: manfaatnya paling terasa pada siswa yang mudah cemas menghadapi ujian.",
+      "Menurut para peneliti, menuliskan kekhawatiran membantu \"memindahkan\" beban itu ke kertas sehingga memori kerja lebih lega untuk mengerjakan soal. Jadi sebelum ujian berikutnya, ambil kertas dan tulis semua yang kamu takutkan selama 10 menit. Kalau kecemasan menghadapi ujian terasa sangat berat dan terus-menerus, tidak ada salahnya bercerita ke konselor sekolah, psikolog, atau orang yang kamu percaya."
+    ],
+    "source": "Ramirez, G., & Beilock, S. L. (2011). Writing about testing worries boosts exam performance in the classroom. Science, 331(6014), 211–213."
+  },
+  {
     "no": 15,
     "slug": "chat-duluan",
     "title": "Chat duluan, kok gengsi?",

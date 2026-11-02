@@ -87,7 +87,7 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Mau rajin? Pakai kalimat "kalau..., maka..." (implementation intentions, Gollwitzer & Sheeran 2006)
 - [ ] Lagi takut? Genggam tangan orang terdekat (Coan dkk. 2006)
 - [ ] Mau lebih bahagia? Tulis 3 hal baik sebelum tidur (Seligman dkk. 2005)
-- [ ] Mau ujian, kok blank? Tulis kekhawatiranmu 10 menit sebelum ujian (Ramirez & Beilock 2011, Science)
+- [x] Mau ujian, kok blank? Tulis kekhawatiranmu 10 menit sebelum ujian (Ramirez & Beilock 2011, Science) — EP16, lihat `EP16_takut-blank.md`
 - [ ] Overthinking pas mau tidur? Tulis to-do list besok (Scullin dkk. 2018, cepat terlelap)
 - [ ] Susah fokus belajar? Taruh HP di ruangan lain (Ward dkk. 2017, "brain drain")
 - [ ] Panik/cemas? Tarik napas dua kali, buang panjang (cyclic sighing, Balban dkk. 2023)
