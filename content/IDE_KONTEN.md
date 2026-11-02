@@ -99,3 +99,8 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Sering berantem sama pasangan? Lihat dari sudut pandang orang ketiga yang netral (Finkel dkk. 2013, Psychological Science: 120 pasangan, 3 × 7 menit, 2 tahun)
 - [ ] Lagi panik? Taruh tangan di dada 20 detik (Dreisoerner dkk. 2021: kortisol lebih rendah setelah tes stres; jujur: rasa stres yang dilaporkan tidak beda)
 - [ ] Telepon masuk, kok langsung panik? Telepon nggak secanggung yang dikira dan bikin lebih dekat daripada chat (Kumar & Epley 2021, JEP: General)
+- [ ] Mau cepat akrab sama orang baru? Coba pertanyaan ini (Aron dkk. 1997: pertanyaan yang makin dalam bikin dua orang asing lebih dekat dibanding basa-basi) — formula EP14
+- [ ] Minta maaf tapi nggak dimaafin? Tambahin dua kalimat: "itu salahku" + "aku perbaiki" (Lewicki, Polin & Lount 2016)
+- [ ] Mau diizinin? Tambahin satu kata: "karena" (Langer, Blank & Chanowitz 1978; jujur: untuk permintaan besar alasan kosong tidak membantu)
+- [ ] Nggak bisa tidur karena kepikiran besok? Tulis to-do list 5 menit (Scullin dkk. 2018: terlelap ±9 menit lebih cepat)
+- [ ] Mau kelihatan pintar? Tanya "menurut kamu gimana?" (Brooks, Gino & Schweitzer 2015)
