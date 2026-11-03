@@ -104,3 +104,5 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Mau diizinin? Tambahin satu kata: "karena" (Langer, Blank & Chanowitz 1978; jujur: untuk permintaan besar alasan kosong tidak membantu)
 - [ ] Nggak bisa tidur karena kepikiran besok? Tulis to-do list 5 menit (Scullin dkk. 2018: terlelap ±9 menit lebih cepat)
 - [ ] Mau kelihatan pintar? Tanya "menurut kamu gimana?" (Brooks, Gino & Schweitzer 2015)
+- [ ] Mau dibantu lagi? Tambahin dua kata ini: "makasih banyak" (Grant & Gino 2010, JPSP: yang diberi ucapan terima kasih lebih mau membantu lagi, ±66% vs ±32%)
+- [ ] Mau negur tanpa bikin marah? Ganti satu kata: "kamu" jadi "aku" (Kubany dkk. 1992: pesan "kamu" yang menuduh memicu lebih banyak marah daripada pesan "aku")
