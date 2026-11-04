@@ -1,0 +1,65 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Mau dia terbuka sama kamu? Coba ini: cerita duluan.",
+  "file": "vo/l00.wav",
+  "dur": 3.911
+ },
+ {
+  "i": 1,
+  "anchor": 3.05,
+  "text": "Kita sering nunggu orang lain buka diri duluan. Akhirnya, dua-duanya diem.",
+  "file": "vo/l01.wav",
+  "dur": 4.345
+ },
+ {
+  "i": 2,
+  "anchor": 7.27,
+  "text": "Tahun dua ribu tiga belas, psikolog Susan Spreker meneliti dua orang asing yang ngobrol lewat video call.",
+  "file": "vo/l02.wav",
+  "dur": 5.405
+ },
+ {
+  "i": 3,
+  "anchor": 13.25,
+  "text": "Ada yang ceritanya gantian, bolak-balik. Ada yang satu cerita terus, yang lain cuma dengerin.",
+  "file": "vo/l03.wav",
+  "dur": 5.331
+ },
+ {
+  "i": 4,
+  "anchor": 18.55,
+  "text": "Hasilnya? Yang gantian cerita, lebih saling suka.",
+  "file": "vo/l04.wav",
+  "dur": 3.24
+ },
+ {
+  "i": 5,
+  "anchor": 21.34,
+  "text": "Bahkan setelah tukar peran, yang satu arah tetap nggak bisa ngejar.",
+  "file": "vo/l05.wav",
+  "dur": 3.483
+ },
+ {
+  "i": 6,
+  "anchor": 25.15,
+  "text": "Soalnya cerita duluan itu kayak bilang: aku percaya sama kamu. Dan orang cenderung membalas.",
+  "file": "vo/l06.wav",
+  "dur": 6.041
+ },
+ {
+  "i": 7,
+  "anchor": 30.39,
+  "text": "Mulai dari hal kecil, terus tanya balik. Cerita apa yang pernah bikin kamu langsung akrab? Tulis di komentar!",
+  "file": "vo/l07.wav",
+  "dur": 5.358
+ },
+ {
+  "i": 8,
+  "anchor": 36.6,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l08.wav",
+  "dur": 3.001
+ }
+]
