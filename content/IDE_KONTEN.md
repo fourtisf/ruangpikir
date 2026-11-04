@@ -106,7 +106,7 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Mau kelihatan pintar? Tanya "menurut kamu gimana?" (Brooks, Gino & Schweitzer 2015)
 - [x] Mau dibantu lagi? Tambahin dua kata ini: "makasih banyak" — EP18, lihat `EP18_makasih-banyak.md` (Grant & Gino 2010, studi lapangan penggalang dana ±50% lebih banyak telepon; angka 66% vs 32% dari eksperimen yang dijalankan Gino TIDAK dipakai)
 - [ ] Mau negur tanpa bikin marah? Ganti satu kata: "kamu" jadi "aku" (Kubany dkk. 1992: pesan "kamu" yang menuduh memicu lebih banyak marah daripada pesan "aku")
-- [ ] Mau disukai? Minta tolong hal kecil ke dia (efek Ben Franklin: Jecker & Landy 1969; replikasi Niiya 2016) — seri ngobrol, kafe
+- [x] Mau disukai? Minta tolong hal kecil ke dia — EP19, lihat `EP19_minta-tolong.md` (efek Ben Franklin: Jecker & Landy 1969; replikasi Niiya 2016) — seri ngobrol, kafe
 - [ ] Hening 4 detik pas ngobrol, kok langsung panik? (Koudenburg, Postmes & Gordijn 2011: jeda ±4 detik bikin merasa ditolak) + trik: tanya lanjutan
 - [ ] Mau dia terbuka sama kamu? Cerita duluan, lalu gantian (Sprecher dkk. 2013: saling bercerita bikin lebih suka dibanding satu arah)
 - [ ] Naik KRL, coba sapa sebelahmu (Epley & Schroeder 2014: ngobrol dengan orang asing bikin perjalanan lebih menyenangkan dari yang diduga)

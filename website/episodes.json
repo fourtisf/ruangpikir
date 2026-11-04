@@ -1,5 +1,22 @@
 [
   {
+    "no": 19,
+    "slug": "minta-tolong",
+    "title": "Ngerepotin, kok malah disukai?",
+    "topic": "Efek Ben Franklin",
+    "date": "2026-11-04",
+    "video": "ruang-pikir-ep19-minta-tolong.mp4",
+    "poster_time": 3.75,
+    "summary": "Mau disukai sama orang? Coba minta tolong hal kecil ke dia (Jecker & Landy, 1969; Niiya, 2016).",
+    "body": [
+      "Banyak dari kita sungkan minta tolong karena takut merepotkan. Padahal riset psikologi menemukan hal yang terdengar terbalik: dimintai tolong untuk hal kecil justru bisa membuat orang lebih suka pada yang meminta. Fenomena ini dikenal sebagai efek Ben Franklin.",
+      "Tahun 1969, psikolog Jecker dan Landy menguji ini. Peserta yang baru memenangkan uang dalam sebuah eksperimen diminta mengembalikannya sebagai bantuan pribadi untuk si peneliti. Peserta yang dimintai tolong itu kemudian menilai si peneliti lebih menyenangkan dibanding peserta yang tidak dimintai tolong.",
+      "Tahun 2016, Yu Niiya dari Universitas Hosei di Jepang menemukan bahwa permintaan tolong yang disampaikan secara langsung meningkatkan rasa suka kepada orang yang meminta, sedangkan membantu tanpa diminta tidak memberi efek yang sama. Menurut Niiya, permintaan tolong terasa seperti tanda dipercaya dan ajakan untuk akrab, sehingga orang membalasnya dengan rasa suka.",
+      "Kedua riset ini berskala kecil, jadi anggap ini sebagai trik ringan, bukan jaminan. Kuncinya: mintalah bantuan yang kecil dan mudah, seperti meminjam pulpen atau meminta rekomendasi lagu, bukan yang memberatkan."
+    ],
+    "source": "Jecker, J., & Landy, D. (1969). Liking a person as a function of doing him a favour. Human Relations, 22(4), 371–378; Niiya, Y. (2016). Does a favor request increase liking toward the requester? The Journal of Social Psychology, 156(2), 211–221."
+  },
+  {
     "no": 18,
     "slug": "makasih-banyak",
     "title": "Bilang makasih, kok dibantu lagi?",
