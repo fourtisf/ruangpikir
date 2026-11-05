@@ -1,5 +1,22 @@
 [
   {
+    "no": 22,
+    "slug": "puji-aja",
+    "title": "Pengen muji, kok gengsi?",
+    "topic": "Kekuatan pujian",
+    "date": "2026-11-05",
+    "video": "ruang-pikir-ep22-puji-aja.mp4",
+    "poster_time": 4.3,
+    "summary": "Pengen muji orang tapi gengsi? Bilang aja. Dia bakal lebih senang dari yang kamu kira (Zhao & Epley, 2021).",
+    "body": [
+      "Kita sering menahan pujian yang tulus: takut dikira lebay, takut suasana jadi canggung, atau bingung memilih kata-kata yang pas. Akhirnya pujian itu tidak pernah terucap.",
+      "Tahun 2021, psikolog Xuan Zhao dan Nicholas Epley menguji kebiasaan ini lewat serangkaian eksperimen. Peserta diminta menulis pujian tulus untuk teman atau kenalan, lalu menebak bagaimana perasaan orang itu setelah menerimanya. Penerimanya kemudian ditanya langsung.",
+      "Hasilnya konsisten: pemberi pujian meremehkan seberapa senang penerima, dan melebih-lebihkan seberapa canggung penerima akan merasa. Pemberi pujian sibuk memikirkan apakah kata-katanya sudah pas, sementara penerima lebih memperhatikan ketulusan dan kehangatannya, yaitu bahwa seseorang peduli pada mereka.",
+      "Jadi pujian tidak harus sempurna. Kalimat sederhana yang tulus, seperti \"senyummu bikin suasana enak\" atau \"makasih udah dengerin\", sudah cukup untuk membuat hari seseorang lebih baik."
+    ],
+    "source": "Zhao, X., & Epley, N. (2021). Insufficiently complimentary?: Underestimating the positive impact of compliments creates a barrier to expressing them. Journal of Personality and Social Psychology, 121(2), 239–256."
+  },
+  {
     "no": 21,
     "slug": "deep-talk",
     "title": "Deep talk, kok nggak canggung?",

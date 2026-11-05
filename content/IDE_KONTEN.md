@@ -110,5 +110,5 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Hening 4 detik pas ngobrol, kok langsung panik? (Koudenburg, Postmes & Gordijn 2011: jeda ±4 detik bikin merasa ditolak) + trik: tanya lanjutan
 - [x] Mau dia terbuka sama kamu? Cerita duluan, lalu gantian — EP20, lihat `EP20_cerita-duluan.md` (Sprecher dkk. 2013: saling bercerita bikin lebih suka dibanding satu arah)
 - [ ] Naik KRL, coba sapa sebelahmu (Epley & Schroeder 2014: ngobrol dengan orang asing bikin perjalanan lebih menyenangkan dari yang diduga)
-- [ ] Pengen muji tapi gengsi? Bilang aja (Zhao & Epley 2021: kita meremehkan seberapa senang orang dipuji)
+- [x] Pengen muji tapi gengsi? Bilang aja — EP22, lihat `EP22_puji-aja.md` (Zhao & Epley 2021: kita meremehkan seberapa senang orang dipuji)
 - [x] Takut deep talk sama orang baru? Ternyata nggak secanggung yang dikira — EP21, lihat `EP21_deep-talk.md` (Kardas, Kumar & Epley 2022, JPSP: kita melebih-lebihkan canggungnya obrolan dalam dengan orang asing)
