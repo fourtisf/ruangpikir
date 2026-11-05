@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Synthesise music bed + SFX for the reel. Usage: python3 audio.py sfx.json out.wav [duration]"""
-import json, sys, math
+import json, sys, math, os
 import numpy as np
 from scipy.signal import butter, sosfilt
 from scipy.io import wavfile
@@ -277,6 +277,7 @@ if __name__ == '__main__':
     tl = json.load(open(sys.argv[1])); out_path = sys.argv[2]
     D = tl['out_dur']
     mus = music(D)
+    if os.environ.get('MUSIC', '1') == '0': mus = mus * 0.0   # versi tanpa musik latar (untuk lagu TikTok/IG)
     n = len(mus)
     fx = np.zeros(n + 4 * SR); vo = np.zeros(n + 4 * SR)
     cache = {}
