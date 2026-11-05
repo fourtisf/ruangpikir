@@ -1,5 +1,22 @@
 [
   {
+    "no": 21,
+    "slug": "deep-talk",
+    "title": "Deep talk, kok nggak canggung?",
+    "topic": "Obrolan dalam",
+    "date": "2026-11-05",
+    "video": "ruang-pikir-ep21-deep-talk.mp4",
+    "poster_time": 3.6,
+    "summary": "Takut deep talk sama orang baru? Ternyata nggak secanggung yang kamu kira (Kardas, Kumar & Epley, 2022).",
+    "body": [
+      "Saat bertemu orang baru, kita sering betah di basa-basi: cuaca, kuliah di mana, udah makan belum. Obrolan yang lebih dalam terasa menakutkan karena kita membayangkan suasananya akan canggung.",
+      "Tahun 2022, psikolog Michael Kardas, Amit Kumar, dan Nicholas Epley menguji dugaan ini lewat 12 eksperimen dengan lebih dari 1.800 peserta. Pasangan orang asing diminta mengobrol tentang topik ringan atau topik yang lebih dalam, misalnya \"hal apa yang paling kamu syukuri?\", lalu membandingkan perkiraan mereka dengan pengalaman sebenarnya.",
+      "Hasilnya, obrolan dalam ternyata tidak secanggung yang dibayangkan dan membuat peserta merasa lebih terhubung. Peserta yang mencoba keduanya awalnya mengira akan lebih menyukai basa-basi, tetapi setelah mencoba justru lebih memilih obrolan yang dalam. Menurut para peneliti, kita meremehkan seberapa besar orang lain juga tertarik pada obrolan yang bermakna.",
+      "Hasil tiap eksperimen tidak selalu sama besar, dan obrolannya singkat serta terstruktur. Tetapi pesannya jelas: lain kali kenalan, tidak ada salahnya mencoba satu pertanyaan yang lebih dalam, misalnya \"apa yang paling kamu syukuri tahun ini?\""
+    ],
+    "source": "Kardas, M., Kumar, A., & Epley, N. (2022). Overly shallow?: Miscalibrated expectations create a barrier to deeper conversation. Journal of Personality and Social Psychology, 122(3), 367–398."
+  },
+  {
     "no": 20,
     "slug": "cerita-duluan",
     "title": "Cerita duluan, kok jadi akrab?",
