@@ -111,4 +111,6 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [x] Mau dia terbuka sama kamu? Cerita duluan, lalu gantian — EP20, lihat `EP20_cerita-duluan.md` (Sprecher dkk. 2013: saling bercerita bikin lebih suka dibanding satu arah)
 - [ ] Naik KRL, coba sapa sebelahmu (Epley & Schroeder 2014: ngobrol dengan orang asing bikin perjalanan lebih menyenangkan dari yang diduga)
 - [x] Pengen muji tapi gengsi? Bilang aja — EP22, lihat `EP22_puji-aja.md` (Zhao & Epley 2021: kita meremehkan seberapa senang orang dipuji)
+- [ ] Habis nongkrong seru, kok capek banget? ("social battery"; Leikas & Ilmarinen 2017: perilaku ekstravert bikin mood naik saat itu, tapi lebih lelah ±3 jam kemudian; efek kecil, 48 peserta) + trik: jadwalkan waktu sendiri
+- [ ] Mau langsung klik sama orang baru? Cari satu kesamaan (meta-analisis Montoya dkk. 2008; kesamaan kecil, Burger dkk. 2004)
 - [x] Takut deep talk sama orang baru? Ternyata nggak secanggung yang dikira — EP21, lihat `EP21_deep-talk.md` (Kardas, Kumar & Epley 2022, JPSP: kita melebih-lebihkan canggungnya obrolan dalam dengan orang asing)
