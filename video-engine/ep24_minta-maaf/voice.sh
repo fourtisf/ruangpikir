@@ -5,4 +5,4 @@
 set -e
 cd "$(dirname "$0")"
 python3 vo_full.py
-python3 tighten.py 0.25     # jeda > 0,25 dtk di dalam kalimat dipendekkan (durasi video tetap <= 55 dtk)
+python3 tighten.py 0.21     # jeda > 0,21 dtk di dalam kalimat dipendekkan (durasi video tetap <= 55 dtk)
