@@ -1,0 +1,65 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Udah minta maaf, kok nggak dimaafin? Jangan cuma bilang, maafin aku ya. Coba dua kalimat ini.",
+  "file": "vo/l00.wav",
+  "dur": 6.114
+ },
+ {
+  "i": 1,
+  "anchor": 4.94,
+  "text": "Kita sering minta maaf buru-buru, biar cepat selesai. Tapi dia masih diam, dan suasananya tetap dingin.",
+  "file": "vo/l01.wav",
+  "dur": 6.569
+ },
+ {
+  "i": 2,
+  "anchor": 10.07,
+  "text": "Tahun dua ribu enam belas, Roy Lewiki dan timnya menguji enam unsur permintaan maaf ke lebih dari tujuh ratus orang.",
+  "file": "vo/l02.wav",
+  "dur": 8.005
+ },
+ {
+  "i": 3,
+  "anchor": 16.26,
+  "text": "Hasilnya? Unsur paling ampuh: mengakui kesalahan. Bilang: itu salahku.",
+  "file": "vo/l03.wav",
+  "dur": 6.155
+ },
+ {
+  "i": 4,
+  "anchor": 21.08,
+  "text": "Nomor dua: tawarkan perbaikan. Bilang: aku perbaiki, ya.",
+  "file": "vo/l04.wav",
+  "dur": 4.085
+ },
+ {
+  "i": 5,
+  "anchor": 24.37,
+  "text": "Yang paling lemah justru minta dimaafkan, alias, maafin aku ya.",
+  "file": "vo/l05.wav",
+  "dur": 4.527
+ },
+ {
+  "i": 6,
+  "anchor": 27.99,
+  "text": "Makin lengkap permintaan maafnya, makin dihargai. Tapi kalau cuma sempat dua kalimat, pakai yang ini.",
+  "file": "vo/l06.wav",
+  "dur": 5.853
+ },
+ {
+  "i": 7,
+  "anchor": 32.58,
+  "text": "Itu salahku. Aku perbaiki, ya. Kirim video ini ke orang yang mau kamu mintain maaf!",
+  "file": "vo/l07.wav",
+  "dur": 5.077
+ },
+ {
+  "i": 8,
+  "anchor": 36.6,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l08.wav",
+  "dur": 3.194
+ }
+]
