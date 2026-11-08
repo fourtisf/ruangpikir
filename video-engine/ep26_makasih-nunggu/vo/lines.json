@@ -1,0 +1,65 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Telat datang? Jangan bilang maaf ya. Coba ganti pakai kalimat ini.",
+  "file": "vo/l00.wav",
+  "dur": 4.454
+ },
+ {
+  "i": 1,
+  "anchor": 4.0,
+  "text": "Biasanya kita langsung bilang: maaf ya, maaf banget, tadi macet.",
+  "file": "vo/l01.wav",
+  "dur": 4.969
+ },
+ {
+  "i": 2,
+  "anchor": 8.27,
+  "text": "Tahun dua ribu dua puluh, peneliti Yanfen Yo dan timnya menguji ini di berbagai layanan yang bikin kecewa.",
+  "file": "vo/l02.wav",
+  "dur": 6.189
+ },
+ {
+  "i": 3,
+  "anchor": 13.51,
+  "text": "Ada yang dibilang: maaf ya. Ada yang dibilang: makasih ya, udah sabar.",
+  "file": "vo/l03.wav",
+  "dur": 5.067
+ },
+ {
+  "i": 4,
+  "anchor": 17.85,
+  "text": "Hasilnya? Yang dibilang makasih justru lebih puas.",
+  "file": "vo/l04.wav",
+  "dur": 3.767
+ },
+ {
+  "i": 5,
+  "anchor": 21.15,
+  "text": "Soalnya kata maaf bikin fokusnya ke kesalahan kita. Kata makasih bikin fokusnya ke kebaikan dia, jadi dia merasa dihargai.",
+  "file": "vo/l05.wav",
+  "dur": 8.034
+ },
+ {
+  "i": 6,
+  "anchor": 27.87,
+  "text": "Jadi lain kali telat, bilang: makasih udah nunggu, ya. Tapi kalau salahnya besar, tetap minta maaf dan perbaiki.",
+  "file": "vo/l06.wav",
+  "dur": 7.082
+ },
+ {
+  "i": 7,
+  "anchor": 33.83,
+  "text": "Kirim video ini ke teman yang paling sering kamu bikin nunggu!",
+  "file": "vo/l07.wav",
+  "dur": 3.093
+ },
+ {
+  "i": 8,
+  "anchor": 36.6,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l08.wav",
+  "dur": 3.077
+ }
+]

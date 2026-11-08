@@ -1,5 +1,22 @@
 [
   {
+    "no": 26,
+    "slug": "makasih-nunggu",
+    "title": "Telat datang? Jangan minta maaf",
+    "topic": "Kalimat yang tepat",
+    "date": "2026-11-09",
+    "video": "ruang-pikir-ep26-makasih-nunggu.mp4",
+    "poster_time": 3.5,
+    "summary": "Telat datang? Jangan cuma bilang \"maaf ya\". Coba ganti dengan \"makasih udah nunggu, ya\" (You, Yang, Wang & Deng, 2020).",
+    "body": [
+      "Kalau telat, refleks kita biasanya langsung minta maaf: \"maaf ya\", \"maaf banget\", \"tadi macet\". Padahal ada kalimat lain yang bisa terasa lebih menyenangkan buat orang yang menunggu.",
+      "Tahun 2020, Yanfen You, Xiaojing Yang, Lili Wang, dan Xiaoyan Deng menguji ini lewat serangkaian eksperimen tentang layanan yang mengecewakan, misalnya pesanan atau layanan yang terlambat. Sebagian peserta mendengar permintaan maaf (\"maaf atas keterlambatannya\"), sebagian lagi ucapan terima kasih (\"terima kasih sudah bersabar\").",
+      "Hasilnya, ucapan terima kasih membuat orang lebih puas daripada permintaan maaf. Menurut para peneliti, kata maaf memusatkan perhatian pada kesalahan pihak yang telat, sedangkan kata terima kasih memusatkan perhatian pada kebaikan orang yang menunggu, sehingga harga dirinya ikut naik.",
+      "Ada batasnya: penelitian ini dilakukan dalam konteks layanan pelanggan, dan untuk kesalahan yang berat, masalahnya tetap harus diperbaiki. Jadi untuk telat sedikit, coba bilang \"makasih udah nunggu, ya\"; kalau salahnya besar, tetap minta maaf dan perbaiki."
+    ],
+    "source": "You, Y., Yang, X., Wang, L., & Deng, X. (2020). When and why saying \"thank you\" is better than saying \"sorry\" in redressing service failures: The role of self-esteem. Journal of Marketing, 84(2), 133–150."
+  },
+  {
     "no": 25,
     "slug": "kerja-kelompok",
     "title": "Kerja kelompok, kok aku paling capek?",
