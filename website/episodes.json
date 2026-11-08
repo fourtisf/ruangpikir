@@ -1,5 +1,22 @@
 [
   {
+    "no": 25,
+    "slug": "kerja-kelompok",
+    "title": "Kerja kelompok, kok aku paling capek?",
+    "topic": "Kerja kelompok",
+    "date": "2026-11-08",
+    "video": "ruang-pikir-ep25-kerja-kelompok.mp4",
+    "poster_time": 2.0,
+    "summary": "Ngerasa paling banyak kerja di kelompok? Faktanya, hampir semua anggota ngerasa gitu juga (Schroeder, Caruso & Epley, 2016).",
+    "body": [
+      "Selesai tugas kelompok, kamu merasa paling banyak kerja: bikin slide, cari data, begadang revisi. Lucunya, anggota lain sering merasa hal yang sama.",
+      "Tahun 2016, Juliana Schroeder, Eugene Caruso, dan Nicholas Epley meneliti ini, antara lain pada 699 mahasiswa MBA dalam kelompok belajar dan pada tim penulis artikel ilmiah. Setiap anggota diminta memperkirakan berapa persen bagian kerja yang mereka lakukan.",
+      "Kalau klaim semua anggota dijumlah, totalnya secara konsisten lebih dari 100%, dan kelebihannya makin besar seiring bertambahnya jumlah anggota; di sebagian tim berisi delapan orang atau lebih, totalnya melewati 140%. Penyebabnya bukan karena orang berbohong: kerja kita sendiri lebih mudah teringat dan terlihat, sedangkan kerja orang lain sering luput.",
+      "Klaim berlebihan ini berkurang ketika anggota diminta memikirkan dulu kontribusi anggota lain. Jadi sebelum mengeluh \"aku terus yang kerja\", coba sebutkan dulu apa saja yang sudah dikerjakan teman-temanmu. Membagi tugas dengan jelas sejak awal juga membantu."
+    ],
+    "source": "Schroeder, J., Caruso, E. M., & Epley, N. (2016). Many hands make overlooked work: Over-claiming of responsibility increases with group size. Journal of Experimental Psychology: Applied, 22(2), 238–246."
+  },
+  {
     "no": 24,
     "slug": "minta-maaf",
     "title": "Minta maaf, kok nggak dimaafin?",

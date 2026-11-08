@@ -101,6 +101,7 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Telepon masuk, kok langsung panik? Telepon nggak secanggung yang dikira dan bikin lebih dekat daripada chat (Kumar & Epley 2021, JEP: General)
 - [x] Mau cepat akrab sama orang baru? Coba pertanyaan ini — EP17, lihat `EP17_cepat-akrab.md` (Aron dkk. 1997: pertanyaan yang makin dalam bikin dua orang asing lebih dekat dibanding basa-basi) — formula EP14
 - [x] Minta maaf tapi nggak dimaafin? Tambahin dua kalimat: "itu salahku" + "aku perbaiki" (Lewicki, Polin & Lount 2016) — EP24, lihat `EP24_minta-maaf.md`
+- [x] Kerja kelompok, kok aku paling capek? Sebelum ngomel, sebutin dulu kerjaan yang lain — EP25, lihat `EP25_kerja-kelompok.md` (Schroeder, Caruso & Epley 2016: klaim kontribusi semua anggota dijumlah > 100%, makin besar kelompok makin parah; Caruso, Epley & Bazerman 2006: memikirkan kontribusi orang lain mengurangi klaim berlebih)
 - [ ] Mau diizinin? Tambahin satu kata: "karena" (Langer, Blank & Chanowitz 1978; jujur: untuk permintaan besar alasan kosong tidak membantu)
 - [ ] Nggak bisa tidur karena kepikiran besok? Tulis to-do list 5 menit (Scullin dkk. 2018: terlelap ±9 menit lebih cepat)
 - [ ] Mau kelihatan pintar? Tanya "menurut kamu gimana?" (Brooks, Gino & Schweitzer 2015)
