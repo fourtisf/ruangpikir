@@ -101,6 +101,10 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Telepon masuk, kok langsung panik? Telepon nggak secanggung yang dikira dan bikin lebih dekat daripada chat (Kumar & Epley 2021, JEP: General)
 - [x] Mau cepat akrab sama orang baru? Coba pertanyaan ini — EP17, lihat `EP17_cepat-akrab.md` (Aron dkk. 1997: pertanyaan yang makin dalam bikin dua orang asing lebih dekat dibanding basa-basi) — formula EP14
 - [x] Minta maaf tapi nggak dimaafin? Tambahin dua kalimat: "itu salahku" + "aku perbaiki" (Lewicki, Polin & Lount 2016) — EP24, lihat `EP24_minta-maaf.md`
+- [ ] Telat datang, jangan bilang "maaf ya", bilang "makasih udah nunggu" (You, Yang, Wang & Deng 2020, Journal of Marketing: ucapan terima kasih setelah layanan gagal bikin pelanggan lebih puas daripada minta maaf, lewat naiknya harga diri; konteks layanan)
+- [ ] Teman curhat, jangan bilang "yang sabar ya" / "gitu doang", bilang "wajar kamu ngerasa gitu" (Shenk & Fruzzetti 2011: respons yang memvalidasi menurunkan detak jantung & emosi negatif, respons yang meremehkan menaikkannya)
+- [ ] Negur tanpa bikin marah: ganti "kamu selalu..." jadi "aku ngerasa..." (Rogers, Howieson & Neame 2018 PeerJ; Kubany dkk. 1992/1995: kalimat "kamu" dinilai paling memancing permusuhan; skenario)
+- [ ] Berantem sama pasangan? Lihat dari mata orang ketiga yang netral (Finkel dkk. 2013, Psychological Science: 120 pasangan, 3 × 7 menit menulis, penurunan kepuasan pernikahan berhenti)
 - [x] Kerja kelompok, kok aku paling capek? Sebelum ngomel, sebutin dulu kerjaan yang lain — EP25, lihat `EP25_kerja-kelompok.md` (Schroeder, Caruso & Epley 2016: klaim kontribusi semua anggota dijumlah > 100%, makin besar kelompok makin parah; Caruso, Epley & Bazerman 2006: memikirkan kontribusi orang lain mengurangi klaim berlebih)
 - [ ] Mau diizinin? Tambahin satu kata: "karena" (Langer, Blank & Chanowitz 1978; jujur: untuk permintaan besar alasan kosong tidak membantu)
 - [ ] Nggak bisa tidur karena kepikiran besok? Tulis to-do list 5 menit (Scullin dkk. 2018: terlelap ±9 menit lebih cepat)
