@@ -1,5 +1,22 @@
 [
   {
+    "no": 28,
+    "slug": "ada-saran",
+    "title": "Minta masukan? Ganti satu kata ini",
+    "topic": "Kalimat yang tepat",
+    "date": "2026-11-11",
+    "video": "ruang-pikir-ep28-ada-saran.mp4",
+    "poster_time": 4.4,
+    "summary": "Mau masukan yang beneran berguna? Jangan tanya \"ada feedback?\". Tanya \"ada saran, nggak?\" (Yoon, Blunden, Kristal & Whillans, 2019; Blunden dkk., 2025).",
+    "body": [
+      "Habis presentasi atau kirim tugas, kita sering bertanya \"ada feedback?\". Jawabannya sering cuma \"bagus kok\" atau \"udah oke\", padahal kita butuh tahu apa yang bisa diperbaiki.",
+      "Tahun 2019, peneliti Harvard Business School Jaewon Yoon, Hayley Blunden, Ariella Kristal, dan Ashley Whillans menguji perbedaan kecil ini. Sebagian orang diminta memberi \"feedback\", sebagian lagi diminta memberi \"saran\" (advice) untuk pekerjaan yang sama.",
+      "Yang diminta saran menyebutkan 34% lebih banyak hal yang bisa diperbaiki dan 56% lebih banyak cara memperbaikinya. Menurut para peneliti, kata feedback membuat orang menilai apa yang sudah terjadi, sedangkan kata saran membuat orang berpikir ke depan.",
+      "Penelitian lanjutan yang terbit di Management Science (2025), termasuk eksperimen lapangan dengan 27.432 komentar, menemukan hal yang sama: meminta saran menghasilkan masukan yang lebih konkret dan dinilai lebih berguna. Jadi lain kali, coba tanya \"ada saran, nggak?\"."
+    ],
+    "source": "Blunden, H., Kristal, A., Whillans, A., Yoon, J., Burd, H., Bremner, G., & Yeomans, M. (2025). Eliciting advice instead of feedback improves developmental input. Management Science. Lihat juga Yoon, J., Blunden, H., Kristal, A., & Whillans, A. (2019). Why asking for advice is more effective than asking for feedback. Harvard Business Review."
+  },
+  {
     "no": 27,
     "slug": "wajar-kok",
     "title": "Teman curhat, jangan bilang ini",
