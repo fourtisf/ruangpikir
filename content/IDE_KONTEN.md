@@ -98,6 +98,7 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Mau minta tolong? Ngomong langsung, jangan lewat chat (Roghanizad & Bohns 2017: tatap muka ±34× lebih berhasil daripada email ke orang asing; Flynn & Lake 2008)
 - [ ] Sering berantem sama pasangan? Lihat dari sudut pandang orang ketiga yang netral (Finkel dkk. 2013, Psychological Science: 120 pasangan, 3 × 7 menit, 2 tahun)
 - [ ] Lagi panik? Taruh tangan di dada 20 detik (Dreisoerner dkk. 2021: kortisol lebih rendah setelah tes stres; jujur: rasa stres yang dilaporkan tidak beda)
+- [x] Makin dewasa, kok makin jauh dari orang tua? 3 alasan psikologis yang agak nyakitin — EP30, lihat `EP30_jauh-dari-orang-tua.md` (Fredrickson & Carstensen 1990; Birditt dkk. 2009; intergenerational stake, Giarrusso, Feng & Bengtson 2004)
 - [x] Jarang nelpon orang tua? Telepon nggak secanggung yang dikira dan bikin lebih dekat daripada tulisan; bilang "nggak ada apa-apa, cuma kangen denger suara Ibu" — EP29, lihat `EP29_nelpon-orang-tua.md` (Kumar & Epley 2021, JEP: General; studi dengan teman lama & orang asing)
 - [x] Mau cepat akrab sama orang baru? Coba pertanyaan ini — EP17, lihat `EP17_cepat-akrab.md` (Aron dkk. 1997: pertanyaan yang makin dalam bikin dua orang asing lebih dekat dibanding basa-basi) — formula EP14
 - [x] Minta maaf tapi nggak dimaafin? Tambahin dua kalimat: "itu salahku" + "aku perbaiki" (Lewicki, Polin & Lount 2016) — EP24, lihat `EP24_minta-maaf.md`
