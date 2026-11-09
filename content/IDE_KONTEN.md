@@ -98,7 +98,7 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Mau minta tolong? Ngomong langsung, jangan lewat chat (Roghanizad & Bohns 2017: tatap muka ±34× lebih berhasil daripada email ke orang asing; Flynn & Lake 2008)
 - [ ] Sering berantem sama pasangan? Lihat dari sudut pandang orang ketiga yang netral (Finkel dkk. 2013, Psychological Science: 120 pasangan, 3 × 7 menit, 2 tahun)
 - [ ] Lagi panik? Taruh tangan di dada 20 detik (Dreisoerner dkk. 2021: kortisol lebih rendah setelah tes stres; jujur: rasa stres yang dilaporkan tidak beda)
-- [ ] Telepon masuk, kok langsung panik? Telepon nggak secanggung yang dikira dan bikin lebih dekat daripada chat (Kumar & Epley 2021, JEP: General)
+- [x] Jarang nelpon orang tua? Telepon nggak secanggung yang dikira dan bikin lebih dekat daripada tulisan; bilang "nggak ada apa-apa, cuma kangen denger suara Ibu" — EP29, lihat `EP29_nelpon-orang-tua.md` (Kumar & Epley 2021, JEP: General; studi dengan teman lama & orang asing)
 - [x] Mau cepat akrab sama orang baru? Coba pertanyaan ini — EP17, lihat `EP17_cepat-akrab.md` (Aron dkk. 1997: pertanyaan yang makin dalam bikin dua orang asing lebih dekat dibanding basa-basi) — formula EP14
 - [x] Minta maaf tapi nggak dimaafin? Tambahin dua kalimat: "itu salahku" + "aku perbaiki" (Lewicki, Polin & Lount 2016) — EP24, lihat `EP24_minta-maaf.md`
 - [x] Telat datang, jangan bilang "maaf ya", bilang "makasih udah nunggu" — EP26, lihat `EP26_makasih-nunggu.md` (You, Yang, Wang & Deng 2020, Journal of Marketing: ucapan terima kasih setelah layanan gagal bikin pelanggan lebih puas daripada minta maaf, lewat naiknya harga diri; konteks layanan)
