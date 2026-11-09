@@ -1,5 +1,22 @@
 [
  {
+  "no": 31,
+  "slug": "suara-ibu",
+  "title": "Suara Ibu, kok jadi nyebelin?",
+  "topic": "Otak remaja",
+  "date": "2026-11-14",
+  "video": "ruang-pikir-ep31-suara-ibu.mp4",
+  "poster_time": 8.46,
+  "summary": "Waktu kecil suara Ibu paling bikin tenang, pas remaja kok jadi nyebelin? Riset Stanford (Abrams dkk., 2022): mulai sekitar umur 13, otak lebih tertarik ke suara baru. Itu tanda latihan mandiri, bukan tanda nggak sayang.",
+  "body": [
+   "Waktu kecil, suara Ibu bisa bikin kita tenang. Tapi waktu remaja, nasihat yang sama sering terasa nyebelin, kayak masuk telinga kanan keluar telinga kiri. Ternyata ada penjelasan dari otak.",
+   "Tahun 2022, tim peneliti Stanford Medicine yang dipimpin Daniel Abrams memindai otak anak dan remaja berusia sekitar 7 sampai 16 tahun dengan fMRI. Mereka diperdengarkan suara ibunya sendiri dan suara orang yang tidak mereka kenal.",
+   "Pada anak-anak, suara ibu membuat area otak yang berhubungan dengan rasa senang (reward) lebih aktif dibanding suara orang asing. Mulai sekitar umur 13, polanya berbalik: suara orang baru yang membuat area itu lebih aktif.",
+   "Menurut para peneliti, ini bagian dari perkembangan yang sehat: otak remaja sedang belajar memperhatikan dunia di luar keluarga supaya bisa mandiri. Ini tidak berarti remaja berhenti mendengarkan atau berhenti sayang pada orang tuanya. Jadi kalau dulu kamu sering cuek ke Ibu, sekarang kamu tahu alasannya, dan mungkin ini saat yang pas untuk bilang: \"Bu, aku nggak pernah berhenti sayang.\""
+  ],
+  "source": "Abrams, D. A., Mistry, P. K., Baker, A. E., Padmanabhan, A., & Menon, V. (2022). A neurodevelopmental shift in reward circuitry from mother's to nonfamilial voices in adolescence. Journal of Neuroscience, 42(20), 4164–4173."
+ },
+ {
   "no": 30,
   "slug": "jauh-dari-orang-tua",
   "title": "Makin dewasa, kok makin jauh dari orang tua?",

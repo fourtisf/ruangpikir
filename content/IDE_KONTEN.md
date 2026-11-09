@@ -98,6 +98,11 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Mau minta tolong? Ngomong langsung, jangan lewat chat (Roghanizad & Bohns 2017: tatap muka ±34× lebih berhasil daripada email ke orang asing; Flynn & Lake 2008)
 - [ ] Sering berantem sama pasangan? Lihat dari sudut pandang orang ketiga yang netral (Finkel dkk. 2013, Psychological Science: 120 pasangan, 3 × 7 menit, 2 tahun)
 - [ ] Lagi panik? Taruh tangan di dada 20 detik (Dreisoerner dkk. 2021: kortisol lebih rendah setelah tes stres; jujur: rasa stres yang dilaporkan tidak beda)
+- [x] Suara Ibu, kok jadi nyebelin pas remaja? Otak "pindah channel" ke suara baru — EP31, lihat `EP31_suara-ibu.md` (Abrams dkk. 2022, Journal of Neuroscience)
+- [ ] Anak sulung galak, bungsu manja? Riset 20 ribu orang: urutan lahir tidak mengubah kepribadian (Rohrer, Egloff & Schmukle 2015, PNAS)
+- [ ] Kenapa kita paling gampang ketus ke Ibu? Kita berani menunjukkan emosi ke orang yang kita yakin tetap sayang (von Culin, Hirsch & Clark 2018) + kalimat "Maaf ya Bu, tadi aku capek, bukan karena Ibu"
+- [ ] Bilang makasih ke orang tua kok canggung? Penerima jauh lebih senang & tidak secanggung dugaan (Kumar & Epley 2018) + kalimat "Makasih ya Bu, udah …"
+- [ ] Orang tua makin tua makin keras kepala? Cara mempertahankan rasa mandiri; kasih pilihan, bukan perintah (Heid, Zarit & Fingerman 2017, The Gerontologist)
 - [x] Makin dewasa, kok makin jauh dari orang tua? 3 alasan psikologis yang agak nyakitin — EP30, lihat `EP30_jauh-dari-orang-tua.md` (Fredrickson & Carstensen 1990; Birditt dkk. 2009; intergenerational stake, Giarrusso, Feng & Bengtson 2004)
 - [x] Jarang nelpon orang tua? Telepon nggak secanggung yang dikira dan bikin lebih dekat daripada tulisan; bilang "nggak ada apa-apa, cuma kangen denger suara Ibu" — EP29, lihat `EP29_nelpon-orang-tua.md` (Kumar & Epley 2021, JEP: General; studi dengan teman lama & orang asing)
 - [x] Mau cepat akrab sama orang baru? Coba pertanyaan ini — EP17, lihat `EP17_cepat-akrab.md` (Aron dkk. 1997: pertanyaan yang makin dalam bikin dua orang asing lebih dekat dibanding basa-basi) — formula EP14
