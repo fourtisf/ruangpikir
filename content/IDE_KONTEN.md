@@ -98,6 +98,7 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Mau minta tolong? Ngomong langsung, jangan lewat chat (Roghanizad & Bohns 2017: tatap muka ±34× lebih berhasil daripada email ke orang asing; Flynn & Lake 2008)
 - [ ] Sering berantem sama pasangan? Lihat dari sudut pandang orang ketiga yang netral (Finkel dkk. 2013, Psychological Science: 120 pasangan, 3 × 7 menit, 2 tahun)
 - [ ] Lagi panik? Taruh tangan di dada 20 detik (Dreisoerner dkk. 2021: kortisol lebih rendah setelah tes stres; jujur: rasa stres yang dilaporkan tidak beda)
+- [ ] Takut minta tolong? Orang jauh lebih mau bantu dari yang kita kira (Flynn & Lake 2008, JPSP) + kalimat "Boleh minta tolong sebentar?"
 - [x] Susah move on? Jangan stalking. Ingat kebiasaan dia yang nyebelin, lalu alihkan — EP32, lihat `EP32_susah-move-on.md` (Fisher dkk. 2010; Marshall 2012; Langeslag & Sanchez 2018)
 - [ ] Ngerasa temanmu paling sedikit? Hampir semua orang mengira kehidupan sosial orang lain lebih ramai (Deri, Davidai & Gilovich 2017, JPSP)
 - [ ] Takut dibilang lemah kalau jujur? Orang lain melihatnya sebagai keberanian — beautiful mess effect (Bruk, Scholl & Bless 2018, JPSP) + kalimat "Jujur, aku salah"
@@ -119,7 +120,7 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Berantem sama pasangan? Lihat dari mata orang ketiga yang netral (Finkel dkk. 2013, Psychological Science: 120 pasangan, 3 × 7 menit menulis, penurunan kepuasan pernikahan berhenti)
 - [x] Kerja kelompok, kok aku paling capek? Sebelum ngomel, sebutin dulu kerjaan yang lain — EP25, lihat `EP25_kerja-kelompok.md` (Schroeder, Caruso & Epley 2016: klaim kontribusi semua anggota dijumlah > 100%, makin besar kelompok makin parah; Caruso, Epley & Bazerman 2006: memikirkan kontribusi orang lain mengurangi klaim berlebih)
 - [ ] Mau diizinin? Tambahin satu kata: "karena" (Langer, Blank & Chanowitz 1978; jujur: untuk permintaan besar alasan kosong tidak membantu)
-- [ ] Nggak bisa tidur karena kepikiran besok? Tulis to-do list 5 menit (Scullin dkk. 2018: terlelap ±9 menit lebih cepat)
+- [x] Nggak bisa tidur karena kepikiran besok? Tulis daftar tugas besok 5 menit — EP33, lihat `EP33_tulis-daftar-besok.md` (Scullin dkk. 2018: terlelap ±9 menit lebih cepat)
 - [ ] Mau kelihatan pintar? Tanya "menurut kamu gimana?" (Brooks, Gino & Schweitzer 2015)
 - [x] Mau dibantu lagi? Tambahin dua kata ini: "makasih banyak" — EP18, lihat `EP18_makasih-banyak.md` (Grant & Gino 2010, studi lapangan penggalang dana ±50% lebih banyak telepon; angka 66% vs 32% dari eksperimen yang dijalankan Gino TIDAK dipakai)
 - [ ] Mau negur tanpa bikin marah? Ganti satu kata: "kamu" jadi "aku" (Kubany dkk. 1992: pesan "kamu" yang menuduh memicu lebih banyak marah daripada pesan "aku")
