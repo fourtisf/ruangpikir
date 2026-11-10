@@ -1,0 +1,65 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Lagi panik atau deg-degan? Jangan cuma tarik napas dalam. Coba napas aneh ini.",
+  "file": "vo/l00.wav",
+  "dur": 5.385
+ },
+ {
+  "i": 1,
+  "anchor": 4.68,
+  "text": "Tahun dua ribu dua puluh tiga, tim Stanford, termasuk Andrew Huberman, menguji ini.",
+  "file": "vo/l01.wav",
+  "dur": 5.002
+ },
+ {
+  "i": 2,
+  "anchor": 8.91,
+  "text": "Sekitar seratus orang latihan lima menit sehari, selama sebulan. Ada yang meditasi, ada yang latihan napas.",
+  "file": "vo/l02.wav",
+  "dur": 7.022
+ },
+ {
+  "i": 3,
+  "anchor": 14.73,
+  "text": "Hasilnya? Yang paling bikin mood naik dan napas lebih tenang, satu cara napas ini. Bahkan ngalahin meditasi.",
+  "file": "vo/l03.wav",
+  "dur": 7.412
+ },
+ {
+  "i": 4,
+  "anchor": 20.86,
+  "text": "Caranya: tarik napas lewat hidung, tambah tarik sekali lagi, terus buang pelan lewat mulut, lebih panjang.",
+  "file": "vo/l04.wav",
+  "dur": 7.536
+ },
+ {
+  "i": 5,
+  "anchor": 27.09,
+  "text": "Soalnya buang napas yang panjang ngasih sinyal ke tubuh buat melambat.",
+  "file": "vo/l05.wav",
+  "dur": 4.636
+ },
+ {
+  "i": 6,
+  "anchor": 31.03,
+  "text": "Coba sekarang: tarik dua kali, buang panjang. Ulangi lima menit.",
+  "file": "vo/l06.wav",
+  "dur": 3.981
+ },
+ {
+  "i": 7,
+  "anchor": 34.45,
+  "text": "Kirim ke teman yang besok mau presentasi!",
+  "file": "vo/l07.wav",
+  "dur": 2.371
+ },
+ {
+  "i": 8,
+  "anchor": 36.6,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l08.wav",
+  "dur": 3.41
+ }
+]

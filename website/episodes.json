@@ -1,5 +1,22 @@
 [
  {
+  "no": 34,
+  "slug": "napas-aneh",
+  "title": "Lagi panik, kok susah tenang? Coba napas aneh ini",
+  "topic": "Napas & tenang",
+  "date": "2026-11-17",
+  "video": "ruang-pikir-ep34-napas-aneh.mp4",
+  "poster_time": 5.4,
+  "summary": "Lagi panik atau deg-degan? Coba 'tarik 2x, buang panjang' (cyclic sighing). Riset Stanford 2023: 5 menit sehari bikin mood naik dan napas lebih tenang, lebih baik dari meditasi biasa.",
+  "body": [
+   "Saat panik atau deg-degan, saran yang paling sering kita dengar adalah \"tarik napas dalam\". Ternyata ada cara bernapas sederhana yang dalam penelitian terbukti lebih ampuh menaikkan mood.",
+   "Tahun 2023, tim Stanford Medicine (Melis Yilmaz Balban, David Spiegel, Andrew Huberman, dan rekan) membagi sekitar seratus orang dewasa sehat ke empat latihan 5 menit sehari selama 28 hari: meditasi mindfulness, napas kotak, hiperventilasi terkontrol, dan cyclic sighing.",
+   "Semua latihan membantu, tapi latihan napas lebih baik daripada meditasi dalam menaikkan mood, dan cyclic sighing paling besar efeknya. Kelompok ini juga punya laju napas istirahat yang lebih lambat. Caranya: tarik napas lewat hidung, tambah tarik sekali lagi untuk 'mengisi penuh' paru-paru, lalu buang pelan lewat mulut, lebih panjang dari tarikannya.",
+   "Buang napas yang panjang membantu tubuh beralih ke mode tenang. Jadi kalau besok presentasi, ujian, atau lagi panik, coba: tarik 2 kali, buang panjang, ulangi beberapa menit. Catatan: ini satu studi pada orang dewasa sehat; untuk serangan panik yang sering, konsultasikan ke tenaga kesehatan."
+  ],
+  "source": "Balban, M. Y., Neri, E., Kogon, M. M., Weed, L., Nouriani, B., Jo, B., Holl, G., Zeitzer, J. M., Spiegel, D., & Huberman, A. D. (2023). Brief structured respiration practices enhance mood and reduce physiological arousal. Cell Reports Medicine, 4(1), 100895."
+ },
+ {
   "no": 33,
   "slug": "tulis-daftar-besok",
   "title": "Mau tidur, kok kepikiran besok?",

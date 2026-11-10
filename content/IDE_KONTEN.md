@@ -120,6 +120,9 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Berantem sama pasangan? Lihat dari mata orang ketiga yang netral (Finkel dkk. 2013, Psychological Science: 120 pasangan, 3 × 7 menit menulis, penurunan kepuasan pernikahan berhenti)
 - [x] Kerja kelompok, kok aku paling capek? Sebelum ngomel, sebutin dulu kerjaan yang lain — EP25, lihat `EP25_kerja-kelompok.md` (Schroeder, Caruso & Epley 2016: klaim kontribusi semua anggota dijumlah > 100%, makin besar kelompok makin parah; Caruso, Epley & Bazerman 2006: memikirkan kontribusi orang lain mengurangi klaim berlebih)
 - [ ] Mau diizinin? Tambahin satu kata: "karena" (Langer, Blank & Chanowitz 1978; jujur: untuk permintaan besar alasan kosong tidak membantu)
+- [x] Lagi panik? Coba napas aneh: tarik 2x, buang panjang (cyclic sighing) — EP34, lihat `EP34_napas-aneh.md` (Balban, Spiegel, Huberman dkk. 2023, Cell Reports Medicine)
+- [ ] Ngantuk siang? Tidur 10 menit, bukan 1 jam (Brooks & Lack 2006, Sleep: 10 menit paling efektif, segar ±2,5 jam; 30 menit bikin pusing dulu)
+- [ ] Masuk kamar, kok langsung lupa mau ngapain? Efek pintu (Radvansky dkk. 2011) + trik balik ke ruangan sebelumnya
 - [x] Nggak bisa tidur karena kepikiran besok? Tulis daftar tugas besok 5 menit — EP33, lihat `EP33_tulis-daftar-besok.md` (Scullin dkk. 2018: terlelap ±9 menit lebih cepat)
 - [ ] Mau kelihatan pintar? Tanya "menurut kamu gimana?" (Brooks, Gino & Schweitzer 2015)
 - [x] Mau dibantu lagi? Tambahin dua kata ini: "makasih banyak" — EP18, lihat `EP18_makasih-banyak.md` (Grant & Gino 2010, studi lapangan penggalang dana ±50% lebih banyak telepon; angka 66% vs 32% dari eksperimen yang dijalankan Gino TIDAK dipakai)
