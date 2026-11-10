@@ -1,6 +1,7 @@
 # EP 35 — Dia cuek, kok makin kepikiran?
 
 Status: **sudah diproduksi** — `videos/ruang-pikir-ep35-digantungin.mp4` (±53 detik, 1080×1920, dengan **lagu instrumental orisinal**), halaman web `ruangpikir.id/episode/digantungin/`.
+**Visual versi 2 (premium):** dirombak setelah ALFA bilang v1 "visualnya jelek": studio lampu sorot + lantai pantul, ponsel DM 3D melayang, bandul hati kaca berisi cairan di ujung rantai, carousel profil 3D, tiga bandul hati kondisi, orbit kartu pikiran, kartu dibuka dengan sinar. Suara, naskah, dan timing sama dengan v1.
 Format: topik gebetan (paling banyak dikirim ke teman) + kalimat/pertanyaan disensor lalu dibuka (rumus EP24).
 
 ## Riset
@@ -38,13 +39,13 @@ LINES = [
 ## Adegan
 | Waktu animasi | Visual |
 |---|---|
-| 0–6.2 | **Hook:** DM "dia" → "oke", "mengetik..." hilang, meter KEPIKIRAN 47x, JATUH CINTA? dicoret → hati tergantung tali DIGANTUNGIN, kartu TANYA DIRI SENDIRI buram. |
-| 6.2–9.7 | Kartu ARSIP RISET 2011 · Whitchurch, Wilson & Gilbert · Univ. of Virginia · Harvard · Psychological Science → **47 MAHASISWI**. |
-| 9.7–13.7 | PROFIL 4 COWOK (kartu kaca + mata) + KATANYA UDAH LIHAT PROFILMU. |
-| 13.7–19.6 | MEREKA DIBILANG...: kartu SUKA BANGET (3 hati emas), BIASA AJA (1 hati), NGGAK JELAS (hati "?" berkedip). |
-| 19.6–24.1 | HASILNYA? → batang SEBERAPA TERTARIK: NGGAK JELAS paling tinggi + mahkota, LEBIH DARI YANG DISUKAI BANGET. |
-| 24.1–29.5 | Rantai NGGAK PASTI → KEPIKIRAN → MAKIN SUKA, kepala dengan panah berputar + pikiran "dia suka nggak ya?", "kok cuma 'oke'?", "tadi dia lihat story-ku", batang KEPIKIRAN & RASA SUKA naik. |
-| 29.5–34.1 | Kartu dibuka: **"Aku suka dia, atau cuma penasaran?"** + gelembung SUKA? / PENASARAN? + hati berhenti berayun, tokoh tenang. |
+| 0–6.2 | **Hook (v2):** studio lampu sorot, tokoh berbaring gelisah, ponsel DM 3D melayang: "lagi apa?" → "oke", "mengetik..." muncul lalu hilang; kotak kaca KEPIKIRAN 1x → 47x; bandul hati kaca turun berayun (JATUH CINTA? → teks 3D **DIGANTUNGIN**), kartu TANYA DIRI SENDIRI terbang miring 3D, buram + gembok. |
+| 6.2–9.7 | Kartu ARSIP RISET 2011 · Whitchurch, Wilson & Gilbert · Univ. of Virginia · Harvard · Psychological Science → teks 3D **47 MAHASISWI** + 47 hati berdenyut. |
+| 9.7–13.7 | Carousel 3D 4 kartu profil cowok berputar di bawah sorot lampu + mata + KATANYA UDAH LIHAT PROFILMU. |
+| 13.7–19.6 | MEREKA DIBILANG "DIA ITU...": tiga bandul hati kaca di palang: SUKA BANGET (emas, penuh), BIASA AJA (biru, setengah), NGGAK JELAS (merah muda, "?", cairan naik-turun, berayun). |
+| 19.6–24.1 | HASILNYA? → SEBERAPA TERTARIK?: hati NGGAK JELAS terisi penuh + mahkota + sinar, dua hati lain meredup, LEBIH DARI YANG DISUKAI BANGET. |
+| 24.1–29.5 | Rantai NGGAK PASTI → KEPIKIRAN → MAKIN SUKA, kepala dengan kartu pikiran yang mengorbit ("dia suka nggak ya?", "kok cuma 'oke'?", "tadi dia lihat story-ku"), bandul RASA SUKA terisi. |
+| 29.5–34.1 | Kartu 3D dibuka dengan sinar: **"Aku suka dia, atau cuma penasaran?"** + bandul hati berhenti berayun, tokoh tenang, gelembung SUKA? / PENASARAN?. |
 | 34.1–36.6 | Kartu "SEBELUM BAPER, TANYA" + KIRIM KE (bestie, teman kos, sepupu, teman kelas) + TERKIRIM. |
 | 36.6–42 | Outro logo + RUANG PIKIR + ruangpikir.id + tombol Follow. |
 
@@ -110,4 +111,4 @@ Dia cuek, kok makin kepikiran? Kata riset psikologi, kamu mungkin cuma digantung
 Malam 20.00–22.00 WIB (jam chat-an dan galau), paling pas Jumat–Sabtu malam.
 
 ## Produksi
-Folder `video-engine/ep35_digantungin/` (dibangun dari EP34): render ulang dengan `./build.sh` (suara sudah ada di `vo/`), buat ulang suara dengan `./build.sh --voice` (resep EP01 + `tighten.py 0.21`). `DUR` 42, jeda antarbaris 0.35 dtk. Encode CRF 26. **Lagu orisinal** di `audio.py` folder ini (variasi EP22: 96 BPM, `TR = 1`). Versi tanpa musik: `python3 episode.py timeline timeline.json && MUSIC=0 python3 audio.py timeline.json audio_nomusic.wav`, lalu mux ke video yang sudah ada (`-map 0:v -map 1:a -c:v copy` + loudnorm −14). Helper baru: `dm_phone()`, `hanging_heart()`, `profile_card()`, `cond_card()`; plus `msg()`, `secret_card2()`, `eye_icon()`, `head_solid()`, `loop_arrow()`, `vbar()`, `crown()`, `race_bar()`, `mini_person()`, `research_card()`, `extrude()`, `thought()`, `cross()`, `avatar()`, `plane_icon()`.
+Folder `video-engine/ep35_digantungin/` (dibangun dari EP34): render ulang dengan `./build.sh` (suara sudah ada di `vo/`), buat ulang suara dengan `./build.sh --voice` (resep EP01 + `tighten.py 0.21`). `DUR` 42, jeda antarbaris 0.35 dtk. Encode CRF 26. **Lagu orisinal** di `audio.py` folder ini (variasi EP22: 96 BPM, `TR = 1`). Versi tanpa musik: `python3 episode.py timeline timeline.json && MUSIC=0 python3 audio.py timeline.json audio_nomusic.wav`, lalu mux ke video yang sudah ada (`-map 0:v -map 1:a -c:v copy` + loudnorm −14). Helper v2 (premium): `studio()`, `chain()`, `pend_heart()`, `phone3d()`, `carousel()`, `thought_ring()`, `three_hearts()`. Helper v1: `dm_phone()`, `hanging_heart()`, `profile_card()`, `cond_card()`; plus `msg()`, `secret_card2()`, `eye_icon()`, `head_solid()`, `loop_arrow()`, `vbar()`, `crown()`, `race_bar()`, `mini_person()`, `research_card()`, `extrude()`, `thought()`, `cross()`, `avatar()`, `plane_icon()`.

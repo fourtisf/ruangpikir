@@ -4,7 +4,8 @@ Hook: ponsel DM 'dia' yang cuma bales "oke", "mengetik..." muncul lalu hilang, m
 di tali dan berayun (DIGANTUNGIN), kartu TANYA DIRI SENDIRI buram. Kartu riset 2011 + 47 mahasiswi, 4 kartu profil cowok + mata "katanya udah lihat
 profilmu", 3 kartu kondisi SUKA BANGET / BIASA AJA / NGGAK JELAS, batang SEBERAPA TERTARIK (nggak jelas paling tinggi + mahkota), rantai
 NGGAK PASTI -> KEPIKIRAN -> MAKIN SUKA + pikiran berputar di kepala, kartu dibuka "Aku suka dia, atau cuma penasaran?" + hati berhenti berayun.
-Lagu: variasi EP22 (96 BPM, +1 semitone).
+Versi 2 (premium): studio sorot + lantai pantul, ponsel DM 3D melayang, bandul hati kaca berisi cairan + rantai, carousel profil 3D,
+3 bandul hati (suka banget / biasa aja / nggak jelas), orbit kartu pikiran 3D. Lagu: variasi EP22 (96 BPM, +1 semitone).
 python3 episode.py preview t1 t2 ... | timeline out.json | video out.mp4"""
 import sys, os, math, json, subprocess, random
 import skia
@@ -2702,123 +2703,222 @@ def cond_card(cv, x, y, w, h, a, t, title, kind, c, glow=0.0):
     f = font(XB, 34 if len(title) < 11 else 30); tw = f.measureText(title)
     cv.drawString(title, x - tw / 2, bl(f, r.bottom() - 56), f, P(col(c, a)))
 
+# ------------------------------------------------------------ helper EP35 v2 (premium): studio sorot + lantai pantul, bandul hati kaca, ponsel 3D, carousel profil, orbit pikiran
+def studio(cv, a, t, c=ROSE, x=540, cone=260):
+    """latar studio malam: lampu sorot volumetrik dari atas + lantai mengilap yang memantulkan cahaya"""
+    if a <= 0: return
+    cone_p = skia.Path(); cone_p.moveTo(x - 50, 250); cone_p.lineTo(x + 50, 250); cone_p.lineTo(x + cone * 1.8, 1130); cone_p.lineTo(x - cone * 1.8, 1130); cone_p.close()
+    cv.drawPath(cone_p, P(shader=lg(0, 250, 0, 1130, [col('#FFFFFF', 0.10 * a), col(c, 0.07 * a), col(c, 0)])))
+    cv.drawRect(skia.Rect(0, 1060, 1080, 1200), P(shader=lg(0, 1060, 0, 1200, [col('#1A1530', 0), col('#1A1530', 0.85 * a), col('#0A0A14', 0)])))
+    cv.drawOval(skia.Rect(x - 420, 1085, x + 420, 1165), P(shader=rg(x, 1125, 420, [col(c, 0.22 * a), col(c, 0)])))
+    cv.drawLine(60, 1090, 1020, 1090, P(shader=lg(60, 0, 1020, 0, [col(ACC_L, 0), col(ACC_L, 0.25 * a), col(ACC_L, 0)]), stroke=2))
+
+def chain(cv, x0, y0, x1, y1, a, c='#C9CCE8'):
+    """rantai logam berkilau dari (x0,y0) ke (x1,y1)"""
+    L = math.hypot(x1 - x0, y1 - y0); n = max(2, int(L / 22))
+    for i in range(n):
+        u = (i + 0.5) / n; x = lerp(x0, x1, u); y = lerp(y0, y1, u)
+        ang = math.degrees(math.atan2(y1 - y0, x1 - x0))
+        cv.save(); cv.translate(x, y); cv.rotate(ang)
+        r = skia.Rect(-12, -5, 12, 5) if i % 2 == 0 else skia.Rect(-10, -2.5, 10, 2.5)
+        cv.drawRoundRect(r, 5, 5, P(col(c, 0.85 * a), stroke=3))
+        cv.restore()
+
+def pend_heart(cv, x, top, L, s, v, a, t, swing=1.0, c=ROSE, q=0.0, glow=0.0, phase=0.0, label=None, shadow=True, slosh=0.0):
+    """bandul hati kaca berisi cairan: tergantung rantai dari (x, top), berayun (swing), cairan v; q = tanda tanya di dalam"""
+    if a <= 0 or L <= 1: return x, top
+    ang = math.radians(17 * swing * math.sin(t * 2.3 + phase))
+    hx = x + math.sin(ang) * L; hy = top + math.cos(ang) * L
+    if shadow:
+        sw = s * 1.6 * (1 - 0.15 * abs(math.sin(ang)))
+        cv.drawOval(skia.Rect(hx - sw, 1100, hx + sw, 1130), P(col('#000000', 0.45 * a), blur=14))
+        cv.drawOval(skia.Rect(hx - sw * 0.8, 1105, hx + sw * 0.8, 1125), P(col(c, 0.18 * a * (0.5 + glow)), blur=18))
+    cv.drawCircle(x, top, 12, P(shader=rg(x - 4, top - 4, 14, [col('#E6E8F6', a), col('#6A6E8E', a)])))
+    chain(cv, x, top, hx, hy - s * 0.8, a)
+    cv.save(); cv.translate(hx, hy); cv.rotate(-math.degrees(ang) * 0.8); cv.translate(-hx, -hy)
+    vv = clamp(v + slosh * 0.12 * math.sin(t * 7 + phase))
+    glass_heart(cv, hx, hy, s, vv, a, t, label=None, c=c, glow=glow)
+    if q > 0:
+        f = font(XB, s * 0.95); w = f.measureText('?')
+        cv.drawString('?', hx - w / 2, bl(f, hy - s * 0.05), f, P(col('#FFFFFF', 0.5 * a * q), blur=8))
+        cv.drawString('?', hx - w / 2, bl(f, hy - s * 0.05), f, P(col('#FFFFFF', a * q)))
+    cv.restore()
+    if label: mono(cv, label, hx, hy + s * 1.25, 20, mixc(c, '#FFFFFF', 0.25), a, sp=3)
+    return hx, hy
+
+def phone3d(cv, cx, cy, w, h, a, t, ry=-16, rx=8, z=0, **kw):
+    """ponsel DM melayang dalam perspektif 3D + pendar neon di belakang"""
+    if a <= 0: return
+    halo(cv, cx, cy, w * 1.1, ROSE, 0.45 * a)
+    with plane(cv, cx, cy, z, w, h, ry, rx) as ok:
+        if ok: dm_phone(cv, 0, 0, w, h, a, t, **kw)
+
+def carousel(cv, cx, cy, R, spin, a, t, seen=0.0):
+    """4 kartu profil berputar dalam carousel 3D (urut kedalaman)"""
+    items = []
+    for k, (c, nm) in enumerate(BOYS):
+        ang = spin + k * math.tau / 4
+        x = R * math.sin(ang); z = R * (1 - math.cos(ang)) * 0.9
+        items.append((z, k, x, ang, c, nm))
+    items.sort(key=lambda it: -it[0])
+    for z, k, x, ang, c, nm in items:
+        dep = clamp(1 - z / (1.8 * R))
+        with plane(cv, cx + x, cy, z, 450, 270, math.degrees(math.sin(ang)) * 0.6, -6) as ok:
+            if ok:
+                if True:
+                    profile_card(cv, 0, 0, 450, 270, a * lerp(0.35, 1.0, dep), c, nm, t, seen=seen)
+                else:
+                    r = skia.Rect(-225, -135, 225, 135); glass(cv, r, rad=24, a=a * 0.5, glow=0.1)
+
+def thought_ring(cv, cx, cy, R, spin, a, texts, tilt=0.32, size=24, center=None):
+    """kartu pikiran mengorbit dalam 3D (perspektif + urut kedalaman); center() digambar di tengah antrian"""
+    items = []
+    for k, (txt, c) in enumerate(texts):
+        x, y, z = ring_pos(k, len(texts), spin, R, tilt); items.append((z, k, x, y, txt, c))
+    items.sort(key=lambda it: -it[0]); drawn = False
+    for z, k, x, y, txt, c in items:
+        if z < 0 and not drawn and center: center(); drawn = True
+        X, Y, s = P3(cx + x, cy + y, z)
+        dep = clamp((R - z) / (2 * R))
+        comment(cv, txt, X, Y, a * lerp(0.35, 1.0, dep), s * 0.85, size=size, av=c, rot=(k % 3 - 1) * 4, glow=0.5 * dep)
+    if center and not drawn: center()
+
 # ------------------------------------------------------------ A: HOOK — dia cuek, kok kamu makin kepikiran? bukan jatuh cinta, kamu lagi digantungin (0 - 6.22)
 DM = [('R', 'lagi apa?', 0.15), ('R', 'udah makan belum?', 0.45), ('L', 'oke', 0.85)]
 def gA(cv, t):
-    zin = eo(prog(t, 0.0, 0.5)); push = lerp(1.07, 1.0, zin)
+    zin = eo(prog(t, 0.0, 0.6)); push = lerp(1.08, 1.0, zin)
     cv.save(); cv.translate(540, 760); cv.scale(push, push); cv.translate(-540, -760)
-    typ = bump(prog(t, 1.3, 2.6)) if t < 2.6 else bump(prog(t, 3.2, 4.0))
-    st = 'online' if (t % 1.6) < 1.0 or t < 1.0 else 'terakhir dilihat baru saja'
-    dm_phone(cv, 735, 700, 400, 720, 1.0, t, DM, typing=typ, status=st, glow=0.3)
-    hero(cv, 250, 1110, 300, 'worried' if t > 0.9 else 'neutral', 1.0, t, glow=0.3, gc=ROSE)
+    studio(cv, 1.0, t, ROSE, x=560, cone=200)
+    sleeper(cv, 560, 1050, 210, 1.0, t, eye=1.2 + 0.08 * math.sin(t * 9), mood='worried', glow=0.4, gc=ROSE)
     cv.restore()
+    mv = eio(prog(t, 2.5, 3.2))
+    typ = bump(prog(t, 1.3, 2.4)) if t < 2.5 else bump(prog(t, 3.3, 4.2))
+    st = 'online' if (t % 1.6) < 1.0 or t < 1.0 else 'terakhir dilihat baru saja'
+    px = lerp(560, 300, mv); py = lerp(645, 640, mv); pw = lerp(320, 280, mv)
+    phone3d(cv, px, py + 8 * math.sin(t * 1.6), pw, pw * 1.75, 1.0 * (1 - 0.25 * mv), t, ry=lerp(-14, -26, mv) + 4 * math.sin(t * 0.9), rx=6,
+            z=lerp(0, 60, mv), msgs=DM, typing=typ, status=st, glow=0.4)
     n = 1 + int(prog(t, 0.2, 4.0) * 46)
-    va = eo(prog(t, 0.3, 0.6)) * (1 - eio(prog(t, 4.8, 5.1)))
+    va = eo(prog(t, 0.4, 0.7)) * (1 - eio(prog(t, 5.0, 5.3)))
     if va > 0:
-        race_bar(cv, 70, 430, 380, 0.15 + 0.8 * prog(t, 0.3, 4.2), va, ROSE, 'KEPIKIRAN')
-        mono(cv, f'{n}x HARI INI', 250, 430, 18, ROSE, va, sp=2)
-    ja = eo(prog(t, 2.56, 2.85)) * (1 - eio(prog(t, 4.0, 4.2)))
-    if ja > 0:
-        heart_shape(cv, 250, 600, 46 * lerp(0.6, 1, bo(prog(t, 2.56, 2.9))), ja, ROSE)
-        chip(cv, 'JATUH CINTA?', 250, 690, ja, size=24, fg=INK, bgc=ROSE, edge=ROSE)
-        if t > 3.6: cross(cv, 250, 600, 50, ja * eo(prog(t, 3.6, 3.85)), CORAL)
-    ga = eo(prog(t, 4.13, 4.45))
-    if ga > 0:
-        hanging_heart(cv, 250, 470, 170 * eo(prog(t, 4.13, 4.6)) + 1, 46, ga, t, swing=1.0, c=ROSE, q=1.0)
-        chip(cv, 'DIGANTUNGIN', 250, 745, ga * (1 - eio(prog(t, 5.0, 5.3))), size=24, fg='#FFFFFF', bgc=CORAL, edge=CORAL)
-    c2 = prog(t, 5.15, 5.45)
+        r = skia.Rect(700, 300, 1000, 410); glass(cv, r, rad=22, a=va * (1 - mv), glow=0.4, gc=ROSE, edge=ROSE)
+        mono(cv, 'KEPIKIRAN', 850, 328, 16, ROSE, va * (1 - mv), sp=3)
+        f = font(XB, 44); s_ = f'{n}x'; cv.drawString(s_, 850 - f.measureText(s_) / 2, bl(f, 380), f, P(col('#FFFFFF', va * (1 - mv))))
+    ha = eo(prog(t, 2.6, 3.0))
+    if ha > 0:
+        L = 330 * eo(prog(t, 2.6, 3.3)); sl = eo(prog(t, 4.13, 4.6))
+        pend_heart(cv, 760, 300, L, 92, 0.55, ha, t, swing=0.4 + 0.9 * sl, c=ROSE, q=sl, glow=0.5 + 0.4 * sl, slosh=1.0)
+        la = eo(prog(t, 2.9, 3.2)) * (1 - eo(prog(t, 4.0, 4.2)))
+        if la > 0: mono(cv, 'JATUH CINTA?', 760, 790, 22, ROSE, ha * la, sp=4)
+        da = sl * (1 - eio(prog(t, 5.0, 5.3)))
+        if da > 0:
+            cv.save(); cv.translate(760, 800); s2 = lerp(1.4, 1, eo(sl)); cv.scale(s2, s2)
+            extrude(cv, 'DIGANTUNGIN', 0, 0, 52, da, depth=8, front=('#FFFFFF', '#FFD6E6'), side='#6A2A4A', glow=ROSE); cv.restore()
+    c2 = prog(t, 5.15, 5.5)
     if c2 > 0:
-        cv.save(); cv.translate(560, 655); s_ = lerp(0.5, 1, bo(c2)); cv.scale(s_, s_); cv.translate(-560, -655)
-        secret_card2(cv, 560, 655, 860, 220, 'TANYA DIRI SENDIRI', TANYA, clamp(c2 * 3), t, reveal=0.0, glow=0.6, size=54)
-        cv.restore()
+        with plane(cv, 540, 620, lerp(500, 0, eo(c2)), 860, 220, lerp(30, 0, eo(c2)), 6) as ok:
+            if ok: secret_card2(cv, 0, 0, 860, 220, 'TANYA DIRI SENDIRI', TANYA, clamp(c2 * 3), t, reveal=0.0, glow=0.7, size=54)
 
 # ------------------------------------------------------------ B: 2011, Erin Whitchurch dan timnya (6.22 - 9.74)
 def gB(cv, t):
+    studio(cv, eo(prog(t, 6.22, 6.5)), t, ACC)
     research_card(cv, t, 6.25, '2011', 'Whitchurch, Wilson & Gilbert', 'Univ. of Virginia · Harvard · Psychological Science', None, None, 600, t_out=8.5, tag='PSYCH SCI')
     ma = eo(prog(t, 8.55, 8.85))
     if ma > 0:
-        extrude(cv, '47 MAHASISWI', 540, 560, 84, ma, depth=10, front=('#FFFFFF', '#FFD6E6'), side='#6A2A4A', glow=ROSE)
+        extrude(cv, '47 MAHASISWI', 540, 470, 88, ma, depth=12, front=('#FFFFFF', '#FFD6E6'), side='#6A2A4A', glow=ROSE)
         for k in range(47):
             u = prog(t, 8.6 + k * 0.012, 8.9 + k * 0.012)
-            if u > 0: mini_person(cv, 150 + (k % 12) * 71, 700 + (k // 12) * 70, 22, ROSE, ma * clamp(u * 3), lit=0.0)
+            if u <= 0: continue
+            x = 150 + (k % 12) * 71; y = 620 + (k // 12) * 95
+            pulse = 0.6 + 0.4 * math.sin(t * 3 - k * 0.3)
+            heart_shape(cv, x, y, 22 * lerp(0.4, 1, bo(u)), ma * clamp(u * 3) * pulse, ROSE)
 
 # ------------------------------------------------------------ C: lihat profil 4 cowok yang katanya udah lihat profil mereka (9.74 - 13.65)
 def gC(cv, t):
     a0 = eo(prog(t, 9.74, 10.05)); seen = eo(prog(t, 11.53, 11.85))
+    studio(cv, a0, t, ACC)
     mono(cv, 'PROFIL 4 COWOK', 540, 350, 22, ACC_XL, a0, sp=4)
-    for k, (c, nm) in enumerate(BOYS):
-        q = eo(prog(t, 9.85 + k * 0.15, 10.2 + k * 0.15))
-        x = 300 + (k % 2) * 480; y = 520 + (k // 2) * 240
-        profile_card(cv, x, y + (1 - q) * 30, 420, 200, a0 * q, c, nm, t, seen=seen)
+    spin = lerp(-1.2, 0.0, eo(prog(t, 9.74, 10.6))) + (t - 10.6) * 0.45 * (t > 10.6)
+    carousel(cv, 540, 650, 380, spin, a0, t, seen=seen)
     if seen > 0:
-        eye_icon(cv, 540, 1010, 46, a0 * seen, 0.6 + 0.4 * math.sin(t * 3) ** 2, GOLD)
-        chip(cv, 'KATANYA UDAH LIHAT PROFILMU', 540, 1100, a0 * seen, size=26, fg=INK, bgc=GOLD, edge=GOLD)
+        eye_icon(cv, 540, 950, 52, a0 * seen, 0.6 + 0.4 * math.sin(t * 3) ** 2, GOLD)
+        halo(cv, 540, 950, 160, GOLD, 0.5 * seen * a0)
+        chip(cv, 'KATANYA UDAH LIHAT PROFILMU', 540, 1060, a0 * seen, size=26, fg=INK, bgc=GOLD, edge=GOLD)
 
 # ------------------------------------------------------------ D: dibilang suka banget / biasa aja / nggak jelas (13.65 - 19.55)
+HEARTS3 = [('SUKA BANGET', GOLD, 0.92, 14.48, 0.15), ('BIASA AJA', '#7FB8FF', 0.45, 16.8, 0.1), ('NGGAK JELAS', ROSE, 0.55, 18.38, 1.0)]
+def three_hearts(cv, t, a0, levels=None, dim=None, crown_k=None):
+    cv.drawRoundRect(skia.Rect(100, 353, 980, 367), 7, 7, P(shader=lg(0, 353, 0, 367, [col('#C9CCE8', 0.8 * a0), col('#5A5E7E', 0.8 * a0)])))
+    for k, (lab, c, v, t0, sw) in enumerate(HEARTS3):
+        q = prog(t, t0, t0 + 0.5) if levels is None else 1.0
+        if q <= 0: continue
+        x = 200 + k * 320; L = 380 * bo(clamp(q * 1.2))
+        vv = v if levels is None else levels[k]
+        dd = 1.0 if dim is None else dim[k]
+        ragu = (k == 2)
+        if ragu and levels is None: vv = 0.55 + 0.35 * math.sin(t * 3.1)
+        pend_heart(cv, x, 360, L, 104, vv, a0 * clamp(q * 3) * dd, t, swing=sw * (0.75 if ragu else 1.0), c=c, q=1.0 if ragu else 0.0,
+                   glow=(0.7 if ragu else 0.25) * dd, phase=k * 1.3, label=lab, slosh=1.0 if ragu else 0.2)
+        if crown_k == k: crown(cv, x, 312, 34, a0)
+
 def gD(cv, t):
     a0 = eo(prog(t, 13.65, 13.95))
-    mono(cv, 'MEREKA DIBILANG...', 540, 360, 22, ACC_XL, a0, sp=4)
-    for k, (title, kind, c, t0) in enumerate((('SUKA BANGET', 'suka', GOLD, 14.48), ('BIASA AJA', 'biasa', '#7FB8FF', 16.8), ('NGGAK JELAS', 'ragu', ROSE, 18.38))):
-        q = prog(t, t0, t0 + 0.3)
-        if q <= 0: continue
-        cv.save(); x = 200 + k * 340; cv.translate(x, 700); s_ = lerp(0.6, 1, bo(q)); cv.scale(s_, s_); cv.translate(-x, -700)
-        cond_card(cv, x, 700, 300, 420, a0 * clamp(q * 3), t, title, kind, c, glow=0.6 if kind == 'ragu' else 0.0)
-        cv.restore()
-    hero(cv, 540, 1130, 160, 'neutral', a0 * eo(prog(t, 13.8, 14.1)), t, glow=0.2)
+    studio(cv, a0, t, ROSE)
+    mono(cv, 'MEREKA DIBILANG "DIA ITU..."', 540, 300, 22, ACC_XL, a0, sp=4)
+    three_hearts(cv, t, a0)
 
 # ------------------------------------------------------------ E: hasilnya? paling tertarik = yang nggak jelas, lebih dari yang disukai banget (19.55 - 24.14)
 def gE(cv, t):
     a0 = eo(prog(t, 19.55, 19.85))
-    if t < 20.3: extrude(cv, 'HASILNYA?', 540, 640, 100, a0 * (1 - eio(prog(t, 20.0, 20.3))), depth=10)
-    ba = a0 * eo(prog(t, 20.21, 20.5))
-    if ba > 0:
-        mono(cv, 'SEBERAPA TERTARIK?', 540, 350, 22, ACC_XL, ba, sp=4)
-        g = eio(prog(t, 20.3, 21.4)); win = eo(prog(t, 21.2, 21.6))
-        for k, (lab, hgt, c) in enumerate((('BIASA AJA', 170, '#7FB8FF'), ('SUKA BANGET', 300, GOLD), ('NGGAK JELAS', 420, ROSE))):
-            x = 220 + k * 320
-            vbar(cv, x, 1000, hgt * g, ba, c, lab)
-            if k == 2 and win > 0:
-                crown(cv, x, 1000 - hgt * g - 60, 34, ba * win)
-                halo(cv, x, 1000 - hgt * g / 2, 200, ROSE, 0.5 * win * ba)
-        la = eo(prog(t, 22.38, 22.7))
-        if la > 0: chip(cv, 'LEBIH DARI YANG DISUKAI BANGET', 540, 470, la * ba, size=24, fg=INK, bgc=ROSE, edge=ROSE)
+    studio(cv, a0, t, ROSE)
+    g = eio(prog(t, 20.21, 21.4)); win = eo(prog(t, 21.2, 21.6))
+    lv = [lerp(0.45, 0.32, g), lerp(0.92, 0.62, g), lerp(0.55, 1.0, g)]
+    three_hearts(cv, t, a0, levels=lv, dim=[1 - 0.45 * win, 1 - 0.45 * win, 1.0], crown_k=2 if win > 0.5 else None)
+    mono(cv, 'SEBERAPA TERTARIK?', 540, 300, 22, ACC_XL, a0 * eo(prog(t, 20.0, 20.3)), sp=4)
+    if t < 20.4: extrude(cv, 'HASILNYA?', 540, 1010, 96, a0 * (1 - eio(prog(t, 20.1, 20.4))), depth=10)
+    if win > 0:
+        halo(cv, 840, 740, 280, ROSE, 0.6 * win * a0)
+        rays(cv, 840, 740, 340, 0.5 * win * a0, t, n=14, c=ROSE, spin=10)
+    la = eo(prog(t, 22.38, 22.7))
+    if la > 0: chip(cv, 'LEBIH DARI YANG DISUKAI BANGET', 540, 1050, la * a0, size=26, fg=INK, bgc=ROSE, edge=ROSE)
 
 # ------------------------------------------------------------ F: ketidakpastian -> mikirin dia terus -> makin kerasa suka (24.14 - 29.52)
-THOUGHTS = [('dia suka nggak ya?', ROSE), ("kok cuma 'oke'?", '#7FB8FF'), ('tadi dia lihat story-ku', GOLD), ('apa aku salah ngomong?', MINT)]
+THOUGHTS = [('dia suka nggak ya?', ROSE), ("kok cuma 'oke'?", '#7FB8FF'), ('tadi dia lihat story-ku', GOLD), ('apa aku salah ngomong?', MINT), ('kok online tapi nggak bales?', HOTPINK)]
 def gF(cv, t):
     a0 = eo(prog(t, 24.14, 24.45))
-    ca = eo(prog(t, 24.3, 24.6))
+    studio(cv, a0, t, ROSE, x=420)
     for k, (lab, c, t0) in enumerate((('NGGAK PASTI', ROSE, 24.3), ('KEPIKIRAN', GOLD, 26.0), ('MAKIN SUKA', HOTPINK, 28.16))):
         q = eo(prog(t, t0, t0 + 0.3))
         if q <= 0: continue
         x = 200 + k * 340
-        chip(cv, lab, x, 360, a0 * q, size=26, fg=INK, bgc=c, edge=c)
+        chip(cv, lab, x, 300, a0 * q, size=26, fg=INK, bgc=c, edge=c)
         if k > 0:
-            ar = skia.Path(); ar.moveTo(x - 250, 360); ar.lineTo(x - 120, 360); cv.drawPath(ar, P(col(ACC_XL, 0.7 * a0 * q), stroke=3))
-            tri_ = skia.Path(); tri_.moveTo(x - 132, 350); tri_.lineTo(x - 118, 360); tri_.lineTo(x - 132, 370); tri_.close(); cv.drawPath(tri_, P(col(ACC_XL, 0.7 * a0 * q)))
-    head_solid(cv, 540, 720, 0.48, a0, face=1, rim=ROSE, glow=0.4, gc=ROSE)
+            ar = skia.Path(); ar.moveTo(x - 250, 300); ar.lineTo(x - 120, 300); cv.drawPath(ar, P(col(ACC_XL, 0.7 * a0 * q), stroke=3))
+            tri_ = skia.Path(); tri_.moveTo(x - 132, 290); tri_.lineTo(x - 118, 300); tri_.lineTo(x - 132, 310); tri_.close(); cv.drawPath(tri_, P(col(ACC_XL, 0.7 * a0 * q)))
     sw = eo(prog(t, 24.92, 25.3))
-    if sw > 0:
-        loop_arrow(cv, 530, 660, 130, t, a0 * sw, ROSE, spin=300, sweep=300, w=6)
-        for k, (txt, c) in enumerate(THOUGHTS):
-            ang = t * 1.5 + k * math.tau / 4
-            chip(cv, txt, 540 + math.cos(ang) * 330, 690 + math.sin(ang) * 150, a0 * sw * (0.6 + 0.4 * (math.sin(ang) + 1) / 2), size=22, fg=INK, bgc=c, edge=c)
-    kp = eio(prog(t, 25.3, 28.0)); sk = eio(prog(t, 28.16, 29.3))
-    race_bar(cv, 160, 920, 980, 0.2 + 0.75 * kp, a0 * eo(prog(t, 25.3, 25.6)), GOLD, 'KEPIKIRAN')
-    race_bar(cv, 160, 920, 1080, 0.15 + 0.75 * sk, a0 * eo(prog(t, 27.9, 28.2)), HOTPINK, 'RASA SUKA')
+    def head(): head_solid(cv, 420, 800, 0.44, a0, face=1, rim=ROSE, glow=0.5, gc=ROSE)
+    if sw > 0: thought_ring(cv, 420, 650, 190, t * 0.9, a0 * sw, THOUGHTS, tilt=0.3, size=21, center=head)
+    else: head()
+    fill = 0.2 + 0.75 * eio(prog(t, 25.3, 29.0))
+    pend_heart(cv, 905, 380, 330, 92, fill, a0, t, swing=0.5, c=HOTPINK, q=0.0, glow=0.3 + 0.6 * eio(prog(t, 28.16, 29.0)), slosh=0.6)
+    mono(cv, 'RASA SUKA', 905, 930, 20, HOTPINK, a0, sp=3)
 
 # ------------------------------------------------------------ G: sebelum baper, tanya diri sendiri: aku suka dia, atau cuma penasaran? (29.52 - 34.12)
 def gG(cv, t):
     a0 = eo(prog(t, 29.52, 29.85)); rv = eio(prog(t, 31.75, 32.3))
-    cv.save(); cv.translate(540, 410); s_ = 1 + 0.05 * bump(prog(t, 32.2, 32.6)); cv.scale(s_, s_); cv.translate(-540, -410)
-    secret_card2(cv, 540, 410, 880, 220, 'TANYA DIRI SENDIRI', TANYA, a0, t, reveal=rv, glow=0.5 + 0.5 * rv, size=60)
-    cv.restore()
+    studio(cv, a0, t, GOLD)
+    if rv > 0:
+        rays(cv, 540, 420, 560, 0.6 * rv * a0, t, n=18, c=GOLD, spin=6)
+        halo(cv, 540, 420, 460, GOLD, 0.5 * rv * a0)
+    with plane(cv, 540, 420, 0, 900, 230, 4 * math.sin(t * 0.8), 4) as ok:
+        if ok:
+            s_ = 1 + 0.05 * bump(prog(t, 32.2, 32.6)); cv.scale(s_, s_)
+            secret_card2(cv, 0, 0, 900, 230, 'TANYA DIRI SENDIRI', TANYA, a0, t, reveal=rv, glow=0.5 + 0.5 * rv, size=60)
     calm = eio(prog(t, 32.64, 33.8))
-    hanging_heart(cv, 790, 560, 220, 40, a0, t, swing=lerp(1.0, 0.1, calm), c=ROSE, q=1 - calm)
-    hero(cv, 360, 1110, 300, 'calm' if calm > 0.5 else 'neutral', a0, t, glow=0.3 + 0.3 * calm, gc=MINT if calm > 0.5 else ROSE)
-    for k, (lab, x, y, c, t0) in enumerate((('SUKA?', 210, 640, HOTPINK, 31.9), ('PENASARAN?', 520, 620, GOLD, 32.7))):
+    pend_heart(cv, 800, 560, 260, 70, 0.6, a0, t, swing=lerp(1.0, 0.0, calm), c=ROSE, q=1 - calm, glow=0.4 + 0.4 * calm, slosh=1 - calm)
+    hero(cv, 330, 1110, 300, 'calm' if calm > 0.5 else 'neutral', a0, t, glow=0.3 + 0.3 * calm, gc=MINT if calm > 0.5 else ROSE)
+    for k, (lab, x, y, c, t0) in enumerate((('SUKA?', 200, 640, HOTPINK, 31.9), ('PENASARAN?', 480, 610, GOLD, 32.7))):
         q = prog(t, t0, t0 + 0.3)
-        if q > 0: thought(cv, lab, x, y, 32, a0 * clamp(q * 3), c, (360, 780), sc=lerp(0.6, 1, bo(q)), fg='#FFFFFF')
+        if q > 0: thought(cv, lab, x, y, 32, a0 * clamp(q * 3), c, (330, 780), sc=lerp(0.6, 1, bo(q)), fg='#FFFFFF')
 
 # ------------------------------------------------------------ H: kirim ke teman yang lagi digantungin (34.12 - 36.6)
 SHARE = [('bestie', '#FF7FC8'), ('teman kos', '#7FB8FF'), ('sepupu', '#FFC56B'), ('teman kelas', '#3FD6A4')]
