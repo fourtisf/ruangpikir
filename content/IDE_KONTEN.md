@@ -98,6 +98,10 @@ Situasi tegang yang umum + satu kalimat/tindakan yang bisa langsung dicoba + tok
 - [ ] Mau minta tolong? Ngomong langsung, jangan lewat chat (Roghanizad & Bohns 2017: tatap muka ±34× lebih berhasil daripada email ke orang asing; Flynn & Lake 2008)
 - [ ] Sering berantem sama pasangan? Lihat dari sudut pandang orang ketiga yang netral (Finkel dkk. 2013, Psychological Science: 120 pasangan, 3 × 7 menit, 2 tahun)
 - [ ] Lagi panik? Taruh tangan di dada 20 detik (Dreisoerner dkk. 2021: kortisol lebih rendah setelah tes stres; jujur: rasa stres yang dilaporkan tidak beda)
+- [x] Susah move on? Jangan stalking. Ingat kebiasaan dia yang nyebelin, lalu alihkan — EP32, lihat `EP32_susah-move-on.md` (Fisher dkk. 2010; Marshall 2012; Langeslag & Sanchez 2018)
+- [ ] Ngerasa temanmu paling sedikit? Hampir semua orang mengira kehidupan sosial orang lain lebih ramai (Deri, Davidai & Gilovich 2017, JPSP)
+- [ ] Takut dibilang lemah kalau jujur? Orang lain melihatnya sebagai keberanian — beautiful mess effect (Bruk, Scholl & Bless 2018, JPSP) + kalimat "Jujur, aku salah"
+- [ ] Dia cuek, kok makin kepikiran? Ketidakpastian bikin makin tertarik (Whitchurch, Wilson & Gilbert 2011, Psychological Science)
 - [x] Suara Ibu, kok jadi nyebelin pas remaja? Otak "pindah channel" ke suara baru — EP31, lihat `EP31_suara-ibu.md` (Abrams dkk. 2022, Journal of Neuroscience)
 - [ ] Anak sulung galak, bungsu manja? Riset 20 ribu orang: urutan lahir tidak mengubah kepribadian (Rohrer, Egloff & Schmukle 2015, PNAS)
 - [ ] Kenapa kita paling gampang ketus ke Ibu? Kita berani menunjukkan emosi ke orang yang kita yakin tetap sayang (von Culin, Hirsch & Clark 2018) + kalimat "Maaf ya Bu, tadi aku capek, bukan karena Ibu"
