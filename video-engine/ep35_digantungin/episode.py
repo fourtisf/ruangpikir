@@ -2849,15 +2849,16 @@ HEARTS3 = [('SUKA BANGET', GOLD, 0.92, 14.48, 0.15), ('BIASA AJA', '#7FB8FF', 0.
 def three_hearts(cv, t, a0, levels=None, dim=None, crown_k=None):
     cv.drawRoundRect(skia.Rect(100, 353, 980, 367), 7, 7, P(shader=lg(0, 353, 0, 367, [col('#C9CCE8', 0.8 * a0), col('#5A5E7E', 0.8 * a0)])))
     for k, (lab, c, v, t0, sw) in enumerate(HEARTS3):
-        q = prog(t, t0, t0 + 0.5) if levels is None else 1.0
+        q = prog(t, 13.8 + k * 0.14, 14.35 + k * 0.14) if levels is None else 1.0
         if q <= 0: continue
+        qf = eo(prog(t, t0, t0 + 0.6)) if levels is None else 1.0
         x = 200 + k * 320; L = 380 * bo(clamp(q * 1.2))
-        vv = v if levels is None else levels[k]
-        dd = 1.0 if dim is None else dim[k]
+        vv = v * qf if levels is None else levels[k]
+        dd = (1.0 if dim is None else dim[k]) * (0.5 + 0.5 * qf)
         ragu = (k == 2)
-        if ragu and levels is None: vv = 0.55 + 0.35 * math.sin(t * 3.1)
-        pend_heart(cv, x, 360, L, 104, vv, a0 * clamp(q * 3) * dd, t, swing=sw * (0.75 if ragu else 1.0), c=c, q=1.0 if ragu else 0.0,
-                   glow=(0.7 if ragu else 0.25) * dd, phase=k * 1.3, label=lab, slosh=1.0 if ragu else 0.2)
+        if ragu and levels is None: vv = (0.55 + 0.35 * math.sin(t * 3.1)) * qf
+        pend_heart(cv, x, 360, L, 104, vv, a0 * clamp(q * 3) * dd, t, swing=sw * (0.75 if ragu else 1.0) * (0.3 + 0.7 * qf), c=c, q=qf if ragu else 0.0,
+                   glow=(0.7 if ragu else 0.25) * dd * qf, phase=k * 1.3, label=lab if qf > 0.02 else None, slosh=(1.0 if ragu else 0.2) * qf)
         if crown_k == k: crown(cv, x, 312, 34, a0)
 
 def gD(cv, t):
