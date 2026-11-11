@@ -3040,11 +3040,11 @@ def gA(cv, t):
     ba = eo(prog(t, 1.35, 1.75)) * (1 - out)
     if ba > 0:
         fr = eo(prog(t, 2.12, 3.1)); hit = prog(t, 2.07, 2.15)
-        drop = 0.0 if t >= 2.07 else lerp(260, 0, eio(prog(t, 1.75, 2.07))) if t > 1.75 else 260
+        drop = 0.0 if t >= 2.07 else lerp(150, 0, eio(prog(t, 1.75, 2.07))) if t > 1.75 else 150
         sy = shake(t, 2.07, 9, 0.5)
         sc = lerp(0.4, 1.0, bo(prog(t, 1.35, 1.75)))
         cv.save(); cv.translate(660, 520 + sy); cv.scale(sc, sc); cv.rotate(-3 + 2 * math.sin(t * 0.8)); cv.translate(-660, -520)
-        big_bubble(cv, 660, 520, 'oke', 132, ba, t, dot=1.0, frost_=fr, crack=prog(t, 2.07, 2.4), drop=drop, hl=0.4 * (1 - fr))
+        big_bubble(cv, 660, 520, 'oke', 132, ba, t, dot=eo(prog(t, 1.55, 1.8)), frost_=fr, crack=prog(t, 2.07, 2.4), drop=drop, hl=0.4 * (1 - fr))
         cv.restore()
         if 0 < hit < 1 or 2.07 <= t < 2.5:
             u = prog(t, 2.07, 2.5); cv.drawCircle(780, 540, 60 + 160 * u, P(col(ICE, 0.5 * (1 - u) * ba), stroke=5))
@@ -3063,8 +3063,8 @@ def gA(cv, t):
 # ------------------------------------------------------------ B: 2016, Celia Klin dan timnya (5.88 - 9.4)
 def gB(cv, t):
     studio(cv, eo(prog(t, 5.88, 6.2)), t, ACC)
-    research_card(cv, t, 5.92, '2016', 'Gunraj dkk. & Celia Klin', 'Binghamton Univ. · Computers in Human Behavior', None, None, 560, t_out=9.0, tag='CHB')
-    da = eo(prog(t, 7.0, 7.4)) * (1 - eo(prog(t, 8.95, 9.3)))
+    research_card(cv, t, 5.92, '2016', 'Gunraj dkk. & Celia Klin', 'Binghamton Univ. · Computers in Human Behavior', None, None, 560, t_out=9.25, tag='CHB')
+    da = eo(prog(t, 7.0, 7.4)) * (1 - eo(prog(t, 9.2, 9.45)))
     if da > 0:
         y = 1000 + 10 * math.sin(t * 1.8)
         chrome_dot(cv, 540, y - 20, 66, da, t, glow=0.5, gc=CORAL)
@@ -3077,9 +3077,9 @@ def gC(cv, t):
     studio(cv, a0, t, ACC)
     ga = a0 * (1 - g_out)
     if ga > 0:
-        extrude(cv, '126 MAHASISWA', 540, 420, 84, ga, depth=12, front=('#FFFFFF', HL), side='#2E3270', glow=ACC)
+        extrude(cv, '126 MAHASISWA', 540, 420, 84 * lerp(1.2, 1, eo(prog(t, 9.4, 9.7))), ga, depth=12, front=('#FFFFFF', HL), side='#2E3270', glow=ACC)
         for k in range(126):
-            u = prog(t, 9.5 + k * 0.006, 9.8 + k * 0.006)
+            u = prog(t, 9.42 + k * 0.005, 9.7 + k * 0.005)
             if u <= 0: continue
             x = 150 + (k % 14) * 60; y = 560 + (k // 14) * 62
             mini_person(cv, x, y, 34 * lerp(0.5, 1, bo(u)), ACC_L if k % 9 else FRIEND, ga * clamp(u * 3), lit=0.5 + 0.5 * math.sin(t * 2 + k * 0.4) ** 2)

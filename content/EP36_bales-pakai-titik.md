@@ -28,7 +28,7 @@ Bales pakai titik, kok [dikira marah?]
   - ponsel chat 3D: "besok jadi nongkrong?", "aku udah booking!" → dibalas **"oke."** (titiknya menyala koral);
   - titik itu jadi **bola krom hitam raksasa** yang jatuh ke gelembung "oke" besar, lalu gelembungnya **retak dan membeku**;
   - meter **KESAN TULUS** turun dari 92% ke 28%, dan teman cemas berpikir "dia marah ya?";
-  - kartu emas **TRIK 1 TANDA** buram + gembok (dibuka di detik ±44 video).
+  - kartu emas **TRIK 1 TANDA** buram + gembok (dibuka di detik ±42 video).
 
 ## Naskah suara (vo.py, anchor = waktu animasi, DUR 42)
 ```python
