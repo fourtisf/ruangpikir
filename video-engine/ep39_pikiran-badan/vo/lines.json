@@ -1,0 +1,65 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Mau obrolan nggak garing? Coba satu pertanyaan ini.",
+  "file": "vo/l00.wav",
+  "dur": 3.387
+ },
+ {
+  "i": 1,
+  "anchor": 3.45,
+  "text": "Kalau bisa hidup sampai sembilan puluh tahun, kamu pilih punya pikiran, atau badan umur tiga puluh?",
+  "file": "vo/l01.wav",
+  "dur": 5.852
+ },
+ {
+  "i": 2,
+  "anchor": 8.93,
+  "text": "Ini salah satu dari tiga puluh enam pertanyaan buatan psikolog Arthur Aron.",
+  "file": "vo/l02.wav",
+  "dur": 3.881
+ },
+ {
+  "i": 3,
+  "anchor": 12.67,
+  "text": "Pertanyaannya makin lama makin pribadi, dan dijawab gantian oleh dua orang asing.",
+  "file": "vo/l03.wav",
+  "dur": 4.33
+ },
+ {
+  "i": 4,
+  "anchor": 16.81,
+  "text": "Tahun dua ribu dua puluh satu, Susan Spreker menguji ulang. Mereka jadi lebih dekat, dibanding yang cuma basa-basi.",
+  "file": "vo/l04.wav",
+  "dur": 6.294
+ },
+ {
+  "i": 5,
+  "anchor": 22.68,
+  "text": "Soalnya pertanyaan kayak gini bikin kita cerita soal diri sendiri, bukan soal cuaca.",
+  "file": "vo/l05.wav",
+  "dur": 5.232
+ },
+ {
+  "i": 6,
+  "anchor": 27.62,
+  "text": "Jadi kalau obrolan mulai garing, lempar pertanyaan ini, terus jawab gantian.",
+  "file": "vo/l06.wav",
+  "dur": 4.65
+ },
+ {
+  "i": 7,
+  "anchor": 32.04,
+  "text": "Kamu pilih mana: pikiran atau badan? Tulis di komentar, terus kirim ke temanmu!",
+  "file": "vo/l07.wav",
+  "dur": 4.801
+ },
+ {
+  "i": 8,
+  "anchor": 36.6,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l08.wav",
+  "dur": 3.213
+ }
+]
