@@ -1,6 +1,16 @@
 # EP 39 — Obrolan garing, kok jadi seru? (Pikiran atau badan umur 30?)
 
 Status: **sudah diproduksi** — `videos/ruang-pikir-ep39-pikiran-atau-badan.mp4` (±47 detik, 1080×1920, dengan **lagu instrumental orisinal**), halaman web `ruangpikir.id/episode/pikiran-atau-badan/`.
+**Visual versi 2 (premium berbeda, "lab hologram")** atas permintaan ALFA. Suara, naskah, dan timing sama dengan v1.
+- Platform hologram bercahaya + lantai grid perspektif + sorot proyektor.
+- Dua siluet hologram dengan garis pindai: jaringan saraf menyala di kepala = PIKIRAN, energi mengalir di badan = BADAN.
+- "?" 3D naik di sorot cahaya, lalu cincin dial UMUR 30→90.
+- Layar terbelah PIKIRAN | BADAN dengan huruf 3D raksasa.
+- Menara spiral 36 kartu.
+- Jembatan cahaya + kartu bergantian.
+- Pilar cahaya BASA-BASI vs 36 PERTANYAAN.
+- Cerita diri mengorbit kepala hologram.
+- Gelombang energi dari platform.
 Format: **format EP17** (episode viral 20,9K: satu pertanyaan konkret + penonton menjawab di komentar), dengan pertanyaan pilihan A/B supaya komentar lebih ramai. Visual **UI premium** seperti EP38: kartu emas 3D, tombol kuis, panel energi obrolan, kolom komentar.
 
 ## Riset
@@ -131,7 +141,16 @@ Malam 19.00–21.00 WIB, paling pas Jumat–Minggu (waktu nongkrong). Balas kome
 - **Versi tanpa musik:**
   1. `python3 episode.py timeline timeline.json && MUSIC=0 python3 audio.py timeline.json audio_nomusic.wav`
   2. Mux ke video yang sudah ada (`-map 0:v -map 1:a -c:v copy` + loudnorm −14).
-- **Helper baru:**
+- **Helper v2 (lab hologram):**
+  - `holo_bg()` — lantai grid, cincin platform berputar, sorot.
+  - `bust_path()`.
+  - `holo_bust()` — siluet hologram + garis pindai. `mind` = jaringan saraf di kepala, `body` = energi di badan.
+  - `holo_ring()` — dial miring.
+  - `holo_text()` — teks hologram yang muncul dari kiri.
+  - `helix_cards()` — menara spiral 36 kartu + garis spiral.
+  - `light_pillar()`.
+  - `split_world()` — layar terbelah dengan fade vertikal, `dtop` = awal garis tengah.
+- **Helper v1:**
   - `q_card3d()` — kartu pertanyaan emas 3D: belakang "?", muka pertanyaan; `flip` membalik.
   - `brain_icon()`, `dumbbell_icon()`.
   - `choice_btn()` — tombol kuis premium.

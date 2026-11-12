@@ -6,6 +6,9 @@ kamu pilih punya PIKIRAN atau BADAN umur 30?" + slider UMUR 30->90 + tombol PIKI
 kartu 06 maju; slider RINGAN->PRIBADI + kartu dilempar gantian + GILIRAN KAMU/DIA; kartu riset 2021 Sprecher + ring BASA-BASI vs 36 PERTANYAAN;
 panel chat BASA-BASI (cuaca dicoret) vs CERITA DIRI; kartu dilempar ke meja, energi obrolan naik jadi SERU; kartu polling "Kamu pilih mana?" +
 kolom komentar mengetik + KIRIM KE TEMANMU.
+Versi 2 (premium berbeda, "lab hologram"): platform hologram + lantai grid, siluet hologram dengan garis pindai (jaringan saraf di kepala = PIKIRAN,
+energi mengalir di badan = BADAN), "?" naik di sorot cahaya, cincin dial UMUR 30->90, layar terbelah PIKIRAN | BADAN, menara spiral 36 kartu,
+jembatan cahaya + kartu gantian, pilar cahaya BASA-BASI vs 36 PERTANYAAN, cerita diri mengorbit kepala hologram, gelombang energi dari platform.
 python3 episode.py preview t1 t2 ... | timeline out.json | video out.mp4"""
 import sys, os, math, json, subprocess, random
 import skia
@@ -3429,165 +3432,292 @@ def energy_panel(cv, cx, cy, w, v, a, t, label='ENERGI OBROLAN'):
     tag = 'GARING' if v < 0.4 else 'SERU'
     chip(cv, tag, r.centerX(), r.top() + 34, a, size=18, fg=INK, bgc=c, edge=c)
 
-# ------------------------------------------------------------ A: HOOK — mau obrolan nggak garing? coba satu pertanyaan ini: pikiran atau badan umur 30? (0 - 8.93)
+# ------------------------------------------------------------ helper EP39 v2 (premium berbeda: "lab hologram"): platform hologram, siluet hologram + garis pindai, jaringan saraf, energi badan, cincin putar, menara spiral kartu, pilar cahaya, layar terbelah
+HOLO = '#8FE3FF'; PINK = HOTPINK; MNT = UI_MINT
+
+def bust_path(x, y, s):
+    p = skia.Path.Circle(x, y - s * 0.56, s * 0.3)
+    b_ = skia.Path(); b_.moveTo(x - s * 0.75, y + s * 0.9); b_.cubicTo(x - s * 0.75, y - s * 0.05, x - s * 0.45, y - s * 0.28, x, y - s * 0.28)
+    b_.cubicTo(x + s * 0.45, y - s * 0.28, x + s * 0.75, y - s * 0.05, x + s * 0.75, y + s * 0.9); b_.close()
+    return skia.Op(p, b_, skia.PathOp.kUnion_PathOp)
+
+def holo_bg(cv, a, t, c=HOLO, cx=540, beam=0.0, warm=0.0):
+    """lab hologram: lantai grid perspektif (garis), platform cincin bercahaya, sorot proyektor ke atas"""
+    if a <= 0: return
+    cc = mixc(c, GOLD, warm)
+    for k in range(9):
+        y = 1090 + (k ** 1.6) * 6
+        cv.drawLine(0, y, 1080, y, P(col(cc, 0.10 * a * (1 - k / 9)), stroke=1.5))
+    for k in range(-6, 7):
+        cv.drawLine(cx + k * 40, 1090, cx + k * 180, 1290, P(col(cc, 0.08 * a * (1 - abs(k) / 7)), stroke=1.5))
+    for k, (rx, ry, al) in enumerate(((330, 46, 0.55), (250, 34, 0.4), (170, 22, 0.3))):
+        ang = (t * (20 + k * 12)) % 360
+        r = skia.Rect(cx - rx, 1090 - ry, cx + rx, 1090 + ry)
+        cv.drawOval(r, P(col(cc, 0.25 * al * a), stroke=10, blur=10))
+        p = skia.Path(); p.addArc(r, ang, 250); cv.drawPath(p, P(col(cc, al * a), stroke=3))
+    cv.drawOval(skia.Rect(cx - 340, 1050, cx + 340, 1130), P(shader=rg(cx, 1090, 340, [col(cc, 0.25 * a), col(cc, 0)])))
+    if beam > 0:
+        bp = skia.Path(); bp.moveTo(cx - 160, 1090); bp.lineTo(cx + 160, 1090); bp.lineTo(cx + 60, 300); bp.lineTo(cx - 60, 300); bp.close()
+        cv.drawPath(bp, P(shader=lg(0, 1090, 0, 300, [col(cc, 0.22 * beam * a), col(cc, 0)])))
+
+def holo_bust(cv, x, y, s, a, t, c=HOLO, mind=0.0, body=0.0, flick=True, mc=PINK, bc=MNT):
+    """siluet hologram: isi tembus pandang, garis pindai bergerak, tepi bercahaya, jaringan saraf di kepala (mind), energi mengalir di badan (body)"""
+    if a <= 0: return
+    if flick: a *= 0.85 + 0.15 * (1 if (t * 7.3 + x) % 1 > 0.08 else 0.2)
+    p = bust_path(x, y, s)
+    cv.drawPath(p, P(col(c, 0.35 * a), blur=s * 0.25))
+    cv.drawPath(p, P(shader=lg(x, y - s, x, y + s, [col(c, 0.26 * a), col(c, 0.06 * a)])))
+    cv.save(); cv.clipPath(p, skia.ClipOp.kIntersect, True)
+    off = (t * 40) % 10
+    for k in range(int(s * 2.2 / 10) + 2):
+        yy = y - s + k * 10 + off; cv.drawLine(x - s, yy, x + s, yy, P(col(c, 0.12 * a), stroke=1.5))
+    hx, hy, hr = x, y - s * 0.56, s * 0.3
+    if mind > 0:
+        cv.drawCircle(hx, hy, hr, P(col(mc, 0.25 * mind * a), blur=hr * 0.4))
+        rnd = random.Random(int(x)); pts = [(hx + rnd.uniform(-0.8, 0.8) * hr, hy + rnd.uniform(-0.8, 0.8) * hr) for _ in range(11)]
+        net = skia.Path()
+        for i, (px, py) in enumerate(pts):
+            for qx, qy in pts[i + 1:]:
+                if math.hypot(px - qx, py - qy) < hr * 0.75: net.moveTo(px, py); net.lineTo(qx, qy)
+        cv.drawPath(net, P(col(mc, 0.55 * mind * a), stroke=2))
+        cv.drawPath(net, P(col('#FFFFFF', 0.9 * mind * a), stroke=2.4, effect=skia.DashPathEffect.Make([10, 40], -t * 90)))
+    if body > 0:
+        cv.drawRect(skia.Rect(x - s, y - s * 0.3, x + s, y + s), P(shader=lg(0, y + s, 0, y - s * 0.3, [col(bc, 0.35 * body * a), col(bc, 0)])))
+        for k in range(3):
+            bx = x + (k - 1) * s * 0.34; bp = skia.Path()
+            for i in range(30):
+                yy = y + s * 0.9 - i * s * 0.04; xx = bx + s * 0.06 * math.sin(i * 0.45 + t * 3 + k * 2)
+                (bp.moveTo if i == 0 else bp.lineTo)(xx, yy)
+            cv.drawPath(bp, P(col(bc, 0.6 * body * a), stroke=6, blur=6))
+            cv.drawPath(bp, P(col('#FFFFFF', 0.9 * body * a), stroke=3, effect=skia.DashPathEffect.Make([50, 70], -t * 160 - k * 37)))
+    cv.restore()
+    rc = c if (mind <= 0 and body <= 0) else mixc(c, mc if mind >= body else bc, 0.5)
+    cv.drawPath(p, P(col(rc, 0.6 * a), stroke=6, blur=6)); cv.drawPath(p, P(col('#FFFFFF', 0.7 * a), stroke=1.8))
+    cv.drawOval(skia.Rect(x - s * 0.9, y + s * 0.84, x + s * 0.9, y + s * 1.0), P(col(c, 0.35 * a), blur=10))
+
+def holo_ring(cv, cx, cy, rx, ry, a, t, c=HOLO, spin=1.0, ticks=48):
+    """cincin dial hologram miring dengan garis-garis skala yang berputar"""
+    if a <= 0: return
+    r = skia.Rect(cx - rx, cy - ry, cx + rx, cy + ry)
+    cv.drawOval(r, P(col(c, 0.3 * a), stroke=12, blur=12)); cv.drawOval(r, P(col(c, 0.85 * a), stroke=2.5))
+    for k in range(ticks):
+        ang = k * math.tau / ticks + t * spin; ca, sa = math.cos(ang), math.sin(ang)
+        L = 0.08 if k % 4 == 0 else 0.04; front = sa > 0
+        x0, y0 = cx + ca * rx, cy + sa * ry; x1, y1 = cx + ca * rx * (1 - L), cy + sa * ry * (1 - L)
+        cv.drawLine(x0, y0, x1, y1, P(col(c, (0.9 if front else 0.35) * a), stroke=3 if k % 4 == 0 else 1.6))
+
+def holo_text(cv, text, cx, cy, size, a, t, c=HOLO, fg='#FFFFFF', reveal=1.0, align=0.5):
+    """teks hologram: pendar + garis pindai tipis + kemunculan dari kiri"""
+    if a <= 0: return
+    f = font(XB, size); w = f.measureText(text); x = cx - w * align; y = bl(f, cy)
+    cv.save(); cv.clipRect(skia.Rect(x - 10, cy - size, x + (w + 20) * clamp(reveal), cy + size))
+    cv.drawString(text, x, y, f, P(col(c, 0.6 * a), blur=size * 0.18))
+    cv.drawString(text, x, y, f, P(shader=lg(0, cy - size * 0.6, 0, cy + size * 0.3, [col(fg, a), col(mixc(fg, c, 0.6), a)])))
+    cv.restore()
+    if 0 < reveal < 1:
+        xe = x + w * reveal; cv.drawLine(xe, cy - size * 0.7, xe, cy + size * 0.4, P(col(c, a), stroke=4, blur=3))
+
+def helix_cards(cv, cx, top, bot, a, t, spin, skip=None, R=230, n=36):
+    """36 kartu mini membentuk menara spiral mengelilingi sorot cahaya (urut kedalaman)"""
+    items = []
+    for k in range(n):
+        u = k / (n - 1); ang = spin + k * 0.36
+        x = R * math.sin(ang); z = R * math.cos(ang); y = lerp(bot, top, u)
+        items.append((z, k, x, y))
+    gp = skia.Path()
+    for i in range(141):
+        u = i / 140; ang = spin + u * (n - 1) * 0.36
+        X, Y, s = P3(cx + R * math.sin(ang), lerp(bot, top, u), R * math.cos(ang))
+        (gp.moveTo if i == 0 else gp.lineTo)(X, Y)
+    cv.drawPath(gp, P(col(GOLD, 0.25 * a), stroke=6, blur=8)); cv.drawPath(gp, P(col(GOLD, 0.5 * a), stroke=1.6))
+    items.sort(key=lambda it: -it[0])
+    for z, k, x, y in items:
+        if skip is not None and k == skip: continue
+        q = prog(t, 9.0 + k * 0.02, 9.35 + k * 0.02)
+        if q <= 0: continue
+        X, Y, s = P3(cx + x, y, z); dep = clamp((R - z) / (2 * R))
+        mini_q(cv, X, Y, 80 * s, a * clamp(q * 3) * lerp(0.3, 1, dep), k + 1, card_col(k), glow=0.2 * dep)
+
+def light_pillar(cv, x, base, h, a, t, c, w=150, label=None, top_draw=None):
+    """pilar cahaya hologram yang tumbuh dari platform"""
+    if a <= 0 or h <= 2: return
+    r = skia.Rect(x - w / 2, base - h, x + w / 2, base)
+    cv.drawRect(r, P(shader=lg(0, base - h, 0, base, [col(c, 0.15 * a), col(c, 0.55 * a)])))
+    cv.drawRect(skia.Rect(x - w * 0.12, base - h, x + w * 0.12, base), P(shader=lg(0, base - h, 0, base, [col('#FFFFFF', 0.3 * a), col('#FFFFFF', 0.7 * a)])))
+    cv.drawOval(skia.Rect(x - w / 2, base - h - 14, x + w / 2, base - h + 14), P(col(c, 0.9 * a), stroke=3))
+    cv.drawOval(skia.Rect(x - w / 2, base - 14, x + w / 2, base + 14), P(col(c, 0.7 * a), stroke=3))
+    off = (t * 60) % 30
+    for k in range(int(h / 30) + 1):
+        yy = base - k * 30 - off
+        if base - h < yy < base: cv.drawLine(x - w / 2, yy, x + w / 2, yy, P(col('#FFFFFF', 0.12 * a), stroke=1.5))
+    if label: mono(cv, label, x, base + 50, 19, c, a, sp=3)
+    if top_draw: top_draw(x, base - h)
+
+def split_world(cv, a, t, u, lw='PIKIRAN', rw='BADAN', y=460, size=96, dtop=300):
+    """layar terbelah: kiri dunia PIKIRAN (merah muda), kanan dunia BADAN (mint), garis cahaya di tengah"""
+    if a <= 0: return
+    e = eio(clamp(u))
+    cv.saveLayer(skia.Rect(0, 150, 1080, 1250), None)
+    cv.drawRect(skia.Rect(0, 150, 540, 1250), P(shader=lg(0, 0, 540, 0, [col(PINK, 0.2 * a * e), col(PINK, 0.03 * a * e)])))
+    cv.drawRect(skia.Rect(540, 150, 1080, 1250), P(shader=lg(540, 0, 1080, 0, [col(MNT, 0.03 * a * e), col(MNT, 0.2 * a * e)])))
+    pm = skia.Paint(Shader=lg(0, 150, 0, 1250, [col('#FFFFFF', 0), col('#FFFFFF', 1), col('#FFFFFF', 1), col('#FFFFFF', 0)], [0, 0.25, 0.7, 1]), BlendMode=skia.BlendMode.kDstIn)
+    cv.drawRect(skia.Rect(0, 150, 1080, 1250), pm)
+    cv.restore()
+    cv.drawLine(540, dtop, 540, 1100, P(col('#FFFFFF', 0.5 * a * e), stroke=8, blur=10)); cv.drawLine(540, dtop, 540, 1100, P(col('#FFFFFF', 0.9 * a * e), stroke=2))
+
+# ------------------------------------------------------------ A (v2): HOOK — dua siluet hologram, garis datar GARING, "?" naik di sorot cahaya, cincin UMUR 30->90, layar terbelah PIKIRAN | BADAN (0 - 8.93)
 def gA(cv, t):
     zin = eo(prog(t, 0.0, 0.6)); push = lerp(1.08, 1.0, zin)
+    beam = eo(prog(t, 1.66, 2.1))
+    sp = prog(t, 5.3, 5.9)
     cv.save(); cv.translate(540, 760); cv.scale(push, push); cv.translate(-540, -760)
-    cafe_bg(cv, 1.0, t)
-    table(cv, 540, 1120, 360, 1.0, t, legs=False)
-    q = prog(t, 1.66, 2.5); fl = prog(t, 3.45, 4.1)
-    md = 'neutral' if fl <= 0 else ('excited' if t > 5.4 else 'happy')
-    hero(cv, 250, 1120, 240, md, 1.0, t, glow=0.25 + 0.3 * fl, gc=GOLD)
-    hero(cv, 830, 1120, 240, md, 1.0, t, glow=0.25 + 0.3 * fl, gc=HOTPINK)
+    holo_bg(cv, 1.0, t, HOLO, beam=beam * (1 - 0.6 * sp))
+    split_world(cv, 1.0, t, sp)
+    m = eo(prog(t, 5.44, 5.9)); bd = eo(prog(t, 6.44, 6.9))
+    holo_bust(cv, 250, 900, 170, 1.0, t, HOLO if m <= 0 else mixc(HOLO, PINK, m), mind=m)
+    holo_bust(cv, 830, 900, 170, 1.0, t, HOLO if bd <= 0 else mixc(HOLO, MNT, bd), body=bd)
     cv.restore()
-    ea = eo(prog(t, 0.2, 0.5)) * (1 - eo(prog(t, 1.66, 2.0)))
-    if ea > 0: energy_panel(cv, 540, 560, 760, 0.1, ea, t)
-    if q > 0:
-        y = lerp(-300, 560, eo(q)) + 8 * math.sin(t * 1.4) * (q >= 1)
-        rz = lerp(-40, 0, eo(q))
-        if q < 1: rays(cv, 540, y, 520, 0.5 * q, t, n=16, c=GOLD, spin=8)
-        halo(cv, 540, y, 520, GOLD, 0.45 * clamp(q * 2))
-        q_card3d(cv, 540, y, 900, 360, clamp(q * 3), t, flip=fl, z=lerp(400, 0, eo(q)), rz=rz, glow=0.5 + 0.3 * fl)
-    sa = eo(prog(t, 3.9, 4.3)) * (1 - eo(prog(t, 5.3, 5.6)))
-    if sa > 0: age_slider(cv, 540, 860, 640, prog(t, 4.2, 5.3), sa, t)
-    for k, (x, lab, icon, c, t0) in enumerate(((330, 'PIKIRAN', brain_icon, HOTPINK, 5.44), (750, 'BADAN', dumbbell_icon, UI_MINT, 6.44))):
-        ba = prog(t, t0, t0 + 0.35)
-        if ba > 0:
-            cv.save(); cv.translate(x, 840); s_ = lerp(0.6, 1, bo(ba)); cv.scale(s_, s_); cv.translate(-x, -840)
-            choice_btn(cv, x, 840, 380, 120, clamp(ba * 3), t, lab, 'umur 30', icon, c, glow=0.3 * bump(prog(t, t0, t0 + 0.8)))
-            cv.restore()
+    fa = 1 - eo(prog(t, 1.66, 2.0))
+    if fa > 0:
+        p = skia.Path(); p.moveTo(340, 780)
+        for i in range(40): p.lineTo(340 + i * 10, 780 + (2 * math.sin(i + t * 9)))
+        cv.drawPath(p, P(col('#9AA0C8', 0.6 * fa), stroke=3))
+        chip(cv, 'GARING', 540, 730, fa * eo(prog(t, 0.3, 0.6)), size=22, fg=INK, bgc='#9AA0C8', edge='#9AA0C8')
+    qa = eo(prog(t, 1.75, 2.3)) * (1 - eo(prog(t, 3.35, 3.7)))
+    if qa > 0:
+        y = lerp(1000, 600, eo(prog(t, 1.75, 2.5))) + 10 * math.sin(t * 2)
+        cv.save(); cv.translate(540, y); cv.scale(1 + 0.04 * math.sin(t * 3), 1); cv.translate(-540, -y)
+        holo_ring(cv, 540, y + 120, 170, 34, qa, t, HOLO, spin=1.4)
+        extrude(cv, '?', 540, y, 230, qa, depth=16, front=('#FFFFFF', HOLO), side='#1E4A6A', glow=HOLO)
+        cv.restore()
+    ra = eo(prog(t, 3.45, 3.85)) * (1 - eo(prog(t, 5.3, 5.7)))
+    if ra > 0:
+        holo_ring(cv, 540, 600, 260, 70, ra, t, HOLO, spin=2.0)
+        holo_ring(cv, 540, 600, 200, 52, ra * 0.7, -t, HOLO, spin=1.2)
+        age = int(round(lerp(30, 90, eio(prog(t, 3.9, 5.2)))))
+        mono(cv, 'UMUR', 540, 470, 22, HOLO, ra, sp=6)
+        extrude(cv, str(age), 540, 590, 170, ra, depth=14, front=('#FFFFFF', HOLO), side='#1E4A6A', glow=HOLO)
+    if sp > 0:
+        for k, (x, word, c, t0, icon) in enumerate(((270, 'PIKIRAN', PINK, 5.44, brain_icon), (810, 'BADAN', MNT, 6.44, dumbbell_icon))):
+            q = prog(t, t0, t0 + 0.45)
+            if q <= 0: continue
+            xx = x + (1 - eo(q)) * (-120 if k == 0 else 120)
+            extrude(cv, word, xx, 470, 92, clamp(q * 3), depth=12, front=('#FFFFFF', c), side=mixc(c, '#000000', 0.6), glow=c)
+            icon(cv, xx, 600, 46, clamp(q * 3), c)
+            chip(cv, 'UMUR 30', xx, 690, clamp(q * 3), size=22, fg=INK, bgc=c, edge=c)
 
-# ------------------------------------------------------------ B: salah satu dari 36 pertanyaan Arthur Aron (8.93 - 12.67)
+# ------------------------------------------------------------ B (v2): menara spiral 36 kartu di sorot cahaya, kartu 06 keluar (8.93 - 12.67)
 def gB(cv, t):
     a0 = eo(prog(t, 8.93, 9.25))
-    studio(cv, 0.6 * a0, t, GOLD)
-    extrude(cv, '36 PERTANYAAN', 540, 360, 78, a0 * eo(prog(t, 9.0, 9.4)), depth=11, front=('#FFFFFF', '#FFE3B0'), side='#5A4A2A', glow=GOLD)
-    spin = (t - 9.0) * 0.5; items = []
-    for k in range(36):
-        x, y, z = ring_pos(k, 36, spin, 400, 0.34); items.append((z, k, x, y))
-    items.sort(key=lambda it: -it[0])
-    pop = eo(prog(t, 9.9, 10.5))
-    for z, k, x, y in items:
-        bq = prog(t, 9.0 + k * 0.012, 9.3 + k * 0.012)
-        if bq <= 0: continue
-        X, Y, s = P3(540 + x, 700 + y, z); dep = clamp((380 - z) / 760)
-        if k == 5 and pop > 0: continue
-        mini_q(cv, X, Y, 96 * s, a0 * clamp(bq * 3) * lerp(0.35, 1, dep) * (1 - 0.4 * pop), k + 1, card_col(k))
+    holo_bg(cv, a0, t, GOLD, beam=1.0, warm=0.6)
+    extrude(cv, '36 PERTANYAAN', 540, 330, 76, a0 * eo(prog(t, 9.0, 9.4)), depth=11, front=('#FFFFFF', '#FFE3B0'), side='#5A4A2A', glow=GOLD)
+    pop = eo(prog(t, 9.9, 10.6))
+    helix_cards(cv, 540, 470, 1010, a0, t, (t - 9.0) * 0.9, skip=5 if pop > 0 else None)
     if pop > 0:
-        mini_q(cv, 540, lerp(760, 700, pop), lerp(96, 220, eo(pop)), a0, 6, GOLD, glow=0.8 * pop)
+        x = lerp(540 + 230 * math.sin((9.9 - 9.0) * 0.9 + 5 * 0.36), 540, eo(pop)); y = lerp(lerp(1010, 470, 5 / 35), 700, eo(pop))
+        rays(cv, x, y, 300, 0.5 * pop * a0, t, n=14, c=GOLD, spin=8)
+        mini_q(cv, x, y, lerp(80, 240, eo(pop)), a0, 6, GOLD, glow=0.9 * pop)
     ca = eo(prog(t, 10.2, 10.5))
-    if ca > 0: chip(cv, 'PSIKOLOG ARTHUR ARON · 1997', 540, 1040, a0 * ca, size=24, fg=INK, bgc=GOLD, edge=GOLD)
+    if ca > 0: chip(cv, 'PSIKOLOG ARTHUR ARON · 1997', 540, 1060, a0 * ca, size=24, fg=INK, bgc=GOLD, edge=GOLD)
 
-# ------------------------------------------------------------ C: makin lama makin pribadi, dijawab gantian oleh dua orang asing (12.67 - 16.81)
+# ------------------------------------------------------------ C (v2): dua siluet hologram, jembatan cahaya, kartu bergantian makin pribadi (12.67 - 16.81)
 def gC(cv, t):
     a0 = eo(prog(t, 12.67, 13.0))
-    cafe_bg(cv, 0.6 * a0, t)
+    holo_bg(cv, a0, t, HOLO)
     u = prog(t, 12.8, 16.6)
-    r = skia.Rect(150, 300, 930, 420); ui_panel(cv, r, a0, glow=0.25)
-    mono(cv, 'RINGAN', r.left() + 34, r.top() + 36, 17, UI_MINT, a0, sp=3, align=0); mono(cv, 'PRIBADI', r.right() - 34, r.top() + 36, 17, HOTPINK, a0, sp=3, align=1)
-    gx0, gx1, gy = r.left() + 34, r.right() - 34, r.top() + 82
-    cv.drawRoundRect(skia.Rect(gx0, gy - 8, gx1, gy + 8), 8, 8, P(col('#FFFFFF', 0.12 * a0)))
-    xv = lerp(gx0, gx1, u)
-    cv.drawRoundRect(skia.Rect(gx0, gy - 8, xv, gy + 8), 8, 8, P(shader=lg(gx0, 0, gx1, 0, [col(UI_MINT, a0), col(GOLD, a0), col(HOTPINK, a0)])))
-    cv.drawCircle(xv, gy, 18, P(col('#FFFFFF', a0)))
-    turns = int((t - 13.0) / 0.9) if t > 13.0 else 0; fr = ((t - 13.0) / 0.9) % 1 if t > 13.0 else 0
-    side = turns % 2
-    hero(cv, 230, 1100, 280, 'excited' if side == 0 and fr < 0.6 else 'happy', a0, t, glow=0.3, gc=GOLD, mouth_open=0.4 * (side == 0))
-    hero(cv, 850, 1100, 280, 'excited' if side == 1 and fr < 0.6 else 'happy', a0, t, glow=0.3, gc=HOTPINK, mouth_open=0.4 * (side == 1))
+    holo_text(cv, 'RINGAN', 140, 350, 26, a0, t, MNT, align=0); holo_text(cv, 'PRIBADI', 940, 350, 26, a0, t, PINK, align=1)
+    cv.drawLine(150, 395, 930, 395, P(col('#FFFFFF', 0.15 * a0), stroke=4))
+    xv = lerp(150, 930, u)
+    cv.drawLine(150, 395, xv, 395, P(shader=lg(150, 0, 930, 0, [col(MNT, a0), col(GOLD, a0), col(PINK, a0)]), stroke=6))
+    cv.drawCircle(xv, 395, 14, P(col('#FFFFFF', a0))); cv.drawCircle(xv, 395, 26, P(col(mixc(MNT, PINK, u), 0.5 * a0), blur=10))
+    turns = int((t - 13.0) / 0.9) if t > 13.0 else 0; fr = ((t - 13.0) / 0.9) % 1 if t > 13.0 else 0; side = turns % 2
+    cc = card_col(min(35, turns * 4))
+    bond(cv, 300, 760, 780, 760, a0, t, w=lerp(3, 8, u), c=cc, lift=220)
+    holo_bust(cv, 250, 900, 160, a0, t, mixc(HOLO, cc, 0.5 * (side == 0)), mind=0.6 * (side == 0) * u)
+    holo_bust(cv, 830, 900, 160, a0, t, mixc(HOLO, cc, 0.5 * (side == 1)), mind=0.6 * (side == 1) * u)
     if t > 13.0:
-        e = eio(clamp(fr * 1.4)); x0, x1 = (330, 750) if side == 0 else (750, 330)
-        x = lerp(x0, x1, e); y = 700 - 160 * math.sin(math.pi * e)
+        e = eio(clamp(fr * 1.4)); x0, x1 = (300, 780) if side == 0 else (780, 300)
+        x = lerp(x0, x1, e); y = 760 - 170 * math.sin(math.pi * e)
         cv.save(); cv.translate(x, y); cv.rotate(lerp(-20, 20, e) * (1 if side == 0 else -1)); cv.translate(-x, -y)
-        mini_q(cv, x, y, 150, a0, min(36, 1 + turns * 4), card_col(min(35, turns * 4)), glow=0.6)
-        cv.restore()
-    ui_seg(cv, 540, 1010, 420, ['GILIRAN KAMU', 'GILIRAN DIA'], float(side) if t > 13.0 else 0.0, a0, GOLD if side == 0 else HOTPINK, h=60)
+        mini_q(cv, x, y, 140, a0, min(36, 1 + turns * 4), cc, glow=0.8); cv.restore()
     ga = eo(prog(t, 14.5, 14.8))
-    if ga > 0: chip(cv, 'DUA ORANG ASING', 540, 520, a0 * ga, size=24, fg=INK, bgc=UI_BLUE, edge=UI_BLUE)
+    if ga > 0: chip(cv, 'DUA ORANG ASING · GANTIAN', 540, 1060, a0 * ga, size=24, fg=INK, bgc=HOLO, edge=HOLO)
 
-# ------------------------------------------------------------ D: 2021 Susan Sprecher menguji ulang: lebih dekat dibanding basa-basi (16.81 - 22.68)
+# ------------------------------------------------------------ D (v2): 2021 Sprecher + pilar cahaya BASA-BASI vs 36 PERTANYAAN (16.81 - 22.68)
 def gD(cv, t):
     a0 = eo(prog(t, 16.81, 17.15))
-    studio(cv, 0.6 * a0, t, ACC)
+    holo_bg(cv, a0, t, HOLO)
     research_card(cv, t, 16.86, '2021', 'Susan Sprecher', 'Journal of Social and Personal Relationships', None, None, 560, t_out=19.4, tag='JSPR')
-    pa = eo(prog(t, 19.55, 19.95))
+    pa = eo(prog(t, 19.55, 19.9))
     if pa <= 0: return
-    r = skia.Rect(90, 320, 990, 1060); ui_panel(cv, r, a0 * pa, glow=0.25)
-    mono(cv, 'RASA DEKAT SETELAH NGOBROL', 540, r.top() + 52, 22, ACC_L, a0 * pa, sp=3)
-    fill = eo(prog(t, 19.8, 21.0)); win = eo(prog(t, 20.88, 21.2))
-    for k, (x, c, lab, v) in enumerate(((310, UI_BLUE, 'BASA-BASI', 0.38), (770, GOLD, '36 PERTANYAAN', 0.86))):
-        def ctr(x=x, k=k, c=c):
-            if k == 0:
-                f = font(XB, 40); cv.drawString('...?', x - f.measureText('...?') / 2, bl(f, 660), f, P(col(c, a0 * pa)))
-            else:
-                mini_q(cv, x, 660, 110, a0 * pa, 6, GOLD, glow=0.5 * win)
-        ui_ring(cv, x, 660, 150, v * fill, a0 * pa, t, c, sub=lab, center=ctr)
-        if k == 1 and win > 0: crown(cv, x, 455, 44, a0 * pa * win)
-    if win > 0: chip(cv, 'LEBIH DEKAT', 770, 960, a0 * pa * win, size=26, fg=INK, bgc=GOLD, edge=GOLD)
+    holo_text(cv, 'RASA DEKAT', 540, 330, 44, a0 * pa, t, HOLO)
+    g = eo(prog(t, 19.7, 21.0)); win = eo(prog(t, 20.88, 21.2))
+    light_pillar(cv, 340, 1050, 200 * g, a0 * pa, t, UI_BLUE, label='BASA-BASI')
+    light_pillar(cv, 740, 1050, 470 * g, a0 * pa, t, GOLD, label='36 PERTANYAAN',
+                 top_draw=lambda x, y: (crown(cv, x, y - 60, 46, a0 * pa * win), mini_q(cv, x, y - 140, 100, a0 * pa * win, 6, GOLD, glow=0.6)) if win > 0 else None)
+    if win > 0: chip(cv, 'LEBIH DEKAT', 740, 1158, a0 * pa * win, size=24, fg=INK, bgc=GOLD, edge=GOLD)
 
-# ------------------------------------------------------------ E: bikin kita cerita soal diri sendiri, bukan soal cuaca (22.68 - 27.62)
+# ------------------------------------------------------------ E (v2): kepala hologram, cuaca larut, cerita diri mengorbit (22.68 - 27.62)
+STORY = [('pengen naik gunung', GOLD), ('takut kehilangan', PINK), ('mimpi waktu kecil', MNT), ('orang terpenting', UI_BLUE), ('hal yang bikin bangga', '#B57BFF')]
 def gE(cv, t):
     a0 = eo(prog(t, 22.68, 23.0))
-    studio(cv, 0.5 * a0, t, ACC)
-    for k, (x0, x1, title, c, msgs, mv, t0) in enumerate(((100, 525, 'BASA-BASI', UI_BLUE, [('L', 'panas ya hari ini'), ('R', 'iya'), ('L', 'udah makan?'), ('R', 'udah')], 0.22, 22.9),
-                                                       (555, 980, 'CERITA DIRI', GOLD, [('L', 'aku pilih badan'), ('R', 'kenapa?'), ('L', 'pengen naik gunung'), ('L', 'sampai tua!')], 0.9, 24.3))):
-        pa = eo(prog(t, t0, t0 + 0.35))
-        if pa <= 0: continue
-        r = skia.Rect(x0, 330, x1, 1040); ui_panel(cv, r, a0 * pa, glow=0.25 if k == 0 else 0.45, accent=c)
-        mono(cv, title, r.centerX(), r.top() + 44, 20, c, a0 * pa, sp=3)
-        for i, (sd, txt) in enumerate(msgs):
-            q = prog(t, t0 + 0.2 + i * 0.35, t0 + 0.45 + i * 0.35)
-            if q <= 0: continue
-            y = r.top() + 130 + i * 92
-            edge = r.left() + 24 if sd == 'L' else r.right() - 24
-            fill = ('#34365A' if sd == 'L' else '#4B53D6') if k == 0 else ('#5A4A2A' if sd == 'L' else '#7A5A9A')
-            msg(cv, edge, y + (1 - eo(q)) * 14, txt, 26, a0 * pa * clamp(q * 3), sd, fill)
-        kv = mv * eo(prog(t, t0 + 1.2, t0 + 2.2))
-        mono(cv, 'JADI KENAL', r.left() + 30, r.bottom() - 110, 17, ACC_L, a0 * pa, sp=3, align=0)
-        cv.drawRoundRect(skia.Rect(r.left() + 30, r.bottom() - 80, r.right() - 30, r.bottom() - 60), 10, 10, P(col('#FFFFFF', 0.1 * a0 * pa)))
-        cv.drawRoundRect(skia.Rect(r.left() + 30, r.bottom() - 80, lerp(r.left() + 30, r.right() - 30, kv), r.bottom() - 60), 10, 10, P(col(c, a0 * pa)))
-        if k == 0:
-            xa = eo(prog(t, 26.09, 26.4))
-            if xa > 0:
-                rain_cloud(cv, r.centerX(), r.bottom() - 215, 0.62, a0 * xa, t, rain=0.0)
-                cross(cv, r.centerX(), r.bottom() - 215, 62, a0 * xa, CORAL, d=prog(t, 26.2, 26.6))
+    holo_bg(cv, a0, t, HOLO, beam=0.7)
+    open_ = eo(prog(t, 24.3, 25.0))
+    wx = eo(prog(t, 22.8, 23.2)) * (1 - eo(prog(t, 26.09, 26.6)))
+    def center():
+        holo_bust(cv, 540, 930, 240, a0, t, mixc(HOLO, GOLD, 0.6 * open_), mind=open_, mc=GOLD)
+    if open_ > 0:
+        thought_ring(cv, 540, 680, 330 * lerp(0.4, 1, eo(open_)), (t - 24.3) * 0.7, a0 * open_, STORY, tilt=0.28, size=24, center=center)
+    else: center()
+    if wx > 0:
+        rain_cloud(cv, 830, 470, 0.8, a0 * wx * (1 - 0.6 * open_), t, rain=0.0)
+        mono(cv, 'BASA-BASI: CUACA', 830, 560, 18, UI_BLUE, a0 * wx * (1 - 0.6 * open_), sp=3)
+        xa = eo(prog(t, 26.09, 26.35))
+        if xa > 0: cross(cv, 830, 480, 80, a0 * xa * wx, CORAL, d=prog(t, 26.09, 26.45))
+    ca = eo(prog(t, 24.4, 24.7))
+    if ca > 0: chip(cv, 'CERITA SOAL DIRI SENDIRI', 540, 1150 - 40, a0 * ca, size=24, fg=INK, bgc=GOLD, edge=GOLD)
 
-# ------------------------------------------------------------ F: kalau mulai garing, lempar pertanyaan ini, jawab gantian (27.62 - 32.04)
+# ------------------------------------------------------------ F (v2): lempar pertanyaan, jembatan cahaya menebal, gelombang energi dari platform (27.62 - 32.04)
 def gF(cv, t):
     a0 = eo(prog(t, 27.62, 27.95))
-    cafe_bg(cv, a0, t)
-    v = lerp(0.12, 0.92, eo(prog(t, 29.4, 31.0)))
-    energy_panel(cv, 540, 360, 780, v, a0, t)
-    sh = eo(prog(t, 29.6, 30.6))
-    bond(cv, 340, 820, 740, 820, a0 * eo(prog(t, 29.5, 29.9)), t, w=lerp(3, 9, sh), c=GOLD, lift=140)
-    table(cv, 540, 1060, 400, a0, t, legs=False)
-    hero(cv, 300, 1060, 300, 'excited' if t > 29.5 else 'neutral', a0, t, glow=0.3 + 0.3 * sh, gc=GOLD, mouth_open=0.5 * bump(prog(t, 29.6, 30.4)))
-    hero(cv, 780, 1060, 300, 'excited' if t > 30.4 else 'neutral', a0, t, glow=0.3 + 0.3 * sh, gc=HOTPINK, mouth_open=0.5 * bump(prog(t, 30.5, 31.3)))
-    q = prog(t, 29.09, 29.7)
-    if q > 0:
-        x = lerp(300, 540, eio(q)); y = lerp(760, 1010, eio(q)) - 220 * math.sin(math.pi * q)
-        cv.save(); cv.translate(x, y); cv.rotate(lerp(-60, 0, eo(q))); cv.translate(-x, -y)
-        mini_q(cv, x, y, 120, a0, 6, GOLD, glow=0.7); cv.restore()
-    for k, (txt, x, tail, t0, c) in enumerate((('pikiran dong!', 300, (300, 840), 29.7, HOTPINK), ('badan! biar bisa jalan-jalan', 720, (780, 840), 30.55, UI_MINT))):
+    warm = eo(prog(t, 29.4, 31.0))
+    holo_bg(cv, a0, t, HOLO, warm=warm)
+    for k in range(3):
+        u = ((t - 29.4) * 0.6 + k / 3) % 1.0
+        if t > 29.4: cv.drawOval(skia.Rect(540 - 340 * (0.3 + u), 1090 - 50 * (0.3 + u), 540 + 340 * (0.3 + u), 1090 + 50 * (0.3 + u)), P(col(GOLD, 0.6 * (1 - u) * warm * a0), stroke=4))
+    bond(cv, 300, 760, 780, 760, a0 * eo(prog(t, 29.4, 29.8)), t, w=lerp(3, 11, warm), c=GOLD, lift=180)
+    holo_bust(cv, 250, 900, 170, a0, t, mixc(HOLO, PINK, warm), mind=warm)
+    holo_bust(cv, 830, 900, 170, a0, t, mixc(HOLO, MNT, warm), body=warm)
+    q = prog(t, 29.09, 29.8)
+    if q > 0 and q < 1:
+        x = lerp(300, 780, eio(q)); y = 760 - 220 * math.sin(math.pi * q)
+        cv.save(); cv.translate(x, y); cv.rotate(lerp(-40, 40, q)); cv.translate(-x, -y)
+        mini_q(cv, x, y, 130, a0, 6, GOLD, glow=0.9); cv.restore()
+    for k, (txt, x, tail, t0, c) in enumerate((('pikiran dong!', 270, (260, 700), 29.7, PINK), ('badan! biar bisa jalan-jalan', 760, (830, 700), 30.55, MNT))):
         sq = prog(t, t0, t0 + 0.3)
-        if sq > 0: say(cv, txt, x, 620 + k * 0, 28, a0 * clamp(sq * 3), c, ('#2E2A48', '#17152A'), '#FFFFFF', tail, sc=lerp(0.6, 1, bo(sq)), glow=0.5)
+        if sq > 0: say(cv, txt, x, 560, 28, a0 * clamp(sq * 3), c, ('#1E2A3A', '#101722'), '#FFFFFF', tail, sc=lerp(0.6, 1, bo(sq)), glow=0.6)
+    sa = eo(prog(t, 30.48, 30.8))
+    if sa > 0: holo_text(cv, 'OBROLAN JADI SERU', 540, 380, 50, a0 * sa, t, GOLD, reveal=prog(t, 30.48, 31.1))
 
-# ------------------------------------------------------------ G: kamu pilih mana? tulis di komentar, kirim ke temanmu (32.04 - 36.6)
+# ------------------------------------------------------------ G (v2): layar terbelah raksasa PIKIRAN | BADAN + kolom komentar hologram (32.04 - 36.6)
 def gG(cv, t):
     a0 = eo(prog(t, 32.04, 32.35))
-    studio(cv, 0.7 * a0, t, GOLD)
-    r = skia.Rect(110, 300, 970, 820); ui_panel(cv, r, a0, glow=0.5, accent=GOLD, fill=('#2E2A40', '#15131F'))
-    mono(cv, 'PERTANYAAN 06 / 36', r.left() + 40, r.top() + 44, 18, GOLD, a0, sp=3, align=0)
-    ui_text(cv, 'Kamu pilih mana?', r.left() + 40, r.top() + 120, 56, TXT, a0, XB, 0)
-    ui_text(cv, 'hidup sampai 90, tapi punya...', r.left() + 42, r.top() + 182, 28, MUTED, a0, M, 0)
-    for k, (y, lab, icon, c, t0) in enumerate(((r.top() + 290, 'PIKIRAN', brain_icon, HOTPINK, 32.94), (r.top() + 430, 'BADAN', dumbbell_icon, UI_MINT, 33.3))):
-        q = prog(t, t0, t0 + 0.35)
+    holo_bg(cv, a0, t, HOLO)
+    split_world(cv, a0, t, prog(t, 32.1, 32.6), dtop=410)
+    holo_text(cv, 'KAMU PILIH MANA?', 540, 340, 52, a0, t, HOLO, reveal=prog(t, 32.1, 32.8))
+    for k, (x, word, c, t0, icon) in enumerate(((270, 'PIKIRAN', PINK, 32.94, brain_icon), (810, 'BADAN', MNT, 33.3, dumbbell_icon))):
+        q = prog(t, t0, t0 + 0.4)
         if q <= 0: continue
-        cv.save(); cv.translate(540, y); s_ = lerp(0.7, 1, bo(q)); cv.scale(s_, s_); cv.translate(-540, -y)
-        choice_btn(cv, 540, y, 780, 116, a0 * clamp(q * 3), t, lab, 'umur 30', icon, c, glow=0.3 * (0.5 + 0.5 * math.sin(t * 3 + k * 3)))
+        pulse = 1 + 0.04 * math.sin(t * 4 + k * 3)
+        cv.save(); cv.translate(x, 600); s_ = lerp(0.6, 1, bo(q)) * pulse; cv.scale(s_, s_); cv.translate(-x, -600)
+        halo(cv, x, 600, 220, c, 0.5 * a0)
+        icon(cv, x, 560, 70, a0 * clamp(q * 3), c)
+        extrude(cv, word, x, 700, 84, a0 * clamp(q * 3), depth=12, front=('#FFFFFF', c), side=mixc(c, '#000000', 0.6), glow=c)
         cv.restore()
+        chip(cv, 'UMUR 30', x, 790, a0 * clamp(q * 3), size=22, fg=INK, bgc=c, edge=c)
     ca = eo(prog(t, 34.0, 34.35))
     if ca > 0:
-        cr = skia.Rect(110, 870, 970, 970); ui_panel(cv, cr, a0 * ca, rad=50, glow=0.3)
+        cr = skia.Rect(110, 880, 970, 980); ui_panel(cv, cr, a0 * ca, rad=50, glow=0.4, accent=HOLO, fill=('#16283A', '#0C141E'))
         avatar(cv, cr.left() + 54, cr.centerY(), 30, GOLD, a0 * ca, ok=0.0)
         typed = 'aku pilih '[:int(clamp(prog(t, 34.2, 35.0)) * 10)]
         ui_text(cv, typed if typed else 'Tulis di komentar...', cr.left() + 100, cr.centerY(), 30, TXT if typed else MUTED, a0 * ca, B, 0)
@@ -3595,13 +3725,13 @@ def gG(cv, t):
             f = font(B, 30); cx_ = cr.left() + 104 + f.measureText(typed)
             cv.drawRoundRect(skia.Rect(cx_, cr.centerY() - 20, cx_ + 4, cr.centerY() + 20), 2, 2, P(col('#FFFFFF', a0 * ca)))
         sx = cr.right() - 56
-        cv.drawCircle(sx, cr.centerY(), 30, P(col(GOLD, a0 * ca)))
+        cv.drawCircle(sx, cr.centerY(), 30, P(col(HOLO, a0 * ca)))
         plane_icon(cv, sx, cr.centerY(), 22, a0 * ca, rot=-20)
     ka = eo(prog(t, 35.15, 35.5))
     if ka > 0:
         fp = prog(t, 35.15, 35.9)
-        if 0 < fp < 1: plane_icon(cv, lerp(914, 960, fp), lerp(920, 1060, fp) - 80 * math.sin(math.pi * fp), 30, a0, rot=lerp(-20, 30, fp))
-        chip(cv, 'KIRIM KE TEMANMU', 540, 1060, a0 * ka, size=26, fg=INK, bgc=GOLD, edge=GOLD)
+        if 0 < fp < 1: plane_icon(cv, lerp(914, 960, fp), lerp(930, 1060, fp) - 80 * math.sin(math.pi * fp), 30, a0, rot=lerp(-20, 30, fp))
+        chip(cv, 'KIRIM KE TEMANMU', 540, 1060, a0 * ka, size=26, fg=INK, bgc=HOLO, edge=HOLO)
 
 
 # ------------------------------------------------------------ J: outro (36.6 - 42)
