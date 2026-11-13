@@ -1,0 +1,65 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Mau tahu apa yang paling berarti buat seseorang? Tanya satu pertanyaan ini.",
+  "file": "vo/l00.wav",
+  "dur": 4.757
+ },
+ {
+  "i": 1,
+  "anchor": 4.4,
+  "text": "Rumahmu kebakaran. Semua orang dan hewan peliharaanmu udah aman. Kamu cuma sempat ambil satu barang. Apa?",
+  "file": "vo/l01.wav",
+  "dur": 6.576
+ },
+ {
+  "i": 2,
+  "anchor": 10.16,
+  "text": "Ini pertanyaan nomor tiga puluh empat, salah satu yang paling dalam dari tiga puluh enam pertanyaan Arthur Aron.",
+  "file": "vo/l02.wav",
+  "dur": 6.097
+ },
+ {
+  "i": 3,
+  "anchor": 15.52,
+  "text": "Jawabannya sering nunjukin apa yang paling berarti buat kita, dan kenapa.",
+  "file": "vo/l03.wav",
+  "dur": 4.744
+ },
+ {
+  "i": 4,
+  "anchor": 19.76,
+  "text": "Tapi kita sering takut nanya hal sedalam ini. Takut canggung.",
+  "file": "vo/l04.wav",
+  "dur": 3.727
+ },
+ {
+  "i": 5,
+  "anchor": 23.15,
+  "text": "Padahal riset Michael Kardas tahun dua ribu dua puluh dua nemuin: obrolan yang dalam nggak secanggung yang kita kira.",
+  "file": "vo/l05.wav",
+  "dur": 6.591
+ },
+ {
+  "i": 6,
+  "anchor": 28.92,
+  "text": "Orang lain ternyata lebih tertarik dengerin cerita kita, daripada yang kita bayangin.",
+  "file": "vo/l06.wav",
+  "dur": 3.881
+ },
+ {
+  "i": 7,
+  "anchor": 32.44,
+  "text": "Kamu sendiri, barang apa yang kamu ambil? Tulis di komentar, terus kirim ke temanmu!",
+  "file": "vo/l07.wav",
+  "dur": 4.638
+ },
+ {
+  "i": 8,
+  "anchor": 36.6,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l08.wav",
+  "dur": 2.953
+ }
+]
