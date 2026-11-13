@@ -160,7 +160,15 @@ def make_episode_og(ep, card_img, path):
         y += 78
     sf = font('PlusJakartaSans-Medium.ttf', 27)
     y += 18
-    for line in wrap(d, ep['summary'], sf, 600)[:3]:
+    sl = wrap(d, ep['summary'], sf, 600)
+    if len(sl) > 3:                                  # terlalu panjang: potong di akhir kalimat, atau tambah "…"
+        txt = ' '.join(sl[:3]); cut = max(txt.rfind(c) for c in '.?!')
+        if cut > len(txt) * 0.4: txt = txt[:cut + 1]
+        else:
+            txt = txt.rstrip(' ,;:&') + '…'
+            while len(wrap(d, txt, sf, 600)) > 3: txt = txt[:-1].rsplit(' ', 1)[0].rstrip(' ,;:&') + '…'
+        sl = wrap(d, txt, sf, 600)
+    for line in sl[:3]:
         d.text((80, y), line, font=sf, fill=MUTED)
         y += 40
     d.text((80, 540), 'ruangpikir.id  ·  @ruangpikir2026', font=font('PlusJakartaSans-Bold.ttf', 26), fill=TEXT)
