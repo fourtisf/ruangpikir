@@ -3811,9 +3811,10 @@ def gC(cv, t):
     hl1 = eo(prog(t, 15.43, 15.8)); hl2 = eo(prog(t, 16.82, 17.2))
     texts = [(txt, c) for txt, c in FUTURE]
     thought_ring(cv, 540, 690, 340, (t - 14.1) * 0.6, a0 * eo(prog(t, 14.3, 14.8)), texts, tilt=0.3, size=26, center=center)
-    if hl1 > 0:
-        cv.save(); cv.translate(540, 400); s_ = lerp(0.6, 1, bo(hl1)); cv.scale(s_, s_)
-        extrude(cv, 'JODOHKU SIAPA?', 0, 0, 64, a0 * hl1 * (1 - hl2), depth=9, front=('#FFFFFF', PINK), side='#5A2A4A', glow=PINK); cv.restore()
+    out1 = eo(prog(t, 16.5, 16.8))
+    if hl1 > 0 and out1 < 1:
+        cv.save(); cv.translate(540, 400 - 60 * out1); s_ = lerp(0.6, 1, bo(hl1)); cv.scale(s_, s_)
+        extrude(cv, 'JODOHKU SIAPA?', 0, 0, 64, a0 * hl1 * (1 - out1), depth=9, front=('#FFFFFF', PINK), side='#5A2A4A', glow=PINK); cv.restore()
     if hl2 > 0:
         cv.save(); cv.translate(540, 400); s_ = lerp(0.6, 1, bo(hl2)); cv.scale(s_, s_)
         extrude(cv, 'AKU SUKSES NGGAK?', 0, 0, 60, a0 * hl2, depth=9, front=('#FFFFFF', GOLD), side='#5A4A2A', glow=GOLD); cv.restore()
