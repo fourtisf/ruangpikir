@@ -26,9 +26,10 @@ Mimpi lama, kok [belum dikejar?]
 
 ## Hook (detik 0–3)
 - Suara: **"Penyesalan yang paling lama nempel, ternyata bukan soal kesalahan."**
-- Visual sejak frame pertama:
-  - siluet hologram emas **DIRI IMPIAN** keluar dari siluet biru **AKU**, lalu berjalan menjauh di jembatan cahaya menuju cakrawala yang bercahaya;
-  - teks **PENYESALAN PALING LAMA**, lalu **BUKAN SOAL KESALAHAN** dengan kata KESALAHAN yang dicoret.
+- Visual sejak frame pertama (versi 2 "studio jam pasir"):
+  - **jam pasir kaca raksasa** jatuh sambil terbalik di bawah lampu sorot studio, lalu mendarat dengan kilatan garis cahaya;
+  - di tabung atas melayang **bintang mimpi** emas, pasir emas mulai mengalir;
+  - teks 3D **PENYESALAN PALING LAMA**, lalu tag kaca **BUKAN SOAL KESALAHAN** berayun di rantai dan dicoret.
 
 ## Naskah suara (vo.py, anchor = waktu animasi, DUR 42)
 ```python
@@ -47,16 +48,21 @@ LINES = [
 - Transkripsi persis dan instruksi gaya tidak ikut terbaca.
 - `tighten.py 0.17` dan jeda antarbaris 0,30 dtk (`base.py`) dipakai supaya video ≤ 55 dtk.
 
-## Adegan
+## Adegan (versi 2 "studio jam pasir")
+ALFA minta "visual berbeda yang lebih premium", jadi versi 1 (lab hologram: diri impian di jembatan cahaya, kapsul mimpi, timbangan hologram) diganti. Isinya:
+- studio malam dengan lampu sorot dan lantai mengilap yang memantulkan objek;
+- satu objek utama: **jam pasir kaca raksasa** berisi pasir emas dan bintang mimpi;
+- banyak gerak fisik (jatuh, berayun, dibalik, menumpuk).
+
 | Waktu animasi | Visual |
 |---|---|
-| 0–7.3 | **Hook + pertanyaan:** DIRI IMPIAN emas berjalan menjauh di jembatan cahaya + PENYESALAN PALING LAMA / BUKAN SOAL ~~KESALAHAN~~ → kapsul kaca berisi bintang mimpi naik di sorot cahaya (MIMPI LAMA) → catatan kuning NANTI ditempel satu per satu, kaca makin buram, tahun 2019 → 2026 → **KENAPA BELUM?** |
-| 7.3–11.2 | Menara spiral 36 kartu di sorot emas, kartu **14** oranye keluar dengan sinar + PSIKOLOG ARTHUR ARON · 1997. |
-| 11.2–15.4 | JAWABANMU? → tiga lempeng kaca 3D terbang dan menghantam di depan kapsul: NANTI AJA, BELUM WAKTUNYA, TAKUT GAGAL. Bintang meredup → **TEMBOK ALASAN**. |
-| 15.4–20.2 | Kartu ARSIP RISET 2018 · Davidai & Gilovich · Cornell University · Emotion → teks 3D **RATUSAN ORANG** + kerumunan hologram + APA PENYESALAN TERBESARMU? |
-| 20.2–26.8 | HASILNYA? → timbangan hologram: piring kiri berisi DIRI IMPIAN emas turun berayun (**72%**, sinar) vs piring kanan papan tugas KEWAJIBAN (**28%**). |
-| 26.8–31.5 | KENAPA? → kartu KEWAJIBAN retak, lalu disapu cahaya dan dicentang (CEPAT DIBERESIN), bergeser ke kiri → kapsul mimpi ditempeli 4 catatan NANTI, tahun 2026 → 2031 (DITUNDA TERUS). |
-| 31.5–36.6 | MIMPIMU APA?: diri impian berjalan mendekat di jembatan cahaya, bintang mimpi masuk ke dadanya + sinar → kolom komentar mengetik "mimpiku " + KIRIM KE TEMANMU. |
+| 0–7.3 | **Hook + pertanyaan:** jam pasir jatuh, terbalik, lalu mendarat + PENYESALAN PALING LAMA + tag BUKAN SOAL ~~KESALAHAN~~ berayun di rantai → kamera mendekat, MIMPI LAMA, catatan kuning NANTI ditempel di kaca, pasir terkuras, kaca makin buram, tahun 2019 → 2026 → **KENAPA BELUM?** |
+| 7.3–11.2 | 36 PERTANYAAN: cincin 36 kartu mini berputar 3D, kartu emas **14** maju ke depan lalu dibalik ("Ada mimpi yang udah lama pengen kamu lakuin? Kenapa belum?") + PSIKOLOG ARTHUR ARON · 1997. |
+| 11.2–15.4 | JAWABANMU? → tiga balok kaca 3D jatuh dan menumpuk di depan jam pasir: NANTI AJA, BELUM WAKTUNYA, TAKUT GAGAL. Jam pasir bergetar, bintang meredup → **TEMBOK ALASAN**. |
+| 15.4–20.2 | Kartu ARSIP RISET 2018 · Davidai & Gilovich · Cornell University · Emotion → **RATUSAN ORANG** + terowongan kartu kaca berisi contoh penyesalan yang melayang mendekati kamera (ilustratif) + APA PENYESALAN TERBESARMU? |
+| 20.2–26.8 | HASILNYA? → diagram lingkaran 3D: irisan emas tumbuh jadi **72%** (DIRI IMPIAN), lalu irisan biru **28%** (KEWAJIBAN). |
+| 26.8–31.5 | KENAPA? → kartu KEWAJIBAN retak, lalu disapu cahaya dan dicentang (CEPAT DIBERESIN), bergeser ke kiri → jam pasir kecil ditempeli 4 catatan NANTI, pasir terkuras, tahun 2026 → 2031 (DITUNDA TERUS). |
+| 31.5–36.6 | MIMPIMU APA?: jam pasir dibalik, bintang mimpi lepas dan naik ke cahaya (sinar) → kolom komentar mengetik "mimpiku " + KIRIM KE TEMANMU. |
 | 36.6–42 | Outro logo + RUANG PIKIR + ruangpikir.id + tombol Follow. |
 
 ## Teks cover Reels
@@ -121,7 +127,7 @@ Penyesalan paling lama bukan soal kesalahan. Ada mimpi yang belum kamu kejar? (r
 Malam 19.00–21.00 WIB, paling pas Minggu malam atau Senin (momen "mulai minggu baru"). Balas komentar di jam pertama dengan "apa langkah paling kecil yang bisa kamu mulai minggu ini?" supaya diskusinya hidup.
 
 ## Produksi
-- **Folder:** `video-engine/ep42_mimpi-lama/` (dibangun dari EP41).
+- **Folder:** `video-engine/ep42_mimpi-lama/` (dibangun dari EP41; adegan versi 2 "studio jam pasir" menggantikan versi 1 lab hologram).
 - **Render:**
   - Render ulang dengan `./build.sh`; suara sudah ada di `vo/`.
   - Buat ulang suara dengan `./build.sh --voice` (resep EP01 + `tighten.py 0.21`, lalu `tighten.py 0.17`).
@@ -131,7 +137,15 @@ Malam 19.00–21.00 WIB, paling pas Minggu malam atau Senin (momen "mulai minggu
 - **Versi tanpa musik:**
   1. `python3 episode.py timeline timeline.json && MUSIC=0 python3 audio.py timeline.json audio_nomusic.wav`
   2. Mux ke video yang sudah ada (`-map 0:v -map 1:a -c:v copy` + loudnorm).
-- **Helper baru:**
+- **Helper baru versi 2:**
+  - `hourglass3d()` — jam pasir kaca: tutup & tiang emas, pasir atas/bawah + aliran, bintang mimpi, `rot` dibalik, `frost`, angka tahun.
+  - `mirror()` — pantulan di lantai studio.
+  - `q14_card()` — kartu emas 3D nomor 14 yang dibalik.
+  - `card_ring()` — cincin 36 kartu 3D.
+  - `glass_block()` — balok kaca 3D alasan.
+  - `regret_tunnel()` — terowongan kartu penyesalan.
+  - Dipakai juga: `studio()` dari EP35 v2, `pie3d()` dari EP25.
+- **Helper versi 1 (masih ada di file):**
   - `ideal_self()` — siluet hologram emas di lantai pada kedalaman z: langkah, bintang di dada.
   - `light_bridge()` — jembatan cahaya perspektif dengan anak tangga bergerak menjauh/mendekat.
   - `dream_capsule()` — kapsul kaca + bintang mimpi; `dim`, `frost` (kaca buram), `lid`.

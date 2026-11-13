@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Ruang Pikir reel #42: 'Mimpi lama, kok belum dikejar?' — pertanyaan 14 dari 36 pertanyaan Arthur Aron ("Ada mimpi yang udah lama pengen
-kamu lakuin? Kenapa belum?") + Davidai & Gilovich 2018 (Emotion: 72% penyesalan = diri impian yang tidak dikejar, 28% = kewajiban) + lagu.
-Lanjutan seri 36 pertanyaan (EP39-EP41), gaya "lab hologram". Hook: siluet emas DIRI IMPIAN keluar dari siluet AKU lalu berjalan menjauh di
-jembatan cahaya, PENYESALAN PALING LAMA / BUKAN SOAL KESALAHAN (dicoret); kapsul mimpi naik di sorot cahaya, ditempeli catatan NANTI, tahun
-2019 -> 2026, KENAPA BELUM?. Menara spiral 36 kartu (kartu 14 keluar); tembok alasan 3D (NANTI AJA / BELUM WAKTUNYA / TAKUT GAGAL) menutupi
-kapsul; kartu riset 2018 + kerumunan RATUSAN ORANG; timbangan hologram 72% DIRI IMPIAN vs 28% KEWAJIBAN; kartu KEWAJIBAN retak lalu cepat
-diberesin vs kapsul mimpi DITUNDA TERUS; diri impian berjalan mendekat + bintang mimpi masuk ke dada, MIMPIMU APA? + kolom komentar.
+"""Ruang Pikir reel #42 (versi 2, "studio jam pasir"): 'Mimpi lama, kok belum dikejar?' — pertanyaan 14 dari 36 pertanyaan Arthur Aron
+("Ada mimpi yang udah lama pengen kamu lakuin? Kenapa belum?") + Davidai & Gilovich 2018 (Emotion: 72% penyesalan = diri impian yang tidak
+dikejar, 28% = kewajiban) + lagu. Versi 2 atas permintaan ALFA "visual berbeda yang lebih premium": studio lampu sorot + lantai mengilap
+dengan pantulan. Hook: jam pasir kaca raksasa jatuh sambil terbalik dan mendarat (kilat garis cahaya), bintang mimpi di tabung atas, pasir
+emas mengalir; PENYESALAN PALING LAMA + tag kaca BUKAN SOAL KESALAHAN yang berayun di rantai lalu dicoret; catatan NANTI ditempel, tahun
+2019 -> 2026 di tutup bawah, KENAPA BELUM?. Cincin 36 kartu + kartu emas 14 maju lalu dibalik; balok kaca alasan (NANTI AJA / BELUM
+WAKTUNYA / TAKUT GAGAL) jatuh & menumpuk; kartu riset 2018 + terowongan kartu penyesalan RATUSAN ORANG; diagram lingkaran 3D emas 72% vs
+28%; kartu KEWAJIBAN retak lalu cepat diberesin vs jam pasir mimpi DITUNDA TERUS; jam pasir dibalik, bintang mimpi lepas & naik ke cahaya,
+MIMPIMU APA? + kolom komentar.
 python3 episode.py preview t1 t2 ... | timeline out.json | video out.mp4"""
 import sys, os, math, json, subprocess, random
 import skia
@@ -3909,178 +3911,346 @@ def duty_card(cv, cx, cy, w, h, a, t, crack=0.0, fix=0.0):
         cv.drawRect(skia.Rect(xs - 40, r.top(), xs, r.bottom()), P(shader=lg(xs - 40, 0, xs, 0, [col(MNT, 0), col(MNT, 0.5 * a)])))
         cv.drawLine(xs, r.top(), xs, r.bottom(), P(col('#FFFFFF', a), stroke=3, blur=2))
 
-# ------------------------------------------------------------ A: HOOK — penyesalan paling lama bukan soal kesalahan; ada mimpi lama? kenapa belum? (0 - 7.27)
-def gA(cv, t):
-    zin = eo(prog(t, 0.0, 0.6)); push = lerp(1.08, 1.0, zin)
-    beam = eo(prog(t, 3.74, 4.2))
-    cv.save(); cv.translate(540, 760); cv.scale(push, push); cv.translate(-540, -760)
-    holo_bg(cv, 1.0, t, HOLO, beam=beam * 0.8, warm=0.4 * beam)
-    ba = 1 - eo(prog(t, 3.4, 3.8))
-    if ba > 0:
-        hg = ba * lerp(0.5, 1.0, eo(prog(t, 0.0, 1.5)))
-        cv.drawCircle(540, 770, 560, P(shader=rg(540, 770, 560, [col(GOLD, 0.30 * hg), col(ORANGE, 0.10 * hg), col(GOLD, 0)], [0, 0.45, 1])))
-        rays(cv, 540, 770, 640, 0.22 * hg, t, n=16, c=GOLD, spin=2)
-        light_bridge(cv, ba * lerp(0.5, 1, eo(prog(t, 0.0, 0.5))), t, GOLD, away=True)
-        wk = eo(prog(t, 0.25, 3.5)); sx = lerp(300, 540, eio(prog(t, 0.0, 1.0))); z = lerp(0, 2300, wk)
-        X, Yf, S = ideal_self(cv, sx, z, 190, ba * lerp(0.55, 1, eo(prog(t, 0.0, 0.3))), t, walk=1.0 if t < 3.5 else 0.0)
-        la = eo(prog(t, 0.7, 1.1))
-        if la > 0: chip(cv, 'DIRI IMPIAN', X, Yf - 1.76 * S - 34, ba * la, size=max(18, int(28 * (S / 190) ** 0.5)), fg=INK, bgc=GOLD, edge=GOLD)
-        holo_bust(cv, 300, 1090 - 0.9 * 190, 190, ba, t, HOLO)
-        mono(cv, 'AKU', 300, 1140, 22, HOLO, ba * eo(prog(t, 0.3, 0.6)), sp=5)
-    cv.restore()
-    if ba > 0:
-        holo_text(cv, 'PENYESALAN PALING LAMA', 540, 360, 44, ba, t, PINK, reveal=prog(t, 0.15, 0.9))
-        ea = eo(prog(t, 1.93, 2.25))
-        if ea > 0:
-            mono(cv, 'BUKAN SOAL', 790, 440, 22, PINK, ba * ea, sp=4)
-            chip(cv, 'KESALAHAN', 790, 500, ba * ea, size=34, fg=TXT, bgc='#3A1A2A', edge=PINK)
-            sp_ = eo(prog(t, 2.4, 2.75))
-            if sp_ > 0: cv.drawLine(790 - 125, 500, 790 - 125 + 250 * sp_, 500, P(col(PINK, ba * ea), stroke=6))
-    ca = eo(prog(t, 3.6, 4.3))
-    if ca > 0:
-        y = lerp(1000, 650, eo(ca)) + 8 * math.sin(t * 1.6); r = 125 * lerp(0.5, 1, eo(ca))
-        fr = eo(prog(t, 5.0, 6.5))
-        dream_capsule(cv, 540, y, r, ca, t, glow=0.6 + 0.4 * eo(prog(t, 4.56, 4.9)), dim=0.35 * fr, frost=0.6 * fr)
-        for k, (dx, dy, rot, t0) in enumerate(((-95, -60, -12, 5.05), (100, 20, 10, 5.5), (-60, 110, 6, 5.95))):
-            q = prog(t, t0, t0 + 0.18)
-            if q > 0: sticky(cv, 540 + dx, y + dy, 112 * lerp(2.0, 1.0, eo(q)), 'NANTI', ca * clamp(q * 3), rot)
-        ma = eo(prog(t, 4.56, 4.9)) * (1 - eo(prog(t, 6.35, 6.56)))
-        if ma > 0: chip(cv, 'MIMPI LAMA', 540, 400, ca * ma, size=28, fg=INK, bgc=GOLD, edge=GOLD)
-        ya = eo(prog(t, 5.0, 5.3))
-        if ya > 0:
-            mono(cv, 'TAHUN DEMI TAHUN', 540, 950, 20, GOLD, ca * ya, sp=4)
-            holo_text(cv, str(int(round(lerp(2019, 2026, eio(prog(t, 5.05, 6.45)))))), 540, 1015, 62, ca * ya, t, GOLD)
-    ka = eo(prog(t, 6.56, 6.9))
-    if ka > 0:
-        cv.save(); cv.translate(540, 400); s_ = lerp(0.6, 1, bo(ka)); cv.scale(s_, s_)
-        extrude(cv, 'KENAPA BELUM?', 0, 0, 74, ca * ka, depth=11, front=('#FFFFFF', GOLD), side='#5A4A2A', glow=GOLD); cv.restore()
-    fl = prog(t, 6.56, 7.0)
-    if 0 < fl < 1: cv.drawCircle(540, 650, 200 + 300 * fl, P(col('#FFFFFF', 0.5 * (1 - fl)), stroke=6))
+# ------------------------------------------------------------ helper EP42 v2 (premium berbeda: "studio jam pasir"): jam pasir kaca raksasa + pasir emas + bintang mimpi, pantulan lantai, kartu 14 emas, cincin 36 kartu, balok kaca 3D, terowongan kartu penyesalan
+SAND = '#F2C46B'
+QL14 = ['Ada [mimpi] yang udah lama', 'pengen kamu lakuin?', '[Kenapa belum?]']
+REGRETS = [('nggak jadi kuliah seni', GOLD), ('nggak berani resign', GOLD), ('lupa nelpon Ibu', HOLO), ('berhenti main musik', GOLD),
+           ('nggak bilang suka', GOLD), ('ngecewain teman', HOLO), ('belum keliling dunia', GOLD), ('nggak buka usaha', GOLD),
+           ('telat bayar utang', HOLO), ('nggak coba audisi', GOLD)]
 
-# ------------------------------------------------------------ B: pertanyaan nomor 14 dari 36 pertanyaan Arthur Aron (7.27 - 11.19)
+def mirror(cv, a, draw, floor=1090, depth=110):
+    """pantulan samar di lantai studio mengilap (digambar ulang terbalik, memudar ke bawah)"""
+    if a <= 0: return
+    cv.save(); cv.clipRect(skia.Rect(0, floor, 1080, floor + depth))
+    cv.saveLayer(skia.Rect(0, floor, 1080, floor + depth), skia.Paint(Alphaf=clamp(a)))
+    cv.save(); cv.translate(0, 2 * floor); cv.scale(1, -1); draw(); cv.restore()
+    cv.drawRect(skia.Rect(0, floor, 1080, floor + depth), skia.Paint(Shader=lg(0, floor, 0, floor + depth, [col('#FFFFFF', 0.32), col('#FFFFFF', 0)]), BlendMode=skia.BlendMode.kDstIn))
+    cv.restore(); cv.restore()
+
+def hourglass3d(cv, x, y, H, a, t, sand=0.6, rot=0.0, star=1.0, dim=0.0, frost=0.0, glow=0.6, flow=1.0, year=None):
+    """jam pasir kaca raksasa: tutup & tiang emas, dua tabung kaca, pasir emas (sand = isi tabung atas 0..1) + aliran pasir,
+    bintang mimpi melayang di tabung atas (dim = meredup), frost = kaca buram, year = angka di tutup bawah; rot = derajat (dibalik)"""
+    if a <= 0 or H <= 4: return
+    W = H * 0.25; top, bot = y - H / 2, y + H / 2; ch = H * 0.055; hb = H / 2 - ch
+    if glow > 0: cv.drawCircle(x, y - H * 0.18, H * 0.75, P(shader=rg(x, y - H * 0.18, H * 0.75, [col(GOLD, 0.28 * glow * a), col(GOLD, 0)])))
+    cv.save(); cv.rotate(rot, x, y)
+    def bulb(y0, y1):
+        p = skia.Path(); p.moveTo(x - W * 0.86, y0)
+        p.cubicTo(x - W * 1.12, lerp(y0, y1, 0.42), x - W * 0.16, lerp(y0, y1, 0.78), x - W * 0.07, y1)
+        p.lineTo(x + W * 0.07, y1)
+        p.cubicTo(x + W * 0.16, lerp(y0, y1, 0.78), x + W * 1.12, lerp(y0, y1, 0.42), x + W * 0.86, y0)
+        p.close(); return p
+    tb = bulb(top + ch, y); bb = bulb(bot - ch, y)
+    cv.drawLine(x, top + ch, x, bot - ch, P(col('#8A6A2A', 0.55 * a), stroke=W * 0.05))
+    glass_p = skia.Path(); glass_p.addPath(tb); glass_p.addPath(bb)
+    cv.drawPath(glass_p, P(shader=lg(x - W, 0, x + W, 0, [col('#B8C2FF', 0.22 * a), col('#20224A', 0.4 * a), col('#B8C2FF', 0.18 * a)])))
+    sc = mixc(SAND, '#8A8EA8', dim * 0.6)
+    if sand > 0:
+        Ly = y - hb * 0.88 * sand
+        cv.save(); cv.clipPath(tb, skia.ClipOp.kIntersect, True)
+        sp = skia.Path(); sp.moveTo(x - W * 1.2, Ly); sp.lineTo(x - W * 0.25, Ly); sp.lineTo(x, Ly + hb * 0.05); sp.lineTo(x + W * 0.25, Ly)
+        sp.lineTo(x + W * 1.2, Ly); sp.lineTo(x + W * 1.2, y + 2); sp.lineTo(x - W * 1.2, y + 2); sp.close()
+        cv.drawPath(sp, P(shader=lg(0, Ly, 0, y, [col(mixc(sc, '#FFFFFF', 0.3), a), col(mixc(sc, '#7A4A10', 0.35), a)])))
+        cv.restore()
+    ph = hb * 0.88 * (1 - sand) + hb * 0.06; by_ = bot - ch
+    cv.save(); cv.clipPath(bb, skia.ClipOp.kIntersect, True)
+    bp = skia.Path(); bp.moveTo(x - W * 1.2, by_ + 2); bp.lineTo(x - W * 1.2, by_ - ph * 0.55); bp.lineTo(x, by_ - ph); bp.lineTo(x + W * 1.2, by_ - ph * 0.55); bp.lineTo(x + W * 1.2, by_ + 2); bp.close()
+    cv.drawPath(bp, P(shader=lg(0, by_ - ph, 0, by_, [col(mixc(sc, '#FFFFFF', 0.25), a), col(mixc(sc, '#7A4A10', 0.4), a)])))
+    cv.restore()
+    if flow > 0 and sand > 0.01:
+        cv.drawLine(x, y, x, by_ - ph, P(col(sc, 0.9 * flow * a), stroke=max(2.0, W * 0.03)))
+        cv.drawLine(x, y, x, by_ - ph, P(col('#FFFFFF', 0.6 * flow * a), stroke=max(1.5, W * 0.015), effect=skia.DashPathEffect.Make([10, 14], -t * 300)))
+    if star > 0:
+        sy = top + ch + hb * 0.36 + math.sin(t * 1.8) * hb * 0.04
+        star5(cv, x, sy, W * 0.34, a * star * (1 - 0.45 * dim), mixc(GOLD, '#8A8EA8', dim), rot=math.sin(t * 0.8) * 0.25, glow=0.9 * (1 - dim))
+    if frost > 0:
+        cv.save(); cv.clipPath(glass_p, skia.ClipOp.kIntersect, True)
+        cv.drawRect(skia.Rect(x - W * 1.3, top, x + W * 1.3, bot), P(col('#C8CCE0', 0.4 * frost * a)))
+        for k in range(8):
+            xx = x - W + (k + 0.5) * 2 * W / 8
+            cv.drawLine(xx, top, xx - W * 0.3, bot, P(col('#FFFFFF', 0.12 * frost * a), stroke=W * 0.05, blur=W * 0.04))
+        cv.restore()
+    for p_ in (tb, bb):
+        cv.drawPath(p_, P(col('#DCE2FF', 0.35 * a), stroke=6, blur=6)); cv.drawPath(p_, P(col('#FFFFFF', 0.7 * a), stroke=2))
+    cv.drawLine(x - W * 0.6, top + ch + hb * 0.15, x - W * 0.42, y - hb * 0.28, P(col('#FFFFFF', 0.35 * a), stroke=W * 0.06, blur=W * 0.03))
+    cv.drawLine(x - W * 0.6, bot - ch - hb * 0.15, x - W * 0.42, y + hb * 0.32, P(col('#FFFFFF', 0.25 * a), stroke=W * 0.06, blur=W * 0.03))
+    for sx in (-1, 1):
+        px = x + sx * W * 1.12
+        cv.drawRoundRect(skia.Rect(px - W * 0.045, top + ch * 0.5, px + W * 0.045, bot - ch * 0.5), W * 0.04, W * 0.04,
+                         P(shader=lg(px - W * 0.045, 0, px + W * 0.045, 0, [col('#8A5A1A', a), col('#FFE8B0', a), col('#8A5A1A', a)])))
+    for cy_ in (top, bot - ch):
+        r = skia.Rect(x - W * 1.32, cy_, x + W * 1.32, cy_ + ch)
+        cv.drawRoundRect(r, ch * 0.3, ch * 0.3, P(shader=lg(0, cy_, 0, cy_ + ch, [col('#FFE8B0', a), col('#B07A2A', a), col('#6A4410', a)])))
+        cv.drawRoundRect(r, ch * 0.3, ch * 0.3, P(col('#FFFFFF', 0.4 * a), stroke=1.5))
+    if year:
+        f = font(XB, ch * 0.66); w = f.measureText(year)
+        cv.drawString(year, x - w / 2, bl(f, bot - ch / 2), f, P(col('#3A2208', a)))
+    cv.restore()
+
+def q14_card(cv, cx, cy, w, h, a, t, flip=0.0, z=0.0, rz=0.0, rx=4.0, glow=0.6):
+    """kartu pertanyaan emas 3D nomor 14: belakang '?' (flip 0), muka angka 14 + pertanyaan (flip 1)"""
+    if a <= 0: return
+    ry = 180 * (1 - eio(clamp(flip))) + 4 * math.sin(t * 0.8)
+    face = math.cos(math.radians(ry)) > 0
+    with plane(cv, cx, cy, z, w, h, ry, rx, rz) as ok:
+        if not ok: return
+        r = skia.Rect(-w / 2, -h / 2, w / 2, h / 2)
+        if glow > 0: cv.drawRoundRect(r, 34, 34, P(col(GOLD, 0.45 * glow * a), stroke=24, blur=34))
+        cv.drawRoundRect(r.makeOffset(0, 24), 34, 34, P(col('#000000', 0.5 * a), blur=34))
+        cv.drawRoundRect(r, 34, 34, P(shader=lg(r.left(), r.top(), r.right(), r.bottom(), [col('#3A3020', a), col('#1C1810', a)])))
+        cv.drawRoundRect(r.makeInset(14, 14), 24, 24, P(col(GOLD, 0.55 * a), stroke=2))
+        cv.drawRoundRect(r, 34, 34, P(col(GOLD, 0.9 * a), stroke=3))
+        if not face:
+            cv.save(); cv.scale(-1, 1)
+            f = font(XB, h * 0.62); cv.drawString('?', -f.measureText('?') / 2, bl(f, 0), f, P(col(GOLD, 0.6 * a), blur=18))
+            cv.drawString('?', -f.measureText('?') / 2, bl(f, 0), f, P(shader=lg(0, -h * 0.3, 0, h * 0.3, [col('#FFF1C8', a), col(GOLD, a)])))
+            cv.restore()
+        else:
+            mono(cv, 'PERTANYAAN 14 / 36', r.left() + 40, r.top() + 44, 20, GOLD, a, sp=3, align=0)
+            f = font(XB, h * 0.3); s = '14'; sw = f.measureText(s)
+            cv.drawString(s, -sw / 2, bl(f, -h * 0.17), f, P(col(GOLD, 0.5 * a), blur=14))
+            cv.drawString(s, -sw / 2, bl(f, -h * 0.17), f, P(shader=lg(0, -h * 0.32, 0, 0, [col('#FFF1C8', a), col(GOLD, a)])))
+            f2 = font(XB, h * 0.085); lh = h * 0.125
+            for i, ln in enumerate(QL14):
+                segs = parse(ln); tot = sum(f2.measureText(p_) for p_, _ in segs); x = -tot / 2; y = bl(f2, h * 0.08 + i * lh)
+                for part, hl in segs: cv.drawString(part, x, y, f2, P(col(GOLD if hl else '#FFFFFF', a))); x += f2.measureText(part)
+
+def card_ring(cv, cx, cy, R, spin, a, t, skip=None, tilt=0.22):
+    """36 kartu mini melingkar 3D di sekitar sorot lampu (urut kedalaman)"""
+    if a <= 0: return
+    items = []
+    for k in range(36):
+        if skip is not None and k == skip: continue
+        x_, y_, z_ = ring_pos(k, 36, spin, R, tilt); items.append((z_, k, x_, y_))
+    items.sort(key=lambda it: -it[0])
+    for z_, k, x_, y_ in items:
+        X, Y, s = P3(cx + x_, cy + y_, z_); dep = clamp((R - z_) / (2 * R))
+        mini_q(cv, X, Y, 92 * s, a * lerp(0.3, 1, dep), k + 1, card_col(k), glow=0.25 * dep)
+
+def glass_block(cv, cx, by, w, h, text, c, a, t, d=46):
+    """balok kaca 3D (muka depan + atas + samping) dengan dasar di by"""
+    if a <= 0: return
+    top = by - h; dx, dy = d * 0.9, -d * 0.55; L, R_ = cx - w / 2, cx + w / 2
+    cv.drawOval(skia.Rect(L - 10, by - 8, R_ + dx + 10, by + 14), P(col('#000000', 0.45 * a), blur=12))
+    tp = skia.Path(); tp.moveTo(L, top); tp.lineTo(R_, top); tp.lineTo(R_ + dx, top + dy); tp.lineTo(L + dx, top + dy); tp.close()
+    sp = skia.Path(); sp.moveTo(R_, top); sp.lineTo(R_ + dx, top + dy); sp.lineTo(R_ + dx, by + dy); sp.lineTo(R_, by); sp.close()
+    cv.drawPath(sp, P(shader=lg(R_, 0, R_ + dx, 0, [col(mixc(c, '#0E0F1C', 0.45), 0.92 * a), col(mixc(c, '#0E0F1C', 0.75), 0.92 * a)])))
+    cv.drawPath(tp, P(shader=lg(0, top + dy, 0, top, [col(mixc(c, '#FFFFFF', 0.35), 0.85 * a), col(mixc(c, '#1A1B2E', 0.2), 0.85 * a)])))
+    fr = skia.Rect(L, top, R_, by)
+    cv.drawRect(fr, P(shader=lg(0, top, 0, by, [col(mixc(c, '#1A1B2E', 0.3), 0.94 * a), col(mixc(c, '#0E0F1C', 0.68), 0.94 * a)])))
+    cv.drawRect(skia.Rect(L + 18, top + 10, R_ - 18, top + 15), P(col('#FFFFFF', 0.3 * a)))
+    for p_ in (tp, sp): cv.drawPath(p_, P(col(c, 0.8 * a), stroke=2))
+    cv.drawRect(fr, P(col(c, a), stroke=3)); cv.drawRect(fr, P(col(c, 0.4 * a), stroke=12, blur=12))
+    f = font(XB, h * 0.42); tw = f.measureText(text)
+    cv.drawString(text, cx - tw / 2, bl(f, top + h / 2), f, P(col(c, 0.7 * a), blur=h * 0.08))
+    cv.drawString(text, cx - tw / 2, bl(f, top + h / 2), f, P(col('#FFFFFF', a)))
+
+def regret_tunnel(cv, a, t, t0):
+    """terowongan kartu kaca berisi contoh penyesalan yang melayang mendekati kamera (ilustratif)"""
+    if a <= 0: return
+    items = []
+    for k in range(20):
+        txt, c = REGRETS[k % len(REGRETS)]
+        u = ((t - t0) * 0.36 + k / 20) % 1.0
+        z = lerp(1700, -260, u); ang = k * 2.4
+        items.append((z, txt, c, 540 + math.cos(ang) * 300, 720 + math.sin(ang) * 230, u, k))
+    items.sort(key=lambda it: -it[0])
+    for z, txt, c, sx, sy, u, k in items:
+        X, Y, s = P3(sx, sy, z); aa = a * clamp(u * 4) * clamp((1 - u) * 5)
+        if aa <= 0: continue
+        f = font(B, 32 * s); tw = f.measureText(txt); w = tw + 64 * s; h = 74 * s
+        cv.save(); cv.translate(X, Y); cv.rotate(6 * math.sin(k * 1.7 + t * 0.6))
+        r = skia.Rect(-w / 2, -h / 2, w / 2, h / 2)
+        cv.drawRoundRect(r, 16 * s, 16 * s, P(col(c, 0.3 * aa), stroke=10 * s, blur=10 * s))
+        cv.drawRoundRect(r, 16 * s, 16 * s, P(shader=lg(0, -h / 2, 0, h / 2, [col('#272A46', 0.92 * aa), col('#14152A', 0.92 * aa)])))
+        cv.drawRoundRect(r, 16 * s, 16 * s, P(col(c, 0.85 * aa), stroke=2))
+        cv.drawString(txt, -tw / 2, bl(f, 0), f, P(col('#FFFFFF', aa)))
+        cv.restore()
+
+# ------------------------------------------------------------ A v2: HOOK — jam pasir raksasa jatuh & terbalik di studio; penyesalan paling lama bukan soal KESALAHAN (tag berayun dicoret); mimpi lama, kenapa belum? (0 - 7.27)
+def gA(cv, t):
+    studio(cv, 1.0, t, c=GOLD, cone=250)
+    push = lerp(1.0, 1.1, eio(prog(t, 3.74, 7.2)))
+    cv.save(); cv.translate(540, 760); cv.scale(push, push); cv.translate(-540, -760)
+    fall = prog(t, 0.0, 0.7); H = 640; yc = 1090 - H / 2
+    y = lerp(yc - 650, yc, fall ** 2) - 26 * bump(prog(t, 0.7, 1.0))
+    rot = lerp(180, 0, eio(prog(t, 0.0, 0.75)))
+    sand = lerp(0.95, 0.12, eio(prog(t, 0.8, 6.6))); fr = eo(prog(t, 5.0, 6.5))
+    yr = str(int(round(lerp(2019, 2026, eio(prog(t, 5.05, 6.45)))))) if t > 5.0 else None
+    def hg(): hourglass3d(cv, 540, y, H, 1.0, t, sand=sand, rot=rot, star=eo(prog(t, 0.5, 1.1)), dim=0.35 * fr, frost=0.5 * fr,
+                          glow=0.5 + 0.4 * eo(prog(t, 4.56, 4.9)), flow=1.0 if t > 0.8 else 0.0, year=yr)
+    mirror(cv, 1.0, hg)
+    cv.drawOval(skia.Rect(540 - 230, 1080, 540 + 230, 1104), P(col('#000000', 0.5 * clamp(fall * 2)), blur=14))
+    hg()
+    sparks(cv, 540, 1080, 280, prog(t, 0.7, 1.2), 1.0, GOLD, n=16)
+    for dx, dy, rr, t0 in ((-112, -200, -12, 5.05), (104, -118, 10, 5.5), (-74, 150, 6, 5.95)):
+        q = prog(t, t0, t0 + 0.18)
+        if q > 0: sticky(cv, 540 + dx, y + dy, 112 * lerp(2.0, 1.0, eo(q)), 'NANTI', clamp(q * 3), rr)
+    cv.restore()
+    ba = 1 - eo(prog(t, 3.4, 3.74))
+    pa = eo(prog(t, 0.2, 0.6)) * ba
+    if pa > 0: extrude(cv, 'PENYESALAN PALING LAMA', 540, 360, 50, pa, depth=8, front=('#FFFFFF', '#FFE3B0'), side='#5A4A2A', glow=GOLD)
+    ka = eo(prog(t, 1.93, 2.15)) * ba
+    if ka > 0:
+        tau = max(0.0, t - 1.93); ang = math.radians(55 * math.exp(-2.4 * tau) * math.cos(6.0 * tau))
+        ax, ay, L = 860, 425, 105
+        tx, ty = ax + math.sin(ang) * L, ay + math.cos(ang) * L
+        cv.drawCircle(ax, ay, 9, P(shader=rg(ax - 3, ay - 3, 10, [col('#FFE8B0', ka), col('#8A5A1A', ka)])))
+        chain(cv, ax, ay, tx, ty, ka)
+        cv.save(); cv.translate(tx, ty); cv.rotate(-math.degrees(ang))
+        r = skia.Rect(-128, 0, 128, 96)
+        cv.drawRoundRect(r, 18, 18, P(col(PINK, 0.4 * ka), stroke=12, blur=12))
+        cv.drawRoundRect(r, 18, 18, P(shader=lg(0, 0, 0, 96, [col('#3A1E30', 0.95 * ka), col('#1C0F18', 0.95 * ka)])))
+        cv.drawRoundRect(r, 18, 18, P(col(PINK, ka), stroke=3))
+        mono(cv, 'BUKAN SOAL', 0, 26, 18, PINK, ka, sp=4)
+        f = font(XB, 36); tw = f.measureText('KESALAHAN'); cv.drawString('KESALAHAN', -tw / 2, bl(f, 62), f, P(col('#FFFFFF', ka)))
+        xs = eo(prog(t, 2.4, 2.7))
+        if xs > 0:
+            cv.drawLine(-110, 16, -110 + 220 * xs, 80, P(col(PINK, ka), stroke=7)); cv.drawLine(-110, 16, -110 + 220 * xs, 80, P(col('#FFFFFF', 0.6 * ka), stroke=2))
+        cv.restore()
+    ma = eo(prog(t, 4.56, 4.9)) * (1 - eo(prog(t, 6.35, 6.56)))
+    if ma > 0: chip(cv, 'MIMPI LAMA', 540, 385, ma, size=28, fg=INK, bgc=GOLD, edge=GOLD)
+    if yr: extrude(cv, yr, 540, 1148, 46, eo(prog(t, 5.0, 5.3)), depth=7, front=('#FFFFFF', '#FFE3B0'), side='#5A4A2A', glow=GOLD)
+    kb = eo(prog(t, 6.56, 6.9))
+    if kb > 0:
+        cv.save(); cv.translate(540, 380); s_ = lerp(0.6, 1, bo(kb)); cv.scale(s_, s_)
+        extrude(cv, 'KENAPA BELUM?', 0, 0, 72, kb, depth=11, front=('#FFFFFF', GOLD), side='#5A4A2A', glow=GOLD); cv.restore()
+    fl = prog(t, 6.56, 7.0)
+    if 0 < fl < 1: cv.drawCircle(540, 640, 220 + 300 * fl, P(col('#FFFFFF', 0.5 * (1 - fl)), stroke=6))
+
+# ------------------------------------------------------------ B v2: pertanyaan nomor 14 dari 36 — cincin 36 kartu, kartu emas 14 maju lalu dibalik (7.27 - 11.19)
 def gB(cv, t):
     a0 = eo(prog(t, 7.27, 7.6))
-    holo_bg(cv, a0, t, GOLD, beam=1.0, warm=0.6)
+    studio(cv, a0, t, c=GOLD, cone=300)
     extrude(cv, '36 PERTANYAAN', 540, 330, 76, a0 * eo(prog(t, 7.3, 7.7)), depth=11, front=('#FFFFFF', '#FFE3B0'), side='#5A4A2A', glow=GOLD)
-    pop = eo(prog(t, 7.8, 8.6))
-    helix_cards(cv, 540, 470, 1010, a0, t + 1.7, (t - 7.3) * 0.8, skip=13 if pop > 0 else None)
+    pop = eo(prog(t, 7.8, 8.5)); fl = prog(t, 8.5, 9.2)
+    card_ring(cv, 540, 720, 420, (t - 7.27) * 0.5, a0 * (1 - 0.65 * pop), t, skip=13 if pop > 0 else None)
     if pop > 0:
-        y = lerp(lerp(1010, 470, 13 / 35), 700, eo(pop))
-        rays(cv, 540, y, 320, 0.55 * pop * a0, t, n=14, c=ORANGE, spin=8)
-        mini_q(cv, 540, y, lerp(80, 250, eo(pop)), a0, 14, ORANGE, glow=0.9 * pop)
+        halo(cv, 540, 700, 480, GOLD, 0.5 * pop * a0)
+        q14_card(cv, 540, 700, 760, 520, a0 * clamp(pop * 2), t, flip=fl, z=lerp(900, 0, pop), rz=lerp(-25, 0, pop), glow=0.6 + 0.4 * bump(fl))
     ca = eo(prog(t, 8.48, 8.8))
     if ca > 0: chip(cv, 'PSIKOLOG ARTHUR ARON · 1997', 540, 1060, a0 * ca, size=24, fg=INK, bgc=GOLD, edge=GOLD)
 
-# ------------------------------------------------------------ C: mungkin jawabanmu: nanti aja, belum waktunya, takut gagal (11.19 - 15.35)
-EXCUSES = (('NANTI AJA', HOLO, 12.38, 790), ('BELUM WAKTUNYA', VIOLET, 13.18, 910), ('TAKUT GAGAL', PINK, 14.03, 1030))
+# ------------------------------------------------------------ C v2: nanti aja, belum waktunya, takut gagal — balok kaca alasan jatuh & menumpuk menutupi jam pasir (11.19 - 15.35)
+EXC2 = (('NANTI AJA', HOLO, 12.38, 1090, 640, -8), ('BELUM WAKTUNYA', VIOLET, 13.18, 978, 610, 10), ('TAKUT GAGAL', PINK, 14.03, 866, 570, -4))
 def gC(cv, t):
     a0 = eo(prog(t, 11.19, 11.5))
-    holo_bg(cv, a0, t, HOLO, beam=0.6, warm=0.4)
-    dimv = sum(eo(prog(t, t0 + 0.2, t0 + 0.5)) for _, _, t0, _ in EXCUSES) / 3
-    shake = sum(bump(prog(t, t0 + 0.22, t0 + 0.42)) for _, _, t0, _ in EXCUSES)
-    dream_capsule(cv, 540 + 7 * shake * math.sin(t * 90), 625, 135, a0, t, glow=1.0 - 0.6 * dimv, dim=0.75 * dimv)
+    studio(cv, a0, t, c=VIOLET, cone=260)
+    dimv = sum(eo(prog(t, t0 + 0.1, t0 + 0.5)) for _, _, t0, _, _, _ in EXC2) / 3
+    shake = sum(bump(prog(t, t0 + 0.1, t0 + 0.3)) for _, _, t0, _, _, _ in EXC2)
+    H = 600; xh = 540 + 6 * shake * math.sin(t * 90)
+    def scene():
+        hourglass3d(cv, xh, 1090 - H / 2, H, a0, t, sand=lerp(0.5, 0.36, prog(t, 11.2, 15.3)), dim=0.8 * dimv, glow=0.7 * (1 - 0.6 * dimv))
+        for txt, c, t0, rest, w, dx in EXC2:
+            u = prog(t, t0 - 0.2, t0 + 0.1)
+            if u <= 0: continue
+            glass_block(cv, 540 + dx, lerp(rest - 1100, rest, u * u) - 22 * bump(prog(t, t0 + 0.1, t0 + 0.3)), w, 112, txt, c, a0, t)
+    mirror(cv, a0, scene); scene()
+    for txt, c, t0, rest, w, dx in EXC2:
+        sparks(cv, 540 + dx, rest - 56, 360, prog(t, t0 + 0.1, t0 + 0.5), a0, c, n=14)
     ja = eo(prog(t, 11.3, 11.7)) * (1 - eo(prog(t, 13.9, 14.15)))
-    if ja > 0: holo_text(cv, 'JAWABANMU?', 540, 360, 50, a0 * ja, t, HOLO, reveal=prog(t, 11.3, 11.9))
+    if ja > 0: extrude(cv, 'JAWABANMU?', 540, 370, 64, a0 * ja, depth=10)
     wa = eo(prog(t, 14.3, 14.6))
-    if wa > 0: holo_text(cv, 'TEMBOK ALASAN', 540, 360, 50, a0 * wa, t, PINK, reveal=prog(t, 14.3, 14.9))
-    for txt, c, t0, y in EXCUSES:
-        excuse_slab(cv, 540, y, 640, 100, txt, c, a0, t, prog(t, t0 - 0.05, t0 + 0.3))
+    if wa > 0: extrude(cv, 'TEMBOK ALASAN', 540, 370, 64, a0 * wa, depth=10, front=('#FFFFFF', '#FFC2D8'), side='#5A2A4A', glow=PINK)
 
-# ------------------------------------------------------------ D: 2018 Thomas Gilovich dkk. nanya ratusan orang soal penyesalan mereka (15.35 - 20.23)
+# ------------------------------------------------------------ D v2: 2018 Thomas Gilovich dkk. nanya ratusan orang soal penyesalan — kartu riset + terowongan kartu penyesalan (15.35 - 20.23)
 def gD(cv, t):
     a0 = eo(prog(t, 15.35, 15.65))
-    holo_bg(cv, a0, t, HOLO)
-    research_card(cv, t, 15.4, '2018', 'Davidai & Gilovich', 'Cornell University · Emotion', None, None, 600, t_out=17.75, tag='EMOTION')
+    studio(cv, a0, t, c=HOLO, cone=280)
+    research_card(cv, t, 15.4, '2018', 'Davidai & Gilovich', 'Cornell University · Emotion', None, None, 640, t_out=17.75, tag='EMOTION')
     ca = eo(prog(t, 18.0, 18.4))
     if ca <= 0: return
-    extrude(cv, 'RATUSAN ORANG', 540, 360, 80, a0 * ca, depth=12, front=('#FFFFFF', HOLO), side='#1E4A6A', glow=HOLO)
-    holo_crowd(cv, 540, 560, 6, 11, a0 * ca, t, t0=18.05)
+    regret_tunnel(cv, a0 * ca, t, 17.6)
+    extrude(cv, 'RATUSAN ORANG', 540, 340, 80, a0 * ca, depth=12, front=('#FFFFFF', HOLO), side='#1E4A6A', glow=HOLO)
     qa = eo(prog(t, 18.6, 18.95))
     if qa > 0: chip(cv, 'APA PENYESALAN TERBESARMU?', 540, 1110, a0 * qa, size=26, fg=INK, bgc=HOLO, edge=HOLO)
 
-# ------------------------------------------------------------ E: 72% soal diri impian yang nggak dikejar; soal kewajiban cuma 28% (20.23 - 26.79)
+# ------------------------------------------------------------ E v2: 72% soal diri impian, 28% soal kewajiban — diagram lingkaran 3D emas yang tumbuh (20.23 - 26.79)
 def gE(cv, t):
     a0 = eo(prog(t, 20.23, 20.55))
-    holo_bg(cv, a0, t, GOLD, warm=0.4)
+    studio(cv, a0, t, c=GOLD, cone=300)
     ha = eo(prog(t, 20.25, 20.55)) * (1 - eo(prog(t, 20.8, 21.0)))
     if ha > 0: extrude(cv, 'HASILNYA?', 540, 640, 110, a0 * ha, depth=14)
-    sa = eo(prog(t, 20.95, 21.35))
-    if sa <= 0: return
-    tau = max(0.0, t - 21.1)
-    tilt = -16 * (1 - math.exp(-2.2 * tau) * math.cos(5.0 * tau)) if t > 21.1 else 0.0
-    gl = eo(prog(t, 22.44, 22.8)); ra = eo(prog(t, 24.08, 24.4))
-    def left(x, y):
-        if gl > 0: rays(cv, x, y - 80, 200, 0.5 * gl * a0, t, n=12, c=GOLD, spin=6)
-        holo_bust(cv, x, y - 0.9 * 82, 82, a0 * sa, t, GOLD, flick=False)
-    def right(x, y):
-        if ra > 0: duty_icon(cv, x, y - 72, 90, a0 * ra * lerp(0.5, 1, bo(ra)), HOLO)
-    holo_scale(cv, 540, 560, tilt, a0 * sa, t, left, right, 'DIRI IMPIAN' if gl > 0 else None, 'KEWAJIBAN' if ra > 0 else None)
-    na = eo(prog(t, 21.0, 21.35))
-    if na > 0:
-        cv.save(); cv.translate(260, 380); s_ = lerp(1.5, 1, eo(na)); cv.scale(s_, s_)
-        extrude(cv, '72%', 0, 0, 110, a0 * na, depth=14, front=('#FFFFFF', GOLD), side='#5A4A2A', glow=GOLD); cv.restore()
-    nb = eo(prog(t, 25.26, 25.6))
-    if nb > 0:
-        cv.save(); cv.translate(820, 380); s_ = lerp(1.5, 1, eo(nb)); cv.scale(s_, s_)
-        extrude(cv, '28%', 0, 0, 76, a0 * nb, depth=10, front=('#FFFFFF', HOLO), side='#1E4A6A', glow=HOLO); cv.restore()
+    pa = eo(prog(t, 20.9, 21.3))
+    if pa <= 0: return
+    g = eio(prog(t, 20.98, 22.2)); bv = eio(prog(t, 24.08, 24.9))
+    yy = lerp(820, 740, eo(pa)) + 6 * math.sin(t * 1.5)
+    if g > 0.25: rays(cv, 540, yy, 520, 0.25 * clamp((g - 0.25) * 2) * a0, t, n=16, c=GOLD, spin=3)
+    pie3d(cv, 540, yy, 330, [(0.72 * g, GOLD), (0.28 * bv, HOLO)], a0 * pa, t, tilt=0.42, depth=56, labels=False)
+    n72 = eo(prog(t, 21.0, 21.4)); sh = eio(prog(t, 25.1, 25.6))
+    if n72 > 0:
+        cv.save(); cv.translate(lerp(540, 330, sh), 400); s_ = lerp(1.5, 1, eo(n72)) * lerp(1.0, 0.85, sh); cv.scale(s_, s_)
+        extrude(cv, '72%', 0, 0, 130, a0 * n72, depth=16, front=('#FFFFFF', GOLD), side='#5A4A2A', glow=GOLD); cv.restore()
+    n28 = eo(prog(t, 25.26, 25.6))
+    if n28 > 0:
+        cv.save(); cv.translate(770, 400); s_ = lerp(1.5, 1, eo(n28)); cv.scale(s_, s_)
+        extrude(cv, '28%', 0, 0, 96, a0 * n28, depth=12, front=('#FFFFFF', HOLO), side='#1E4A6A', glow=HOLO); cv.restore()
+    da = eo(prog(t, 22.44, 22.75)); kw = eo(prog(t, 24.08, 24.4))
+    if da > 0: chip(cv, 'DIRI IMPIAN', lerp(540, 330, kw), 1010, a0 * da, size=26, fg=INK, bgc=GOLD, edge=GOLD)
+    if kw > 0: chip(cv, 'KEWAJIBAN', 770, 1010, a0 * kw, size=26, fg=INK, bgc=HOLO, edge=HOLO)
 
-# ------------------------------------------------------------ F: kewajiban yang gagal cepat kita beresin; mimpi sering cuma kita tunda (26.79 - 31.52)
+# ------------------------------------------------------------ F v2: kewajiban cepat diberesin; mimpi ditunda — kartu KEWAJIBAN vs jam pasir dengan catatan NANTI (26.79 - 31.52)
 def gF(cv, t):
     a0 = eo(prog(t, 26.79, 27.1))
-    holo_bg(cv, a0, t, HOLO)
-    holo_text(cv, 'KENAPA?', 540, 360, 52, a0, t, HOLO, reveal=prog(t, 26.85, 27.3))
+    studio(cv, a0, t, c=HOLO, cone=260)
+    extrude(cv, 'KENAPA?', 540, 360, 64, a0 * eo(prog(t, 27.0, 27.35)), depth=10)
     crack = eo(prog(t, 27.05, 27.5)); fix = eio(prog(t, 28.28, 29.0))
-    sh = 8 * bump(prog(t, 27.05, 27.35)) * math.sin(t * 80)
-    dx_ = lerp(540, 290, eio(prog(t, 29.3, 29.8)))
-    duty_card(cv, dx_ + sh, 640, 400, 300, a0 * eo(prog(t, 26.85, 27.2)), t, crack, fix)
+    sh = 8 * bump(prog(t, 27.05, 27.35)) * math.sin(t * 80); dx_ = lerp(540, 290, eio(prog(t, 29.3, 29.8)))
+    duty_card(cv, dx_ + sh, 660, 400, 300, a0 * eo(prog(t, 26.85, 27.2)), t, crack, fix)
     fa = eo(prog(t, 28.6, 28.9))
-    if fa > 0: chip(cv, 'CEPAT DIBERESIN', dx_, 870, a0 * fa, size=24, fg=INK, bgc=MNT, edge=MNT)
+    if fa > 0: chip(cv, 'CEPAT DIBERESIN', dx_, 890, a0 * fa, size=24, fg=INK, bgc=MNT, edge=MNT)
     ma = eo(prog(t, 29.62, 30.0))
     if ma > 0:
-        fr = eo(prog(t, 30.23, 31.4))
-        dream_capsule(cv, 790, 620, 95 * lerp(0.6, 1, bo(ma)), a0 * ma, t, glow=0.8, dim=0.45 * fr, frost=0.7 * fr)
-        for k, (dx, dy, rot, t0) in enumerate(((-60, -70, -12, 30.25), (65, -10, 9, 30.5), (-45, 60, 5, 30.75), (55, 110, -7, 31.0))):
+        fr = eo(prog(t, 30.23, 31.4)); H = 480 * lerp(0.6, 1, bo(ma))
+        yr = str(int(round(lerp(2026, 2031, eio(prog(t, 30.3, 31.4))))))
+        def hg(): hourglass3d(cv, 790, 1090 - H / 2, H, a0 * ma, t, sand=lerp(0.7, 0.08, prog(t, 29.7, 31.5)), dim=0.45 * fr, frost=0.6 * fr, glow=0.6, year=yr)
+        mirror(cv, a0 * ma, hg); hg()
+        for dx, dy, rr, t0 in ((-62, -150, -12, 30.25), (64, -80, 9, 30.5), (-50, 70, 5, 30.75), (56, 140, -7, 31.0)):
             q = prog(t, t0, t0 + 0.18)
-            if q > 0: sticky(cv, 790 + dx, 620 + dy, 88 * lerp(2.0, 1.0, eo(q)), 'NANTI', a0 * clamp(q * 3), rot)
+            if q > 0: sticky(cv, 790 + dx, 1090 - H / 2 + dy, 86 * lerp(2.0, 1.0, eo(q)), 'NANTI', a0 * clamp(q * 3), rr)
         da = eo(prog(t, 30.23, 30.55))
         if da > 0:
-            chip(cv, 'DITUNDA TERUS', 790, 870, a0 * da, size=24, fg=INK, bgc=PINK, edge=PINK)
-            holo_text(cv, str(int(round(lerp(2026, 2031, eio(prog(t, 30.3, 31.4)))))), 790, 950, 48, a0 * da, t, PINK)
+            chip(cv, 'DITUNDA TERUS', 790, 1090 - H - 40, a0 * da, size=24, fg=INK, bgc=PINK, edge=PINK)
+            extrude(cv, yr, 790, 1148, 42, a0 * da, depth=6, front=('#FFFFFF', '#FFC2D8'), side='#5A2A4A', glow=PINK)
 
-# ------------------------------------------------------------ G: mimpi apa yang belum kamu kejar? tulis di komentar, kirim ke temanmu yang lagi nunda mimpinya (31.52 - 36.6)
+# ------------------------------------------------------------ G v2: mimpi apa yang belum kamu kejar? — jam pasir dibalik, bintang mimpi lepas & naik ke cahaya + kolom komentar (31.52 - 36.6)
 def gG(cv, t):
     a0 = eo(prog(t, 31.52, 31.85))
-    holo_bg(cv, a0, t, GOLD, warm=0.5)
-    light_bridge(cv, a0, t, GOLD, away=False)
-    wk = eio(prog(t, 31.6, 33.6)); z = lerp(2300, 900, wk)
-    ch = eo(prog(t, 32.6, 32.9))
-    holo_text(cv, 'MIMPIMU APA?', 540, 360, 60, a0, t, GOLD, reveal=prog(t, 31.9, 32.5))
-    if ch > 0:
-        Xh, Yh, Sh = P3(540, 1090, z)
-        rays(cv, Xh, Yh - 1.3 * 220 * Sh, 460, 0.3 * ch * a0, t, n=16, c=GOLD, spin=3)
-    X, Yf, S = ideal_self(cv, 540, z, 220, a0, t, walk=1.0 if t < 33.6 else 0.0, chest=ch)
-    fly = eio(prog(t, 32.29, 32.9))
-    if fly < 1:
-        sy = lerp(560, Yf - 0.9 * S + S * 0.25, fly); sR = lerp(58, S * 0.2, fly)
-        if fly <= 0: rays(cv, 540, sy, 200, 0.45 * a0 * eo(prog(t, 31.7, 32.1)), t, n=12, c=GOLD, spin=5)
-        star5(cv, 540, sy + 6 * math.sin(t * 2) * (1 - fly), sR, a0 * eo(prog(t, 31.7, 32.1)), GOLD, rot=t * 0.6, glow=0.9)
+    studio(cv, a0, t, c=GOLD, cone=320)
+    H = 460; yc = 1090 - H / 2
+    fl = eio(prog(t, 31.6, 32.2)); rot = 180 * fl if fl < 1 else 0.0
+    sand = 0.1 if fl < 1 else lerp(0.9, 0.7, prog(t, 32.2, 36.6))
+    rise = eio(prog(t, 32.29, 33.1)); ha = a0 * (1 - 0.7 * eo(prog(t, 33.3, 33.7)))
+    def hg(): hourglass3d(cv, 540, yc - 20 * bump(prog(t, 31.6, 32.2)), H, ha, t, sand=sand, rot=rot, star=1.0 if rise <= 0 else 0.0, glow=0.6)
+    mirror(cv, ha, hg); hg()
+    if rise > 0:
+        sy0 = yc - H / 2 + H * 0.055 + (H / 2 - H * 0.055) * 0.36
+        sy = lerp(sy0, 500, rise); R = lerp(H * 0.25 * 0.34, 84, rise)
+        rays(cv, 540, sy, 400, 0.45 * rise * a0, t, n=16, c=GOLD, spin=4)
+        halo(cv, 540, sy, 280, GOLD, 0.6 * rise * a0)
+        star5(cv, 540, sy + 6 * math.sin(t * 2) * rise, R, a0, GOLD, rot=t * 0.6, glow=1.0)
+        sparks(cv, 540, sy0, 200, prog(t, 32.29, 32.8), a0, GOLD, n=14)
+    ma = eo(prog(t, 31.9, 32.3))
+    if ma > 0:
+        cv.save(); cv.translate(540, 310); s_ = lerp(0.7, 1, bo(ma)); cv.scale(s_, s_)
+        extrude(cv, 'MIMPIMU APA?', 0, 0, 70, a0 * ma, depth=11, front=('#FFFFFF', GOLD), side='#5A4A2A', glow=GOLD); cv.restore()
     ca = eo(prog(t, 33.5, 33.85))
     if ca > 0:
-        cr = skia.Rect(110, 1000, 970, 1090); ui_panel(cv, cr, a0 * ca, rad=46, glow=0.4, accent=GOLD, fill=('#2A2414', '#14100A'))
-        avatar(cv, cr.left() + 52, cr.centerY(), 28, GOLD, a0 * ca, ok=0.0)
+        cr = skia.Rect(110, 880, 970, 970); ui_panel(cv, cr, a0 * ca, rad=45, glow=0.4, accent=GOLD, fill=('#2A2414', '#14100A'))
+        avatar(cv, cr.left() + 50, cr.centerY(), 28, GOLD, a0 * ca, ok=0.0)
         typed = 'mimpiku '[:int(clamp(prog(t, 33.7, 34.3)) * 8)]
-        ui_text(cv, typed if typed else 'Tulis di komentar...', cr.left() + 96, cr.centerY(), 30, TXT if typed else MUTED, a0 * ca, B, 0)
+        ui_text(cv, typed if typed else 'Tulis di komentar...', cr.left() + 94, cr.centerY(), 30, TXT if typed else MUTED, a0 * ca, B, 0)
         if typed and (t * 2) % 1 < 0.6:
-            f = font(B, 30); cx_ = cr.left() + 100 + f.measureText(typed)
+            f = font(B, 30); cx_ = cr.left() + 98 + f.measureText(typed)
             cv.drawRoundRect(skia.Rect(cx_, cr.centerY() - 20, cx_ + 4, cr.centerY() + 20), 2, 2, P(col('#FFFFFF', a0 * ca)))
-        sx = cr.right() - 52
+        sx = cr.right() - 50
         cv.drawCircle(sx, cr.centerY(), 28, P(col(GOLD, a0 * ca)))
         plane_icon(cv, sx, cr.centerY(), 20, a0 * ca, rot=-20)
     ka = eo(prog(t, 34.44, 34.75))
     if ka > 0:
         fp = prog(t, 34.44, 35.2)
-        if 0 < fp < 1: plane_icon(cv, lerp(918, 960, fp), lerp(1045, 1150, fp) - 80 * math.sin(math.pi * fp), 30, a0, rot=lerp(-20, 30, fp))
-        chip(cv, 'KIRIM KE TEMANMU', 540, 1150, a0 * ka, size=26, fg=INK, bgc=GOLD, edge=GOLD)
+        if 0 < fp < 1: plane_icon(cv, lerp(920, 960, fp), lerp(925, 1040, fp) - 80 * math.sin(math.pi * fp), 30, a0, rot=lerp(-20, 30, fp))
+        chip(cv, 'KIRIM KE TEMANMU', 540, 1050, a0 * ka, size=26, fg=INK, bgc=GOLD, edge=GOLD)
 
 
 # ------------------------------------------------------------ J: outro (36.6 - 42)
@@ -4104,14 +4274,14 @@ def gJ(cv, t):
 b.DRAWERS = [gA, gB, gC, gD, gE, gF, gG, gJ]
 
 def build_sfx():
-    ev = [(0.0, 'whoosh'), (0.2, 'rise'), (0.6, 'swish'), (0.75, 'pop'), (1.93, 'pop'), (2.4, 'chop'), (3.6, 'zoom'), (4.2, 'shine'), (4.56, 'ding_soft'),
+    ev = [(0.0, 'whoosh'), (0.1, 'rise'), (0.7, 'clunk'), (0.75, 'shine'), (1.93, 'swish'), (2.4, 'chop'), (3.74, 'rise'), (4.56, 'ding_soft'),
           (5.05, 'plop'), (5.5, 'plop'), (5.95, 'plop'), (5.3, 'tick'), (5.7, 'tick'), (6.1, 'tick'), (6.56, 'clunk'), (6.6, 'shine'),
-          (7.27, 'whoosh'), (7.35, 'rise'), (7.8, 'shine'), (7.9, 'pop'), (8.48, 'pop'),
-          (11.19, 'whoosh'), (11.3, 'swish'), (12.6, 'clunk'), (13.4, 'clunk'), (14.25, 'clunk'), (14.3, 'swish'),
+          (7.27, 'whoosh'), (7.35, 'rise'), (7.8, 'swish'), (8.48, 'pop'), (8.5, 'card'), (8.9, 'shine'),
+          (11.19, 'whoosh'), (11.3, 'swish'), (12.48, 'clunk'), (13.28, 'clunk'), (14.13, 'clunk'), (14.3, 'swish'),
           (15.35, 'whoosh'), (15.41, 'card'), (15.71, 'stamp'), (15.99, 'ding_soft'), (18.0, 'rise'), (18.6, 'pop'),
-          (20.23, 'whoosh'), (20.28, 'chop'), (20.95, 'swish'), (21.15, 'clunk'), (22.44, 'shine'), (24.08, 'pop'), (25.26, 'ding'),
+          (20.23, 'whoosh'), (20.28, 'chop'), (20.98, 'rise'), (21.0, 'pop'), (22.44, 'shine'), (24.08, 'swish'), (25.26, 'ding'),
           (26.79, 'whoosh'), (27.05, 'crack'), (28.28, 'shine'), (28.6, 'ding'), (29.62, 'swish'), (30.25, 'plop'), (30.5, 'plop'), (30.75, 'plop'), (31.0, 'plop'),
-          (31.52, 'whoosh'), (31.6, 'rise'), (32.29, 'shine'), (32.85, 'ding_soft'), (33.5, 'swish'), (33.75, 'tick'), (34.05, 'tick'), (34.44, 'zoom'), (34.55, 'ding'),
+          (31.52, 'whoosh'), (31.6, 'swish'), (32.29, 'rise'), (32.5, 'shine'), (33.5, 'swish'), (33.75, 'tick'), (34.05, 'tick'), (34.44, 'zoom'), (34.55, 'ding'),
           (36.6, 'whoosh'), (36.75, 'boing'), (37.1, 'shine'), (37.35, 'pop')]
     return sorted(ev)
 
