@@ -4217,7 +4217,7 @@ def gC(cv, t):
     studio(cv, a0, t, c=ROSE, cone=270)
     ha = eo(prog(t, 13.0, 13.3)) * (1 - eo(prog(t, 13.55, 13.74)))
     if ha > 0: extrude(cv, 'HASILNYA?', 540, 640, 110, a0 * ha, depth=14)
-    c1 = eo(prog(t, 13.74, 14.05)) * (1 - eo(prog(t, 16.25, 16.53)))
+    c1 = eo(prog(t, 13.74, 14.05)) * (1 - eo(prog(t, 16.45, 16.8)))
     if c1 > 0:
         hero(cv, 540, 1080, 300, 'calm', a0 * c1, t)
         more = eo(prog(t, 14.64, 15.3)); spin = (t - 13.74) * 0.8
@@ -4234,7 +4234,7 @@ def gC(cv, t):
         e1 = eo(prog(t, 13.8, 14.1)) * (1 - eo(prog(t, 15.2, 15.4)))
         if e1 > 0: extrude(cv, 'CUMA SATU?', 540, 380, 70, a0 * c1 * e1, depth=10, front=('#FFFFFF', '#FFC2D8'), side='#5A2A4A', glow=PINK)
         stamp(cv, 'NGGAK ADA BUKTI KUAT', 540, 390, 44, t, 15.4, c=CORAL, rot=-6, a=a0 * c1)
-    c2 = eo(prog(t, 16.53, 16.85))
+    c2 = eo(prog(t, 16.35, 16.7))
     if c2 > 0:
         fill = lerp(0.3, 0.78, eio(prog(t, 17.2, 18.6)))
         for x, ks, lab, ph in ((270, (1, 1), 'LOVE LANGUAGE SAMA', 0.0), (810, (0, 2), 'BEDA', 1.7)):
