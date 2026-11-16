@@ -1,0 +1,58 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Anak sulung pasti galak, bungsu pasti manja? Riset dua puluh ribu orang bilang: itu mitos.",
+  "file": "vo/l00.wav",
+  "dur": 6.902
+ },
+ {
+  "i": 2,
+  "anchor": 5.64,
+  "text": "Tapi tahun dua ribu lima belas, Julia Rohrer dan timnya ngecek data lebih dari dua puluh ribu orang, di Amerika, Inggris, dan Jerman.",
+  "file": "vo/l02.wav",
+  "dur": 9.034
+ },
+ {
+  "i": 3,
+  "anchor": 12.74,
+  "text": "Hasilnya? Urutan lahir nggak ngaruh ke kepribadian. Nggak bikin kamu lebih supel, lebih rajin, lebih ramah, atau lebih gampang cemas.",
+  "file": "vo/l03.wav",
+  "dur": 8.714
+ },
+ {
+  "i": 4,
+  "anchor": 19.6,
+  "text": "Riset lain dengan tiga ratus tujuh puluh tujuh ribu siswa juga sama: bedanya hampir nol.",
+  "file": "vo/l04.wav",
+  "dur": 5.68
+ },
+ {
+  "i": 5,
+  "anchor": 24.16,
+  "text": "Satu-satunya beda: anak pertama unggul sekitar satu poin IQ. Itu pun nyaris nggak kerasa.",
+  "file": "vo/l05.wav",
+  "dur": 6.402
+ },
+ {
+  "i": 6,
+  "anchor": 29.27,
+  "text": "Jadi kalau kamu dicap galak atau manja, itu bukan karena nomor urut lahirmu.",
+  "file": "vo/l06.wav",
+  "dur": 5.334
+ },
+ {
+  "i": 7,
+  "anchor": 33.57,
+  "text": "Kamu anak ke berapa? Tulis di komentar, terus tag kakak atau adikmu!",
+  "file": "vo/l07.wav",
+  "dur": 3.66
+ },
+ {
+  "i": 8,
+  "anchor": 36.6,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l08.wav",
+  "dur": 3.41
+ }
+]
