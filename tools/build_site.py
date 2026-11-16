@@ -162,7 +162,9 @@ def make_episode_og(ep, card_img, path):
     y += 18
     sl = wrap(d, ep['summary'], sf, 600)
     if len(sl) > 3:                                  # terlalu panjang: potong di akhir kalimat, atau tambah "…"
-        txt = ' '.join(sl[:3]); cut = max(txt.rfind(c) for c in '.?!')
+        txt = ' '.join(sl[:3])
+        ends = [i for i, ch in enumerate(txt) if ch in '.?!' and not txt[max(0, i - 3):i].lower() in ('dkk', 'dll', 'mis')]
+        cut = max(ends) if ends else -1
         if cut > len(txt) * 0.4: txt = txt[:cut + 1]
         else:
             txt = txt.rstrip(' ,;:&') + '…'
