@@ -1,0 +1,65 @@
+[
+ {
+  "i": 0,
+  "anchor": 0.15,
+  "text": "Ada guru yang masih kamu ingat sampai sekarang? Mungkin dia nggak pernah tahu.",
+  "file": "vo/l00.wav",
+  "dur": 3.872
+ },
+ {
+  "i": 1,
+  "anchor": 3.91,
+  "text": "Tahun dua ribu delapan belas, Amit Kumar dan Nicholas Epley minta orang nulis surat makasih.",
+  "file": "vo/l01.wav",
+  "dur": 5.815
+ },
+ {
+  "i": 2,
+  "anchor": 9.41,
+  "text": "Penulisnya ngira, penerimanya bakal canggung, dan nggak sesenang itu.",
+  "file": "vo/l02.wav",
+  "dur": 4.322
+ },
+ {
+  "i": 3,
+  "anchor": 13.57,
+  "text": "Hasilnya? Penerimanya jauh lebih senang dari dugaan, dan canggungnya jauh lebih kecil.",
+  "file": "vo/l03.wav",
+  "dur": 5.678
+ },
+ {
+  "i": 4,
+  "anchor": 18.94,
+  "text": "Kita juga takut kata-katanya aneh. Padahal yang kerasa, tulusnya.",
+  "file": "vo/l04.wav",
+  "dur": 4.684
+ },
+ {
+  "i": 5,
+  "anchor": 23.43,
+  "text": "Jadi jangan cuma dibatin. Kirim satu pesan ini ke gurumu.",
+  "file": "vo/l05.wav",
+  "dur": 3.644
+ },
+ {
+  "i": 6,
+  "anchor": 28.12,
+  "text": "Bu, makasih ya. Sampai sekarang, aku masih ingat pelajaran dari Ibu.",
+  "file": "vo/l06.wav",
+  "dur": 4.699
+ },
+ {
+  "i": 7,
+  "anchor": 32.62,
+  "text": "Selamat Hari Guru! Tulis di komentar: guru siapa yang paling kamu ingat?",
+  "file": "vo/l07.wav",
+  "dur": 3.774
+ },
+ {
+  "i": 8,
+  "anchor": 36.6,
+  "text": "Follow Ruang Pikir, biar makin kenal isi kepalamu.",
+  "file": "vo/l08.wav",
+  "dur": 3.043
+ }
+]
